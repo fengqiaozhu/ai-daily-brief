@@ -2,3 +2,15 @@ dist/
 __pycache__/
 *.pyc
 .pytest_cache/
+*.m4a
+*.mp3
+*.wav
+*.aac
+*.ogg
+*.flac
+*.m4b
+*.mp4
+*.webm
+*.mov
+*.mkv
+*.m4v

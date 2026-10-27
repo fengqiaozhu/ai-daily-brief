@@ -1,5 +1,5 @@
 #!/bin/sh
-# Proves publish.sh refuses audio/extra/oversize files and stages only the whitelist.
+# Proves publish.sh refuses audio/video/extra/oversize files and stages only the whitelist.
 # Runs in a throwaway clone whose origin is a local bare repo.
 set -eu
 
@@ -72,11 +72,14 @@ fail() { echo "FAIL: $1" >&2; exit 1; }
 test "$nopush_code" -ne 0 || fail "dirty --no-push exit"
 test "$push_code" -ne 0 || fail "dirty publish exit"
 test "$before" = "$after" || fail "HEAD moved"
-grep -F "这些文件不进仓库；音频按 CMP-225 走外链托管。" "$TMP/nopush.err" >/dev/null || fail "nopush warning"
-grep -F "这些文件不进仓库；音频按 CMP-225 走外链托管。" "$TMP/push.err" >/dev/null || fail "push warning"
+grep -F "这些文件不进仓库。音频与视频走 GitHub Releases 外链，不提交进站点 git。" "$TMP/nopush.err" >/dev/null || fail "nopush warning"
+grep -F "这些文件不进仓库。音频与视频走 GitHub Releases 外链，不提交进站点 git。" "$TMP/push.err" >/dev/null || fail "push warning"
 grep -F "fake.m4a" "$TMP/nopush.err" >/dev/null || fail "nopush missing m4a"
 grep -F "notes.tmp" "$TMP/nopush.err" >/dev/null || fail "nopush missing notes"
-grep -F "?? briefs/2099-01-01/audio/fake.m4a" "$TMP/dirty-status.txt" >/dev/null || fail "status missing m4a"
+if grep -F "fake.m4a" "$TMP/dirty-status.txt" >/dev/null; then
+  fail "gitignore failed to hide fake.m4a from status"
+fi
+git check-ignore -q briefs/2099-01-01/audio/fake.m4a || fail "gitignore missed fake.m4a"
 test ! -s "$TMP/dirty-cached.txt" || fail "index was not empty"
 if git ls-files | grep -q "fake.m4a"; then
   echo "fake audio was staged into the index" >&2
@@ -165,5 +168,50 @@ echo "exit: $mp3_code"
 cat "$TMP/mp3.err"
 test "$mp3_code" -ne 0 || fail "uppercase audio was accepted"
 grep -F "音频扩展名" "$TMP/mp3.err" >/dev/null || fail "audio reason"
+
+echo "== video extension is refused =="
+make_brief 2099-01-06
+printf 'x' > briefs/2099-01-06/clip.mp4
+set +e
+sh scripts/publish.sh 2099-01-06 --no-push >"$TMP/mp4.out" 2>"$TMP/mp4.err"
+mp4_code=$?
+set -e
+echo "command: sh scripts/publish.sh 2099-01-06 --no-push"
+echo "exit: $mp4_code"
+cat "$TMP/mp4.err"
+test "$mp4_code" -ne 0 || fail "mp4 was accepted"
+grep -F "视频扩展名" "$TMP/mp4.err" >/dev/null || fail "video reason"
+grep -F "非白名单" "$TMP/mp4.err" >/dev/null || fail "mp4 whitelist reason"
+
+echo "== uppercase video extension is refused =="
+make_brief 2099-01-07
+printf 'x' > briefs/2099-01-07/clip.MP4
+set +e
+sh scripts/publish.sh 2099-01-07 --no-push >"$TMP/MP4.out" 2>"$TMP/MP4.err"
+MP4_code=$?
+set -e
+test "$MP4_code" -ne 0 || fail "uppercase mp4 was accepted"
+grep -F "视频扩展名" "$TMP/MP4.err" >/dev/null || fail "uppercase video reason"
+
+echo "== gitignore and CI pattern keep mp4 out of the index =="
+printf 'x' > stray.mp4
+git check-ignore -q stray.mp4 || fail "gitignore missed mp4"
+set +e
+git add -- stray.mp4 >"$TMP/add.out" 2>"$TMP/add.err"
+add_code=$?
+set -e
+git diff --cached --name-only > "$TMP/add-cached.txt"
+if grep -F "stray.mp4" "$TMP/add-cached.txt" >/dev/null; then
+  fail "git add staged an ignored mp4"
+fi
+test "$add_code" -ne 0 || fail "git add of an ignored mp4 exited 0"
+git add -f -- stray.mp4
+if git ls-files | grep -Ei '\.(m4a|mp3|aac|wav|ogg|flac|m4b|mp4|webm|mov|mkv|m4v)$' >/dev/null; then
+  echo "ci pattern matched forced mp4"
+else
+  fail "ci pattern missed mp4"
+fi
+git rm --cached -q -- stray.mp4
+rm -f stray.mp4
 
 echo "ALL_OK origin=$origin_url"

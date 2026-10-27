@@ -19,6 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Reject media binaries in git
+        run: |
+          if git ls-files | grep -Ei '\.(m4a|mp3|aac|wav|ogg|flac|m4b|mp4|webm|mov|mkv|m4v)$'; then
+            echo "audio and video files must stay on GitHub Releases, not in git"
+            exit 1
+          fi
       - name: Build static site
         run: python3 scripts/build.py --base "/${{ github.event.repository.name }}"
       - uses: actions/upload-pages-artifact@v3

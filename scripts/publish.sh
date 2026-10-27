@@ -1,5 +1,5 @@
 #!/bin/sh
-# Publish one issue: validate the brief files, refuse audio and extras, build, commit, and push.
+# Publish one issue: validate the brief files, refuse audio, video, and extras, build, commit, and push.
 # Usage: scripts/publish.sh YYYY-MM-DD [--no-push]
 set -eu
 ROOT=$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)
@@ -39,8 +39,8 @@ for f in index.md index.html sources.md; do
   fi
 done
 
-# Refuse before build or git add. A non-whitelist file, an audio extension,
-# or anything over 1 MB must not enter the public repository (CMP-225).
+# Refuse before build or git add. A non-whitelist file, an audio or video
+# extension, or anything over 1 MB must not enter the public repository.
 scan_dir=$(mktemp -d)
 find "$DIR" \( -type f -o -type l \) > "$scan_dir/files"
 : > "$scan_dir/hits"
@@ -54,7 +54,8 @@ while IFS= read -r path || [ -n "${path:-}" ]; do
   esac
   lower=$(printf '%s' "$rel" | tr '[:upper:]' '[:lower:]')
   case "$lower" in
-    *.m4a|*.mp3|*.wav|*.aac|*.ogg) append_reason "音频扩展名" ;;
+    *.m4a|*.mp3|*.wav|*.aac|*.ogg|*.flac|*.m4b) append_reason "音频扩展名" ;;
+    *.mp4|*.webm|*.mov|*.mkv|*.m4v) append_reason "视频扩展名" ;;
   esac
   if bytes=$(wc -c < "$path" 2>/dev/null); then
     bytes=$(printf '%s' "$bytes" | tr -d '[:space:]')
@@ -72,9 +73,9 @@ while IFS= read -r path || [ -n "${path:-}" ]; do
   fi
 done < "$scan_dir/files"
 if [ -s "$scan_dir/hits" ]; then
-  echo "拒绝发布 $DIR：这些文件不进仓库；音频按 CMP-225 走外链托管。" >&2
+  echo "拒绝发布 $DIR：这些文件不进仓库。音频与视频走 GitHub Releases 外链，不提交进站点 git。" >&2
   cat "$scan_dir/hits" >&2
-  echo "请把上述文件移出本期目录后再发布。m4a 等音频不提交进站点 git 仓库。" >&2
+  echo "请把上述文件移出本期目录后再发布。mp4、m4a 等影音文件不提交进站点 git 仓库。" >&2
   rm -rf "$scan_dir"
   exit 1
 fi
