@@ -50,3 +50,9 @@ git rm -r briefs/YYYY-MM-DD && git commit -m "unpublish YYYY-MM-DD" && git push
 ## 凭据
 
 部署使用 GitHub Actions 自带的 `GITHUB_TOKEN` 与仓库的 GitHub Pages，不把密钥写入仓库。站点挂在当前已授权 GitHub 账号名下。缺组织账号、自定义域名或 Pages 权限时，以工单里的缺口清单为准，不在本仓库记录密钥。
+
+## 发布步骤状态
+
+发布步骤已启用（2026-10-27 起）。内容负责人在终审通过后，用上面的一条命令即可独立完成「提交内容 → 构建 → 部署」。
+
+发布门不变：先终审通过，再发布；未获批不得推送、不得发布。回滚某一期用上面的 `unpublish` 命令。
