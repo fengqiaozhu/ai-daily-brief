@@ -21,7 +21,7 @@ dist/                           构建产物，不提交
 
 ## 程心如何发布一期
 
-1. 把 `index.md`、`index.html`、`sources.md` 放进 `briefs/YYYY-MM-DD/`。不要在这个仓库里改写正文。
+1. 把 `index.md`、`index.html`、`sources.md` 放进 `briefs/YYYY-MM-DD/`。可选再放 `blurb.txt`，最新一期的这段文字会显示在首页。不要在这个仓库里改写正文。
 2. 在仓库根目录执行：
 
 ```sh

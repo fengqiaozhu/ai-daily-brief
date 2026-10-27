@@ -285,6 +285,8 @@ def build(root: Path, dist: Path, base: str) -> list[str]:
         sources = folder / "sources.md"
         if sources.is_file():
             source_text = sources.read_text(encoding="utf-8")
+            # The supplied issue page links to ./sources.md beside index.html.
+            (target / "sources.md").write_text(source_text, encoding="utf-8")
             (archive / "sources.md").write_text(source_text, encoding="utf-8")
             source_page = page(
                 f"来源清单 · {date}",
@@ -297,6 +299,11 @@ def build(root: Path, dist: Path, base: str) -> list[str]:
         published.append((date, title))
 
     published.sort(reverse=True)
+    latest_blurb = ""
+    if published:
+        blurb_path = briefs / published[0][0] / "blurb.txt"
+        if blurb_path.is_file():
+            latest_blurb = blurb_path.read_text(encoding="utf-8").strip()
     if published:
         items = []
         for date, title in published:
@@ -315,9 +322,10 @@ def build(root: Path, dist: Path, base: str) -> list[str]:
     if config_path.is_file():
         config = json.loads(config_path.read_text(encoding="utf-8"))
         description = str(config.get("description") or description)
+    blurb_html = f"<p>{escape(latest_blurb)}</p>\n" if latest_blurb else ""
     home = page(
         "AI 早报",
-        f"<h1>AI 早报</h1>\n<p class=\"sub\">{escape(description)}</p>\n{listing}",
+        f"<h1>AI 早报</h1>\n<p class=\"sub\">{escape(description)}</p>\n{blurb_html}{listing}",
         base,
         0,
     )

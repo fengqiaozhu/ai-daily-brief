@@ -37,6 +37,7 @@ class BuildTests(unittest.TestCase):
             self.assertNotIn("<script", page.lower())
             self.assertIn("https://example.com", sources)
             self.assertTrue((dist / "2026-10-27" / "index.md").is_file())
+            self.assertTrue((dist / "2026-10-27" / "sources.md").is_file())
             self.assertTrue((dist / "404.html").is_file())
 
     def test_rejects_script_in_supplied_html(self) -> None:

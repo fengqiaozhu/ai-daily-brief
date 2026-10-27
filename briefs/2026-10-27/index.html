@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-10-27 — 对外发布核验版</title>
+<meta name="description" content="AI 早报第 001 期（2026-10-27）对外发布核验版：4 条已核验条目完整展开，12 条单一来源线索以标题级呈现。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+
+/* ---------- publish-version additions ---------- */
+code{font-family:var(--mono);font-size:.9em;background:rgba(255,255,255,.07);border:1px solid var(--line2);padding:1px 5px;border-radius:5px;color:#dbe6f7}
+.ovc .body{margin-top:8px;font-size:13.6px}
+.ovc .body p{margin:0 0 6px}
+.ovc .lk{margin-top:6px}
+.ovc .tag{font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:2px 8px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.chip b{color:var(--tx)}
+.callout .body p{margin:0 0 8px}
+.callout .body p:last-child{margin-bottom:0}
+.callout .body b{color:var(--tx)}
+.notes a{color:var(--cy);word-break:break-all}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">小小工作室 · AI 早报 · 第 001 期</div>
+  <h1>AI 早报 · 2026-10-27</h1>
+  <p class="sub">本期为<b>「核验版」</b>：只有达到「官方已确认」或「多源交叉」的条目才完整展开；其余条目只保留标题级线索，不作事实断言、因果结论或影响推断。</p>
+  <div class="meta">
+    <span class="chip live"><b>已核验条目</b> 4 条 · 第 1 / 2 / 3 / 13 条</span>
+    <span class="chip"><b>线索雷达</b> 12 条 · 单一来源 · 未核实</span>
+    <span class="chip"><b>实际检索时间窗</b> 2026-10-27 12:20–12:48（Asia/Shanghai）</span>
+    <span class="chip"><b>事件窗口</b> 2026-10-26 00:00 – 2026-10-27 12:00，补充 72 小时内遗漏事件，最早回溯至 2026-10-15</span>
+    <span class="chip"><b>链接复核</b> 2026-10-27 发布前逐条访问</span>
+  </div>
+</header>
+
+<section>
+  <div class="sec-h"><span class="no">00</span><h2>版头与来源分级</h2><span class="cnt">READING GUIDE</span></div>
+  <div class="callout">
+    <div class="ct">来源分级说明</div>
+    <p class="body" style="margin-top:0"><b>官方已确认</b>：已读到发布方或监管机构原文（本期为 Cloudflare 官方披露、Anthropic S-1 招股书原文）。<br>
+    <b>多源交叉</b>：至少两个相互独立的来源同时指向同一事实，但未逐字核对全部一手正文。<br>
+    <b>单一来源 · 未核实</b>：仅有一个来源，且正文未逐篇打开。该级别条目<b>只进入 B 区线索雷达</b>，仅列标题、来源链接、日期，不展开细节、不作推断。</p>
+  </div>
+  <div class="callout" style="border-color:rgba(255,202,107,.22);background:linear-gradient(135deg,rgba(255,202,107,.08),rgba(255,122,122,.05))">
+    <div class="ct" style="color:var(--am)">更正与反馈</div>
+    <p class="body" style="margin-top:0">发现错误或有补充，请通过站点页脚「更正与反馈」入口提交（Issue / 邮件）。确认后我们将在 <b>24 小时内在原文顶部加更正说明</b>并同步仓库 commit。本期一手来源与链接复核状态见 <a href="./sources.md">sources.md</a>。</p>
+  </div>
+</section>
+
+<section id="a">
+  <div class="sec-h"><span class="no">A</span><h2>已核验条目（完整展开）</h2><span class="cnt">4 条</span></div>
+
+  <article>
+    <div class="a-h"><span class="a-n">01</span><h3>OpenAI 发布 GPT-6.1 Terra，API 标准价格较 GPT-5.6 Terra 与 GPT-6.1 Sol 低 50%</h3></div>
+    <div class="tags"><span class="tag cross">多源交叉</span><span class="tag pend">基准数据为发布方口径</span></div>
+    <p class="lede">OpenAI 于 10 月 26 日发布 GPT-6.1 Terra，官方口径下 API 标准价格较前代 GPT-5.6 Terra 与同期 GPT-6.1 Sol 低 50%：每百万输入 token 1 美元、每百万缓存输入 token 0.05 美元、每百万输出 token 5 美元。该模型已在 ChatGPT Work 与 Codex 向 Plus、Pro、Enterprise、Edu 订阅者开放，API 模型标识为 <code>gpt-6.1-terra</code>。</p>
+    <div class="body">
+      <p>官方将 Terra 定位为面向计算机操作、视觉推理、编码与日常办公场景的模型，典型任务包括起草方案、解读技术图纸、填写表单与剪辑视频，其中给出的示例是读取来件发票并将字段录入财务软件。OpenAI 称 Terra 是 GPT-5.6 Terra 的替代型号。</p>
+      <p>基准数据全部来自 OpenAI 自测，未见第三方独立复现：</p>
+      <ul>
+        <li><b>Agents' Last Exam</b>（专业计算机操作任务基准）：medium reasoning effort 下较 GPT-5.6 Terra 高 15 个百分点，官方称成本约为后者的三分之一。</li>
+        <li><b>Terminal-Bench 4.0</b>（命令行编码智能体测试）：max reasoning effort 下解出 50.3% 任务，GPT-5.6 Terra 为 21.5%。OpenAI 仍建议最复杂的编码任务使用 GPT-6.1 Sol 或 GPT-6 Astra。</li>
+        <li><b>内部「诱导错误提示」基准</b>：low reasoning effort 下错误率从 GPT-5.6 Terra 的 53.6% 降至 16.7%；max reasoning effort 下降 18 个百分点至 4.3%。</li>
+        <li><b>横向对比（均为官方口径）</b>：官方称与 Claude Opus 5.5 相比，max effort 下 token 效率高出 3 倍以上、单 token 成本为四分之一，折算每任务成本约低 9 倍；官方称与 GPT-6 Astra 表现相当而单 token 价格为十分之一，完成速度快 3 倍以上。</li>
+      </ul>
+      <p>安全方面，官方称 GPT-6.1 Terra 在其 Preparedness Framework 的网络安全维度达到 Critical 阈值，保留了 GPT-6 Astra 的防护措施，并称对提示注入的抵抗力强于 GPT-5.6 Terra（细节见系统卡）。ChatGPT 订阅用户的实际变化是额度口径：官方称同等套餐额度在 Terra 上可完成的任务数多于 GPT-5.6 Terra，也显著多于 GPT-6.1 Sol 与 GPT-6 Astra。OpenAI 尚未说明 GPT-6.1 Terra 是否进入免费层。</p>
+    </div>
+    <div class="links">
+      <div class="lk"><span class="lt">一手来源</span><a href="https://openai.com/index/introducing-gpt-6-1-terra/" rel="noopener noreferrer">openai.com/index/introducing-gpt-6-1-terra/</a> <span class="tag pend">需人工打开（站点 JS 质询，本期未读到正文）</span></div>
+      <div class="lk"><span class="lt">已读全文</span><a href="https://www.ghacks.net/2026/10/27/openai-launches-gpt-6-1-terra-with-api-pricing-50-lower-than-gpt-5-6-terra/" rel="noopener noreferrer">ghacks.net/2026/10/27/openai-launches-gpt-6-1-terra…</a></div>
+    </div>
+  </article>
+
+  <article>
+    <div class="a-h"><span class="a-n">02</span><h3>Cloudflare 披露 Workers AI 上 GLM-5.3 跨请求 KV 缓存泄露，155 次响应受影响</h3></div>
+    <div class="tags"><span class="tag ok">官方已确认</span></div>
+    <p class="lede">Cloudflare 于 10 月 26 日与开源推理引擎 SGLang 联合披露：8 月 27 日至 9 月 9 日期间，Workers AI 上的 <code>@cf/zai-org/glm-5.3</code> 存在跨请求 KV 缓存暴露，共 155 次响应中混入了其他用户请求的内容，全部发生在提示长度超过 681,280 token 的请求上。事件已于 9 月 9 日修复并恢复服务。</p>
+    <div class="body">
+      <p>根因是两层问题叠加。第一层是配置错配：Cloudflare 以 1,048,576 token 的上下文窗口部署 GLM 5.3，但 prefill GPU 上的 KV 缓存池只有 681,280 token 容量，这一错配在发布前已知，团队原以为引擎会自行报错——实测只校验了 HTTP 状态码与流式响应体，没有校验模型输出连贯性。第二层是 SGLang 的缺陷：在 disaggregated prefill/decode 模式下，超长提示被调度器拒绝后会被替换成单 token 占位符继续走流程，prefill 照常为占位符生成 KV 缓存并通过 RDMA（Mooncake）传给 decode 节点；decode 节点收到「传输完成」信号后认为缓存已被本次请求完全覆盖，实际只写入了部分页码，于是生成时读取到残留的旧页面，客户端拿到 HTTP 200 且内容连贯但混入了他人数据。</p>
+      <p>处置与修复：9 月 8 日收到 Knostic 研究员 Gadi Evron 的 HackerOne 报告；9 月 9 日 13:22 宣布安全事件，14:00 将模型置为私有（返回 HTTP 400），14:52 完成全部 prefill 节点配置回滚，19:04 以修正配置加引擎补丁重建并用研究者复现脚本验证，19:40 恢复公开。配置侧把 KV 池扩到约 204 万 token（约为上下文长度的两倍），引擎侧让被拒请求在 KV 传输前就以原始错误终止。相关上游修复已合入 SGLang v0.5.20（PR #36988）与 v0.5.21（PR #38935），Cloudflare 建议所有 SGLang 部署方升级到 v0.5.22 或更高版本，并做四项检查：核对 KV 池与上下文长度、开启 deferred KV release、限制传输批次、启用 <code>--disaggregation-enable-kv-checksum</code> 与 <code>--kv-canary</code>（对 GLM 5.3、GLM 5.3 Flash、DeepSeek V4 的支持仍在扩展中）。Cloudflare 称仅 GLM 5.3 受影响，Workers AI 上其他模型的 KV 池均大于其上下文长度。</p>
+    </div>
+    <div class="links">
+      <div class="lk"><span class="lt">一手来源</span><a href="https://blog.cloudflare.com/kv-cache-exposure-remediation/" rel="noopener noreferrer">blog.cloudflare.com/kv-cache-exposure-remediation/</a></div>
+      <div class="lk"><span class="lt">联合声明</span><a href="https://www.lmsys.org/blog/2026-10-26-cf-security" rel="noopener noreferrer">lmsys.org/blog/2026-10-26-cf-security</a></div>
+      <div class="lk"><span class="lt">状态页</span><a href="https://www.cloudflarestatus.com/incidents/jsvvrtk5hvym" rel="noopener noreferrer">cloudflarestatus.com/incidents/jsvvrtk5hvym</a></div>
+    </div>
+  </article>
+
+  <article>
+    <div class="a-h"><span class="a-n">03</span><h3>Anthropic 提交 S-1 招股书：2026 上半年净亏 807 亿美元，消费型收入半年达 131 亿美元</h3></div>
+    <div class="tags"><span class="tag ok">官方已确认</span><span class="tag">一手监管文件 · 已读原文</span></div>
+    <p class="lede">10 月 26 日，Anthropic PBC 向 SEC 提交 S-1 招股说明书，拟以 Class A 普通股在纳斯达克全球精选市场（Nasdaq Global Select Market）首次公开发行。本期已读到招股书原文：<b>2026 年上半年消费型收入 131 亿美元（占总收入 80%），同期净亏损 807 亿美元；发行价区间尚未填写。</b></p>
+    <div class="body">
+      <p><b>已披露关键数据（均引自 Anthropic S-1（SEC EDGAR）原文）</b></p>
+      <ul>
+        <li><b>消费型收入（consumption-based revenue）</b>：2024 年 2.88 亿美元（占总收入 75%）→ 2025 年 38 亿美元（83%）→ 2026 年上半年 <b>131 亿美元（80%）</b>。</li>
+        <li><b>订阅型收入（subscription-based revenue）</b>：2024 年 9800 万美元（25%）→ 2025 年 7.89 亿美元（17%）→ 2026 年上半年 32 亿美元（20%）。</li>
+        <li><b>总收入（原文直接列示）</b>：2023 / 2024 / 2025 年分别为 <b>0.41 亿 / 3.86 亿 / 46 亿美元</b>；2026 年上半年 <b>163 亿美元</b>，同比增长 1,300%。</li>
+        <li><b>净亏损</b>：2023 / 2024 / 2025 三个年度分别为 <b>15 亿 / 83 亿 / 420 亿美元</b>；2026 年上半年 <b>807 亿美元</b>。招股书自述「自成立以来每个年度均出现净亏损」。</li>
+        <li><b>增长与成本口径（原文表述）</b>：截至 2026 年 6 月 30 日的三个月，营收同比增长 1,368%，同期计算与基础设施支出增长 300%；公司称 Claude Opus 5.5 相比 Claude Opus 5 将客户单任务成本降低约 40%。</li>
+        <li><b>客户集中度（原文表述）</b>：通过 CSP 市场（云厂商等分发与计费渠道）产生的收入，分别占 2023、2024、2025 三个年度总收入的约 11%、32%、47%，以及 2026 年上半年的约 48%；对应净应收账款占比为 42%、60%、58%。</li>
+        <li><b>注册信息</b>：注册主体为 Delaware 注册的 Anthropic, PBC（总部 548 Market Street, San Francisco, California 94104）；公司注册代理为 CEO 兼联合创始人 Dario Amodei、总裁兼联合创始人 Daniela Amodei；招股书封面写明「本次为 Anthropic PBC Class A 普通股的首次公开发行」；「拟开始公开销售时间」一栏为「本注册声明生效后尽快」。</li>
+      </ul>
+      <p><b>披露口径声明：发行价区间尚未填写，本文不推测估值、募资规模与上市时间。</b>（招股书原文为 “the initial public offering price per share will be between $ and $”。）本条不包含亏损构成、现金流、估值对标等原文未支持的解读。若正式招股书后续修订，以修订版为准，并在下一期做更正说明。</p>
+    </div>
+    <div class="links">
+      <div class="lk"><span class="lt">一手来源</span><a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm" rel="noopener noreferrer">sec.gov/Archives/edgar/data/2130357/…/anthropicpbc-sx1.htm</a></div>
+    </div>
+  </article>
+
+  <article>
+    <div class="a-h"><span class="a-n">13</span><h3>微软向四国约 6 万名员工提供自愿离职买断方案，至 12 月 31 日</h3></div>
+    <div class="tags"><span class="tag cross">多源交叉</span><span class="tag pend">两处口径存在差异</span></div>
+    <p class="lede">据 10 月 26 日《Seattle Times》报道，微软面向四国员工提供批量自愿离职买断方案，覆盖人数约占其员工总数的四分之一；gHacks 同日标题给出的口径为约 60,000 人、四个国家、截止 12 月 31 日。</p>
+    <div class="body">
+      <p>两处报道口径存在差异：一处以「约占四分之一员工规模」表述，一处给出「60,000 人、四国、截至 12 月 31 日」的具体数字。本期<b>未能读到任一报道全文</b>，故并列呈现而不做取舍，读者引用时应以原文为准。就其性质而言，这是本季度规模最大的科技公司结构调整信号之一，且与同期的 Copilot 产品线扩张同时发生。对开发者的现实影响主要在招聘侧与云/工具链支持侧。</p>
+    </div>
+    <div class="links">
+      <div class="lk"><span class="lt">报道一</span><a href="https://www.seattletimes.com/business/microsoft/microsoft-offers-mass-buyouts-for-roughly-a-quarter-of-its-workforce/" rel="noopener noreferrer">seattletimes.com/…/microsoft-offers-mass-buyouts…</a></div>
+      <div class="lk"><span class="lt">报道二</span><a href="https://www.ghacks.net/category/ai/" rel="noopener noreferrer">ghacks.net/category/ai/</a></div>
+    </div>
+  </article>
+</section>
+
+<section id="b">
+  <div class="sec-h"><span class="no">B</span><h2>线索雷达（标题级）</h2><span class="cnt">12 条 · 单一来源 · 未核实</span></div>
+  <div class="callout" style="border-color:rgba(255,202,107,.22);background:linear-gradient(135deg,rgba(255,202,107,.08),rgba(255,122,122,.05))">
+    <div class="ct" style="color:var(--am)">阅读须知</div>
+    <p class="body" style="margin-top:0">本区 12 条<b>全部为「单一来源 · 未核实」</b>：只提供标题、来源链接与日期，<b>不含细节断言、因果结论、估值或影响推断</b>。请把本区当作「值得一跟的线索清单」，引用前回到原始链接确认。</p>
+  </div>
+  <div class="ovc"><div class="top"><span class="num">04</span><span class="cat">开发生态</span><span class="tag pend">单一来源 · 未核实</span></div><h4>微软公开 Type Server Protocol（TSP）规范文档，指向语言服务器协议层</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-26</p><p style="margin:0" class="lk"><a href="https://github.com/microsoft/pylance-release/blob/main/docs/tsp/type-server-protocol.md" rel="noopener noreferrer">github.com/microsoft/pylance-release/…/type-server-protocol.md</a></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">05</span><span class="cat">开发生态</span><span class="tag pend">单一来源 · 未核实</span></div><h4>微软将移除 OneDrive Copilot 快捷入口，自 11 月中旬起执行</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-21（报道日期）</p><p style="margin:0" class="lk"><a href="https://www.ghacks.net/category/ai/" rel="noopener noreferrer">ghacks.net/category/ai/</a></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">06</span><span class="cat">开发生态</span><span class="tag pend">单一来源 · 未核实</span></div><h4>微软扩展 Copilot Studio，新增 AI Agent 与治理能力</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：栏目未标注日期</p><p style="margin:0" class="lk"><a href="https://www.ghacks.net/category/ai/" rel="noopener noreferrer">ghacks.net/category/ai/</a></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">07</span><span class="cat">模型发布</span><span class="tag pend">单一来源 · 未核实</span></div><h4>OpenAI 公布与学界合作推动科学理解的三项研究进展</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-26</p><p style="margin:0" class="lk"><a href="https://openai.com/index/building-scientific-understanding-with-academic-communities/" rel="noopener noreferrer">openai.com/index/building-scientific-understanding…</a> <span class="tag pend">需人工打开</span></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">08</span><span class="cat">技术与洞察</span><span class="tag pend">单一来源 · 未核实</span></div><h4>OpenAI 发布预印本《The Exponential Time Hypothesis is False》</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-26</p><p style="margin:0" class="lk"><a href="https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf" rel="noopener noreferrer">github.com/openai/math/…/paper.pdf</a></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">09</span><span class="cat">技术与洞察</span><span class="tag pend">单一来源 · 未核实</span></div><h4>Sebastian Raschka 发布从零构建推理模型的视频课程</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-26</p><p style="margin:0" class="lk"><a href="https://magazine.sebastianraschka.com/p/building-reasoning-models" rel="noopener noreferrer">magazine.sebastianraschka.com/p/building-reasoning-models</a></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">10</span><span class="cat">产品应用</span><span class="tag pend">单一来源 · 未核实</span></div><h4>Anthropic 发布后台代理 Claude Duet，仅面向美国 Pro/Max 订阅者</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-23（报道日期）</p><p style="margin:0" class="lk"><a href="https://www.ghacks.net/category/ai/" rel="noopener noreferrer">ghacks.net/category/ai/</a></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">11</span><span class="cat">产品应用</span><span class="tag pend">单一来源 · 未核实</span></div><h4>谷歌自 11 月 13 日起从 4.99 美元 AI Plus 套餐移除 Gemini Pro 模型</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-16（报道日期）</p><p style="margin:0" class="lk"><a href="https://www.ghacks.net/category/ai/" rel="noopener noreferrer">ghacks.net/category/ai/</a></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">12</span><span class="cat">产品应用</span><span class="tag pend">单一来源 · 未核实</span></div><h4>谷歌在 Android Auto 推出 Gemini Personal Intelligence</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-21（报道日期）</p><p style="margin:0" class="lk"><a href="https://www.ghacks.net/category/ai/" rel="noopener noreferrer">ghacks.net/category/ai/</a></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">14</span><span class="cat">行业动态</span><span class="tag pend">单一来源 · 未核实</span></div><h4>美国国土安全部要求联邦民事机构停用并移除 DeepSeek 产品</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-20（报道日期）</p><p style="margin:0" class="lk"><a href="https://www.ghacks.net/category/ai/" rel="noopener noreferrer">ghacks.net/category/ai/</a></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">15</span><span class="cat">行业动态</span><span class="tag pend">单一来源 · 未核实</span></div><h4>OpenAI 指控前员工带走 100 余份未发布硬件机密文件</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-16（报道日期）</p><p style="margin:0" class="lk"><a href="https://www.ghacks.net/category/ai/" rel="noopener noreferrer">ghacks.net/category/ai/</a></p></div></div>
+  <div class="ovc"><div class="top"><span class="num">16</span><span class="cat">行业动态</span><span class="tag pend">单一来源 · 未核实</span></div><h4>ChatGPT 广告扩展至 89 个市场；八州检方起诉 OpenAI</h4><div class="body" style="margin-top:8px"><p style="margin:0 0 6px">日期：2026-10-21 宣布 / 10-22 报道；诉讼 10-15 报道</p><p style="margin:0" class="lk"><a href="https://www.ghacks.net/category/ai/" rel="noopener noreferrer">ghacks.net/category/ai/</a></p></div></div>
+</section>
+
+<section>
+  <div class="sec-h"><span class="no">C</span><h2>更正与反馈</h2><span class="cnt">CORRECTIONS</span></div>
+  <div class="notes">
+    <h2>发现错误怎么办</h2>
+    <ol>
+      <li>通过站点页脚「<strong>更正与反馈</strong>」入口提交更正请求（Issue / 邮件），请注明条目编号与具体原文。</li>
+      <li>我们会在 <strong>24 小时内在原文顶部加更正说明</strong>，并同步仓库 commit。</li>
+      <li>第 001 期如招股书发生修订，以修订版为准，并在下一期做更正说明。</li>
+      <li>本期全部一手来源链接与复核状态见 <a href="./sources.md">sources.md</a>（12 个唯一链接，9 个 HTTP 200，3 个标注「需人工打开」，无失效链接）。</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p>AI 早报 · 第 001 期 · 2026-10-27 · 小小工作室内容运营组 制</p>
+  <p><span class="badge">核验版 · 已通过 CEO 终审发布结构</span></p>
+</footer>
+
+</div>
+</body>
+
+</html>
