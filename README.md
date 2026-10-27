@@ -1,0 +1,52 @@
+# AI 早报
+
+小小工作室的每日 AI 早报静态站。正文不在这个仓库里生成。内容负责人把某一期的三份文件放进 `briefs/YYYY-MM-DD/`，然后用一条命令提交。GitHub Actions 负责构建并部署到 GitHub Pages。
+
+## 目录
+
+```text
+briefs/YYYY-MM-DD/index.md      正文母版
+briefs/YYYY-MM-DD/index.html    正文页面（不得含脚本）
+briefs/YYYY-MM-DD/sources.md    来源清单
+dist/                           构建产物，不提交
+```
+
+发布后的地址：
+
+- 首页：`/`
+- 某一期：`/YYYY-MM-DD/`（同时提供 `index.html` 与 `index.md`）
+- 来源清单：`/briefs/YYYY-MM-DD/sources.md`
+
+项目页的实际前缀是仓库名，例如 `https://<owner>.github.io/ai-daily-brief/`。
+
+## 程心如何发布一期
+
+1. 把 `index.md`、`index.html`、`sources.md` 放进 `briefs/YYYY-MM-DD/`。不要在这个仓库里改写正文。
+2. 在仓库根目录执行：
+
+```sh
+scripts/publish.sh YYYY-MM-DD
+```
+
+这条命令会检查三份文件是否齐全、拒绝带脚本的 HTML、构建 `dist/`、提交并推送。推送后，`.github/workflows/pages.yml` 完成部署。
+
+只想本地预览、先不推送：
+
+```sh
+scripts/publish.sh YYYY-MM-DD --no-push
+python3 -m http.server 4173 --directory dist
+```
+
+浏览器打开 `http://127.0.0.1:4173/`。本地预览使用 `site.json` 里的 `base`。若链接带仓库前缀导致本地 404，可临时执行 `python3 scripts/build.py --base ""` 后再开本地服务器。
+
+## 撤下某一期
+
+删除该期目录并推送，下一次构建不再包含这个路径。
+
+```sh
+git rm -r briefs/YYYY-MM-DD && git commit -m "unpublish YYYY-MM-DD" && git push
+```
+
+## 凭据
+
+部署使用 GitHub Actions 自带的 `GITHUB_TOKEN` 与仓库的 GitHub Pages，不把密钥写入仓库。站点挂在当前已授权 GitHub 账号名下。缺组织账号、自定义域名或 Pages 权限时，以工单里的缺口清单为准，不在本仓库记录密钥。
