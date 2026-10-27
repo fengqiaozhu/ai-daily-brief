@@ -69,6 +69,7 @@ code { font-size: 0.92em; }
 .date { display: block; font-variant-numeric: tabular-nums; font-weight: 700; }
 .tools { font-size: 0.92rem; color: #5c564c; }
 footer { padding-bottom: 2rem; font-size: 0.85rem; color: #5c564c; }
+footer p { margin: 0.15rem 0; }
 @media (max-width: 375px) {
   body { font-size: 15.5px; }
   header, main, footer { width: min(40rem, calc(100% - 1.5rem)); }
@@ -209,7 +210,50 @@ def reject_scripts(document: str, label: str) -> None:
         raise SystemExit(f"{label} contains a script or javascript: URL; refusing to publish")
 
 
-def page(title: str, body: str, base: str, depth: int) -> str:
+def feedback_url_from(config: dict) -> str:
+    raw = str(config.get("feedbackUrl") or "").strip()
+    if not raw:
+        return ""
+    if not raw.startswith("https://"):
+        raise SystemExit("feedbackUrl must be an https URL")
+    reject_scripts(raw, "feedbackUrl")
+    return raw
+
+
+def feedback_link(url: str) -> str:
+    return f'<p><a href="{escape(url)}">更正与反馈</a></p>'
+
+
+def footer_html(feedback_url: str) -> str:
+    note = "<p>小小工作室 · 静态发布 · 无外部脚本</p>"
+    if not feedback_url:
+        return f"<footer>{note}</footer>"
+    return f"<footer>\n{feedback_link(feedback_url)}\n{note}\n</footer>"
+
+
+def ensure_feedback(document: str, feedback_url: str) -> str:
+    """Add the site feedback entry to a supplied page without rewriting its prose."""
+    if not feedback_url:
+        return document
+    if re.search(r"<a\b[^>]*>\s*更正与反馈\s*</a>", document, re.IGNORECASE):
+        return document
+    snippet = feedback_link(feedback_url)
+    footer_open = re.search(r"<footer\b[^>]*>", document, re.IGNORECASE)
+    if footer_open:
+        at = footer_open.end()
+        updated = document[:at] + snippet + document[at:]
+    else:
+        block = f"<footer>{snippet}</footer>"
+        body_close = re.search(r"</body\s*>", document, re.IGNORECASE)
+        if body_close:
+            updated = document[: body_close.start()] + block + document[body_close.start() :]
+        else:
+            updated = document + block
+    reject_scripts(updated, "feedback link")
+    return updated
+
+
+def page(title: str, body: str, base: str, depth: int, feedback_url: str = "") -> str:
     home = f"{base}/" if base else "./" if depth == 0 else "../" * depth
     if base:
         home = f"{base}/"
@@ -226,7 +270,7 @@ def page(title: str, body: str, base: str, depth: int) -> str:
 <main>
 {body}
 </main>
-<footer>小小工作室 · 静态发布 · 无外部脚本</footer>
+{footer_html(feedback_url)}
 </body>
 </html>
 """
@@ -244,10 +288,22 @@ def issue_dirs(briefs: Path) -> list[Path]:
     return found
 
 
+def read_config(root: Path) -> dict:
+    config_path = root / "site.json"
+    if not config_path.is_file():
+        return {}
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    if not isinstance(config, dict):
+        raise SystemExit("site.json must be an object")
+    return config
+
+
 def build(root: Path, dist: Path, base: str) -> list[str]:
     base = base.rstrip("/")
     if base and not base.startswith("/"):
         base = "/" + base
+    config = read_config(root)
+    feedback_url = feedback_url_from(config)
     briefs = root / "briefs"
     if dist.exists():
         shutil.rmtree(dist)
@@ -266,13 +322,20 @@ def build(root: Path, dist: Path, base: str) -> list[str]:
         if html_path.is_file():
             issue_html = html_path.read_text(encoding="utf-8")
             reject_scripts(issue_html, str(html_path))
+            issue_html = ensure_feedback(issue_html, feedback_url)
         else:
             tools = (
                 f'<p class="tools"><a href="{base}/briefs/{date}/sources.html">来源清单</a>'
                 f' · <a href="{base}/briefs/{date}/sources.md">sources.md</a>'
                 f' · <a href="{base}/{date}/index.md">Markdown</a></p>'
             )
-            issue_html = page(f"{title} · {date}", markdown_to_html(markdown) + "\n" + tools, base, 1)
+            issue_html = page(
+                f"{title} · {date}",
+                markdown_to_html(markdown) + "\n" + tools,
+                base,
+                1,
+                feedback_url,
+            )
         target = dist / date
         target.mkdir(parents=True)
         (target / "index.html").write_text(issue_html, encoding="utf-8")
@@ -294,6 +357,7 @@ def build(root: Path, dist: Path, base: str) -> list[str]:
                 + f'\n<p class="tools"><a href="{base}/briefs/{date}/sources.md">sources.md</a></p>',
                 base,
                 2,
+                feedback_url,
             )
             (archive / "sources.html").write_text(source_page, encoding="utf-8")
         published.append((date, title))
@@ -317,17 +381,14 @@ def build(root: Path, dist: Path, base: str) -> list[str]:
         listing = '<ul class="issue-list">\n' + "\n".join(items) + "\n</ul>"
     else:
         listing = "<p>尚无已发布期次。新一期放到 <code>briefs/YYYY-MM-DD/</code> 后执行发布命令。</p>"
-    config_path = root / "site.json"
-    description = "每日人工智能早报。"
-    if config_path.is_file():
-        config = json.loads(config_path.read_text(encoding="utf-8"))
-        description = str(config.get("description") or description)
+    description = str(config.get("description") or "每日人工智能早报。")
     blurb_html = f"<p>{escape(latest_blurb)}</p>\n" if latest_blurb else ""
     home = page(
         "AI 早报",
         f"<h1>AI 早报</h1>\n<p class=\"sub\">{escape(description)}</p>\n{blurb_html}{listing}",
         base,
         0,
+        feedback_url,
     )
     (dist / "index.html").write_text(home, encoding="utf-8")
     missing = page(
@@ -335,6 +396,7 @@ def build(root: Path, dist: Path, base: str) -> list[str]:
         f"<h1>未找到这一期</h1>\n<p>该日期还没有发布，或已经撤下。</p>\n<p><a href=\"{base or ''}/\">返回首页</a></p>",
         base,
         0,
+        feedback_url,
     )
     (dist / "404.html").write_text(missing, encoding="utf-8")
     return [date for date, _title in published]

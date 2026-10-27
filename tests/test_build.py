@@ -62,6 +62,32 @@ class BuildTests(unittest.TestCase):
             self.assertIn('href="/ai-daily-brief/"', home)
             self.assertNotIn("<script", home.lower())
 
+    def test_feedback_link_is_added_without_rewriting_source(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            issue = root / "briefs" / "2026-10-27"
+            issue.mkdir(parents=True)
+            source = (
+                "<!DOCTYPE html><html><body>"
+                "<p>请通过站点页脚「更正与反馈」入口提交。</p>"
+                "<footer><p>署名</p></footer>"
+                "</body></html>"
+            )
+            (issue / "index.md").write_text("# 测试期\n", encoding="utf-8")
+            (issue / "index.html").write_text(source, encoding="utf-8")
+            (issue / "sources.md").write_text("# 来源\n", encoding="utf-8")
+            (root / "site.json").write_text(
+                '{"feedbackUrl":"https://github.com/example/ai-daily-brief/issues/new"}\n',
+                encoding="utf-8",
+            )
+            site_build.build(root, root / "dist", "")
+            link = '<a href="https://github.com/example/ai-daily-brief/issues/new">更正与反馈</a>'
+            for rel in ("index.html", "404.html", "2026-10-27/index.html"):
+                text = (root / "dist" / rel).read_text(encoding="utf-8")
+                self.assertIn(link, text)
+                self.assertNotIn("<script", text.lower())
+            self.assertEqual((issue / "index.html").read_text(encoding="utf-8"), source)
+
 
 if __name__ == "__main__":
     unittest.main()

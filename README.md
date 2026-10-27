@@ -28,7 +28,7 @@ dist/                           构建产物，不提交
 scripts/publish.sh YYYY-MM-DD
 ```
 
-这条命令会检查三份文件是否齐全、拒绝带脚本的 HTML、构建 `dist/`、提交并推送。推送后，`.github/workflows/pages.yml` 完成部署。
+这条命令会检查三份文件是否齐全、拒绝带脚本的 HTML、构建 `dist/`、提交并推送。推送后，`.github/workflows/pages.yml` 完成部署。构建时会在首页、404 和各期页面页脚加上「更正与反馈」，地址取自 `site.json` 的 `feedbackUrl`（必须是 https）。正文文件保持原样，不用为了这个入口改写。
 
 只想本地预览、先不推送：
 

@@ -2,5 +2,6 @@
   "title": "AI 早报",
   "owner": "小小工作室",
   "description": "每日人工智能早报。已核验条目完整展开，其余线索只作雷达。",
-  "base": "/ai-daily-brief"
+  "base": "/ai-daily-brief",
+  "feedbackUrl": "https://github.com/fengqiaozhu/ai-daily-brief/issues/new"
 }
