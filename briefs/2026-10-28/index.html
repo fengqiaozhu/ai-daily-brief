@@ -189,9 +189,46 @@ footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
     <span class="chip live">检索执行窗口 <b>2026-10-28 09:18–09:40 CST</b></span>
     <span class="chip">主窗口 <b>2026-10-27 → 10-28 09:00</b></span>
     <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
-    <span class="chip">状态 <b>内部初稿 · 未对外发布</b></span>
+    <span class="chip">状态 <b>已对外发布 · 含本期 AI 生成视频</b></span>
   </div>
 </header>
+<figure class="episode-video">
+  <figcaption class="episode-video-label">收看本期</figcaption>
+  <video controls preload="metadata" playsinline src="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-10-28/ai-daily-2026-10-28.mp4">
+    <a href="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-10-28/ai-daily-2026-10-28.mp4">下载本期视频（mp4）</a>
+  </video>
+  <p class="episode-video-note">本期视频由 AI 生成，内容以图文版为准。</p>
+</figure>
+<style>
+figure.episode-video {
+  color-scheme: dark;
+  margin: 1rem 0 1.25rem;
+  padding: 0.9rem 1rem 0.75rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 48rem;
+  background: #141820;
+  color: #e8ecf6;
+  border: 1px solid rgba(255,255,255,.14);
+}
+figure.episode-video video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  max-height: 70vh;
+  display: block;
+  margin: 0.4rem 0 0.45rem;
+  background: #000;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.episode-video-label { font-size: 0.8rem; letter-spacing: 0.08em; }
+.episode-video-note { margin: 0; font-size: 0.85rem; line-height: 1.5; }
+@media (max-width: 375px) {
+  figure.episode-video { padding: 0.75rem 0.7rem 0.65rem; }
+}
+</style>
+
 
 <div class="stats">
   <div class="stat c1"><div class="n">6</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
