@@ -30,7 +30,9 @@ scripts/publish.sh YYYY-MM-DD
 
 这条命令会检查三份文件是否齐全、拒绝带脚本的 HTML、构建 `dist/`、提交并推送。推送后，`.github/workflows/pages.yml` 完成部署。构建时会在首页、404 和各期页面页脚加上「更正与反馈」，地址取自 `site.json` 的 `feedbackUrl`（必须是 https）。正文文件保持原样，不用为了这个入口改写。
 
-`briefs/YYYY-MM-DD/` 里只会暂存白名单：`index.md`、`index.html`、`sources.md`，以及可选的 `blurb.txt`。目录中若还有别的文件，或任一文件超过 1 MB（1048576 字节），或文件名是音频扩展名（`.m4a`、`.mp3`、`.wav`、`.aac`、`.ogg`、`.flac`、`.m4b`）或视频扩展名（`.mp4`、`.webm`、`.mov`、`.mkv`、`.m4v`），发布命令会告警并以非零状态退出，不暂存、不推送。这些文件不进仓库。影音走 GitHub Releases 外链，不把 m4a 或 mp4 提交进站点 git 仓库。`.gitignore` 忽略这些扩展名。Pages 工作流在构建前会拒绝仓库里已跟踪的同类文件。
+`briefs/YYYY-MM-DD/` 里只会暂存白名单：`index.md`、`index.html`、`sources.md`，以及可选的 `blurb.txt`。目录中若还有别的文件，或任一文件超过 1 MB（1048576 字节），或文件名是音频扩展名（`.m4a`、`.mp3`、`.wav`、`.aac`、`.ogg`、`.flac`、`.m4b`）或视频扩展名（`.mp4`、`.webm`、`.mov`、`.mkv`、`.m4v`），发布命令会告警并以非零状态退出，不暂存、不推送。暂存区里已有这些影音文件时也会直接失败，并写出文件名。这些文件不进仓库。影音走 GitHub Releases 外链，不把 m4a 或 mp4 提交进站点 git 仓库。`.gitignore` 忽略这些扩展名。Pages 工作流在构建前会拒绝仓库里已跟踪的同类文件。
+
+当期视频的上传、播放器注入、校验和回滚命令见 `docs/video-publish-runbook.md`。若 GitHub 上已有 `video-YYYY-MM-DD` 这个 Release，或工作区里有本地标记 `video-markers/YYYY-MM-DD`，则 `index.html` 必须已经包含对应的 `<video src="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-YYYY-MM-DD/ai-daily-YYYY-MM-DD.mp4">` 和披露语「本期视频由 AI 生成，内容以图文版为准。」，否则发布命令失败，不改页面、不推送。没有视频的期次仍按原来的图文流程发布。
 
 只想本地预览、先不推送：
 

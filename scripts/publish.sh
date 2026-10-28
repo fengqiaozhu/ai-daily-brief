@@ -1,5 +1,7 @@
 #!/bin/sh
 # Publish one issue: validate the brief files, refuse audio, video, and extras, build, commit, and push.
+# If this date has a GitHub Release video-YYYY-MM-DD or a local video-markers/YYYY-MM-DD file,
+# index.html must already contain that date's player and the disclosure sentence.
 # Usage: scripts/publish.sh YYYY-MM-DD [--no-push]
 set -eu
 ROOT=$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)
@@ -13,6 +15,91 @@ append_reason() {
     reasons="$reasons，$1"
   else
     reasons=$1
+  fi
+}
+
+refuse_indexed_media() {
+  if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    return 0
+  fi
+  indexed=$(git ls-files | grep -Ei '\.(m4a|mp3|aac|wav|ogg|flac|m4b|mp4|webm|mov|mkv|m4v)$' || true)
+  if [ -z "$indexed" ]; then
+    return 0
+  fi
+  echo "拒绝发布：暂存区有影音文件，不提交进站点 git。" >&2
+  echo "error_stage=staged_media" >&2
+  printf '%s\n' "$indexed" | while IFS= read -r staged || [ -n "${staged:-}" ]; do
+    [ -n "${staged:-}" ] || continue
+    printf '%s\n' "- $staged" >&2
+  done
+  exit 1
+}
+
+require_video_player_if_needed() {
+  basis=""
+  if [ -f "video-markers/$DATE" ]; then
+    basis="视频产物标记 video-markers/$DATE"
+  fi
+
+  do_lookup=0
+  case "${AI_DAILY_VIDEO_LOOKUP:-auto}" in
+    1|true|yes) do_lookup=1 ;;
+    0|false|no) do_lookup=0 ;;
+    *)
+      origin_url=$(git remote get-url origin 2>/dev/null || true)
+      case "$origin_url" in
+        *github.com*) do_lookup=1 ;;
+      esac
+      ;;
+  esac
+
+  if [ "$do_lookup" -eq 1 ]; then
+    if ! command -v gh >/dev/null 2>&1; then
+      echo "error_stage=release_lookup" >&2
+      echo "拒绝发布 $DIR：需要 gh 才能确认视频 Release 是否存在，已停止。" >&2
+      exit 1
+    fi
+    lookup_dir=$(mktemp -d)
+    set +e
+    NO_COLOR=1 GH_FORCE_TTY=0 GH_PROMPT_DISABLED=1 \
+      env -u FORCE_COLOR \
+      gh release view "video-$DATE" --repo "${AI_DAILY_REPO:-fengqiaozhu/ai-daily-brief}" \
+      --json id,tagName,isDraft >"$lookup_dir/rel.json" 2>"$lookup_dir/rel.err"
+    rel_code=$?
+    set -e
+    if [ "$rel_code" -eq 0 ]; then
+      if [ -n "$basis" ]; then
+        basis="$basis；视频 Release video-$DATE"
+      else
+        basis="视频 Release video-$DATE"
+      fi
+    elif grep -qi 'release not found' "$lookup_dir/rel.err"; then
+      :
+    else
+      echo "error_stage=release_lookup" >&2
+      echo "拒绝发布 $DIR：无法确认视频 Release 是否存在，已停止，避免在不确定时放行。" >&2
+      cat "$lookup_dir/rel.err" >&2
+      rm -rf "$lookup_dir"
+      exit 1
+    fi
+    rm -rf "$lookup_dir"
+  fi
+
+  if [ -z "$basis" ]; then
+    return 0
+  fi
+
+  set +e
+  check_out=$(python3 scripts/inject-episode-video.py --check "$DATE" --html "$DIR/index.html" --repo "${AI_DAILY_REPO:-fengqiaozhu/ai-daily-brief}" 2>&1)
+  check_code=$?
+  set -e
+  if [ "$check_code" -ne 0 ]; then
+    echo "error_stage=video_html" >&2
+    echo "拒绝发布 $DIR：该期已有视频，但 index.html 未包含对应播放器。未改页面，未提交，未推送。" >&2
+    echo "依据：$basis" >&2
+    printf '%s\n' "$check_out" >&2
+    echo "补上播放器：python3 scripts/inject-episode-video.py $DATE" >&2
+    exit 1
   fi
 }
 
@@ -81,6 +168,9 @@ if [ -s "$scan_dir/hits" ]; then
 fi
 rm -rf "$scan_dir"
 
+refuse_indexed_media
+require_video_player_if_needed
+
 python3 scripts/build.py --root "$ROOT"
 echo "built dist/"
 
@@ -99,6 +189,10 @@ if [ -f "$DIR/blurb.txt" ]; then
   git add -- "$DIR/blurb.txt"
 fi
 git add -- site.json scripts README.md .github
+if [ -d docs ]; then
+  git add -- docs
+fi
+refuse_indexed_media
 if git diff --cached --quiet; then
   echo "no content changes to commit"
 else

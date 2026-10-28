@@ -214,4 +214,160 @@ fi
 git rm --cached -q -- stray.mp4
 rm -f stray.mp4
 
+echo "== staged mp4 is refused before build or push =="
+make_brief 2099-01-08
+printf 'x' > forced-into-index.mp4
+git add -f -- forced-into-index.mp4
+before=$(git rev-parse HEAD)
+set +e
+sh scripts/publish.sh 2099-01-08 --no-push >"$TMP/staged-nopush.out" 2>"$TMP/staged-nopush.err"
+staged_nopush=$?
+sh scripts/publish.sh 2099-01-08 >"$TMP/staged-push.out" 2>"$TMP/staged-push.err"
+staged_push=$?
+set -e
+after=$(git rev-parse HEAD)
+echo "exit nopush=$staged_nopush push=$staged_push"
+cat "$TMP/staged-nopush.err"
+test "$staged_nopush" -ne 0 || fail "staged mp4 --no-push was accepted"
+test "$staged_push" -ne 0 || fail "staged mp4 publish was accepted"
+test "$before" = "$after" || fail "HEAD moved while a staged mp4 was present"
+grep -F "error_stage=staged_media" "$TMP/staged-nopush.err" >/dev/null || fail "staged stage"
+grep -F "forced-into-index.mp4" "$TMP/staged-nopush.err" >/dev/null || fail "staged filename"
+grep -F "built dist/" "$TMP/staged-nopush.out" >/dev/null && fail "staged mp4 still built"
+git rm --cached -q -- forced-into-index.mp4
+rm -f forced-into-index.mp4
+
+echo "== video marker without a player is refused =="
+make_brief 2099-01-09
+mkdir -p video-markers
+printf 'marker\n' > video-markers/2099-01-09
+html_before=$(sha256sum briefs/2099-01-09/index.html | awk '{print $1}')
+before=$(git rev-parse HEAD)
+set +e
+sh scripts/publish.sh 2099-01-09 --no-push >"$TMP/marker.out" 2>"$TMP/marker.err"
+marker_code=$?
+sh scripts/publish.sh 2099-01-09 >"$TMP/marker-push.out" 2>"$TMP/marker-push.err"
+marker_push=$?
+set -e
+after=$(git rev-parse HEAD)
+html_after=$(sha256sum briefs/2099-01-09/index.html | awk '{print $1}')
+echo "exit nopush=$marker_code push=$marker_push"
+cat "$TMP/marker.err"
+test "$marker_code" -ne 0 || fail "marker without player was accepted"
+test "$marker_push" -ne 0 || fail "marker push was accepted"
+test "$before" = "$after" || fail "HEAD moved for a missing player"
+test "$html_before" = "$html_after" || fail "html changed when the player was missing"
+grep -F "error_stage=video_html" "$TMP/marker.err" >/dev/null || fail "video_html stage"
+grep -F "video-2099-01-09/ai-daily-2099-01-09.mp4" "$TMP/marker.err" >/dev/null || fail "missing url"
+grep -F "本期视频由 AI 生成，内容以图文版为准。" "$TMP/marker.err" >/dev/null || fail "missing disclosure"
+grep -F "视频产物标记 video-markers/2099-01-09" "$TMP/marker.err" >/dev/null || fail "marker basis"
+grep -F "built dist/" "$TMP/marker.out" >/dev/null && fail "missing player still built"
+
+echo "== another date's player does not satisfy this date =="
+make_brief 2099-01-11
+other='<video controls src="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2099-01-01/ai-daily-2099-01-01.mp4"></video><p>本期视频由 AI 生成，内容以图文版为准。</p>'
+printf '%s\n' "$other" >> briefs/2099-01-11/index.html
+printf 'marker\n' > video-markers/2099-01-11
+set +e
+sh scripts/publish.sh 2099-01-11 --no-push >"$TMP/other.out" 2>"$TMP/other.err"
+other_code=$?
+set -e
+echo "exit=$other_code"
+cat "$TMP/other.err"
+test "$other_code" -ne 0 || fail "other date player was accepted"
+grep -F "video-2099-01-11/ai-daily-2099-01-11.mp4" "$TMP/other.err" >/dev/null || fail "did not name this date"
+grep -F "video-2099-01-01/ai-daily-2099-01-01.mp4" briefs/2099-01-11/index.html >/dev/null || fail "other player was removed"
+if grep -F "缺少：披露语" "$TMP/other.err" >/dev/null; then
+  fail "disclosure from the other player was reported missing"
+fi
+
+echo "== marker plus the matching player is accepted =="
+make_brief 2099-01-10
+cat > briefs/2099-01-10/index.html <<'EOF'
+<!DOCTYPE html><html><body>
+<div class="wrap">
+<header class="mast"><h1>测试</h1></header>
+<nav class="toc"><a href="#x">目录</a></nav>
+</div>
+</body></html>
+EOF
+python3 scripts/inject-episode-video.py 2099-01-10 --html briefs/2099-01-10/index.html --theme light >/dev/null
+printf 'marker\n' > video-markers/2099-01-10
+set +e
+sh scripts/publish.sh 2099-01-10 --no-push >"$TMP/player.out" 2>"$TMP/player.err"
+player_code=$?
+set -e
+echo "exit=$player_code"
+cat "$TMP/player.err"
+cat "$TMP/player.out"
+test "$player_code" -eq 0 || fail "matching player was refused"
+grep -F "local build only; not pushed" "$TMP/player.out" >/dev/null || fail "player preview text"
+python3 scripts/inject-episode-video.py --check 2099-01-10 --html briefs/2099-01-10/index.html >/dev/null
+
+echo "== release lookup stays off for a non-GitHub origin =="
+make_brief 2099-01-13
+mkdir -p "$TMP/fakebin"
+cat > "$TMP/fakebin/gh" <<'EOF'
+#!/bin/sh
+echo called >> "${GH_CALL_LOG:?}"
+echo "gh-called" >&2
+exit 99
+EOF
+chmod +x "$TMP/fakebin/gh"
+: > "$TMP/gh-calls"
+set +e
+env PATH="$TMP/fakebin:$PATH" GH_CALL_LOG="$TMP/gh-calls" \
+  sh scripts/publish.sh 2099-01-13 --no-push >"$TMP/offline.out" 2>"$TMP/offline.err"
+offline_code=$?
+set -e
+echo "exit=$offline_code"
+cat "$TMP/offline.err"
+test "$offline_code" -eq 0 || fail "offline publish called gh or failed"
+test ! -s "$TMP/gh-calls" || fail "gh was called for a local origin"
+
+echo "== a missing release does not require a player =="
+cat > "$TMP/fakebin/gh" <<'EOF'
+#!/bin/sh
+echo called >> "${GH_CALL_LOG:?}"
+echo "release not found" >&2
+exit 1
+EOF
+chmod +x "$TMP/fakebin/gh"
+: > "$TMP/gh-calls"
+make_brief 2099-01-14
+set +e
+env PATH="$TMP/fakebin:$PATH" GH_CALL_LOG="$TMP/gh-calls" AI_DAILY_VIDEO_LOOKUP=1 \
+  sh scripts/publish.sh 2099-01-14 --no-push >"$TMP/absent.out" 2>"$TMP/absent.err"
+absent_code=$?
+set -e
+echo "exit=$absent_code"
+cat "$TMP/absent.err"
+test "$absent_code" -eq 0 || fail "absent release was treated as required"
+test -s "$TMP/gh-calls" || fail "lookup did not run"
+
+echo "== a release lookup error stops publish =="
+cat > "$TMP/fakebin/gh" <<'EOF'
+#!/bin/sh
+echo called >> "${GH_CALL_LOG:?}"
+echo "HTTP 401: Bad credentials" >&2
+exit 1
+EOF
+chmod +x "$TMP/fakebin/gh"
+: > "$TMP/gh-calls"
+make_brief 2099-01-15
+before=$(git rev-parse HEAD)
+set +e
+env PATH="$TMP/fakebin:$PATH" GH_CALL_LOG="$TMP/gh-calls" AI_DAILY_VIDEO_LOOKUP=1 \
+  sh scripts/publish.sh 2099-01-15 --no-push >"$TMP/lookup.out" 2>"$TMP/lookup.err"
+lookup_code=$?
+set -e
+after=$(git rev-parse HEAD)
+echo "exit=$lookup_code"
+cat "$TMP/lookup.err"
+test "$lookup_code" -ne 0 || fail "lookup error was ignored"
+test "$before" = "$after" || fail "HEAD moved after lookup error"
+grep -F "error_stage=release_lookup" "$TMP/lookup.err" >/dev/null || fail "lookup stage"
+grep -F "HTTP 401: Bad credentials" "$TMP/lookup.err" >/dev/null || fail "raw lookup error"
+grep -F "built dist/" "$TMP/lookup.out" >/dev/null && fail "lookup error still built"
+
 echo "ALL_OK origin=$origin_url"
