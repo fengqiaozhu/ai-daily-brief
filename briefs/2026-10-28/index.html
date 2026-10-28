@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-10-28 — 全球人工智能情报日报</title>
+<meta name="description" content="2026-10-28 AI 早报：Anthropic 与 GSA 扩大合作、SK hynix 三季度营收破百万亿韩元、Codex CLI 内置 Vertex AI provider 等 6 条已核实动态与线索雷达。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Global AI Intelligence Daily · 第 002 期</div>
+  <h1>AI 早报<br>2026-10-28</h1>
+  <p class="sub">多源发现 → 线索筛选 → 原始资料核实 → 连续事件关联 → 重要性排序 → 分类报道。本期覆盖全球人工智能生态在主窗口（10-27 09:00 – 10-28 09:00，Asia/Shanghai）内首次公开的事件。</p>
+  <div class="meta">
+    <span class="chip live">检索执行窗口 <b>2026-10-28 09:18–09:40 CST</b></span>
+    <span class="chip">主窗口 <b>2026-10-27 → 10-28 09:00</b></span>
+    <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
+    <span class="chip">状态 <b>内部初稿 · 未对外发布</b></span>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat c1"><div class="n">6</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
+  <div class="stat c2"><div class="n">6</div><div class="l">新闻栏目 / SECTIONS</div></div>
+  <div class="stat c3"><div class="n">18</div><div class="l">可追溯来源 / SOURCES</div></div>
+  <div class="stat c4"><div class="n">8</div><div class="l">官方已确认 / CONFIRMED</div></div>
+</div>
+
+<div class="grid">
+
+<nav class="toc">
+  <div class="lbl">目录 / Contents</div>
+  <a href="#ov"><span>00</span>今日概览</a>
+  <a href="#s1"><span>01</span>要闻</a><a href="#s2"><span>02</span>开发生态</a><a href="#s5"><span>05</span>技术与洞察</a><a href="#s7"><span>07</span>前瞻与传闻</a><a href="#s8"><span>08</span>后续追踪</a><a href="#s9"><span>09</span>编辑备注</a>
+</nav>
+
+<main>
+
+<section id="ov">
+  <div class="sec-h"><span class="no">00</span><h2>今日概览</h2><span class="cnt">13 条 · 按重要性与栏目排列</span></div>
+  <div class="ov">
+    <a class="ovc" href="#ov"><div class="top"><span class="num">1</span><span class="cat">要闻</span></div><h4>Anthropic 与 GSA 扩大合作，Claude 全产品线给政府客户 40% 折扣</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">2</span><span class="cat">要闻</span></div><h4>SK hynix 三季度营收首破 100 万亿韩元，HBM4 成为第四季度主流产品</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">3</span><span class="cat">要闻</span></div><h4>OpenAI Codex CLI 发布 rust-v0.165.0，内置 Google Cloud Vertex AI provider</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">4</span><span class="cat">开发生态</span></div><h4>Claude Code 发布 v2.1.312</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">5</span><span class="cat">开发生态</span></div><h4>Gemini CLI 发布 v0.66.0 稳定版与 v0.67.0-preview.0</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">6</span><span class="cat">技术与洞察</span></div><h4>OpenAI 连续第四次下调模型价格，单价降至 GPT-6.1 Sol 的一半</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">7</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源 · 未核实）</span></div><h4>据报道，Amazon 内部备忘录称仅用 token 用量衡量 AI 采纳「严重失真」</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">8</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源 · 未核实）</span></div><h4>据报道，OpenAI 计划采购 Google TPU</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">9</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源 · 未核实）</span></div><h4>据报道，Physical Intelligence 拟募资 10 亿美元以上，估值约 200 亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">10</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源 · 未核实）</span></div><h4>据报道，Meta 250 亿美元股票发行获超额认购 5 倍</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">11</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源 · 未核实）</span></div><h4>据报道，Anthropic 披露与六家伙伴的早期药物研发合作，并收购一人公司 Mithril</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">12</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源 · 未核实）</span></div><h4>Anthropic 招聘负责人称因 Claude 表现更好而取消编程面试</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">13</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源 · 未核实）</span></div><h4>据报道，Infisical 完成 4000 万美元 B 轮融资</h4></a>
+  </div>
+</section>
+
+<section id="s1">
+<div class="sec-h"><span class="no">01</span><h2>要闻</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s1-1">
+<div class="a-h"><div class="a-n">1</div><h3>Anthropic 与 GSA 扩大合作，Claude 全产品线给政府客户 40% 折扣</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">Anthropic 宣布与美国联邦采购机构 GSA 扩大合作，新协议给政府合作伙伴 Claude Enterprise、Claude for Government 与 Claude API 全产品线 40% 折扣，并首次覆盖从 Anthropic 直购与经云厂商采购的两种路径。折扣延伸至州、地方、部落与属地政府。官方称约 500 个美国联邦、州与地方政府机构在用 Claude。</p>
+<div class="body">
+<p>官方公告称，Claude for Government 周活跃用户自今年 2 月以来增长约 8 倍，联邦文职机构（civilian agencies）过去一年的使用量增长约 20 倍。Anthropic 估算该协议下的折扣合计可为政府节省约 10 亿美元，并表示机构不设最低消费承诺，按实际用量付费。</p>
+<p>与公告同步推出的还有面向政府客户的落地支持项目，用于帮助机构在长采购周期、紧预算条件下部署 Claude。公告举出的场景包括积压工单处理、档案与表单管理、旧代码现代化。</p>
+<p>对开发者的直接含义：Claude Enterprise 与 API 的政府渠道价格出现结构性下调，若此前因报价偏高而未进入采购流程的机构可能重新评估。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">https://www.anthropic.com/news/expanding-partnership-gsa</span></div>
+<div class="lk"><span class="lt">https://www.techmeme.com/261027/p36</span></div>
+</div>
+</article>
+<article id="s1-2">
+<div class="a-h"><div class="a-n">2</div><h3>SK hynix 三季度营收首破 100 万亿韩元，HBM4 成为第四季度主流产品</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">SK hynix 10 月 28 日公布 2026 年第三季度财报：营收 104.6155 万亿韩元，营业利润 83.3338 万亿韩元（营业利润率 80%），净利润 39.7756 万亿韩元（净利率 38%）。季度营收首次突破 100 万亿韩元，营收与营业利润双双创历史新高。</p>
+<div class="body">
+<p>官方新闻稿称，增长主要由 AI 内存需求推动的价格上行与高附加值产品放量带动，HBM4 与高附加值服务器产品销售扩大，HBM4 预计从第四季度起成为主流产品。产能方面，公司已就 2027—2028 年超过 50% 的产量签订长期协议（LTAs）。</p>
+<p>股东回报方面，Kioxia 投资带来的收益大部分将回馈股东，公司计划今年执行约 100 万亿韩元的股东回报。官方 AI 摘要另称，公司预计内存供应紧张将持续至 2030 年，并正在扩充先进 DRAM/NAND 产能。</p>
+<p>这是 AI 算力需求在存储端的最新量化信号：供给端的长期协议已覆盖 2027—2028 年过半产量，价格周期与 AI 资本开支的绑定度进一步上升。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">https://news.skhynix.com/en/q3-2026-business-results/</span></div>
+<div class="lk"><span class="lt">https://www.techmeme.com/261027/p37</span></div>
+</div>
+</article>
+<article id="s1-3">
+<div class="a-h"><div class="a-n">3</div><h3>OpenAI Codex CLI 发布 rust-v0.165.0，内置 Google Cloud Vertex AI provider</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">OpenAI 官方 Codex CLI 仓库 在 10 月 27 日发布 rust-v0.165.0。新版内置 Google Cloud Vertex AI provider，配置项为 <code>model_provider = "gcp"</code>；同时把 GPT-6.1 Terra 加入模型目录，并新增会话选择器的仓库过滤与目录分组能力。</p>
+<div class="body">
+<p>该版本在同日还发布了 alpha 通道的 0.166.0-alpha.1 至 alpha.3 三个预发布版本，stable 与 alpha 通道并行推进。模型目录新增 GPT-6.1 Terra 与上一期早报报道的价格下调形成呼应：接入 Vertex AI 的同时可以用到最新价位与最新模型。</p>
+<p>对使用者的影响是多云与多 provider 调度不再依赖外部配置层，Codex 内部即可按 provider 配置调用不同后端。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">https://github.com/openai/codex/releases/tag/rust-v0.165.0</span></div>
+<div class="lk"><span class="lt">https://github.com/openai/codex/releases</span></div>
+</div>
+</article>
+</section>
+<section id="s2">
+<div class="sec-h"><span class="no">02</span><h2>开发生态</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s2-1">
+<div class="a-h"><div class="a-n">4</div><h3>Claude Code 发布 v2.1.312</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">Anthropic 的 Claude Code 官方仓库于 10 月 27 日 20:24（UTC）发布 v2.1.312，为该仓库当天发布的最后一个正式版本标签，前一个稳定版 v2.1.311 发布于 10 月 26 日 21:51（UTC）。</p>
+<div class="body">
+<p>该仓库的发布说明以「Immutable release」形式给出，发布内容以标题与变更条目为主。仓库同时在 10 月 26 日至 27 日间并行推进 v2.1.310 至 v2.1.312 三个版本，正式版节奏保持每日一版以上。</p>
+<p>对使用者的实际影响是版本漂移：生产环境需要显式锁定版本号，官方仓库的 Releases 页提供完整标签列表与逐版本对比入口。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">https://github.com/anthropics/claude-code/releases/tag/v2.1.312</span></div>
+<div class="lk"><span class="lt">https://github.com/anthropics/claude-code/releases</span></div>
+</div>
+</article>
+<article id="s2-2">
+<div class="a-h"><div class="a-n">5</div><h3>Gemini CLI 发布 v0.66.0 稳定版与 v0.67.0-preview.0</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">Google 的 Gemini CLI 在 10 月 27 日一天内发布三个标签：稳定版 v0.66.0（20:26 UTC）、预览版 v0.67.0-preview.0（20:07 UTC）以及夜间构建 v0.67.0-nightly.20261027。</p>
+<div class="body">
+<p>该项目沿用 nightly、preview、stable 三条发布通道。官方 release notes 页说明：自 2026 年 6 月 18 日起，Gemini CLI 已由 Antigravity CLI 取代，未付费用户与 Google One 用户不再使用 Gemini CLI；且 Gemini CLI 未针对 Gemini 4 Argon 做优化，需要该模型的用户应改用 Antigravity。</p>
+<p>这两条限制直接影响选型：把 Gemini CLI 当作默认入口的团队需要确认自己是否处在被取代的通道上。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">https://github.com/google-gemini/gemini-cli/releases/tag/v0.66.0</span></div>
+<div class="lk"><span class="lt">https://geminicli.com/docs/changelogs/</span></div>
+</div>
+</article>
+</section>
+
+
+<section id="s5">
+<div class="sec-h"><span class="no">05</span><h2>技术与洞察</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s5-1">
+<div class="a-h"><div class="a-n">6</div><h3>OpenAI 连续第四次下调模型价格，单价降至 GPT-6.1 Sol 的一半</h3></div>
+<div class="tags"><span class="tag cross">二级来源 · 原文已读</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">据 TechTarget 10 月 27 日报道，OpenAI 最新模型 GPT-6.1 Terra 的价格为每百万输入 token 1 美元、每百万输出 token 5 美元，是 GPT-6.1 Sol（2 美元 / 10 美元）的一半，也低于 GPT-5.6 Terra 的 2 美元 / 12 美元。报道称这已是 OpenAI 连续第四次下调模型价格。</p>
+<div class="body">
+<p>报道将降价放在与开放权重厂商（阿里巴巴、百度、Z.ai 等）竞争压力的背景下解读，并提到 Anthropic 也在 10 月下调了 Haiku 5.5 的价格（每 100K token 下降 90%，输出每百万 token 降 0.50 美元）。报道同时引述 Futurum Group 分析师 David Nicholson 的判断：价格下降让企业有更多低成本选项，但也让「哪个模型对应哪个工作负载」变得更难判断。</p>
+<p>需要区分的是：GPT-6.1 Terra 的发布与价格本身已在上一期早报报道，本期新增的是第三方对「连续第四次降价」这一趋势的分析与竞品对比数字，并非新的价格动作。竞品具体降幅数字为二级来源转述，未在厂商官方定价页逐项核对。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">https://www.techtarget.com/news/openai-slashes-price-for-model-again/872942/</span></div>
+</div>
+</article>
+</section>
+
+<section id="s7">
+<div class="sec-h"><span class="no">07</span><h2>前瞻与传闻</h2><span class="cnt">7 条 · 按重要性排列</span></div>
+<article id="s7-1">
+<div class="a-h"><div class="a-n">7</div><h3>据报道，Amazon 内部备忘录称仅用 token 用量衡量 AI 采纳「严重失真」</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">（2026-10-27）——Techmeme 汇总报道，备忘录原文未获取。https://www.techmeme.com/261027/p27</p>
+</article>
+<article id="s7-2">
+<div class="a-h"><div class="a-n">8</div><h3>据报道，OpenAI 计划采购 Google TPU</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">（2026-10-27）——来源称其招聘启事显示将招聘负责 TPU 相关工作的工程师，OpenAI 为 Nvidia 的重要客户。官方未确认。https://www.techmeme.com/261027/p39</p>
+</article>
+<article id="s7-3">
+<div class="a-h"><div class="a-n">9</div><h3>据报道，Physical Intelligence 拟募资 10 亿美元以上，估值约 200 亿美元</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">（2026-10-27）——传由 Avenir 与 Lux Capital 领投。官方未确认。https://www.techmeme.com/261027/p29</p>
+</article>
+<article id="s7-4">
+<div class="a-h"><div class="a-n">10</div><h3>据报道，Meta 250 亿美元股票发行获超额认购 5 倍</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">（2026-10-27）——传为筹集约 980 亿美元 AI 支出资金。官方未确认。https://www.techmeme.com/261027/p28</p>
+</article>
+<article id="s7-5">
+<div class="a-h"><div class="a-n">11</div><h3>据报道，Anthropic 披露与六家伙伴的早期药物研发合作，并收购一人公司 Mithril</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">（2026-10-27）——Anthropic 官方新闻列表中未见对应条目，未确认。https://www.techmeme.com/261027/p31</p>
+</article>
+<article id="s7-6">
+<div class="a-h"><div class="a-n">12</div><h3>Anthropic 招聘负责人称因 Claude 表现更好而取消编程面试</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">（2026-10-27）——个人公开发言，不代表公司政策。https://www.techmeme.com/261027/p38</p>
+</article>
+<article id="s7-7">
+<div class="a-h"><div class="a-n">13</div><h3>据报道，Infisical 完成 4000 万美元 B 轮融资</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-27 / 10-28 首次公开</span></div>
+<p class="lede">（2026-10-27）——该公司为 AI agent 提供凭据托管。官方公告未核对。https://www.techmeme.com/261027/p35</p>
+</article>
+</section>
+<section id="s8">
+<div class="sec-h"><span class="no">08</span><h2>后续追踪</h2><span class="cnt">连续事件</span></div>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>GPT-6.1 Terra 定价</strong>：上一期已报发布与价格（较前代低 50%）</h3></div>
+<p class="lede">本期新增为第三方对「连续第四次降价」的分析，以及与 Anthropic Haiku 5.5 降价的对比（二级来源）</p>
+<div class="body"><p>下一步关注厂商官方定价页是否再次调整、竞品是否同期跟进。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Anthropic 上市进程</strong>：上一期已报 S-1 招股书与财务数据</h3></div>
+<p class="lede">本期新增为 TechTarget 提到其「本周提交招股书」并提及同期降价</p>
+<div class="body"><p>下一步关注 SEC EDGAR 原文与承销安排。</p></div>
+</article>
+</section>
+<section id="s9">
+<div class="sec-h"><span class="no">09</span><h2>编辑备注</h2><span class="cnt">采集限制与口径</span></div>
+<div class="body">
+<p><strong>本期检索时间范围</strong>：2026-10-27 09:00 至 2026-10-28 09:00（Asia/Shanghai），即 2026-10-27 01:00Z 至 2026-10-28 01:00Z，以事件首次公开时间为准；未回补 72 小时。</p>
+<p><strong>采集限制</strong>：本期检索阶段的 NotebookLM 超级 MCP 通道不可用（工具网关会话未暴露 NotebookLM 连接），检索降级为直接抓取一级与二级来源原文，并按 13.5 标注来源分级；无法核实的线索已降级为「前瞻与传闻」线索雷达（单一来源 · 未核实），取得第二独立来源后才升级为完整条目。</p>
+<p><strong>来源冲突</strong>：SK hynix 三季度数据以官方新闻稿（韩元口径）为准，Techmeme 汇总的美元口径（约 788 亿美元营收、约 627.6 亿美元营业利润）与其一致，未见冲突。</p>
+<p><strong>条目降级说明</strong>：本期行业类消息（Meta 股票发行、Physical Intelligence 融资、Infisical 融资、Amazon 内部备忘录等）目前均为单一来源，按 13.4 证据门槛收在「前瞻与传闻」线索雷达，仅保留标题与链接；取得第二独立来源后可升级为完整条目。</p>
+<p><strong>未收录说明</strong>：本期未收录社交热度高但无实质产品或参数变化的条目；STEPX Neo 手机发布（IT之家，2026-10-13）等超窗条目未纳入。</p>
+</div></section>
+
+</main>
+</div>
+</body>
+</html>
