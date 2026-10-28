@@ -14,3 +14,5 @@ __pycache__/
 *.mov
 *.mkv
 *.m4v
+# Local marker that a date has a video. The mp4 itself stays outside the repo.
+video-markers/
