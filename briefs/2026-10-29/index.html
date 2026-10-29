@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-10-29 — 全球人工智能情报日报</title>
+<meta name="description" content="2026-10-29 AI 早报：微软 Azure 收入同比增 48%、Alphabet Google Cloud 收入翻倍至 307.09 亿美元、DOJ 问询 Nvidia 收购 Hugging Face、NVIDIA 开源 Nemotron 3.5 Transcribe 等 11 条已核实动态与线索雷达。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Global AI Intelligence Daily · 第 003 期</div>
+  <h1>AI 早报<br>2026-10-29</h1>
+  <p class="sub">多源发现 → 线索筛选 → 原始资料核实 → 连续事件关联 → 重要性排序 → 分类报道。本期覆盖全球人工智能生态在主窗口（10-28 07:00 – 10-29 07:00，Asia/Shanghai）内首次公开的事件。</p>
+  <div class="meta">
+    <span class="chip live">检索执行窗口 <b>2026-10-29 07:02–07:35 CST</b></span>
+    <span class="chip">主窗口 <b>2026-10-28 07:00 → 10-29 07:00</b></span>
+    <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
+    <span class="chip">状态 <b>内部初稿 · 未对外发布</b></span>
+  </div>
+</header>
+<figure class="episode-video">
+  <figcaption class="episode-video-label">收看本期</figcaption>
+  <video controls preload="metadata" playsinline src="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-10-29/ai-daily-2026-10-29.mp4">
+    <a href="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-10-29/ai-daily-2026-10-29.mp4">下载本期视频（mp4）</a>
+  </video>
+  <p class="episode-video-note">本期视频由 AI 生成，内容以图文版为准。</p>
+</figure>
+<style>
+figure.episode-video {
+  color-scheme: dark;
+  margin: 1rem 0 1.25rem;
+  padding: 0.9rem 1rem 0.75rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 48rem;
+  background: #141820;
+  color: #e8ecf6;
+  border: 1px solid rgba(255,255,255,.14);
+}
+figure.episode-video video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  max-height: 70vh;
+  display: block;
+  margin: 0.4rem 0 0.45rem;
+  background: #000;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.episode-video-label { font-size: 0.8rem; letter-spacing: 0.08em; }
+.episode-video-note { margin: 0; font-size: 0.85rem; line-height: 1.5; }
+@media (max-width: 375px) {
+  figure.episode-video { padding: 0.75rem 0.7rem 0.65rem; }
+}
+</style>
+
+
+<div class="stats">
+  <div class="stat c1"><div class="n">11</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
+  <div class="stat c2"><div class="n">8</div><div class="l">新闻栏目 / SECTIONS</div></div>
+  <div class="stat c3"><div class="n">23</div><div class="l">可追溯来源 / SOURCES</div></div>
+  <div class="stat c4"><div class="n">12</div><div class="l">官方已确认 / CONFIRMED</div></div>
+</div>
+
+<div class="grid">
+
+<nav class="toc">
+  <div class="lbl">目录 / Contents</div>
+  <a href="#ov"><span>00</span>今日概览</a>
+  <a href="#s1"><span>01</span>要闻</a><a href="#s2"><span>02</span>开发生态</a><a href="#s3"><span>03</span>模型发布</a><a href="#s5"><span>05</span>技术与洞察</a><a href="#s6"><span>06</span>行业动态</a><a href="#s7"><span>07</span>前瞻与传闻</a><a href="#s8"><span>08</span>后续追踪</a><a href="#s9"><span>09</span>编辑备注</a>
+</nav>
+
+<main>
+
+<section id="ov">
+  <div class="sec-h"><span class="no">00</span><h2>今日概览</h2><span class="cnt">16 条 · 按重要性与栏目排列</span></div>
+  <div class="ov">
+    <a class="ovc" href="#ov"><div class="top"><span class="num">1</span><span class="cat">要闻</span></div><h4>微软 FY2027 第一财季营收 923 亿美元，Azure 收入同比增 48%，商业剩余履约义务增至 6770 亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">2</span><span class="cat">要闻</span></div><h4>Alphabet 第三季营收 1275.77 亿美元同比增 25%，Google Cloud 收入翻倍至 307.09 亿美元，当季资本开支 513.55 亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">3</span><span class="cat">要闻</span></div><h4>美国司法部就 Nvidia 以 129.3 亿美元收购 Hugging Face 对 AI 竞争的影响展开问询</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">4</span><span class="cat">要闻</span></div><h4>Anthropic 扩大 AI for Science 计划，新增 20 家机构并公布 Model Hardware Standard</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">5</span><span class="cat">要闻</span></div><h4>MCP 参考服务器发布 v2.2.0 安全更新，因 eMudhra 中间 CA 证书风险要求升级 Node.js 运行时</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">6</span><span class="cat">要闻</span></div><h4>微软披露单季来自 OpenAI 的收入 100 亿美元，约占其季度总营收 11%</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">7</span><span class="cat">开发生态</span></div><h4>openai-python v3.41.0 发布，Realtime 输入支持类型化引用，并首次在 SDK 内写入模型下线公告</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">8</span><span class="cat">模型发布</span></div><h4>NVIDIA 开源 Nemotron 3.5 Transcribe 与 Granary v2 数据管线，单模型覆盖 40 种语言转写与说话人归属</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">9</span><span class="cat">技术与洞察</span></div><h4>Artificial Analysis 发布 Intelligence Index v5，60% 权重改用私有测试集</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r1</span><span class="cat">前瞻与传闻（单一来源 · 未核实）</span></div><h4>Marvell 接近以约 830 亿美元收购数据中心光模块厂商 Lumentum</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r2</span><span class="cat">前瞻与传闻（单一来源 · 未核实）</span></div><h4>AI 与云安全创业公司 Upwind Security 融资 4 亿美元，估值 38 亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r3</span><span class="cat">前瞻与传闻（单一来源 · 未核实）</span></div><h4>ServiceNow 第三季订阅收入 39.9 亿美元，第四季指引引发 AI 支出担忧</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r4</span><span class="cat">前瞻与传闻（单一来源 · 未核实）</span></div><h4>Oracle 承诺至 FY2030 新增融资不超过 200 亿美元，预计 FY2029 自由现金流超 300 亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r5</span><span class="cat">前瞻与传闻（单一来源 · 未核实）</span></div><h4>纽约州 Hochul 签署法案，限制 AI 聊天机器人对未成年人提供「不安全功能」</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r6</span><span class="cat">前瞻与传闻（单一来源 · 未核实）</span></div><h4>Google 与 Xreal 发布有线 XR 眼镜 Xreal Aura，1,099 美元起</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r7</span><span class="cat">前瞻与传闻（单一来源 · 未核实）</span></div><h4>Apple 为 M5 Ultra Mac Studio 增加 512GB 内存版本，起价 22,299 美元</h4></a>
+  </div>
+</section>
+
+<section id="s1">
+<div class="sec-h"><span class="no">01</span><h2>要闻</h2><span class="cnt">6 条 · 按重要性排列</span></div>
+<article id="s1-1">
+<div class="a-h"><div class="a-n">1</div><h3>微软 FY2027 第一财季营收 923 亿美元，Azure 收入同比增长 48%，商业剩余履约义务增至 6770 亿美元</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">微软 2026 年 10 月 28 日公布截至 9 月 30 日的 FY2027 第一财季业绩：营收 923 亿美元、同比增长 19%，Microsoft Cloud 收入 639 亿美元、增长 30%，Azure 收入同比增长 48%，商业剩余履约义务（commercial RPO）同比增长 73% 至 6770 亿美元。</p>
+<div class="body">
+<p>官方财报列出：营收 923 亿美元（+19%），营业利润 459 亿美元（+21%，固定汇率 +22%），净利润 366 亿美元（GAAP +32%），摊薄每股收益 4.92 美元（+32%）；非 GAAP 净利润 364 亿美元（+18%）。分部口径上，「Agents and Infra」收入 768 亿美元、同比增长 25%。业务亮点包括：商业剩余履约义务 6770 亿美元（+73%）、Microsoft Cloud 639 亿美元（+30%，固定汇率 +31%）、Azure +48%、Microsoft 365 商业云收入 +17%、行业解决方案云收入 +10%。</p>
+<p>CFO Amy Hood 表示「以 Microsoft Cloud 639 亿美元的收入开启本财年，增速加快至 30%（固定汇率 31%）」。据 Reuters 报道，本季资本开支 452 亿美元，低于微软自定的 500 亿美元指引，自由现金流 186 亿美元（分析师预期 85.4 亿美元）。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Microsoft FY27 Q1 官方财报页</span><a href="https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast">https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast</a></div>
+<div class="lk"><span class="lt">Reuters：Microsoft 季度云收入超预期</span><a href="https://www.reuters.com/business/retail-consumer/microsoft-beats-quarterly-cloud-revenue-estimates-2026-10-28/">https://www.reuters.com/business/retail-consumer/microsoft-beats-quarterly-cloud-revenue-estimates-2026-10-28/</a></div>
+</div>
+</article>
+<article id="s1-2">
+<div class="a-h"><div class="a-n">2</div><h3>Alphabet 第三季营收 1275.77 亿美元，Google Cloud 收入翻倍至 307.09 亿美元，当季资本开支 513.55 亿美元</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-28 / 10-29 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">Alphabet 于 10 月 28 日向 SEC 提交 8-K 并发布第三季业绩：营收 1275.77 亿美元、同比增长 25%，Google Cloud 收入 307.09 亿美元、同比增长 103%，当季购置物业与设备支出 513.55 亿美元，自由现金流为 -90.65 亿美元。</p>
+<div class="body">
+<p>分项数据（SEC 8-K 附件 99.1 原文，单位百万美元）：Google Services 合计 963.02 亿（+11%），其中 Google Search &amp; other 633.50 亿（+12%）、YouTube 广告 112.07 亿（+9%）、Google Network 74.55 亿、Google 广告合计 820.12 亿（+11%）；Google Cloud 307.09 亿（+103%），分部营业利润 111.21 亿（上年同期 35.94 亿）；Other Bets 收入 3.72 亿、营业亏损 20.47 亿。</p>
+<p>合并层面：总营收 1275.77 亿（上年 1023.46 亿），营业利润 405.76 亿（+30%，利润率 31.8%），净利润 264.68 亿、归属普通股股东净利 261.70 亿，均低于上年同期的 349.79 亿。现金流量表显示，当季购置物业与设备支出 513.55 亿（上年同期 239.53 亿），自由现金流 -90.65 亿，前十二个月自由现金流 101.16 亿（上年同期 245.51 亿）。员工数由 190,167 人增至 204,757 人。</p>
+<p>官方称这是连续第 13 个季度营收双位数增长，Search 查询量同比增速为近五年最高，并称 Google Cloud 的增长「由企业 AI 基础设施与企业 AI 解决方案带动，TPU 系统销售亦对增长有实质贡献」。CNBC 报道称公司维持全年资本开支 1950–2050 亿美元指引，盘后股价跌超 9%。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Alphabet 8-K 附件 99.1（SEC EDGAR 原文）</span><a href="https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm">https://www.sec.gov/Archives/edgar/data/1652044/000165204426000080/googexhibit991q32026.htm</a></div>
+<div class="lk"><span class="lt">Alphabet 官方业绩发布 PDF</span><a href="https://s206.q4cdn.com/479360582/files/doc_financials/2026/q3/2026q3-alphabet-earnings-release.pdf">https://s206.q4cdn.com/479360582/files/doc_financials/2026/q3/2026q3-alphabet-earnings-release.pdf</a></div>
+</div>
+</article>
+<article id="s1-3">
+<div class="a-h"><div class="a-n">3</div><h3>美国司法部就 Nvidia 以 129.3 亿美元收购 Hugging Face 对 AI 竞争的影响展开问询</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">据 Reuters 报道，美国司法部已就 Nvidia 以 129.3 亿美元收购开源平台 Hugging Face 一事问询其对 AI 竞争的影响，反垄断机构对 Nvidia 行为的调查仍在继续。Bloomberg Law、CNBC 等媒体同步跟进报道。</p>
+<div class="body">
+<p>Reuters 原文称司法部已就 Nvidia 收购 Hugging Face 的交易如何影响 AI 竞争提出问询。Techmeme 汇总显示，同一事件另有 The Next Web、Bloomberg Law、CNBC 等多家媒体报道；Bloomberg Law 另报道前反垄断执法人员创办 AI 驱动法律平台。Hugging Face 为开源模型托管与分发平台，此次收购对模型生态的集中度影响因此成为反垄断关注点。</p>
+<p>本条为多源交叉（Reuters 首发，Bloomberg Law、CNBC、The Next Web 跟进）；Reuters 原文对脚本访问返回 401，需人工打开；司法部是否已升级为正式调查，公开信息中未见确认。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Reuters 原文</span><a href="https://www.reuters.com/world/us-doj-is-inquiring-about-nvidias-purchase-hugging-face-sources-say-2026-10-28/">https://www.reuters.com/world/us-doj-is-inquiring-about-nvidias-purchase-hugging-face-sources-say-2026-10-28/</a></div>
+<div class="lk"><span class="lt">Techmeme 事件汇总页</span><a href="https://www.techmeme.com/261028/p57">https://www.techmeme.com/261028/p57</a></div>
+</div>
+</article>
+<article id="s1-4">
+<div class="a-h"><div class="a-n">4</div><h3>Anthropic 扩大 AI for Science 计划，新增 20 家基金会与研究机构</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">Anthropic 于 10 月 28 日宣布扩展 AI for Science 计划，公开 20 家来自全球的科学基金会、研究机构与研究团体，为其提供免费 Claude 额度；该计划自 2025 年 5 月启动。</p>
+<div class="body">
+<p>官方说明中提到，该计划面向生物、医学、物理、化学、气候与数学等方向的高影响力科研项目，向研究者提供免费 Claude 额度；过去数月 Anthropic 还面向科学家推出折扣版 Team Plan，并支持了数百个在研项目。文章以 HHMI Janelia Research Campus 为例，说明双方合作制定了 Model Hardware Standard（MHS）——一套让 AI 智能体安全操作实验室仪器的共享规范。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Anthropic：AI for Science expands to foundations and research institutions</span><a href="https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions">https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions</a></div>
+</div>
+</article>
+<article id="s1-5">
+<div class="a-h"><div class="a-n">5</div><h3>MCP 参考服务器发布 v2.2.0 安全更新，要求 Node.js 升级至 24.22.1 或 26.12.1 及以上</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">modelcontextprotocol/servers 于 10 月 28 日发布 v2.2.0，核心内容是安全更新：因 eMudhra 披露八个中间 CA 证书私钥可被还原，TypeScript 参考服务器要求运行在 Node.js 24.22.1 或 26.12.1 及以上版本。</p>
+<div class="body">
+<p>官方发布说明写明：eMudhra 于 10 月 20 日披露其八个中间 CA 证书的私钥可从公开证书中还原；Node.js 于 10 月 21 日发布安全版本更新内置 CA 证书并修复若干高危运行时 CVE；Python 的 <code>certifi</code> 2026.10.23 移除了 eMudhra 根证书 <code>emSign Root CA - C1</code> 与 <code>emSign ECC Root CA - C3</code>。</p>
+<p>受影响范围按服务器区分：TypeScript 系列服务器不自带 CA 证书、依赖 Node.js 运行时做证书校验，其中只有 <code>server-everything</code> 会发起对外 HTTPS 请求（<code>gzip-file-as-resource</code>），<code>server-filesystem</code>、<code>server-memory</code>、<code>server-sequential-thinking</code> 不连网；<code>mcp-server-fetch</code> 通过 <code>httpx</code> 使用 <code>certifi</code> 校验，从 PyPI 安装会解析到 2026.10.23 及以后版本，仓库内 Dockerfile 的 lockfile 本次也升级到该版本；<code>mcp-server-git</code> 与 <code>mcp-server-time</code> 不连网。官方给出的处置建议是：npm 安装（<code>npx</code> 或全局安装）场景需自行升级 Node.js（<code>engines</code> 字段接受任意 Node.js 24，npm 不会对旧版本告警）；已建环境的 <code>mcp-server-fetch</code> 需执行 <code>uvx --refresh mcp-server-fetch</code> 或 <code>pip install -U certifi</code>。</p>
+<p>本次发布包含 <code>@modelcontextprotocol/server-everything</code> 2.1.0、<code>server-filesystem</code> 2.1.0、<code>server-memory</code> 2.0.1，以及 PyPI 侧 <code>mcp-server-fetch</code>、<code>mcp-server-git</code>、<code>mcp-server-time</code> 的 2026.10.28 版本。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">modelcontextprotocol/servers v2.2.0 Release</span><a href="https://github.com/modelcontextprotocol/servers/releases/tag/v2.2.0">https://github.com/modelcontextprotocol/servers/releases/tag/v2.2.0</a></div>
+</div>
+</article>
+<article id="s1-6">
+<div class="a-h"><div class="a-n">6</div><h3>微软披露单季来自 OpenAI 的收入 100 亿美元，约占其季度总营收 11%</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">据 TechCrunch 依据微软监管文件报道，微软在截至 9 月 30 日的季度中从与 OpenAI 的商业安排（含收入分成）取得 100 亿美元收入，约占其 923 亿美元季度总营收的 11%；同期 OpenAI 应付微软的应收款为 72 亿美元。</p>
+<div class="body">
+<p>报道给出更多口径：2026 财年全年来自 OpenAI 的收入为 241 亿美元，按最新季度速度推算年化约 400 亿美元；9 月末对 OpenAI 的应收款 72 亿美元，高于 6 月末的 60 亿美元，且该款项属既往交易应收、不计入当期收入。报道同时指出，报道无法确认这 100 亿美元中收入分成与 Azure 云服务各自占比；OpenAI 被报道按此前协议向微软分成其收入的 20%（微软投资逾 130 亿美元），双方均未公开确认该比例，2026 年 4 月的协议约定该分成延续至 2030 年并设有上限，同时允许 OpenAI 使用其他云厂商。报道还称微软持股比例由 6 月的约 25% 稀释至 9 月的 24%，微软未说明稀释原因。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch：Microsoft recorded $10 billion in revenue from OpenAI</span><a href="https://techcrunch.com/2026/10/28/microsoft-recorded-10-billion-in-revenue-from-openai/">https://techcrunch.com/2026/10/28/microsoft-recorded-10-billion-in-revenue-from-openai/</a></div>
+<div class="lk"><span class="lt">Microsoft FY27 Q1 官方财报页</span><a href="https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast">https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast</a></div>
+</div>
+</article>
+</section>
+<section id="s2">
+<div class="sec-h"><span class="no">02</span><h2>开发生态</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s2-1">
+<div class="a-h"><div class="a-n">7</div><h3>openai-python v3.41.0 发布，Realtime 输入支持类型化引用，并首次在 SDK 内写入模型下线公告</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">OpenAI Python SDK 于 10 月 28 日发布 v3.41.0：新增 Realtime 响应输入的类型化引用（typed references）、response 工具用量模型、按 metadata 过滤智能体会话，以及 WebSocket 重连后恢复排队中的二进制帧；同一版本的文档变更首次在 SDK 内记录了即将下线的模型与迁移路径。</p>
+<div class="body">
+<p>功能变更包括：Realtime 响应输入接受类型化引用（#4189）、新增 response tool usage 模型（#4201）、支持按 metadata 过滤 agent 会话（#4200）、WebSocket 重连后恢复排队二进制帧（#4191）。修复项包括示例代码对不完整 WebSocket 响应的识别、push-to-talk 中断与断连处理，以及严格 Pyright 下的消费者 fixture 清理。</p>
+<p>文档变更（#4199）为开发者给出明确时间表：2027 年 1 月 6 日下线批次包含 <code>tts-1</code>、<code>tts-1-hd</code>、<code>gpt-4o-mini-tts</code>（含 2025-03-20 快照），官方迁移路径为转向 <code>gpt-realtime-2.1-mini</code>；音频翻译（audio translations）标记为 deprecated，需在 2027 年 2 月 26 日前迁移到 Realtime translations，调用时会发出标准 <code>DeprecationWarning</code>，请求与响应类型不变。OpenAI 官方弃用页另列出 2026 年 10 月 14 日公告的 GPT-4 系列下线安排（<code>gpt-4o</code>、<code>gpt-4o-mini</code>、<code>gpt-4.1</code>、<code>gpt-4.1-mini</code> 于 2027 年 1 月 14 日下线，推荐替代为 <code>gpt-6-luna</code>）。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">openai/openai-python v3.41.0</span><a href="https://github.com/openai/openai-python/releases/tag/v3.41.0">https://github.com/openai/openai-python/releases/tag/v3.41.0</a></div>
+<div class="lk"><span class="lt">PR #4199：chore(api): document upcoming model shutdowns</span><a href="https://github.com/openai/openai-python/pull/4199">https://github.com/openai/openai-python/pull/4199</a></div>
+<div class="lk"><span class="lt">OpenAI 官方弃用与下线页</span><a href="https://platform.openai.com/docs/deprecations">https://platform.openai.com/docs/deprecations</a></div>
+</div>
+</article>
+</section>
+<section id="s3">
+<div class="sec-h"><span class="no">03</span><h2>模型发布</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s3-1">
+<div class="a-h"><div class="a-n">8</div><h3>NVIDIA 开源 Nemotron 3.5 Transcribe 与 Granary v2 数据管线，单模型覆盖 40 种语言转写与说话人归属</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-28 / 10-29 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">NVIDIA 于 10 月 28 日在 Hugging Face 发布开放权重的 Nemotron 3.5 Transcribe 模型与开源数据管线 Granary v2：单 checkpoint 同时完成转写、说话人归属（diarization）、翻译与音频问答，支持 40 种语言转写、31 种语言与英语互译、13 种语言说话人标注，最长 1 小时音频、最多 8 名说话人。</p>
+<div class="body">
+<p>官方说明称该模型为开放权重、可通过自然语言引导输出，可选择音频处理位置并按领域词汇与口音适配识别范围；官方称其在 Hugging Face Open ASR Leaderboard 的英文榜单上位列开放权重模型首位，并使用 Artificial Analysis 的准确率评测（此为官方与第三方评测的官方表述，尚未经独立复现）。同期还发布 Granary v2 开源数据管线与微调配方（recipes），用于构建专用多模态模型。模型已在 Hugging Face 与 ModelScope 上提供。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Hugging Face：NVIDIA Nemotron 3.5 Transcribe and Granary v2</span><a href="https://huggingface.co/blog/nvidia/nemotron-transcribe-granary">https://huggingface.co/blog/nvidia/nemotron-transcribe-granary</a></div>
+</div>
+</article>
+</section>
+
+<section id="s5">
+<div class="sec-h"><span class="no">05</span><h2>技术与洞察</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s5-1">
+<div class="a-h"><div class="a-n">9</div><h3>Artificial Analysis 发布 Intelligence Index v5，60% 权重改用私有测试集</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">Artificial Analysis 于 10 月 27 日发布 Intelligence Index v5，称这是自 v4（1 月上线）以来最大的一次升级：指数的 60% 权重改为基于私有测试集或保留答案的评测，新增两项基准并升级三项基准。</p>
+<div class="body">
+<p>新增基准包括：Cognition 新推出的私有编码基准 FrontierCode 2.0（以「仓库维护者是否合并该智能体的改动」为评分方式）、以及在终端环境中运行的 70 项智能体科学研究任务 Terminal-Bench-Science。升级项包括 HLE-Diamond（1,000 题，推理与知识各半，替代 Humanity's Last Exam）、AA-Omniscience v1.1（剔除已饱和或公开的题、补题并修订有歧义或错误的题）、CritPt v2 的私有 40 题困难子集（由 CritPt 作者修订，带代码执行工具）。保留项为 AA-Briefcase、AutomationBench-AA、GDP.pdf 与 Terminal-Bench 4.0；移出指数的是 GDPval-AA v2.1、SciCode 与 AA-LCR v1.1。权重分布为知识工作 25%（AA-Briefcase 15%、AutomationBench-AA 5%、GDP.pdf 5%）、编码 25%（FrontierCode 2.0 15%、Terminal-Bench 4.0 10%）、科学 25%（Terminal-Bench-Science 15%、CritPt v2 困难子集 10%）。同时推出 Progress Index v1，用单一连续标尺跟踪模型能力变化。</p>
+<p>本条发布于 10 月 27 日（美东），落在本期 24 小时窗口之外，属 13.1 允许的 72 小时补收。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Artificial Analysis：Announcing Artificial Analysis Intelligence Index v5</span><a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5">https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5</a></div>
+</div>
+</article>
+</section>
+<section id="s6">
+<div class="sec-h"><span class="no">06</span><h2>行业动态</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s6-1">
+<div class="a-h"><div class="a-n">10</div><h3>Oracle 投资者日设定 FY2030 营收 2250 亿美元以上长期目标，FY27–FY30 新增融资上限锁定 200 亿美元</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">Oracle 于 10 月 28 日在拉斯维加斯举行投资者日，给出中期财务框架：FY2030 总营收 2250 亿美元以上（较 FY26 复合增速 35% 以上）、非 GAAP 营业利润率 40% 以上、非 GAAP EPS 21 美元以上；并承诺 FY27–FY30 投资周期内资本市场新增融资不超过 200 亿美元。</p>
+<div class="body">
+<p>官方披露的框架要点：自由现金流在 FY2028 下半年转正，FY2029 自由现金流目标 300 亿美元以上；资本开支在 FY27–FY28 见顶、FY29 起回落；FY27–FY30 期间资本市场新增融资上限 200 亿美元，其中约 100 亿美元股权、100 亿美元总债务（不含存量债务再融资），且不包含 FY27 第一季度已完成的 200 亿美元 ATM 股权发行；FY2029 起增长转为自筹资金，净债务/调整后 EBITDA 低于 3.5 倍。官方另重申 FY2027 展望：总营收不低于 900 亿美元。公司称供应商融资、客户提供的硬件与客户预付款将降低自由现金流转正前的现金需求。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Oracle 8-K 附件 99.1：Oracle Investor Day 2026（SEC EDGAR 原文）</span><a href="https://www.sec.gov/Archives/edgar/data/1341439/000119312526435853/d75538dex991.htm">https://www.sec.gov/Archives/edgar/data/1341439/000119312526435853/d75538dex991.htm</a></div>
+</div>
+</article>
+<article id="s6-2">
+<div class="a-h"><div class="a-n">11</div><h3>ServiceNow 第三季订阅收入 39.88 亿美元，2026 年 AI 年合同价值目标上调至 17 亿美元</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">ServiceNow 于 10 月 28 日公布第三季业绩：订阅收入 39.88 亿美元、同比增长 21%，当前剩余履约义务 136.5 亿美元、同比增长 20.5%；公司把 2026 年 AI 年合同价值（ACV）目标从年初水平上调 70% 至 17 亿美元，并将全年自由现金流率目标上调 100 个基点至 36%。</p>
+<div class="body">
+<p>官方新闻稿要点：总营收 41.06 亿美元（+20.5%），剩余履约义务 297 亿美元（+22%）；季度内 19 笔净新增 ACV 超 500 万美元的交易，同比增超 135%，季末 ACV 超 500 万美元的客户数达 680 家；管理层称生产环境中的 agentic AI 用量年内累计同比增长超过 13 倍，并强调通过降低资本开支、以更轻资产的模式承接需求。</p>
+<p>第四季 2026 指引（非 GAAP）：订阅收入 42.45 亿–42.55 亿美元，同比增 22.5%–23%（固定汇率 21.5%），cRPO 同比增 18.5%，营业利润率 32%，摊薄股数 10.5 亿股。同日 ServiceNow 宣布与 OpenAI 扩大合作，先行推出由 Action Fabric 驱动的 ChatGPT 插件。Bloomberg 报道称公司股价盘后跌超 15%，主因第四季 cRPO 增速指引（18.5%）低于市场预期。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">ServiceNow 8-K 附件 99.1：第三季 2026 业绩（SEC EDGAR 原文）</span><a href="https://www.sec.gov/Archives/edgar/data/1373715/000137371526000092/erq3fy26.htm">https://www.sec.gov/Archives/edgar/data/1373715/000137371526000092/erq3fy26.htm</a></div>
+<div class="lk"><span class="lt">Bloomberg：ServiceNow falls after quarterly sales outlook revives AI fears</span><a href="https://www.bloomberg.com/news/articles/2026-10-28/servicenow-falls-after-quarterly-sales-outlook-revives-ai-fears">https://www.bloomberg.com/news/articles/2026-10-28/servicenow-falls-after-quarterly-sales-outlook-revives-ai-fears</a></div>
+</div>
+</article>
+</section>
+<section id="s7">
+<div class="sec-h"><span class="no">07</span><h2>前瞻与传闻</h2><span class="cnt">5 条 · 按重要性排列</span></div>
+<article id="s7-1">
+<div class="a-h"><div class="a-n">12</div><h3>Marvell 接近以约 830 亿美元收购数据中心光模块厂商 Lumentum，交易最快下周宣布</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">· <a href="https://www.bloomberg.com/news/articles/2026-10-28/marvell-is-said-to-near-deal-for-lumentum-in-ai-related-megadeal">Bloomberg</a>（需人工打开）· 2026-10-28</p>
+</article>
+<article id="s7-2">
+<div class="a-h"><div class="a-n">13</div><h3>AI 与云安全创业公司 Upwind Security 融资 4 亿美元，Bessemer 领投，估值 38 亿美元</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">· <a href="https://www.bloomberg.com/news/articles/2026-10-28/ai-cybersecurity-startup-upwind-raises-at-3-8-billion-value">Bloomberg</a>（需人工打开）· 2026-10-28</p>
+</article>
+<article id="s7-3">
+<div class="a-h"><div class="a-n">14</div><h3>纽约州州长 Hochul 签署法案，禁止 AI 聊天机器人对未成年人使用「不安全功能」，并要求联网婴儿监视器具备安全功能</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">· <a href="https://news.bgov.com/bloomberg-government-news/hochul-signs-bills-on-ai-risks-to-children-in-pre-election-push">Bloomberg Government</a> · 2026-10-28</p>
+</article>
+<article id="s7-4">
+<div class="a-h"><div class="a-n">15</div><h3>Google 与 Xreal 发布有线 XR 眼镜 Xreal Aura（Android XR + Snapdragon Reality Elite），12 月前 1,099 美元起、之后 1,279 美元起</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">· <a href="https://techcrunch.com/2026/10/28/xreal-aura-is-a-new-wired-headset-powered-by-android-xr/">TechCrunch</a> · 2026-10-28</p>
+</article>
+<article id="s7-5">
+<div class="a-h"><div class="a-n">16</div><h3>Apple 为 M5 Ultra Mac Studio 增加 512GB 内存版本，起价 22,299 美元；M5 Max 最高 128GB</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-28 / 10-29 首次公开</span></div>
+<p class="lede">· <a href="https://www.macrumors.com/2026/10/28/mac-studio-m5-ultra-512gb-ram/">MacRumors</a> · 2026-10-28</p>
+</article>
+</section>
+<section id="s8">
+<div class="sec-h"><span class="no">08</span><h2>后续追踪</h2><span class="cnt">连续事件</span></div>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>OpenAI 模型下线时间表</strong>：2026-10-14 公告的 GPT-4 系列（<code>gpt-4o</code>、<code>gpt-4o-mini</code>、<code>gpt-4.1</code>、<code>gpt-4.1-mini</code>）定于 2027-01-14 下线，官方推荐替代 <code>gpt-6-luna</code>；TTS 系列（含 <code>gpt-4o-mini-tts</code> 2025-03-20 快照）定于 2027-01-06 下线</h3></div>
+<p class="lede">本期新增 SDK 内的下线公告与 Realtime 迁移说明</p>
+<div class="body"><p>下一步关注其余模型的下线批次与替代映射是否补齐。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Codex CLI 0.166.0 预览版</strong>：官方在 10 月 28 日先后发布 <code>rust-v0.166.0-alpha.5</code>（04:43Z）与 <code>rust-v0.166.0-alpha.5.1</code>（19:17Z），发布说明均只写「Release 0.166.0-alpha.x」，未列实质变更</h3></div>
+<p class="lede">下一步关注首个 0.166.0 稳定版的完整变更清单（上一稳定版 0.165.0 已于第 002 期报道，含内置 Vertex AI provider 与 GPT-6.1 Terra 入目录）。</p>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Gemini CLI 0.67.0</strong>：nightly 版 <code>v0.67.0-nightly.20261028</code> 于 10 月 28 日发布，修复 Termux 下 ripgrep 路径解析等</h3></div>
+<p class="lede">下一步关注 0.67.0 稳定版发布节奏。</p>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Oracle 资本开支与融资周期</strong>：FY27–FY28 资本开支见顶、FY29 起回落并转向自由现金流 ≥300 亿美元</h3></div>
+<p class="lede">本期投资者日给出 FY30 营收 2250 亿美元以上长期目标与 200 亿美元融资上限</p>
+<div class="body"><p>下一步关注 FY27 资本开支实际执行节奏、ATM 与债务工具的落地结构。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Nvidia 收购 Hugging Face 的反垄断审查</strong>：DOJ 已问询交易对 AI 竞争的影响</h3></div>
+<p class="lede">下一步关注是否升级为正式调查、是否出现公开的补救措施或交易条款调整。</p>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Anthropic 上市进程</strong>：Anthropic 于 10 月 26 日提交 S-1 的消息落在本期检索窗口之外，且本次未取得可直接指向原文的稳定链接，故本期不收录</h3></div>
+<p class="lede">下一步关注 SEC EDGAR 上的原始文件与募资规模细节。</p>
+</article>
+</section>
+<section id="s9">
+<div class="sec-h"><span class="no">09</span><h2>编辑备注</h2><span class="cnt">采集限制与口径</span></div>
+<div class="body">
+<p><strong>本期真实检索时间窗</strong>：24 小时窗口为 2026-10-28 07:00 – 2026-10-29 07:00（Asia/Shanghai）＝ 2026-10-27 23:00Z – 2026-10-28 23:00Z，以事件首次公开时间为准；第 9 条（Artificial Analysis Intelligence Index v5，发布于 2026-10-27）属 13.1 允许的 72 小时补收，已在正文标注。</p>
+<p><strong>采集通道降级</strong>：本期 07:02 时 NotebookLM 超级 MCP 可用（<code>notebooklm-server-info</code> 返回 <code>0.8.5</code>、<code>authenticated=true</code>），07:12 起网关工具目录降为 97 个工具且不含 notebooklm 连接（与 <a href="/CMP/issues/CMP-236">CMP-236</a> 2026-10-28 记录的同类抖动一致），Firecrawl 检索随后出现 504 超时与 502 上游缺工具。按 13.5 降级为直连抓取 + 人工逐条核验，事实依据全部来自本次实际访问的原始页面；母版锚定的 NotebookLM 步骤与动漫风视频生成待通道恢复后补做，补做前不生成视频。</p>
+<p><strong>链接可达性</strong>：Reuters、Bloomberg 原文对脚本访问返回 401/403，标注「需人工打开」；Microsoft IR 与 SEC EDGAR 原文需浏览器 UA（脚本默认 UA 返回 403，本次以浏览器 UA 抓取成功）；OpenAI 弃用页存在重定向。公开版条目须逐一访问链接、失效链接不得发布。</p>
+<p><strong>口径说明</strong>：官方与第三方的性能/排名表述（如 Nemotron 3.5 Transcribe 的榜单位置）均按发布方口径写为「官方称」，未表述为已独立验证的事实；财务数字保留原文口径并标注出处，不做估值推测。</p>
+</div></section>
+
+</main>
+</div>
+</body>
+</html>
