@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-11-01 — 全球人工智能情报日报</title>
+<meta name="description" content="2026-11-01 AI 早报：OpenAI 最新一轮融资目标从 300 亿美元下调至约 200 亿美元，估值降至 1.25 万亿美元、ChatGPT 分享链接漏洞可执行攻击者代码并读取私有会话，OpenAI 定级 P1 并已修复、Anthropic 称恶意行为者利用 Cursor 市场权限发布「被篡改」的 Claude Code 扩展副本、llama.cpp 连发 b12018–b12024：修复 `/v1/responses` 端点、Gemma 4 图像缩放新增参数 等 12 条已核实动态与线索雷达。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Global AI Intelligence Daily · 第 006 期</div>
+  <h1>AI 早报<br>2026-11-01</h1>
+  <p class="sub">多源发现 → 线索筛选 → 原始资料核实 → 连续事件关联 → 重要性排序 → 分类报道。本期覆盖全球人工智能生态在主窗口（10-31 07:00 – 11-01 07:00，Asia/Shanghai）内首次公开的事件。</p>
+  <div class="meta">
+    <span class="chip live">检索执行窗口 <b>2026-10-31 07:00 – 2026-11-01 07:00 CST</b></span>
+    <span class="chip">主窗口 <b>2026-10-31 07:00 → 11-01 07:00</b></span>
+    <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
+  </div>
+</header>
+<figure class="episode-video">
+  <figcaption class="episode-video-label">收看本期</figcaption>
+  <video controls preload="metadata" playsinline src="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-11-01/ai-daily-2026-11-01.mp4">
+    <a href="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-11-01/ai-daily-2026-11-01.mp4">下载本期视频（mp4）</a>
+  </video>
+  <p class="episode-video-note">本期视频由 AI 生成，内容以图文版为准。</p>
+</figure>
+<style>
+figure.episode-video {
+  color-scheme: dark;
+  margin: 1rem 0 1.25rem;
+  padding: 0.9rem 1rem 0.75rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 48rem;
+  background: #141820;
+  color: #e8ecf6;
+  border: 1px solid rgba(255,255,255,.14);
+}
+figure.episode-video video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  max-height: 70vh;
+  display: block;
+  margin: 0.4rem 0 0.45rem;
+  background: #000;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.episode-video-label { font-size: 0.8rem; letter-spacing: 0.08em; }
+.episode-video-note { margin: 0; font-size: 0.85rem; line-height: 1.5; }
+@media (max-width: 375px) {
+  figure.episode-video { padding: 0.75rem 0.7rem 0.65rem; }
+}
+</style>
+
+
+<div class="stats">
+  <div class="stat c1"><div class="n">12</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
+  <div class="stat c2"><div class="n">9</div><div class="l">新闻栏目 / SECTIONS</div></div>
+  <div class="stat c3"><div class="n">30</div><div class="l">可追溯来源 / SOURCES</div></div>
+  <div class="stat c4"><div class="n">9</div><div class="l">官方已确认 / CONFIRMED</div></div>
+</div>
+
+<div class="grid">
+
+<nav class="toc">
+  <div class="lbl">目录 / Contents</div>
+  <a href="#ov"><span>00</span>今日概览</a>
+  <a href="#s1"><span>01</span>要闻</a><a href="#s2"><span>02</span>开发生态</a><a href="#s3"><span>03</span>模型发布</a><a href="#s4"><span>04</span>产品应用</a><a href="#s5"><span>05</span>技术与洞察</a><a href="#s6"><span>06</span>行业动态</a><a href="#s7"><span>07</span>前瞻与传闻</a><a href="#s8"><span>08</span>后续追踪</a><a href="#s9"><span>09</span>编辑备注</a>
+</nav>
+
+<main>
+
+<section id="ov">
+  <div class="sec-h"><span class="no">00</span><h2>今日概览</h2><span class="cnt">17 条 · 按重要性与栏目排列</span></div>
+  <div class="ov">
+    <a class="ovc" href="#ov"><div class="top"><span class="num">1</span><span class="cat">要闻</span></div><h4>OpenAI 最新一轮融资目标从 300 亿美元下调至约 200 亿美元，估值降至 1.25 万亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">2</span><span class="cat">要闻</span></div><h4>ChatGPT 分享链接漏洞可执行攻击者代码并读取私有会话，OpenAI 定级 P1 并已修复</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">3</span><span class="cat">要闻</span></div><h4>Anthropic 称恶意行为者利用 Cursor 市场权限发布「被篡改」的 Claude Code 扩展副本</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">4</span><span class="cat">开发生态</span></div><h4>llama.cpp 连发 b12018–b12024：修复 <code>/v1/responses</code> 端点、Gemma 4 图像缩放新增参数</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">5</span><span class="cat">开发生态</span></div><h4>OpenAI Python SDK v3.42.0 加入 agent 上下文压缩与会话复审设置</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">6</span><span class="cat">开发生态</span></div><h4>Claude Code v2.1.316 新增 <code>CLAUDE_CODE_DISABLE_ULTRATHINK</code> 与 group 共享预算</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">7</span><span class="cat">开发生态</span></div><h4>Nvidia 洽谈为 Nscale 西弗吉尼亚 Anthropic 数据中心债务融资提供担保</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">8</span><span class="cat">模型发布</span></div><h4>Transformers 与推理框架侧新增 Gemma 4 图像处理与 Mistral Large 4 支持延续</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">9</span><span class="cat">产品应用</span></div><h4>苹果 CEO Ternus：苹果不打算「为 AI 而 AI」出货 AI</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">10</span><span class="cat">技术与洞察</span></div><h4>Sam Altman：供应链受限的 DRAM 更应留在数据中心，而非闲置在 PC 里</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">11</span><span class="cat">行业动态</span></div><h4>S&amp;P 将 Meta 展望下调至负面，理由是高资本开支与自由现金流为负</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">12</span><span class="cat">行业动态</span></div><h4>联邦法官准许 NAACP 起诉 xAI Colossus 数据中心污染案继续推进</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r1</span><span class="cat">前瞻与传闻</span></div><h4>线索雷达｜Meta 与中国傅利叶三个月造出原型人形机器人，正造第二台</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r2</span><span class="cat">前瞻与传闻</span></div><h4>线索雷达｜Baseten 分两笔融资约 20 亿美元，估值 260 亿与300亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r3</span><span class="cat">前瞻与传闻</span></div><h4>线索雷达｜neoclouds 近期在债券市场被有效排除</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r4</span><span class="cat">前瞻与传闻</span></div><h4>线索雷达｜亚利桑那州两党反对新建 AI 数据中心</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r5</span><span class="cat">前瞻与传闻</span></div><h4>线索雷达｜AI 探测器正在改变人类写作习惯</h4></a>
+  </div>
+</section>
+
+<section id="s1">
+<div class="sec-h"><span class="no">01</span><h2>要闻</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s1-1">
+<div class="a-h"><div class="a-n">1</div><h3>OpenAI 最新一轮融资目标从 300 亿美元下调至约 200 亿美元，估值降至 1.25 万亿美元</h3></div>
+<div class="tags"><span class="tag warn">媒体转述 · 未取得一手确认</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">据英国《金融时报》报道，OpenAI 最新一轮融资目标已从原定的 300 亿美元下调至约 200 亿美元，估值从 1.4 万亿美元降至 1.25 万亿美元。TechCrunch 转述该报道时补充，首轮交割金额预计低于 200 亿美元。部分投资者在 AI 板块回调中削减了承诺额度。</p>
+<div class="body">
+<p>这笔融资原本被视为 OpenAI 计划中的 IPO 前的关键一步。《金融时报》的报道称，最初的目标是 300 亿美元、对应 1.4 万亿美元估值，随后调整至 1.25 万亿美元估值，最新一次调整把募资规模降到约 200 亿美元。TechCrunch 在 10 月 31 日的报道中写道，FT 称公司「随后把融资目标下调至 200 亿美元，首次交割预计甚至低于该数字」。</p>
+<p>同期《华尔街日报》的一则聚合报道指向同一方向：OpenAI 目前已获得的承诺约 110 亿美元，不足原定 300 亿美元目标的一半。截至本期截稿，OpenAI 未就本轮融资条件发布官方公告，上述金额与估值均为媒体转述口径。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://www.ft.com/content/7a3ad950-1b3b-4d9e-8c15-65a61ae6180f" target="_blank" rel="noopener">https://www.ft.com/content/7a3ad950-1b3b-4d9e-8c15-65a61ae6180f</a></div>
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/10/31/openai-reportedly-lowers-funding-target-for-new-round/" target="_blank" rel="noopener">https://techcrunch.com/2026/10/31/openai-reportedly-lowers-funding-target-for-new-round/</a></div>
+<div class="lk"><span class="lt"></span><a href="https://www.techmeme.com/261030/p30" target="_blank" rel="noopener">https://www.techmeme.com/261030/p30</a></div>
+</div>
+</article>
+<article id="s1-2">
+<div class="a-h"><div class="a-n">2</div><h3>ChatGPT 分享链接漏洞可执行攻击者代码并读取私有会话，OpenAI 定级 P1 并已修复</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · 研究原文已读</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">安全公司 Parameter 向 OpenAI 漏洞赏金计划报告的缺陷显示，一个普通的 ChatGPT 公开分享链接可在受害者登录会话中执行攻击者代码，并读取其私有对话。OpenAI 于 10 月 18 日收到报告，10 月 26 日前在两个前端版本中完成修复，严重等级从 P2 上调为最严重的 P1。</p>
+<div class="body">
+<p>攻击载体是任意一次通过公开链接分享的 ChatGPT 对话，可经邮件、聊天消息、工单或社交帖传播，受害者无需安装任何东西。最可靠的利用方式是打开链接并点击一次 ChatGPT 的 Preview 按钮；后续版本中，Parameter 让页面自动打开 Preview，打开链接即是全部步骤。</p>
+<p>据 Parameter 的说明，ChatGPT 的 Preview 功能会把对话中的 HTML 变成一个独立地址上的小网页，运行在受限框架内，本无法读取主页面。突破口来自同一对话中的另一个功能：交互式图表加载了数学库 MathLive，其键盘监听器接受来自任意发送方的消息，且消息允许携带原始 HTML，从而让 Preview 跨过边界把攻击者的 HTML 交给主页面。新建的框架被浏览器视为 chatgpt.com 的一部分，再由一个 YouTube 来源的脚本提供实际代码——内容安全策略拦截了内联脚本，但放行了来自 YouTube 的脚本。攻击代码可直接调用 ChatGPT 的已登录 API，列出受害者最近的对话并把私有内容发送到攻击者服务器。</p>
+<p>OpenAI 复现了代码执行与私有对话读取两项验证，将等级从 P2 上调至 P1，并在两个前端版本中修复。Parameter 表示这是受控测试，未发现该缺陷被真实利用，其私有对话验证在独立账户之间进行。研究者指出问题源于三处设计选择的叠加。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://thehackernews.com/2026/10/a-shared-chatgpt-link-could-run.html" target="_blank" rel="noopener">https://thehackernews.com/2026/10/a-shared-chatgpt-link-could-run.html</a></div>
+<div class="lk"><span class="lt"></span><a href="https://www.techmeme.com/261031/p11" target="_blank" rel="noopener">https://www.techmeme.com/261031/p11</a></div>
+</div>
+</article>
+<article id="s1-3">
+<div class="a-h"><div class="a-n">3</div><h3>Anthropic 称恶意行为者利用 Cursor 市场权限发布「被篡改」的 Claude Code 扩展副本</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">据 Anthropic 方面表示，一起恶意行为者利用其对 Cursor 扩展市场的访问权限，发布了 Claude Code 扩展的「被篡改」副本，该副本并非由 Anthropic 构建或发布。Anthropic 工程师 Felix Rieseberg 对此事作出说明。</p>
+<div class="body">
+<p>这起事件的性质是 AI 编程工具链的分发环节被利用：攻击者借助市场侧的发布权限上架了外观与官方扩展一致的恶意版本，Anthropic 明确表示该副本不是自家产品。Rieseberg 的公开说明指出，该副本并非 Anthropic 构建或发布的版本。</p>
+<p>截至本期截稿，公开信息中未见 Cursor 方面就市场发布权限如何被取得、影响范围多大、是否为单一副本的完整说明，也未见 Anthropic 公布受影响版本与处置细节。编辑提醒：本文仅转述 Anthropic 一侧的公开表述，尚未取得该事件的一手技术说明。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://x.com/felixrieseberg/status/2116170451466543578" target="_blank" rel="noopener">https://x.com/felixrieseberg/status/2116170451466543578</a></div>
+<div class="lk"><span class="lt"></span><a href="https://www.techmeme.com/261031/p2" target="_blank" rel="noopener">https://www.techmeme.com/261031/p2</a></div>
+</div>
+</article>
+</section>
+<section id="s2">
+<div class="sec-h"><span class="no">02</span><h2>开发生态</h2><span class="cnt">4 条 · 按重要性排列</span></div>
+<article id="s2-1">
+<div class="a-h"><div class="a-n">4</div><h3>llama.cpp 连发 b12018–b12024：修复 <code>/v1/responses</code> 端点、Gemma 4 图像缩放新增参数</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">llama.cpp 在 10 月 31 日至 11 月 1 日间连续发布 7 个版本 b12018 至 b12024。其中 b12022 修复了 <code>/v1/responses</code> 端点不接受 <code>extra_params</code> 的问题，b12021 让 Gemma 4 图像缩放不再带 letterbox 填充，b12023 限制共享决策前缀的长度。</p>
+<div class="body">
+<p>具体变更包括：b12018 修复 sycl 后端 f32 到 q2_0/q4_0/q5_0 的 CPY 舍入；b12019 在 <code>reasoning_format none</code> 时剥离 qwen3-coder 响应中的 think 块；b12020 为 OpenCL 增加 fwht；b12021 修改 mtmd 的图像缩放路径，使 Gemma 4 图像不再出现 letterbox 填充；b12022 修复 server 的 <code>/v1/responses</code> 端点以接受 <code>extra_params</code>；b12023 在 server 侧把共享决策前缀限制在第一个输出位置，解决多个子任务共享选项 token 时决策输出 embedding 在最终批中缺失的问题（对应 issue #30482）；b12024 把多模态处理改为在 2D 而非 3D 张量上做 reshape，用于 lfm sc 模型。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://github.com/ggml-org/llama.cpp/releases" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases</a></div>
+<div class="lk"><span class="lt"></span><a href="https://github.com/ggml-org/llama.cpp/pull/30959" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/pull/30959</a></div>
+</div>
+</article>
+<article id="s2-2">
+<div class="a-h"><div class="a-n">5</div><h3>OpenAI Python SDK v3.42.0 加入 agent 上下文压缩与会话复审设置</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">openai-python 在 10 月 31 日发布 v3.42.0，新增多项 API 参数，其中与 agent 相关的有三项：agent 上下文压缩设置、agent 会话复审与工具设置，以及实验性的 agent 时间感知。</p>
+<div class="body">
+<p>该版本新增的 API 能力包括：<code>agent context compaction settings</code>（PR #4209）、<code>agent session review and tool settings</code>（#4217）、实验性的 <code>agent time awareness</code>（#4211）、图像编辑的标记叠加（#4210）、组织外部密钥管理（#4205），以及 SIP 的 DTMF 命令与投递事件（#4208）。</p>
+<p>从功能结构看，这批参数把 agent 的上下文长度管理、会话质量复审与工具调用策略三项能力推到了 SDK 层，配合此前的 agent 相关改动，OpenAI 正在把 agent 运行时的可调项向开发者开放。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://github.com/openai/openai-python/releases/tag/v3.42.0" target="_blank" rel="noopener">https://github.com/openai/openai-python/releases/tag/v3.42.0</a></div>
+<div class="lk"><span class="lt"></span><a href="https://github.com/openai/openai-python/compare/v3.41.0...v3.42.0" target="_blank" rel="noopener">https://github.com/openai/openai-python/compare/v3.41.0...v3.42.0</a></div>
+</div>
+</article>
+<article id="s2-3">
+<div class="a-h"><div class="a-n">6</div><h3>Claude Code v2.1.316 新增 <code>CLAUDE_CODE_DISABLE_ULTRATHINK</code> 与 group 共享预算</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">anthropics/claude-code 在 10 月 31 日发布 v2.1.316，新增 <code>CLAUDE_CODE_DISABLE_ULTRATHINK</code> 开关用于关闭 <code>ultrathink</code> 关键词，并为 Claude apps 网关加入 group 层面的共享预算。</p>
+<div class="body">
+<p>该版本的其他变更包括：<code>CLAUDE_CODE_DISABLE_LOOPED_CROSS_CERT_DROP</code>，用于保留互相循环背书的系统交叉证书（面向私有 CA 的服务器）；<code>CLAUDE_CODE_SUBAGENT_EFFORT</code>，用于设定在无其他指定时子代理的运行 effort 等级，而不再继承会话等级。</p>
+<p>group 共享预算的具体形态是：一个按月计算的预算，由组内成员共享，叠加在每位成员各自的额度之上。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.316" target="_blank" rel="noopener">https://github.com/anthropics/claude-code/releases/tag/v2.1.316</a></div>
+<div class="lk"><span class="lt"></span><a href="https://github.com/anthropics/claude-code/releases" target="_blank" rel="noopener">https://github.com/anthropics/claude-code/releases</a></div>
+</div>
+</article>
+<article id="s2-4">
+<div class="a-h"><div class="a-n">7</div><h3>Nvidia 洽谈为 Nscale 西弗吉尼亚 Anthropic 数据中心债务融资提供担保</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · 原文已读</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">据《The Information》报道，Nvidia 正洽谈为 AI 云服务商 Nscale 位于西弗吉尼亚州的 Anthropic 数据中心提供数十亿美元债务融资担保，Bloomberg 随后证实了这一报道。Nscale 的 IPO 文件显示，Anthropic 已就该项目首栋建筑签署 446 亿美元合同。</p>
+<div class="body">
+<p>按 TechCrunch 的描述，这一安排实质上是芯片厂商为客户的贷款提供共同签署，等同于 Nvidia 与 Nscale 的融资安排。拟议结构属于 residual value guarantee 机制：若 Nscale 在建设付款上违约，Nvidia 将介入，暂时接管该设施，并协助寻找买家与新租户。相关融资用于 Nscale 西弗吉尼亚园区的电力与建设成本。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/10/30/nvidia-weighs-playing-the-cosigner-for-nscales-ai-data-center-in-west-virginia/" target="_blank" rel="noopener">https://techcrunch.com/2026/10/30/nvidia-weighs-playing-the-cosigner-for-nscales-ai-data-center-in-west-virginia/</a></div>
+<div class="lk"><span class="lt"></span><a href="https://www.techmeme.com/261030/p31" target="_blank" rel="noopener">https://www.techmeme.com/261030/p31</a></div>
+</div>
+</article>
+</section>
+<section id="s3">
+<div class="sec-h"><span class="no">03</span><h2>模型发布</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s3-1">
+<div class="a-h"><div class="a-n">8</div><h3>Transformers 与推理框架侧新增 Gemma 4 图像处理与 Mistral Large 4 支持延续</h3></div>
+<div class="tags"><span class="tag cross">官方已确认</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">在本地推理框架侧，本期可核查的进展来自 llama.cpp：b12021 修改多模态图像缩放路径，使 Gemma 4 图像缩放不再带 letterbox 填充；b12024 为 lfm sc 模型的图像处理改为 2D 张量 reshape。上一期已报道的 transformers v5.22.0 加入 Mistral Large 4（Le Chonk）支持，本期未见新的 transformers 正式版本发布。</p>
+<div class="body">
+<p>Mistral Large 4 是 Mistral 迄今规模最大、能力最强的模型：1 万亿参数、原生多模态的混合专家架构，49B 激活参数。transformers v5.22.0 于 10 月 29 日为其加入支持，llama.cpp 自 b12007 起为 <code>mistral-large4</code> 启用逐层 KV rotation。</p>
+<p>本期需要标注的边界：llama.cpp b12018–b12024 中没有任何一个新版本是模型发布本身，全部为端点修复、图像处理与算子层面的改动；本期没有新的开源模型权重发布或新的旗舰模型上线。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://github.com/ggml-org/llama.cpp/releases" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases</a></div>
+<div class="lk"><span class="lt"></span><a href="https://github.com/huggingface/transformers/releases" target="_blank" rel="noopener">https://github.com/huggingface/transformers/releases</a></div>
+</div>
+</article>
+</section>
+<section id="s4">
+<div class="sec-h"><span class="no">04</span><h2>产品应用</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s4-1">
+<div class="a-h"><div class="a-n">9</div><h3>苹果 CEO Ternus：苹果不打算「为 AI 而 AI」出货 AI</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · 原文已读</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">苹果 CEO John Ternus 在接受《连线》采访时表示，苹果不打算「为 AI 而 AI」出货 AI，并称 Tim Cook「在任何地方都愿意提供帮助」。他承认过去几年外界常认为苹果在 AI 上落后，尤其在其推迟了功能更强的 Siri 之后——该版本于今年夏天才推出。</p>
+<div class="body">
+<p>Ternus 在访谈中表示「每个人都有自己的看法」，但他称「我真的很满意我们所处的位置」。背景上，苹果在过去几年多次被描述为在 AI 竞赛中处于落后位置，一个重要原因是更强大的 Siri 版本一再推迟，直到今年夏天才正式上线。Ternus 于 9 月初正式出任苹果 CEO。</p>
+<p>本次表态属于 CEO 层面的公开采访，尚未附带具体的产品时间表或功能承诺。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/10/31/apple-ceo-says-the-company-doesnt-want-to-ship-ai-for-ais-sake/" target="_blank" rel="noopener">https://techcrunch.com/2026/10/31/apple-ceo-says-the-company-doesnt-want-to-ship-ai-for-ais-sake/</a></div>
+<div class="lk"><span class="lt"></span><a href="https://www.wired.com/story/i-spent-30-minutes-with-apples-ceo-now-i-know-why-john-ternus-got-the-job/" target="_blank" rel="noopener">https://www.wired.com/story/i-spent-30-minutes-with-apples-ceo-now-i-know-why-john-ternus-got-the-job/</a></div>
+</div>
+</article>
+</section>
+<section id="s5">
+<div class="sec-h"><span class="no">05</span><h2>技术与洞察</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s5-1">
+<div class="a-h"><div class="a-n">10</div><h3>Sam Altman：供应链受限的 DRAM 更应留在数据中心，而非闲置在 PC 里</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">在谈及本地推理时，OpenAI CEO Sam Altman 表示，供应受限的 DRAM 放在数据中心比放在 PC 里更合适，因为 PC 中的内存「只有 5% 的时间在被使用」。据 Tom's Hardware 报道，这番表述针对的是本地推理对内存的占用与实际利用率之间的落差。</p>
+<div class="body">
+<p>这与本期其他两条基础设施线索指向同一方向：内存供应紧张使 DRAM 的去向成为产业级议题。当数据中心侧的采购能力更强、且内存有更高的实际使用率时，把稀缺 DRAM 分散到消费级设备上的边际收益下降。Altman 的表述同时回应了本地推理的成本讨论——内存既是本地运行大模型的主要硬件成本，也是供应受限环节的主要瓶颈。</p>
+<p>编辑说明：该引述经聚合源转述取得，原文未取到，本条按「据报道」处理。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://www.tomshardware.com/tech-industry/data-centers/openai-ceo-says-its-quite-terrible-for-your-pc-to-have-ram-sam-altman" target="_blank" rel="noopener">https://www.tomshardware.com/tech-industry/data-centers/openai-ceo-says-its-quite-terrible-for-your-pc-to-have-ram-sam-altman</a></div>
+<div class="lk"><span class="lt"></span><a href="https://www.techmeme.com/261031/p5" target="_blank" rel="noopener">https://www.techmeme.com/261031/p5</a></div>
+</div>
+</article>
+</section>
+<section id="s6">
+<div class="sec-h"><span class="no">06</span><h2>行业动态</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s6-1">
+<div class="a-h"><div class="a-n">11</div><h3>S&amp;P 将 Meta 展望下调至负面，理由是高资本开支与自由现金流为负</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">标普全球评级将 Meta 的展望从稳定下调至负面，理由是高资本开支与自由现金流为负。CNBC 报道称，Meta 股价 10 月下跌 15%，为四年来最差月份。</p>
+<div class="body">
+<p>这一评级动作把 EP005 报道过的「AI 资本开支引发自由现金流担忧」推进到了评级层面——从股价反应转为评级机构对现金流的正式判断。Meta 10 月单月 15% 的跌幅，是其 2022 年以来最差的月度表现之一。</p>
+<p>编辑提示：Meta 的具体资本开支数字、评级原文措辞与现金流口径未在本期取得一手来源（CNBC 原文 404），本条按聚合报道的转述口径给出。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://www.cnbc.com/2026/10/30/meta-outlook-to-revised-to-negative-by-sp-after-cash-flow-negative.html" target="_blank" rel="noopener">https://www.cnbc.com/2026/10/30/meta-outlook-to-revised-to-negative-by-sp-after-cash-flow-negative.html</a></div>
+<div class="lk"><span class="lt"></span><a href="https://www.techmeme.com/261031/p3" target="_blank" rel="noopener">https://www.techmeme.com/261031/p3</a></div>
+</div>
+</article>
+<article id="s6-2">
+<div class="a-h"><div class="a-n">12</div><h3>联邦法官准许 NAACP 起诉 xAI Colossus 数据中心污染案继续推进</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · 原文已读</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+<p class="lede">美国联邦法官驳回了 xAI 请求驳回 NAACP 诉讼的动议，允许该案继续推进。南方环境法律中心代 NAACP 起诉，指控 SpaceX 旗下 xAI 在孟菲斯郊外的 Colossus 数据中心运营燃气轮机时未取得所需许可。</p>
+<div class="body">
+<p>据 TechCrunch 报道，南方环境法律中心称，xAI 在 Colossus 场址「安装并运行了至少 35 台燃烧式涡轮机及其他空气污染源，却从未取得必要的施工前或运营空气许可」，并指控 xAI 违反《清洁空气法》。该数据中心为 xAI 的旗舰算力设施，xAI 寻求的驳回动议被联邦法官驳回后，案件进入实质审理阶段。</p>
+<p>这是本期唯一一条涉及环境与合规的司法进展。xAI 方面在报道中未就该裁决作出回应。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/10/31/judge-allows-naacp-lawsuit-over-xai-data-center-pollution-to-move-forward/" target="_blank" rel="noopener">https://techcrunch.com/2026/10/31/judge-allows-naacp-lawsuit-over-xai-data-center-pollution-to-move-forward/</a></div>
+<div class="lk"><span class="lt"></span><a href="https://www.techmeme.com/261031/p7" target="_blank" rel="noopener">https://www.techmeme.com/261031/p7</a></div>
+</div>
+</article>
+</section>
+<section id="s7">
+<div class="sec-h"><span class="no">07</span><h2>前瞻与传闻</h2><span class="cnt">5 条 · 按重要性排列</span></div>
+<article id="s7-1">
+<div class="a-h"><div class="a-n">13</div><h3>线索雷达｜Meta 与中国傅利叶三个月造出原型人形机器人，正造第二台 —— The Information（经 Techmeme 聚合，标 Sources）｜2026-11-01 00:20 CST｜<a href="https://www.techmeme.com/261031/p10" target="_blank" rel="noopener">https://www.techmeme.com/261031/p10</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+</article>
+<article id="s7-2">
+<div class="a-h"><div class="a-n">14</div><h3>线索雷达｜Baseten 分两笔融资约 20 亿美元，一笔估值 260 亿、另一笔 300 亿美元 —— Bloomberg（经 Techmeme 聚合，标 Sources）｜2026-11-01 08:20 CST｜<a href="https://www.techmeme.com/261030/p29" target="_blank" rel="noopener">https://www.techmeme.com/261030/p29</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+</article>
+<article id="s7-3">
+<div class="a-h"><div class="a-n">15</div><h3>线索雷达｜neoclouds（CoreWeave、Nebius、Nscale）近几周在债券市场被有效排除，AI 建设新瓶颈为廉价资金短缺 —— WSJ（经 Techmeme 聚合，标 Sources）｜2026-11-01 13:15 CST｜<a href="https://www.techmeme.com/261031/p4" target="_blank" rel="noopener">https://www.techmeme.com/261031/p4</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+</article>
+<article id="s7-4">
+<div class="a-h"><div class="a-n">16</div><h3>线索雷达｜亚利桑那州两党反对新建 AI 数据中心，与当年 TSMC 晶圆厂获欢迎形成对比 —— The Verge（经 Techmeme 聚合）｜2026-11-01 17:25 CST｜<a href="https://www.techmeme.com/261031/p7" target="_blank" rel="noopener">https://www.techmeme.com/261031/p7</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+</article>
+<article id="s7-5">
+<div class="a-h"><div class="a-n">17</div><h3>线索雷达｜AI 探测器（如 Pangram）正在改变人类写作习惯，作者改用破折号与「不是 X 而是 Y」句式 —— Bloomberg（经 Techmeme 聚合）｜2026-11-01 21:40 CST｜<a href="https://www.techmeme.com/261031/p8" target="_blank" rel="noopener">https://www.techmeme.com/261031/p8</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-10-31 / 11-01 首次公开</span></div>
+</article>
+</section>
+<section id="s8">
+<div class="sec-h"><span class="no">08</span><h2>后续追踪</h2><span class="cnt">连续事件</span></div>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>OpenAI 融资规模下调</strong>：此前报道拟按 300 亿美元 / 1.4 万亿美元推进</h3></div>
+<p class="lede">本期目标降至 200 亿美元 / 1.25 万亿美元，首轮交割可能更低，已获承诺约 110 亿美元</p>
+<div class="body"><p>下一步关注交割完成金额与最终投资方名单。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>AI 基建融资成本上升</strong>：此前 EP005 报道四家巨头资本开支超 7400 亿美元并引发股价下跌</h3></div>
+<p class="lede">本期 neoclouds 遭债券市场排斥、Nvidia 需为客户债务担保、Meta 被下调展望</p>
+<div class="body"><p>下一步关注信用利差与担保安排是否成为常态。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Anthropic 上市进程</strong>：此前官网确认已提交 S-1、FT 报道预计获「高」等级垃圾债评级</h3></div>
+<p class="lede">本期 Anthropic 方面就 Claude Code 被篡改扩展副本发声</p>
+<div class="body"><p>下一步关注发行定价与安全事件处置说明。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Claude Code 供应链安全</strong>：此前无相关记录</h3></div>
+<p class="lede">本期出现被篡改扩展副本</p>
+<div class="body"><p>下一步关注 Cursor 市场是否收紧发布权限、Anthropic 是否公布检测与处置细节。</p></div>
+</article>
+</section>
+<section id="s9">
+<div class="sec-h"><span class="no">09</span><h2>编辑备注</h2><span class="cnt">采集限制与口径</span></div>
+<div class="body">
+<p>1. <strong>本期真实检索时间窗</strong>：2026-10-31 07:00 – 2026-11-01 07:00（Asia/Shanghai），共 24 小时，以事件首次公开时间为准；72 小时补收范围自 2026-10-29 07:00 起，本期实际未从 72 小时窗口补入任何条目。</p>
+<p>2. <strong>来源抓取限制</strong>：<code>openai.com/index/*</code> 正文在本环境返回 HTTP 403（与前 5 期一致）；FT、WSJ、Bloomberg、CNBC、The Verge、Wired、Tom's Hardware、The Information 原文因付费墙或 404 未能取到，相关事实改由可取回正文的二级源（TechCrunch、The Hacker News、Techmeme 聚合摘要）交叉核实，故第 1、4、5、6、9、10、11 条及全部线索雷达条目均标注为单一来源或媒体转述口径。</p>
+<p>3. <strong>无正文抓取的条目</strong>：第 3 条（Anthropic / Cursor 被篡改扩展）的一手说明为 X 帖子，本环境未能取到正文，仅取到 Anthropic 方面的公开表述与要点；编辑保留该条目是因其涉及重点追踪对象 Anthropic 与开发者工具链安全，事实主体已按「据 Anthropic 方面表示」归属。</p>
+<p>4. <strong>金融类数字口径</strong>：第 1 条的 300 亿 / 200 亿 / 1.4 万亿 / 1.25 万亿 / 110 亿承诺，第 7 条的 446 亿美元合同，第 11 条的 15% 跌幅，均为原文数字并标注出处；发行价未定，不做估值推测。</p>
+<p>5. <strong>本期模型发布栏偏薄</strong>：24 小时窗口内没有新的旗舰模型上线或开源权重发布。第 8 条据此只写推理框架侧的模型适配进展，并显式说明本期无模型发布本身，以避免把框架更新包装为模型新闻。</p>
+<p>6. <strong>官方宣称归属</strong>：第 8 条中「1 万亿参数、49B 激活」来自 Mistral 官方发布文转述，属官方宣称，未经独立验证。</p>
+<p>7. <strong>与上期的重复检查</strong>：EP005 已报道的 robots.txt 标准、Project Suncatcher、Anthropic 套餐改名、OpenAI 社区安全报告、llama.cpp b12007–b12017、transformers v5.22.x、Gemini 4 Carbon、DoorDash 代理订单、Ollie 关停、资本开支与纳指下跌、Salesforce 收购 Rune、Anthropic 垃圾债评级预期等，本期均未重复收录，仅在「后续追踪」中作为背景提及。</p>
+</div></section>
+
+</main>
+</div>
+</body>
+</html>
