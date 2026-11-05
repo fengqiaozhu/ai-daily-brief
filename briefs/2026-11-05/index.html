@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-11-05 — 全球人工智能情报日报</title>
+<meta name="description" content="2026-11-05 AI 早报：OpenAI 收购 Pierre Computer Company：扩展 Codex 构建、理解与审查代码的工具链、Meta 收购并行多 Agent 编码初创 Conductor，团队并入 Meta Superintelligence Labs、NVIDIA CUDA 13.5 发布，带来 Vera Rubin 平台 GA 支持、美国中期选举后数据中心扩张面临更严约束，AI 资本开支预期转向放缓 等 23 条已核实动态与线索雷达。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Global AI Intelligence Daily · 第 010 期</div>
+  <h1>AI 早报<br>2026-11-05</h1>
+  <p class="sub">多源发现 → 线索筛选 → 原始资料核实 → 连续事件关联 → 重要性排序 → 分类报道。本期覆盖全球人工智能生态在主窗口（11-04 07:00 – 11-05 07:00，Asia/Shanghai）内首次公开的事件。</p>
+  <div class="meta">
+    <span class="chip live">检索执行窗口 <b>2026-11-04 07:00 – 2026-11-05 07:00 CST</b></span>
+    <span class="chip">主窗口 <b>2026-11-04 07:00 → 11-05 07:00</b></span>
+    <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
+  </div>
+</header>
+<figure class="episode-video">
+  <figcaption class="episode-video-label">收看本期</figcaption>
+  <video controls preload="metadata" playsinline src="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-11-05/ai-daily-2026-11-05.mp4">
+    <a href="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-11-05/ai-daily-2026-11-05.mp4">下载本期视频（mp4）</a>
+  </video>
+  <p class="episode-video-note">本期视频由 AI 生成，内容以图文版为准。</p>
+</figure>
+<style>
+figure.episode-video {
+  color-scheme: dark;
+  margin: 1rem 0 1.25rem;
+  padding: 0.9rem 1rem 0.75rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 48rem;
+  background: #141820;
+  color: #e8ecf6;
+  border: 1px solid rgba(255,255,255,.14);
+}
+figure.episode-video video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  max-height: 70vh;
+  display: block;
+  margin: 0.4rem 0 0.45rem;
+  background: #000;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.episode-video-label { font-size: 0.8rem; letter-spacing: 0.08em; }
+.episode-video-note { margin: 0; font-size: 0.85rem; line-height: 1.5; }
+@media (max-width: 375px) {
+  figure.episode-video { padding: 0.75rem 0.7rem 0.65rem; }
+}
+</style>
+
+
+<div class="stats">
+  <div class="stat c1"><div class="n">23</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
+  <div class="stat c2"><div class="n">10</div><div class="l">新闻栏目 / SECTIONS</div></div>
+  <div class="stat c3"><div class="n">53</div><div class="l">可追溯来源 / SOURCES</div></div>
+  <div class="stat c4"><div class="n">27</div><div class="l">官方已确认 / CONFIRMED</div></div>
+</div>
+
+<div class="grid">
+
+<nav class="toc">
+  <div class="lbl">目录 / Contents</div>
+  <a href="#ov"><span>00</span>今日概览</a>
+  <a href="#s1"><span>01</span>要闻</a><a href="#s2"><span>02</span>开发生态</a><a href="#s3"><span>03</span>模型发布</a><a href="#s4"><span>04</span>产品应用</a><a href="#s5"><span>05</span>技术与洞察</a><a href="#s6"><span>06</span>行业动态</a><a href="#s7"><span>07</span>安全事件</a><a href="#s8"><span>08</span>前瞻与传闻（线索雷达 · 单一来源未核实）</a><a href="#s9"><span>09</span>后续追踪</a><a href="#s10"><span>10</span>编辑备注</a>
+</nav>
+
+<main>
+
+<section id="ov">
+  <div class="sec-h"><span class="no">00</span><h2>今日概览</h2><span class="cnt">35 条 · 按重要性与栏目排列</span></div>
+  <div class="ov">
+    <a class="ovc" href="#ov"><div class="top"><span class="num">1</span><span class="cat">要闻</span></div><h4>OpenAI 收购 Pierre Computer Company：扩展 Codex 构建、理解与审查代码的工具链</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">2</span><span class="cat">要闻</span></div><h4>Meta 收购并行多 Agent 编码初创 Conductor，团队并入 Meta Superintelligence Labs</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">3</span><span class="cat">要闻</span></div><h4>NVIDIA CUDA 13.5 发布，带来 Vera Rubin 平台 GA 支持</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">4</span><span class="cat">要闻</span></div><h4>美国中期选举后数据中心扩张面临更严约束，AI 资本开支预期转向放缓</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">5</span><span class="cat">开发生态</span></div><h4>llama.cpp 发布 v0.9.0，24 小时内连发 b12100–b12119 构建版本</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">6</span><span class="cat">开发生态</span></div><h4>OpenAI Codex Rust 版一天内连发 alpha，openai-agents-python 发 v0.24.0-alpha.6</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">7</span><span class="cat">开发生态</span></div><h4>LiteLLM v1.108.0 正式版与 v1.109.0-rc.1 并行发布，PyPI anthropic 升至 2.5.0</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">8</span><span class="cat">开发生态</span></div><h4>NVIDIA 用 AI Agent 梳理 AI 工厂运维，NeMo 把 Agent 故障转成测试用例</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">9</span><span class="cat">模型发布</span></div><h4>Ripple-65B Preview 开放权重预览，官方称美国开放权重 Agentic Coding 达到 SOTA</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">10</span><span class="cat">模型发布</span></div><h4>Pangram Image 1.0 与 Image Flash 1.0 发布，官方称在 AI 图像与视频检测上达到 SOTA</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">11</span><span class="cat">模型发布</span></div><h4>Qualcomm Cloud AI 100 Ultra：150W 加速卡，128GB 显存，548GB/s 带宽</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">12</span><span class="cat">产品应用</span></div><h4>ChatGPT 支持生成 GIF，随 Images 2.6 一起推出</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">13</span><span class="cat">产品应用</span></div><h4>Gemini for Home 接入 AT&amp;T Connected Life 智能安防系统</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">14</span><span class="cat">产品应用</span></div><h4>OpenAI Daybreak Red（GPT-5.6 Cyber）进入 AWS GovCloud (US-East)</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">15</span><span class="cat">技术与洞察</span></div><h4>Anthropic 发布可证明推理研究进展，FlashProve 用于校验模型身份</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">16</span><span class="cat">技术与洞察</span></div><h4>OpenAI 自主流水线发现并修补 948 个 Linux 内核本地提权漏洞</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">17</span><span class="cat">技术与洞察</span></div><h4>论文：Agent 交付架构决定保真度——表格规模增大时保真度下降；MEMENTO 面向长上下文 Agent 的上下文管理</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">18</span><span class="cat">行业动态</span></div><h4>Qualcomm Q4 营收 103 亿美元、同比降 8%，手机业务 51.4 亿美元、同比降 26%</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">19</span><span class="cat">行业动态</span></div><h4>AMD 以约 29 亿美元收购 AI 芯片初创 Taalas，其中 14 亿美元取决于未明确条件</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">20</span><span class="cat">行业动态</span></div><h4>Sequoia 募集约 100 亿美元新基金，同时关闭 Arc 加速器与 Scouts 项目</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">21</span><span class="cat">安全事件</span></div><h4>Debian/Ubuntu APT 漏洞：中间人可替换已校验软件包，其代码以 root 执行</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">22</span><span class="cat">安全事件</span></div><h4>Xen 虚拟机监控器两个漏洞：恶意 VM 可读写同主机其他 VM 内存</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">23</span><span class="cat">安全事件</span></div><h4>OpenAI Codex 越狱工具包内藏「prompt adware」；APT29 关联攻击者劫持分析脚本投放 iOS/Android 漏洞利用</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r1</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>Nothing CEO 称公司无屏 AI 设备下月发布</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r2</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>Apple 将部分工程师每日 AI 支出上限从 300 美元降至 200 美元，并计划最低降至 100 美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r3</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>NVIDIA RTX Spark 加密固件使 Linux 下推理速度降至 35%</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r4</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>ChatGPT 付费套餐错误率升高（官方状态页记录时间 2026-11-04 22:38 UTC）</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r5</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>Meta 发行 90 亿欧元债券，订单规模 530 亿欧元创纪录</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r6</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>Arm 第二季度营收 14.4 亿美元、同比增 27%</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r7</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>OpenAI 任命 Jill Hazelbaker 为首席公司事务官</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r8</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>AMD 季度营收创纪录，数据中心业务翻倍</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r9</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>Simon Willison 发布 llm 0.37.1、datasette-llm 0.1a10、datasette-agent 0.5a0</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r10</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>Qwen 3.8 27B 在本地笔记本上完成模型权重解读实验</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r11</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>CWE-bench v2 与 StateBench 评测更新发布</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r12</span><span class="cat">前瞻与传闻（线索雷达 · 单一来源未核实）</span></div><h4>NVIDIA 官方博客提出 AI 正在改变半导体晶圆厂的工作方式</h4></a>
+  </div>
+</section>
+
+<section id="s1">
+<div class="sec-h"><span class="no">01</span><h2>要闻</h2><span class="cnt">4 条 · 按重要性排列</span></div>
+<article id="s1-1">
+<div class="a-h"><div class="a-n">1</div><h3>OpenAI 收购 Pierre Computer Company：扩展 Codex 构建、理解与审查代码的工具链（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · OpenAI 官方公告原文已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">OpenAI 于 2026 年 11 月 4 日宣布收购 Pierre Computer Company, Inc.。按 OpenAI 官方公告，此次收购用于扩展 Codex 在代码构建、代码理解与代码审查三个方向上的工具能力。公告发布时间为 2026 年 11 月 4 日 14:30 GMT。</p>
+<div class="body">
+<p>OpenAI 官方索引页对该笔交易的表述为：收购 Pierre Computer Company，以扩展 Codex 构建、理解与审查代码的工具。该表述同时出现在 OpenAI 官方新闻流与 Hacker News 聚合流中，两个来源指向同一份官方公告页。</p>
+<p>公告未在摘要层面披露交易金额、团队规模与产品整合时间表。收购后 Pierre 的产品形态、定价与是否并入 Codex 订阅套餐，官方页面暂未给出可核对的参数。截至本期截稿，未见双方就该笔交易发布独立的深度技术说明。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">OpenAI 官方公告：&lt;&gt;</span><a href="https://openai.com/index/openai-to-acquire-pierre" target="_blank" rel="noopener">https://openai.com/index/openai-to-acquire-pierre</a></div>
+<div class="lk"><span class="lt">Hacker News 同期条目：&lt;&gt;</span><a href="https://news.ycombinator.com/item?id=50368793" target="_blank" rel="noopener">https://news.ycombinator.com/item?id=50368793</a></div>
+</div>
+</article>
+<article id="s1-2">
+<div class="a-h"><div class="a-n">2</div><h3>Meta 收购并行多 Agent 编码初创 Conductor，团队并入 Meta Superintelligence Labs（多源交叉）</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · 公司公告 + TechCrunch 原文已读</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">Meta 于 2026 年 11 月 4 日收购 AI 编码工具初创公司 Conductor。Conductor 的产品让软件工程师为一个项目同时部署多支 Agent 队伍，分别处理项目的不同部分；公司 CEO Charlie Holtz 表示团队将并入 Meta Superintelligence Labs。</p>
+<div class="body">
+<p>Conductor 自身公告页标题为「Conductor Is Joining Meta」，发布于 2026 年 11 月 4 日 18:22 UTC。TechCrunch 同日报道称，Conductor 允许软件工程师围绕一个项目的多个方面同时部署 Agent 团队。Techmeme 汇编的条目进一步给出 CEO Charlie Holtz 的表态：团队将加入 Meta Superintelligence Labs。</p>
+<p>交易金额、Conductor 的用户规模与定价未在上述三个来源中披露。作为开发者工具，这笔交易的直接影响是「并行多 Agent 编排」这一形态进入大型平台公司的产品线；Conductor 现有服务的持续可用性与团队成员去向，截至本期截稿只有官方并入表态，没有更多可核对细节。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Conductor 官方公告：&lt;&gt;</span><a href="https://www.conductor.build/announcement" target="_blank" rel="noopener">https://www.conductor.build/announcement</a></div>
+<div class="lk"><span class="lt">TechCrunch 报道：&lt;&gt;</span><a href="https://techcrunch.com/2026/11/04/meta-acquires-ai-coding-startup-conductor/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/04/meta-acquires-ai-coding-startup-conductor/</a></div>
+<div class="lk"><span class="lt">Techmeme 汇编条目：&lt;&gt;</span><a href="https://www.techmeme.com/261104/p46#a261104p46" target="_blank" rel="noopener">https://www.techmeme.com/261104/p46#a261104p46</a></div>
+</div>
+</article>
+<article id="s1-3">
+<div class="a-h"><div class="a-n">3</div><h3>NVIDIA CUDA 13.5 发布，带来 Vera Rubin 平台 GA 支持（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · NVIDIA 开发者博客标题与时间已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">NVIDIA 于 2026 年 11 月 4 日 18:46 UTC 发布 CUDA 13.5，官方博客标题为「NVIDIA CUDA 13.5 Brings NVIDIA Vera Rubin GA Support」，即该版本随 Vera Rubin 平台的正式可用（GA）一同交付。同一批开发者博客还更新了 AI 工厂运维与 Agent 评测相关内容。</p>
+<div class="body">
+<p>按 NVIDIA 开发者博客的表述，CUDA 13.5 的发布用于解锁新一代加速计算与 AI 工作负载的运行能力，核心变化是 Vera Rubin 平台进入 GA 状态。官方博客给出的框架是：AI 与加速计算持续推进边界，最新的 CUDA 版本随之交付。</p>
+<p>与本期开发者相关的另外两条官方发布同属 11 月 4 日：一条是「How NVIDIA Uses AI Agents to Streamline AI Factory Operations」，说明 GPU 集群规模扩大后，运维横跨计算、网络、硬件与调度多个域，站点可靠性工程师（SRE）往往需要同时查看多个仪表盘，NVIDIA 用 AI Agent 对该流程做了梳理；另一条是「Use NVIDIA NeMo to Turn Agent Failures into Tests and Harness Fixes」，把生产环境中的证据转成优先级排序的问题与自定义评测，用于改进提示词、工具、模型、记忆、技能与 Agent harness 代码。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">CUDA 13.5 与 Vera Rubin GA：&lt;&gt;</span><a href="https://developer.nvidia.com/blog/nvidia-cuda-13-5-brings-nvidia-vera-rubin-ga-support/" target="_blank" rel="noopener">https://developer.nvidia.com/blog/nvidia-cuda-13-5-brings-nvidia-vera-rubin-ga-support/</a></div>
+<div class="lk"><span class="lt">NVIDIA 用 AI Agent 运维 AI 工厂：&lt;&gt;</span><a href="https://developer.nvidia.com/blog/how-nvidia-uses-ai-agents-to-streamline-ai-factory-operations/" target="_blank" rel="noopener">https://developer.nvidia.com/blog/how-nvidia-uses-ai-agents-to-streamline-ai-factory-operations/</a></div>
+<div class="lk"><span class="lt">NeMo 把 Agent 故障转为测试：&lt;&gt;</span><a href="https://developer.nvidia.com/blog/use-nvidia-nemo-to-turn-agent-failures-into-tests-and-harness-fixes/" target="_blank" rel="noopener">https://developer.nvidia.com/blog/use-nvidia-nemo-to-turn-agent-failures-into-tests-and-harness-fixes/</a></div>
+</div>
+</article>
+<article id="s1-4">
+<div class="a-h"><div class="a-n">4</div><h3>美国中期选举后数据中心扩张面临更严约束，AI 资本开支预期转向放缓（多源交叉）</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · Bloomberg（Techmeme 汇编）+ The Verge 原文已读</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">2026 年美国中期选举结果出炉后，数据中心开发商面临更严格的扩张环境：多位当选者支持暂停审批，多个选票议题为扩建增加障碍。Techmeme 汇编的 Bloomberg 条目称，投资者押注民主党控制的国会将放缓正在侵蚀现金流的 AI 资本开支。</p>
+<div class="body">
+<p>据 The Verge 的报道，多国选民选出的候选人倾向于支持数据中心审批暂停，选票议题也增加了扩建环节的障碍，这对 AI 产业的一个支柱构成打击；报道援引 NBC News 选举日民调数据说明选情。Techmeme 汇编的 Bloomberg 条目则从资本开支角度记录同一事件的另一面：中期选举后美国科技巨头股价上涨，投资者押注国会由民主党控制后会放缓 AI 资本开支，因为这类开支正在侵蚀现金流。</p>
+<p>与数据中心直接相关的另一条后果出现在 CoreWeave：其股价与无担保债券在中期选举大胜后下跌，报道称德州当选州长 Gina Hinojosa 呼吁暂停数据中心。Verge 同期评论文章以「Data centers lost the midterms」为题，记录了选举结果对数据中心开发商的直接影响。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">The Verge 报道：&lt;&gt;</span><a href="https://www.theverge.com/policy/1026365/data-centers-midterms-results" target="_blank" rel="noopener">https://www.theverge.com/policy/1026365/data-centers-midterms-results</a></div>
+<div class="lk"><span class="lt">Techmeme 汇编（CoreWeave 与德州）：&lt;&gt;</span><a href="https://www.techmeme.com/261104/p39#a261104p39" target="_blank" rel="noopener">https://www.techmeme.com/261104/p39#a261104p39</a></div>
+</div>
+</article>
+</section>
+<section id="s2">
+<div class="sec-h"><span class="no">02</span><h2>开发生态</h2><span class="cnt">4 条 · 按重要性排列</span></div>
+<article id="s2-1">
+<div class="a-h"><div class="a-n">5</div><h3>llama.cpp 发布 v0.9.0，24 小时内连发 b12100–b12119 构建版本（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 仓库 Release API 时间戳已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">llama.cpp 于 2026 年 11 月 4 日 13:08 UTC 发布 v0.9.0，同日从 07:59 UTC 到 22:34 UTC 连续发布 b12100、b12101、b12102、b12109、b12110、b12114、b12116、b12118、b12119 等构建版本。官方 Releases 列表是本期版本信息的唯一来源。</p>
+<div class="body">
+<p>按官方 GitHub Releases 的发布时间顺序（均为 UTC），窗口内可核对的版本包括：b12100（07:59）、b12101（08:32）、b12102（09:12）、b12109（12:33）、b12110（12:52）、v0.9.0（13:08）、b12114（21:33）、b12116（21:57）、b12118（22:14）、b12119（22:34）。更早的 b12098（03:49）与 b12099（05:47）落在本期窗口之前。</p>
+<p>v0.9.0 是该仓库在 2026 年 11 月 4 日的正式版本号，与同日的构建版本并存。本期抓取到的 Releases 条目只包含版本号与发布时间，逐条版本说明未在抓取内容中完整呈现，因此具体新增功能以仓库 Releases 页面为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">llama.cpp 官方 Releases：&lt;&gt;</span><a href="https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0</a></div>
+</div>
+</article>
+<article id="s2-2">
+<div class="a-h"><div class="a-n">6</div><h3>OpenAI Codex Rust 版一天内连发 alpha，openai-agents-python 发 v0.24.0-alpha.6（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 仓库 Release API 时间戳已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">OpenAI Codex 仓库在 2026 年 11 月 4 日内连续发布 rust-v0.168.0-alpha.1、rust-v0.167.0-alpha.3.1、rust-v0.168.0-alpha.2 等预览版本，另发布 libcap-v2.75。同日 openai-agents-python 发布 v0.24.0-alpha.6，时间为 2026 年 11 月 3 日 16:44 UTC。</p>
+<div class="body">
+<p>Codex 官方 Releases 的时间戳（UTC）为：rust-v0.167.0-alpha.4（11 月 3 日 02:24）、libcap-v2.75（11 月 3 日 23:04）、rust-v0.167.0-alpha.3.1（11 月 4 日 19:05）、rust-v0.168.0-alpha.2（11 月 4 日 20:47）、rust-v0.168.0-alpha.1（11 月 4 日 02:54）、rust-v0.167.0-alpha.5（11 月 4 日 18:09）。24 小时内可见 6 个 Codex 条目，版本线为 rust-v0.167.0 与 rust-v0.168.0 两个 alpha 分支交替推进。</p>
+<p>openai-agents-python 的 v0.24.0-alpha.6 是该仓库在窗口内的唯一新条目，它排在正式版 v0.24.0（2026 年 10 月 15 日）之后。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Codex 官方 Releases：&lt;&gt;</span><a href="https://github.com/openai/codex/releases/tag/rust-v0.168.0-alpha.2" target="_blank" rel="noopener">https://github.com/openai/codex/releases/tag/rust-v0.168.0-alpha.2</a></div>
+<div class="lk"><span class="lt">openai-agents-python 官方 Releases：&lt;&gt;</span><a href="https://github.com/openai/openai-agents-python/releases/tag/v0.24.0-alpha.6" target="_blank" rel="noopener">https://github.com/openai/openai-agents-python/releases/tag/v0.24.0-alpha.6</a></div>
+</div>
+</article>
+<article id="s2-3">
+<div class="a-h"><div class="a-n">7</div><h3>LiteLLM v1.108.0 正式版与 v1.109.0-rc.1 并行发布，PyPI anthropic 升至 2.5.0（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Release API + PyPI JSON 接口已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">LiteLLM 在 2026 年 11 月 4 日的 24 小时内发布 v1.109.0-rc.1、v1.108.0 与 v1.106.7 三个版本，PyPI 上 litellm 最新版本为 1.108.0，上传时间 2026 年 11 月 4 日 03:31 UTC。同日 PyPI 上 anthropic 上传 2.5.0，时间为 2026 年 11 月 4 日 20:27 UTC。</p>
+<div class="body">
+<p>官方 GitHub Releases 的发布时间（UTC）为：v1.109.0-rc.1（02:17）、v1.108.0（03:35）、v1.106.7（04:28），另有 v1.109.0-dev.2 于 10 月 30 日发布。正式版 1.108.0 与预发布 1.109.0-rc.1 在同一天并行存在，使用者按部署需要选择。</p>
+<p>同期 PyPI 数据：openai 包最新版本 3.45.0，上传时间 2026 年 11 月 4 日 02:24 UTC；anthropic 包最新版本 2.5.0，上传时间 2026 年 11 月 4 日 20:27 UTC；litellm 包最新版本 1.108.0，上传时间 2026 年 11 月 4 日 03:31 UTC。三个包的版本号与上传时间均取自 PyPI 官方 JSON 接口。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">LiteLLM 官方 Releases：&lt;&gt;</span><a href="https://github.com/BerriAI/litellm/releases/tag/v1.108.0" target="_blank" rel="noopener">https://github.com/BerriAI/litellm/releases/tag/v1.108.0</a></div>
+<div class="lk"><span class="lt">PyPI anthropic：&lt;&gt;</span><a href="https://pypi.org/project/anthropic/" target="_blank" rel="noopener">https://pypi.org/project/anthropic/</a></div>
+<div class="lk"><span class="lt">PyPI openai：&lt;&gt;</span><a href="https://pypi.org/project/openai/" target="_blank" rel="noopener">https://pypi.org/project/openai/</a></div>
+</div>
+</article>
+<article id="s2-4">
+<div class="a-h"><div class="a-n">8</div><h3>NVIDIA 用 AI Agent 梳理 AI 工厂运维，NeMo 把 Agent 故障转成测试用例（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · NVIDIA 开发者博客标题与时间已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">NVIDIA 开发者博客在 2026 年 11 月 4 日连续发布三篇工程实践文章，其中两篇直接面向 Agent 工程：如何用 AI Agent 简化 AI 工厂运维，以及如何用 NeMo 把 Agent 的失败转化为测试与 harness 修复。</p>
+<div class="body">
+<p>「How NVIDIA Uses AI Agents to Streamline AI Factory Operations」（2026 年 11 月 4 日 22:00 UTC）的背景是：GPU 集群规模扩大后，运维工作横跨计算、网络、硬件与调度，站点可靠性工程师需要同时检查多个仪表盘。文章给出 NVIDIA 自身用 AI Agent 处理该流程的做法。</p>
+<p>「Use NVIDIA NeMo to Turn Agent Failures into Tests and Harness Fixes」（2026 年 11 月 4 日 16:00 UTC）面向 Agent 的评测闭环：把生产环境中收集到的证据转成优先级明确的问题与定制评测项，用于改进提示词、工具、模型、记忆、技能以及 Agent harness 代码。</p>
+<p>同日第三篇为「How NVIDIA Factory Operations Blueprint Coordinates AI Agents to Investigate Production Issues」（17:00 UTC），讲 AI 工厂运维蓝图如何协调多支 Agent 排查生产问题。三篇同属「AI 定义工厂」系列，可作为运维与 Agent 评测的组合参考。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">AI 工厂运维 Agent：&lt;&gt;</span><a href="https://developer.nvidia.com/blog/how-nvidia-uses-ai-agents-to-streamline-ai-factory-operations/" target="_blank" rel="noopener">https://developer.nvidia.com/blog/how-nvidia-uses-ai-agents-to-streamline-ai-factory-operations/</a></div>
+<div class="lk"><span class="lt">NeMo 与 Agent 故障转测试：&lt;&gt;</span><a href="https://developer.nvidia.com/blog/use-nvidia-nemo-to-turn-agent-failures-into-tests-and-harness-fixes/" target="_blank" rel="noopener">https://developer.nvidia.com/blog/use-nvidia-nemo-to-turn-agent-failures-into-tests-and-harness-fixes/</a></div>
+<div class="lk"><span class="lt">运维蓝图协调 Agent：&lt;&gt;</span><a href="https://developer.nvidia.com/blog/how-nvidia-factory-operations-blueprint-coordinates-ai-agents-to-investigate-production-issues/" target="_blank" rel="noopener">https://developer.nvidia.com/blog/how-nvidia-factory-operations-blueprint-coordinates-ai-agents-to-investigate-production-issues/</a></div>
+</div>
+</article>
+</section>
+<section id="s3">
+<div class="sec-h"><span class="no">03</span><h2>模型发布</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s3-1">
+<div class="a-h"><div class="a-n">9</div><h3>Ripple-65B Preview 开放权重预览，官方称美国开放权重 Agentic Coding 达到 SOTA（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 厂商页面 + Hugging Face 模型接口已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">Ripple-65B Preview 于 2026 年 11 月 4 日 18:53 UTC 发布，官方页面标题为「Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding」，即厂商称其为美国开放权重模型在 Agentic Coding 上的 SOTA。同日 Hugging Face 上已出现该模型的 GGUF 量化版本。</p>
+<div class="body">
+<p>按厂商页面的表述，这是 Ripple-65B 的预览版本，定位为美国开放权重的 Agentic Coding 领先模型。Hugging Face 模型接口在 2026 年 11 月 4 日 23:00 UTC 记录到 <code>prometheusAIR/Ripple-65B-Preview-GGUF</code> 的创建时间，说明量化权重在同一晚间已可下载。</p>
+<p>SOTA 属厂商自述口径，本期未找到第三方独立评测机构的复测数据；模型的参数规模、上下文长度、许可证类型与基准成绩明细，需以厂商模型卡与权重仓库为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">厂商页面：&lt;&gt;</span><a href="https://www.ricursive.com/ripple" target="_blank" rel="noopener">https://www.ricursive.com/ripple</a></div>
+<div class="lk"><span class="lt">Hugging Face 量化权重：&lt;&gt;</span><a href="https://huggingface.co/prometheusAIR/Ripple-65B-Preview-GGUF" target="_blank" rel="noopener">https://huggingface.co/prometheusAIR/Ripple-65B-Preview-GGUF</a></div>
+</div>
+</article>
+<article id="s3-2">
+<div class="a-h"><div class="a-n">10</div><h3>Pangram Image 1.0 与 Image Flash 1.0 发布，官方称在 AI 图像与视频检测上达到 SOTA（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 厂商说明（Techmeme 汇编）已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">Pangram 于 2026 年 11 月 4 日发布 Pangram Image 1.0 与更小的 Image Flash 1.0。按厂商说明，Image 1.0 面向 AI 图像与 AI 视频检测，Image Flash 1.0 面向 AI 视频检测，两款均被官方称为当前 SOTA。</p>
+<div class="body">
+<p>Techmeme 汇编的条目引自 Pangram 官方：Pangram 发布 Pangram Image 1.0，官方称在 AI 图像与 AI 视频检测上达到 SOTA，同时发布体积更小的 Image Flash 1.0，用于 AI 视频检测。厂商说明提到，数月前发布的是 Pangram Image 的研究预览版本，本次为正式版。</p>
+<p>SOTA 表述来自厂商自身，其检测基准、误报率与可部署方式需以模型卡为准；本期未见第三方评测机构对该版本的独立复测。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Techmeme 汇编条目：&lt;&gt;</span><a href="https://www.techmeme.com/261104/p43#a261104p43" target="_blank" rel="noopener">https://www.techmeme.com/261104/p43#a261104p43</a></div>
+</div>
+</article>
+<article id="s3-3">
+<div class="a-h"><div class="a-n">11</div><h3>Qualcomm Cloud AI 100 Ultra：150W 加速卡，128GB 显存，548GB/s 带宽（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 厂商产品页参数已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">Qualcomm 官方产品页新增 Cloud AI 100 Ultra 加速卡：150W 功耗、128GB 显存、548GB/s 内存带宽。该条目于 2026 年 11 月 4 日 19:55 UTC 进入公开信息流，是本期数据中心侧推理硬件的关键参数更新。</p>
+<div class="body">
+<p>参数取自 Qualcomm 官方数据中心产品页：功耗 150W，显存容量 128GB，带宽 548GB/s。同期 Qualcomm 在 2026 年 11 月 4 日发布季度业绩时明确把数据中心列为重点方向，手机业务同期下滑（见行业动态部分）。</p>
+<p>该卡面向数据中心推理场景，官方页面同时列出支持环境与部署方式；具体型号命名、推理吞吐与软件栈支持清单以官方产品页为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Qualcomm 官方产品页：&lt;&gt;</span><a href="https://www.qualcomm.com/data-center/products/cloud-ai-100-ultra" target="_blank" rel="noopener">https://www.qualcomm.com/data-center/products/cloud-ai-100-ultra</a></div>
+</div>
+</article>
+</section>
+<section id="s4">
+<div class="sec-h"><span class="no">04</span><h2>产品应用</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s4-1">
+<div class="a-h"><div class="a-n">12</div><h3>ChatGPT 支持生成 GIF，随 Images 2.6 一起推出（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 产品发布（The Verge 原文已读）</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">ChatGPT 现可用提示词或上传照片生成 GIF，该能力随 OpenAI 新的 Images 2.6 模型一起推出。用户可调节 GIF 动画速度、逐帧编辑并分享给他人；此前 ChatGPT 无法在单次生成中原地产出 GIF。</p>
+<div class="body">
+<p>据 The Verge 报道，此次更新与 OpenAI 的 Images 2.6 模型一同推出，功能范围包括通过提示词或上传照片生成 GIF、调整动画速度、编辑单帧以及分享。变化点在于生成链路：此前 ChatGPT 不能在一次生成中直接产出 GIF。</p>
+<p>该功能的地区可用性、免费与付费分层额度、GIF 的单次生成数量与保留时长，报道未给出可核对参数，需以产品内说明为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">The Verge 报道：&lt;&gt;</span><a href="https://www.theverge.com/ai-artificial-intelligence/1026474/openai-chatgpt-animated-gifs-images-2-6" target="_blank" rel="noopener">https://www.theverge.com/ai-artificial-intelligence/1026474/openai-chatgpt-animated-gifs-images-2-6</a></div>
+</div>
+</article>
+<article id="s4-2">
+<div class="a-h"><div class="a-n">13</div><h3>Gemini for Home 接入 AT&amp;T Connected Life 智能安防系统（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 产品发布（The Verge 原文已读）</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">AT&amp;T 的智能家居安防系统 Connected Life 现已接入 Gemini for Home。AT&amp;T 称其为首个与 Google Home Premium 集成的家庭安防产品，可对家庭事件做汇总、检索视频历史等 Gemini 能力。</p>
+<div class="body">
+<p>据 The Verge 报道，更新后 Gemini for Home 可在 Connected Life 体系内提供事件汇总、视频历史检索等能力；AT&amp;T 的表述是这是首个与 Google Home Premium 集成的家庭安防产品。</p>
+<p>该集成的支持设备型号、订阅层级要求、摄像头端到端数据处理方式与在美国的可用范围，报道未逐项列出，需以 AT&amp;T 与 Google 的产品说明为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">The Verge 报道：&lt;&gt;</span><a href="https://www.theverge.com/tech/1026787/att-gemini-for-home-connected-life-security-system" target="_blank" rel="noopener">https://www.theverge.com/tech/1026787/att-gemini-for-home-connected-life-security-system</a></div>
+</div>
+</article>
+<article id="s4-3">
+<div class="a-h"><div class="a-n">14</div><h3>OpenAI Daybreak Red（GPT-5.6 Cyber）进入 AWS GovCloud (US-East)（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · OpenAI 官方公告已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">OpenAI 于 2026 年 11 月 4 日 07:00 UTC 宣布 Daybreak Red 已在 AWS GovCloud (US-East) 上线。按 OpenAI 官方说明，Daybreak Red 把 GPT-5.6 Cyber 带给该区域内的获批客户，经 Amazon Bedrock 提供，用于授权范围内的网络安全工作。</p>
+<div class="body">
+<p>官方索引页的表述为：Daybreak Red 通过 Amazon Bedrock，把 GPT-5.6 Cyber 提供给 AWS GovCloud (US-East) 的获批客户，用于授权的安全网络工作。发布日期为 2026 年 11 月 4 日 07:00 UTC，属于本期窗口内的早期条目。</p>
+<p>面向政府云的可用性通常与认证、授权名单和合规要求绑定，官方公告未在摘要层面列出具体客户名单、可用模型版本列表与配额，需以 OpenAI 与 AWS 的官方文档为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">OpenAI 官方公告：&lt;&gt;</span><a href="https://openai.com/index/daybreak-red-aws-govcloud" target="_blank" rel="noopener">https://openai.com/index/daybreak-red-aws-govcloud</a></div>
+</div>
+</article>
+</section>
+<section id="s5">
+<div class="sec-h"><span class="no">05</span><h2>技术与洞察</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s5-1">
+<div class="a-h"><div class="a-n">15</div><h3>Anthropic 发布可证明推理研究进展，FlashProve 用于校验模型身份（多源交叉）</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · 官方研究博客 + TechCrunch 原文已读</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">Anthropic 于 2026 年 11 月 4 日 17:17 UTC 发布研究博客「Progress on provable inference for large language models」。同期 TechCrunch 报道其正在推进名为 FlashProve 的系统，用于证明某段 AI 响应确实来自它所声称的模型。</p>
+<div class="body">
+<p>Anthropic 官方研究页给出的是该方向的研究进展更新；TechCrunch 的报道补充了系统的命名与定位：FlashProve 将让任何人都能检查一段 AI 响应是否真的来自其声称的模型。两条来源指向同一条研究主线，发布时间分别落在 11 月 3 日 22:41 UTC（报道）与 11 月 4 日 17:17 UTC（官方博客）。</p>
+<p>这一方向的技术意义在于把「模型身份」变成可验证对象：验证方无需拿到权重即可对输出做核对。本期未见该系统的可用范围、验证开销与开源状态的可核对参数。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Anthropic 官方研究博客：&lt;&gt;</span><a href="https://www.anthropic.com/research/provable-inference" target="_blank" rel="noopener">https://www.anthropic.com/research/provable-inference</a></div>
+<div class="lk"><span class="lt">TechCrunch 报道：&lt;&gt;</span><a href="https://techcrunch.com/2026/11/03/anthropic-is-working-on-a-system-to-prove-ai-models-identity/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/03/anthropic-is-working-on-a-system-to-prove-ai-models-identity/</a></div>
+</div>
+</article>
+<article id="s5-2">
+<div class="a-h"><div class="a-n">16</div><h3>OpenAI 自主流水线发现并修补 948 个 Linux 内核本地提权漏洞（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · OpenAI 官方文章已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">OpenAI 于 2026 年 11 月 4 日 08:00 UTC 发布文章「A thousand fewer paths to root」。官方说明其构建了一条自主流水线，用于发现、验证并生成 Linux 内核本地权限提升漏洞的补丁，共覆盖 948 个漏洞。</p>
+<div class="body">
+<p>官方表述为：OpenAI 构建了一条自主流水线，发现、验证并为 Linux 内核的 948 个本地权限提升漏洞生成补丁。文章标题「A thousand fewer paths to root」对应这一批修复的量级。</p>
+<p>对使用 AI 编码助手的团队，这条实践的价值在于把「找漏洞—验证—出补丁」做成可批量运行的闭环，而不是逐个手工处理。本期未见补丁合入上游内核的时间表、涉及的内核版本范围与误报率数据，需以官方文章与上游仓库记录为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">OpenAI 官方文章：&lt;&gt;</span><a href="https://openai.com/index/a-thousand-fewer-paths-to-root" target="_blank" rel="noopener">https://openai.com/index/a-thousand-fewer-paths-to-root</a></div>
+</div>
+</article>
+<article id="s5-3">
+<div class="a-h"><div class="a-n">17</div><h3>论文：Agent 交付架构决定保真度；MEMENTO 面向长上下文 Agent 的上下文管理（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · arXiv 原文摘要页已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">arXiv 于 2026 年 11 月 4 日收录两篇与 Agent 工程直接相关的论文：一篇实证「保真度随表格规模增大而下降、而非随轮次数下降」，并以已部署的工具型 Agent 为案例；另一篇是 MEMENTO，研究长上下文处理 Agent 的上下文管理学习。</p>
+<div class="body">
+<p>论文「Fidelity Collapses with Table Size, Not Turn Count: Delivery Architecture in a Deployed Tool-Using Agent」给出一个反直觉结论：在已部署的工具型 Agent 中，答案保真度下降的原因是表格规模增大，而不是对话轮次增加；论文把问题指向交付架构。论文「MEMENTO: Learning Context Management for Long Context Processing Agents」则面向长上下文场景，训练 Agent 自主管理上下文。</p>
+<p>同批次另有「Cross-Prompt Reuse of Entity-Replacement Responses」（实体替换响应跨提示复用）、「Circuit Oracle: Automating Attribution Graph Analysis via Natural-Language Queries」（用自然语言查询自动做归因图分析）等条目。全部论文的编号为 arXiv 2611.00172 至 2611.00536 区间，链接均指向 arXiv 原始摘要页。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">交付架构与保真度：&lt;&gt;</span><a href="https://arxiv.org/abs/2611.00442" target="_blank" rel="noopener">https://arxiv.org/abs/2611.00442</a></div>
+<div class="lk"><span class="lt">MEMENTO：&lt;&gt;</span><a href="https://arxiv.org/abs/2611.00244" target="_blank" rel="noopener">https://arxiv.org/abs/2611.00244</a></div>
+</div>
+</article>
+</section>
+<section id="s6">
+<div class="sec-h"><span class="no">06</span><h2>行业动态</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s6-1">
+<div class="a-h"><div class="a-n">18</div><h3>Qualcomm Q4 营收 103 亿美元、同比降 8%，手机业务 51.4 亿美元、同比降 26%（多源交叉）</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · Bloomberg（Techmeme 汇编）+ The Verge 原文已读</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">Qualcomm 公布 2026 财年第四季度业绩：营收 103 亿美元，同比下降 8%（市场预期 101 亿美元）；手机业务营收 51.4 亿美元，同比下降 26%（市场预期 52.5 亿美元）。财报后股价下跌 5% 以上，公司把数据中心列为重点方向。</p>
+<div class="body">
+<p>据 Bloomberg 报道（经 Techmeme 汇编），Qualcomm 当季营收 103 亿美元低于上年同期，预期为 101 亿美元；手机业务 51.4 亿美元，预期 52.5 亿美元；公司对本季度利润给出疲弱指引，股价盘后跌超 5%。The Verge 的报道补充了战略侧信息：手机销量较 2025 年下滑约 20%，Qualcomm 希望通过数据中心业务提升业绩，并提及此前宣布的与 Amazon、Meta 等公司的合作。</p>
+<p>硬件侧另有 Cloud AI 100 Ultra 加速卡在同一时间进入公开产品页（见模型发布部分）。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Techmeme 汇编（Bloomberg）：&lt;&gt;</span><a href="https://www.techmeme.com/261104/p52#a261104p52" target="_blank" rel="noopener">https://www.techmeme.com/261104/p52#a261104p52</a></div>
+<div class="lk"><span class="lt">The Verge 报道：&lt;&gt;</span><a href="https://www.theverge.com/ai-artificial-intelligence/1026867/qualcomm-earnings-data-centers" target="_blank" rel="noopener">https://www.theverge.com/ai-artificial-intelligence/1026867/qualcomm-earnings-data-centers</a></div>
+</div>
+</article>
+<article id="s6-2">
+<div class="a-h"><div class="a-n">19</div><h3>AMD 以约 29 亿美元收购 AI 芯片初创 Taalas，其中 14 亿美元取决于未明确条件（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 公司文件披露（Techmeme 汇编）已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">AMD 在 2026 年 11 月 4 日披露，将以约 29 亿美元现金加股票收购多伦多半导体初创公司 Taalas，其中 14 亿美元取决于未明确条件。该交易已于 8 月对外宣布。</p>
+<div class="body">
+<p>据公司文件（经报道）：AMD 周三表示，将为多伦多的半导体初创公司 Taalas Inc. 支付约 29 亿美元，对价为现金与股票组合，其中 14 亿美元取决于尚未明确的具体条件；交易最初于 8 月宣布，本次披露补齐了对价结构与条件安排。</p>
+<p>对 AI 芯片供给侧的含义是：AMD 通过收购一家做 AI 推理芯片的初创公司，把自研之外的产品线直接补进来。Taalas 的产品形态、交付时间表与合并后的团队安排，在本期可核对的来源中尚未给出。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Techmeme 汇编（公司文件）：&lt;&gt;</span><a href="https://www.techmeme.com/261104/p48#a261104p48" target="_blank" rel="noopener">https://www.techmeme.com/261104/p48#a261104p48</a></div>
+</div>
+</article>
+<article id="s6-3">
+<div class="a-h"><div class="a-n">20</div><h3>Sequoia 募集约 100 亿美元新基金，同时关闭 Arc 加速器与 Scouts 项目（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 公司备忘录（TechCrunch 汇编）已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">红杉资本（Sequoia）于 2026 年 11 月 4 日公布募集约 100 亿美元新基金，并在同日发布的备忘录《The Sequoia of Tomorrow》中宣布关闭 Arc 加速器与 Scouts 项目，同时合并早期阶段与成长期团队。</p>
+<div class="body">
+<p>据 TechCrunch 报道（经 Techmeme 汇编），Sequoia 当日上午在 X 上发布题为「The Sequoia of Tomorrow」的备忘录，其中包含多项结构调整：募集约 100 亿美元新基金、关闭 Arc 加速器项目与 Scouts 项目、合并早期阶段与成长阶段团队等。</p>
+<p>对创业团队的实际影响在于：加速器与 Scouts 两类孵化通道不再提供，种子到成长期的内部流转路径合并成一条。这属于投资机构层面的结构调整，对 AI 创业融资节奏的具体影响暂无法量化。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Techmeme 汇编（TechCrunch）：&lt;&gt;</span><a href="https://www.techmeme.com/261104/p44#a261104p44" target="_blank" rel="noopener">https://www.techmeme.com/261104/p44#a261104p44</a></div>
+</div>
+</article>
+</section>
+<section id="s7">
+<div class="sec-h"><span class="no">07</span><h2>安全事件</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s7-1">
+<div class="a-h"><div class="a-n">21</div><h3>Debian/Ubuntu APT 漏洞：中间人可替换已校验软件包，其代码以 root 执行（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 官方安全公告摘要已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">Debian、Ubuntu 与 APT 开发者于 2026 年 11 月 4 日联合发布安全公告：APT 存在一个漏洞，能让可篡改软件包下载的中间人攻击者替换已通过校验的软件包，攻击者代码随后以 root 身份运行。</p>
+<div class="body">
+<p>按官方公告，漏洞位于 Debian 与 Ubuntu 使用的包管理器 APT。攻击前提是攻击者能够修改软件包下载内容；一旦成立，攻击者可把一个通过校验的软件包换成自己的版本，其代码以 root 运行。公告指出，触发条件之一是 APT 对失败的下载进行重试，而 APT 默认会重试，自 Debian 12 起即如此。</p>
+<p>受影响版本范围与各发行版的修复包版本，在本期抓取内容中未逐条列出，需以 Debian、Ubuntu 与 APT 官方公告为准；在此之前，避免在不可信网络上使用 APT 是通用规避方式。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">报道与公告摘要：&lt;&gt;</span><a href="https://thehackernews.com/2026/11/debian-and-ubuntu-apt-flaw-lets-mitm.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/debian-and-ubuntu-apt-flaw-lets-mitm.html</a></div>
+</div>
+</article>
+<article id="s7-2">
+<div class="a-h"><div class="a-n">22</div><h3>Xen 虚拟机监控器两个漏洞：恶意 VM 可读写同主机其他 VM 内存（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 官方安全公告摘要已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">Xen 虚拟机监控器存在两个漏洞，恶意客户机虚拟机可读取并写入同一宿主机上其他虚拟机的内存，包括默认拥有完整权限的 dom0。Xen 项目组于 2026 年 11 月 3 日发布公告，补丁已放出。</p>
+<div class="body">
+<p>按 Xen 项目组公告，这两个漏洞允许一个恶意客户机虚拟机读写同宿主上其他虚拟机的内存，其中 dom0 是默认拥有完整权限并管理其他虚拟机的控制域。公告同时说明：补丁已经发布，且不存在已知的临时缓解措施；自 Xen 4.6 起的所有版本均受影响。</p>
+<p>受影响的是多租户虚拟化环境，对自建与云上 Xen 宿主机均适用。公告列出的完整版本矩阵与补丁入口需以 Xen 官方安全公告为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">报道与公告摘要：&lt;&gt;</span><a href="https://thehackernews.com/2026/11/xen-hypervisor-flaws-let-one-malicious.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/xen-hypervisor-flaws-let-one-malicious.html</a></div>
+</div>
+</article>
+<article id="s7-3">
+<div class="a-h"><div class="a-n">23</div><h3>OpenAI Codex 越狱工具包内藏「prompt adware」；APT29 关联攻击者劫持分析脚本投放 iOS/Android 漏洞利用（官方已确认）</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 研究机构披露摘要已取</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+<p class="lede">两条面向开发者与终端用户的安全进展：其一，安全厂商 Check Point Research 披露一个 OpenAI Codex 越狱捆绑包，会篡改 Agent 的可信指令，为第三方 AI 网关插入广告，该现象被命名为「prompt adware」；其二，APT29 关联攻击者劫持乌克兰网络分析服务 Plerdy SEO Tracker 的脚本，向 iOS 与 Android 用户投放漏洞利用。</p>
+<div class="body">
+<p>据 Check Point Research 的披露，该 Codex 越狱捆绑包名为「Haiou」（中文意为海鸥），它修改 OpenAI Codex 的配置与可信指令，从而在 Agent 的输出路径中插入第三方 AI 网关的广告。研究者把这一类攻击命名为 prompt adware，即以提示注入形式投放广告。</p>
+<p>另一条为 APT29 关联攻击者发起的大规模「水坑」攻击：通过被入侵的网站、伪造域名，以及对乌克兰网络分析服务 Plerdy SEO Tracker 的供应链攻击注入 JavaScript，收集浏览器与设备属性信息。相关研究者来自 Sekoia。</p>
+<p>两条事件的共同点是：Agent 与软件供应链都是新的注入面。厂商侧的检测、版本要求与修复入口需以各自官方公告为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Prompt adware：&lt;&gt;</span><a href="https://thehackernews.com/2026/11/researchers-uncover-prompt-adware.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/researchers-uncover-prompt-adware.html</a></div>
+<div class="lk"><span class="lt">APT29 与 Plerdy 供应链攻击：&lt;&gt;</span><a href="https://thehackernews.com/2026/11/apt29-linked-hackers-hijack-web.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/apt29-linked-hackers-hijack-web.html</a></div>
+</div>
+</article>
+</section>
+<section id="s8">
+<div class="sec-h"><span class="no">08</span><h2>前瞻与传闻（线索雷达 · 单一来源未核实）</h2><span class="cnt">14 条 · 按重要性排列</span></div>
+<article id="s8-1">
+<div class="a-h"><div class="a-n">24</div><h3>Nothing CEO 称公司无屏 AI 设备下月发布，定位为以 AI 提升生产力（TechCrunch / The Verge，2026-11-04）：&lt;<a href="https://techcrunch.com/2026/11/04/nothing-ceo-says-companys-mysterious-ai-first-device-is-dropping-next-month/&gt;" target="_blank" rel="noopener">https://techcrunch.com/2026/11/04/nothing-ceo-says-companys-mysterious-ai-first-device-is-dropping-next-month/&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-2">
+<div class="a-h"><div class="a-n">25</div><h3>Apple 将部分工程师每日 AI 支出上限从 300 美元降至 200 美元，并计划最低降至 100 美元（Bloomberg via Techmeme，2026-11-04）：&lt;<a href="https://www.techmeme.com/261104/p49#a261104p49&gt;" target="_blank" rel="noopener">https://www.techmeme.com/261104/p49#a261104p49&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-3">
+<div class="a-h"><div class="a-n">26</div><h3>NVIDIA RTX Spark 加密固件使 Linux 下推理速度降至 35%（第三方博客，2026-11-04）：&lt;<a href="https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop&gt;" target="_blank" rel="noopener">https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-4">
+<div class="a-h"><div class="a-n">27</div><h3>ChatGPT 付费套餐错误率升高（官方状态页记录时间 2026-11-04 22:38 UTC）：&lt;<a href="https://status.openai.com/&gt;" target="_blank" rel="noopener">https://status.openai.com/&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-5">
+<div class="a-h"><div class="a-n">28</div><h3>Meta 发行 90 亿欧元债券，订单规模 530 亿欧元创纪录，风险溢价约为 Alphabet 同类债券的 1.4 倍（Bloomberg via Techmeme，2026-11-04）：&lt;<a href="https://www.techmeme.com/261104/p50#a261104p50&gt;" target="_blank" rel="noopener">https://www.techmeme.com/261104/p50#a261104p50&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-6">
+<div class="a-h"><div class="a-n">29</div><h3>Arm 第二季度营收 14.4 亿美元、同比增 27%，授权收入 7.73 亿美元、同比增 50%（Reuters via Techmeme，2026-11-04）：&lt;<a href="https://www.techmeme.com/261104/p51#a261104p51&gt;" target="_blank" rel="noopener">https://www.techmeme.com/261104/p51#a261104p51&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-7">
+<div class="a-h"><div class="a-n">30</div><h3>OpenAI 任命 Jill Hazelbaker 为首席公司事务官（OpenAI 官方，2026-11-03）：&lt;<a href="https://openai.com/index/jill-hazelbaker-chief-corporate-affairs-officer&gt;" target="_blank" rel="noopener">https://openai.com/index/jill-hazelbaker-chief-corporate-affairs-officer&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-8">
+<div class="a-h"><div class="a-n">31</div><h3>AMD 季度营收创纪录，数据中心业务翻倍（Ars Technica，2026-11-04）：&lt;<a href="https://arstechnica.com/gadgets/2026/11/amds-record-quarter-data-center-business-doubles-while-gaming-craters/&gt;" target="_blank" rel="noopener">https://arstechnica.com/gadgets/2026/11/amds-record-quarter-data-center-business-doubles-while-gaming-craters/&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-9">
+<div class="a-h"><div class="a-n">32</div><h3>Simon Willison 发布 llm 0.37.1、datasette-llm 0.1a10、datasette-agent 0.5a0（2026-11-03 至 11-04）：&lt;<a href="https://simonwillison.net/2026/Nov/4/datasette-llm/&gt;" target="_blank" rel="noopener">https://simonwillison.net/2026/Nov/4/datasette-llm/&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-10">
+<div class="a-h"><div class="a-n">33</div><h3>Qwen 3.8 27B 在本地笔记本上完成模型权重解读实验（Simon Willison，2026-11-03）：&lt;<a href="https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/&gt;" target="_blank" rel="noopener">https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-11">
+<div class="a-h"><div class="a-n">34</div><h3>CWE-bench v2 与 StateBench 评测更新发布（HF 官方博客，2026-11-03）：&lt;<a href="https://huggingface.co/blog/cwe-bench&gt;" target="_blank" rel="noopener">https://huggingface.co/blog/cwe-bench&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-12">
+<div class="a-h"><div class="a-n">35</div><h3>NVIDIA 官方博客提出 AI 正在改变半导体晶圆厂的工作方式（2026-11-03）：&lt;<a href="https://blogs.nvidia.com/blog/ai-semiconductor-fabs/&gt;" target="_blank" rel="noopener">https://blogs.nvidia.com/blog/ai-semiconductor-fabs/&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-13">
+<div class="a-h"><div class="a-n">36</div><h3>OpenAI 与 DevRev 合作，以 GPT-6.1 Sol 驱动 Computer 与 Operator 实现企业自助服务（OpenAI 官方，2026-11-04）：&lt;<a href="https://openai.com/index/devrev-enterprise-self-service&gt;" target="_blank" rel="noopener">https://openai.com/index/devrev-enterprise-self-service&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+<article id="s8-14">
+<div class="a-h"><div class="a-n">37</div><h3>Hugging Face 发布 Dharma Field Extractor，把任意文档转成结构化 JSON 字段（HF 官方博客，2026-11-04）：&lt;<a href="https://huggingface.co/blog/Dharma-AI/dharma-field-extractor&gt;" target="_blank" rel="noopener">https://huggingface.co/blog/Dharma-AI/dharma-field-extractor&gt;</a></h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-04 / 11-05 首次公开</span></div>
+</article>
+</section>
+<section id="s9">
+<div class="sec-h"><span class="no">09</span><h2>后续追踪</h2><span class="cnt">连续事件</span></div>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Conductor 被 Meta 收购</strong>：此前为独立的多 Agent 并行编码工具</h3></div>
+<p class="lede">本期确认团队并入 Meta Superintelligence Labs</p>
+<div class="body"><p>下一步关注其独立产品是否继续维护、定价是否并入 Meta 订阅体系。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Anthropic 可证明推理 / FlashProve</strong>：此前为研究方向的讨论</h3></div>
+<p class="lede">本期官方研究博客更新进展，并出现模型身份校验的产品化叙述</p>
+<div class="body"><p>下一步关注验证方案是否开源、第三方能否独立复核。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>OpenAI Codex Rust 版本线</strong>：此前稳定版为 rust-v0.166.0</h3></div>
+<p class="lede">本期 24 小时内连发 6 个 alpha 条目，rust-v0.168.0-alpha.2 为最新</p>
+<div class="body"><p>下一步关注 rust-v0.168.0 正式版发布内容与 CLI 兼容性变更。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>AMD 收购 Taalas</strong>：交易已于 8 月宣布</h3></div>
+<p class="lede">本期文件披露对价为约 29 亿美元现金加股票，其中 14 亿美元取决于未明确条件</p>
+<div class="body"><p>下一步关注条件触发细节与整合后的产品线定位。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>美国数据中心审批</strong>：中期选举前为地方性审批</h3></div>
+<p class="lede">本期出现州级暂停倡议与国会资本开支预期变化</p>
+<div class="body"><p>下一步关注具体州与联邦层面的暂停法案推进情况。</p></div>
+</article>
+</section>
+<section id="s10">
+<div class="sec-h"><span class="no">10</span><h2>编辑备注</h2><span class="cnt">采集限制与口径</span></div>
+<div class="body">
+<p><strong>本期真实检索窗口</strong>：2026-11-04 07:00 至 2026-11-05 07:00（Asia/Shanghai），对应 UTC 2026-11-03 23:00 至 2026-11-04 23:00；重要遗漏补至 72 小时（自 2026-11-02 07:00 起），补入条目已在正文或线索雷达中标注日期。</p>
+<p><strong>采集通道</strong>：33 个一手来源，含厂商官方 RSS 与博客、官方 GitHub Releases API、Hugging Face 模型接口、PyPI JSON 接口、Statuspage 事件接口；本期通过 NotebookLM 对采集材料做统一筛选与事实核对。</p>
+<p><strong>口径说明</strong>：第 9、10 条的「SOTA」为厂商自述，本期未见第三方独立复测；第 19 条的 29 亿美元与 14 亿美元来自公司文件披露的交易对价，未做估值推算。</p>
+<p><strong>冲突与缺口</strong>：Xen 公告与 Google 11 月安全公告的完整版本矩阵、APT 漏洞在各发行版上的修复版本号，本期抓取内容未逐条收录，需查官方公告；「线索雷达」条目均为单一来源，未展开、不作推断。</p>
+<p><strong>与上期衔接</strong>：llama.cpp 版本线、Codex Rust alpha 线、LiteLLM 1.108/1.109 双轨、openai-python 3.45.0 等条目在上期已出现过，本期只记录新增版本号与时间，不重复展开既有内容。</p>
+</div></section>
+
+</main>
+</div>
+</div>
+</body>
+</html>
