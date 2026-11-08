@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-11-09 — 全球人工智能情报日报</title>
+<meta name="description" content="2026-11-09 AI 早报：Nvidia 董事会就黄仁勋是否遭外国间谍策动启动调查，称无迹象显示公司机密外泄；黄仁勋内部邮件承认婚外情并称「承担全部责任」、llama.cpp 一晚连发 16 个构建：SSM_SCAN 为 d_state=64 增加 GPU 快路径，radix Top-K 并列结果改为确定性选择、OpenAI Agents SDK v0.24.0-alpha.7：原生执行之外保留 Classic 工作流，新增持久化根 Session 与语音、托管工具、Open WebUI v0.13.1 与 v0.13.2：把 Claude Code、Codex、Pi 等编码 agent 接入模型选择器，并修复明文 HTTP 下的会话加载失败 等 10 条已核实动态与线索雷达。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Global AI Intelligence Daily · 第 014 期</div>
+  <h1>AI 早报<br>2026-11-09</h1>
+  <p class="sub">多源发现 → 线索筛选 → 原始资料核实 → 连续事件关联 → 重要性排序 → 分类报道。本期覆盖全球人工智能生态在主窗口（11-07 07:00 – 11-08 07:00，Asia/Shanghai）内首次公开的事件。</p>
+  <div class="meta">
+    <span class="chip live">检索执行窗口 <b>2026-11-07 07:00 – 2026-11-09 07:00 CST</b></span>
+    <span class="chip">主窗口 <b>2026-11-07 07:00 → 11-08 07:00</b></span>
+    <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
+  </div>
+</header>
+<figure class="episode-video">
+  <figcaption class="episode-video-label">收看本期</figcaption>
+  <video controls preload="metadata" playsinline src="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-11-09/ai-daily-2026-11-09.mp4">
+    <a href="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-11-09/ai-daily-2026-11-09.mp4">下载本期视频（mp4）</a>
+  </video>
+  <p class="episode-video-note">本期视频由 AI 生成，内容以图文版为准。</p>
+</figure>
+<style>
+figure.episode-video {
+  color-scheme: dark;
+  margin: 1rem 0 1.25rem;
+  padding: 0.9rem 1rem 0.75rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 48rem;
+  background: #141820;
+  color: #e8ecf6;
+  border: 1px solid rgba(255,255,255,.14);
+}
+figure.episode-video video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  max-height: 70vh;
+  display: block;
+  margin: 0.4rem 0 0.45rem;
+  background: #000;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.episode-video-label { font-size: 0.8rem; letter-spacing: 0.08em; }
+.episode-video-note { margin: 0; font-size: 0.85rem; line-height: 1.5; }
+@media (max-width: 375px) {
+  figure.episode-video { padding: 0.75rem 0.7rem 0.65rem; }
+}
+</style>
+
+
+<div class="stats">
+  <div class="stat c1"><div class="n">10</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
+  <div class="stat c2"><div class="n">6</div><div class="l">新闻栏目 / SECTIONS</div></div>
+  <div class="stat c3"><div class="n">30</div><div class="l">可追溯来源 / SOURCES</div></div>
+  <div class="stat c4"><div class="n">9</div><div class="l">官方已确认 / CONFIRMED</div></div>
+</div>
+
+<div class="grid">
+
+<nav class="toc">
+  <div class="lbl">目录 / Contents</div>
+  <a href="#ov"><span>00</span>今日概览</a>
+  <a href="#s1"><span>01</span>要闻</a><a href="#s2"><span>02</span>开发生态</a><a href="#s3"><span>03</span>模型发布</a><a href="#s4"><span>04</span>产品应用</a><a href="#s9"><span>09</span>后续追踪</a><a href="#s10"><span>10</span>编辑备注</a>
+</nav>
+
+<main>
+
+<section id="ov">
+  <div class="sec-h"><span class="no">00</span><h2>今日概览</h2><span class="cnt">15 条 · 按重要性与栏目排列</span></div>
+  <div class="ov">
+    <a class="ovc" href="#ov"><div class="top"><span class="num">1</span><span class="cat">要闻</span></div><h4>Nvidia 董事会就黄仁勋是否遭外国间谍策动启动调查，称无迹象显示公司机密外泄；黄仁勋内部邮件承认婚外情并称「承担全部责任」</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">2</span><span class="cat">开发生态</span></div><h4>llama.cpp 一晚连发 16 个构建：SSM_SCAN 为 d_state=64 增加 GPU 快路径，radix Top-K 并列结果改为确定性选择</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">3</span><span class="cat">开发生态</span></div><h4>OpenAI Agents SDK v0.24.0-alpha.7：原生执行之外保留 Classic 工作流，新增持久化根 Session 与语音、托管工具</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">4</span><span class="cat">开发生态</span></div><h4>Open WebUI v0.13.1 与 v0.13.2：把 Claude Code、Codex、Pi 等编码 agent 接入模型选择器，并修复明文 HTTP 下的会话加载失败</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">5</span><span class="cat">开发生态</span></div><h4>LiteLLM v1.110.0-dev.2：Docker 镜像开始用 cosign 签名，路由重试、Responses SSE 帧、Vertex AI 鉴权等 12 项修复</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">6</span><span class="cat">开发生态</span></div><h4>crewAI 1.15.38：默认模型切换为 gpt-6-luna，agent 输入支持表格 URL，eval 新增无头模式</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">7</span><span class="cat">模型发布</span></div><h4>Nous Research 发布 Arete-27B：在 Qwen3.8-27B 上做后训练，Apache-2.0 开源，官方称含宣传内容回答从 22% 降至 0.9%</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">8</span><span class="cat">模型发布</span></div><h4>Mistral 开源 Le Chonk 权重，定位为 agentic 编码与网络安全方向的开放模型</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">9</span><span class="cat">产品应用</span></div><h4>OpenAI 状态页：图像生成相关服务错误率升高，11 月 8 日 23:11 CST 起，约 1 小时 49 分后恢复</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">10</span><span class="cat">产品应用</span></div><h4>DeepSeek 称开源 agent 应用 Harness 日活达 154 万，日均消耗约 92 万亿 token</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r1</span><span class="cat">前瞻与传闻</span></div><h4>Anthropic 据报向 OnePWR 采购 1.7GW 燃气发电机承诺，金额 34 亿美元（金融时报，经 Techmeme 聚合）<a href="https://www.techmeme.com/261108/p8" target="_blank" rel="noopener">https://www.techmeme.com/261108/p8</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r2</span><span class="cat">前瞻与传闻</span></div><h4>美国商务部 AI 安全中心 CAISSI 官员被要求非正式向白宫某办公室汇报（美联社，经 Techmeme 聚合）<a href="https://www.techmeme.com/261108/p16" target="_blank" rel="noopener">https://www.techmeme.com/261108/p16</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r3</span><span class="cat">前瞻与传闻</span></div><h4>苹果高管 John Ternus 推动公司加快 AI 进展，矛头指向 Siri 之外的 agent 能力（彭博社，经 Techmeme 聚合）<a href="https://www.techmeme.com/261108/p9" target="_blank" rel="noopener">https://www.techmeme.com/261108/p9</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r4</span><span class="cat">前瞻与传闻</span></div><h4>2026 年 AI 公司已卖出或定价 3000 亿美元以上股票，另有约 1000 亿美元待发（The Information，经 Techmeme 聚合）<a href="https://www.techmeme.com/261108/p10" target="_blank" rel="noopener">https://www.techmeme.com/261108/p10</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r5</span><span class="cat">前瞻与传闻</span></div><h4>内蒙古成为中国增长最快的 AI 数据中心区域（SemiAnalysis，经 Techmeme 聚合）<a href="https://www.techmeme.com/261108/p7" target="_blank" rel="noopener">https://www.techmeme.com/261108/p7</a></h4></a>
+  </div>
+</section>
+
+<section id="s1">
+<div class="sec-h"><span class="no">01</span><h2>要闻</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s1-1">
+<div class="a-h"><div class="a-n">1</div><h3>Nvidia 董事会就黄仁勋是否遭外国间谍策动启动调查，称无迹象显示公司机密外泄；黄仁勋内部邮件承认婚外情并称「承担全部责任」</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · 彭博 / Axios / TechCrunch 三方报道，官方新闻稿未获取</span><span class="tag">2026-11-07 / 11-08 首次公开</span></div>
+<p class="lede">据彭博社与 Axios 报道，Nvidia 董事会已就其 CEO 黄仁勋是否被外国间谍策动一事启动内部调查，董事会称没有理由相信 Nvidia 机密遭到泄露。据 Axios 获得的内部邮件，黄仁勋承认婚外情并称「承担全部责任」，称自己未能履行对董事会、股东与员工的职责。TechCrunch 同日报道称 Nvidia 将就黄仁勋与「可能的中国间谍」的关系展开调查。</p>
+<div class="body">
+<p>彭博社报道的核心是调查范围与官方表述：调查由董事会发起，重点在于黄仁勋是否被外国情报策动，董事会表示没有理由相信公司机密已被泄露。Axios 获得的内部邮件显示，黄仁勋在其中承认了一段婚外情，称自己「承担全部责任」，并表示未能达到董事会、股东与员工对他的要求。</p>
+<p>TechCrunch 报道的对外表述与彭博口径一致：Nvidia 方面确认将就 CEO 与「可能的中国间谍」的关系展开调查。前一日 TechCrunch 与 Techmeme 聚合的另一条报道援引美国情报备忘录称，一名 Megaspeed 高管被招募为针对 Nvidia CEO 的间谍，该条线索尚未见官方确认，本期不据此展开推断。</p>
+<p>三条报道指向同一事件的不同侧面：董事会调查（彭博）、CEO 内部邮件（Axios）、公司对外表态（TechCrunch）。本期未获取 Nvidia 官方新闻稿原文，涉事细节以媒体转述口径表述。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Techmeme 聚合页（彭博社报道）：</span><a href="https://www.techmeme.com/261108/p13" target="_blank" rel="noopener">https://www.techmeme.com/261108/p13</a></div>
+<div class="lk"><span class="lt">Techmeme 聚合页（Axios 报道）：</span><a href="https://www.techmeme.com/261108/p14" target="_blank" rel="noopener">https://www.techmeme.com/261108/p14</a></div>
+<div class="lk"><span class="lt">TechCrunch 报道：</span><a href="https://techcrunch.com/2026/11/08/nvidia-says-its-investigating-ceo-jensen-huangs-relationship-with-possible-chinese-spy/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/08/nvidia-says-its-investigating-ceo-jensen-huangs-relationship-with-possible-chinese-spy/</a></div>
+</div>
+</article>
+</section>
+<section id="s2">
+<div class="sec-h"><span class="no">02</span><h2>开发生态</h2><span class="cnt">5 条 · 按重要性排列</span></div>
+<article id="s2-1">
+<div class="a-h"><div class="a-n">2</div><h3>llama.cpp 一晚连发 16 个构建：SSM_SCAN 为 d_state=64 增加 GPU 快路径，radix Top-K 并列结果改为确定性选择</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-07 / 11-08 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">2026-11-08 07:45 至 2026-11-09 00:48（CST），llama.cpp 依次发布 b12193 至 b12211 共 16 个构建。其中 b12207 为 SSM_SCAN 内核增加 d_state=64 的 GPU 快路径，官方称在 Zamba2-7B-Instruct 上吞吐从 11 tok/s 提升到 15.1 tok/s；b12208 把 CUDA 与 Metal 的 radix Top-K 并列结果选择改为确定性。</p>
+<div class="body">
+<p>b12207（#31818）针对 Zamba2 一类状态尺寸为 64 的递归扫描架构补充第 4 个模板实例，此前只有 96、128、256 三个快路径，状态尺寸 64 的扫描步会全部回落到 CPU。官方给出的实测是在 Zamba2-7B-Instruct 上吞吐从 11 tok/s 提升到 15.1 tok/s，官方称整体提升约 35%，并说明仍有约 28% 的 scan 调用因另一未定位原因回落 CPU。</p>
+<p>b12208（#31084）修复 radix Top-K 内核的线程时序问题：旧实现用原子计数器收集被选索引，阈值处并列候选的顺序取决于线程调度，官方改用确定性的计数与压缩方案，并把 Metal、ROCm、Vulkan、SYCL 排除在本改动之外。b12202（#31851）按参考实现统一精度调用：GLM4 的下投影与输出投影、MiMoVL 的视觉矩阵乘、Qwen3-TTS 的说话人编码器 conv1d 改为 GGML_PREC_BF16，而 DeepSeek V4 与 V4.1 的 router、minimax-M3 的 indexer 保持 F32。</p>
+<p>其余构建覆盖推测解码、缓存调度与后端：b12201（#31497）不再对 draft 模型套用 MoE 缓存；b12206（#31888）让 moe-cache 的 CPU 部分不再等待已缓存专家；b12200（#31831）改善 OpenCL 的 q8_0 与小 n MoE 验证路径；b12210（#31776）为 SpacemiT IME2 启用 MXFP4 dense repack；b12199（#31861）清理 PEG 工具调用参数中的非法 UTF-8；b12211（#31865）重构 mtmd、移除 clip.h；b12209（#31866）为 llamafile 实现 bf16 与 q8_0 的 vxe 路径。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">llama.cpp Releases：</span><a href="https://github.com/ggml-org/llama.cpp/releases" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases</a></div>
+<div class="lk"><span class="lt">b12207（SSM_SCAN d_state=64 快路径）：</span><a href="https://github.com/ggml-org/llama.cpp/releases/tag/b12207" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases/tag/b12207</a></div>
+<div class="lk"><span class="lt">b12208（radix Top-K 确定性）：</span><a href="https://github.com/ggml-org/llama.cpp/releases/tag/b12208" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases/tag/b12208</a></div>
+<div class="lk"><span class="lt">b12202（精度对齐参考实现）：</span><a href="https://github.com/ggml-org/llama.cpp/releases/tag/b12202" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases/tag/b12202</a></div>
+</div>
+</article>
+<article id="s2-2">
+<div class="a-h"><div class="a-n">3</div><h3>OpenAI Agents SDK v0.24.0-alpha.7：原生执行之外保留 Classic 工作流，新增持久化根 Session 与语音、托管工具</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-07 / 11-08 首次公开</span></div>
+<p class="lede">openai/openai-agents-python 于 2026-11-08 15:05（CST）发布 v0.24.0-alpha.7。官方发布说明列出四项重点：可在原生执行之外继续使用 Classic 工作流、用自有存储保存会话、把语音与托管工具接入原生 agent、以及更细地控制上下文、生成与用量。</p>
+<div class="body">
+<p>第一项重点是 Classic 工作流与原生执行并存。官方说明可从 <code>agents.classic</code> 导入保留下来的 v0 运行时，并提示本次 alpha 同时改动了执行器的写入默认行为，升级前需阅读升级说明再改动既有环境。</p>
+<p>第二项是持久化：官方新增带有 <code>CustomStorage</code> 的持久化根 Session，并说明恢复工作前需要先对状态不确定的工具效果做对账。第三项把语音工作流接到 Session，并支持通过兼容的 Responses 提供方使用 <code>FileSearch</code>、<code>CodeInterpreter</code> 与 <code>ImageGeneration</code> 等托管工具。第四项是控制面：官方列出可变换模型输入、保留特定上下文等上下文、完成与用量相关能力。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Agents SDK v0.24.0-alpha.7 发布说明：</span><a href="https://github.com/openai/openai-agents-python/releases/tag/v0.24.0-alpha.7" target="_blank" rel="noopener">https://github.com/openai/openai-agents-python/releases/tag/v0.24.0-alpha.7</a></div>
+<div class="lk"><span class="lt">Agents SDK 仓库：</span><a href="https://github.com/openai/openai-agents-python" target="_blank" rel="noopener">https://github.com/openai/openai-agents-python</a></div>
+</div>
+</article>
+<article id="s2-3">
+<div class="a-h"><div class="a-n">4</div><h3>Open WebUI v0.13.1 与 v0.13.2：把 Claude Code、Codex、Pi 等编码 agent 接入模型选择器，并修复明文 HTTP 下的会话加载失败</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-07 / 11-08 首次公开</span></div>
+<p class="lede">open-webui 于 2026-11-08 19:07 与 19:53（CST）先后发布 v0.13.1 与 v0.13.2。v0.13.1 的主要新增是把编码 agent 作为模型呈现：提供 agent 的 Open Terminal 中，Claude Code、Codex 与 Pi 会出现在模型选择器里；v0.13.2 修复了明文 HTTP 场景下会话一直停留在加载状态的问题。</p>
+<div class="body">
+<p>v0.13.1 的官方说明描述了这条新链路：在提供 agent 的 Open Terminal 中，Claude Code、Codex、Pi 等编码 agent 出现在模型选择器，用户可以与它们对话或用语音调用，可选择其推理强度与服务层级，并在对话中批准其工具请求。官方同时说明限制：每个会话只使用一个 agent，agent 对话不能重新生成、继续或编辑后重发；agent 所在终端消失时，该会话与新会话会回落到默认模型，早先回复仍保留 agent 名称；agent 对话中的自动补全使用任务模型，没有任务模型时跳过。</p>
+<p>v0.13.2 为修复版本。其一，在局域网或 Docker 地址上以明文 HTTP 打开 Open WebUI 时，新建与已有会话不再卡在加载状态并报 <code>crypto.randomUUID is not a function</code>（#33919）；其二，明文 HTTP 下创建、回复、编辑评论以及编辑含 Mermaid 图、callout 等渲染块的 Markdown 文件时，不再因同一 UUID 报错失败；其三，Side Chat 的允许开关即使在特定配置下也保持可见。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">open-webui v0.13.1 发布说明：</span><a href="https://github.com/open-webui/open-webui/releases/tag/v0.13.1" target="_blank" rel="noopener">https://github.com/open-webui/open-webui/releases/tag/v0.13.1</a></div>
+<div class="lk"><span class="lt">open-webui v0.13.2 发布说明：</span><a href="https://github.com/open-webui/open-webui/releases/tag/v0.13.2" target="_blank" rel="noopener">https://github.com/open-webui/open-webui/releases/tag/v0.13.2</a></div>
+</div>
+</article>
+<article id="s2-4">
+<div class="a-h"><div class="a-n">5</div><h3>LiteLLM v1.110.0-dev.2：Docker 镜像开始用 cosign 签名，路由重试、Responses SSE 帧、Vertex AI 鉴权等 12 项修复</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-07 / 11-08 首次公开</span></div>
+<p class="lede">LiteLLM 于 2026-11-08 10:25（CST）发布 v1.110.0-dev.2。官方发布说明的主线是镜像供应链：所有 LiteLLM Docker 镜像开始用 cosign 签名，本版使用 commit <code>e82a3c6</code> 引入的公钥，并给出以固定 commit 哈希与以版本标签两种校验方式。</p>
+<div class="body">
+<p>镜像签名方面，官方给出的推荐做法是用不可变的 commit 哈希拉取公钥后执行 <code>cosign verify</code>，并说明本仓库的标签受保护、也解析到同一把密钥。变更清单共 12 项，集中在网关可靠性：路由会记录请求首次失败之后的重试与回落跳数（#50445）；代理保留 Responses 的 SSE 事件分帧（#47980）；Vertex AI 直通请求改为只鉴权一次（#48942）；RedisCache 与 Rust 存储共用同一个原生熔断器（#50473）；流式响应中 Anthropic 的工具参数分片按原样保留（#50470）。</p>
+<p>其余变更涉及成本与错误码：按 key 或团队关闭 spend log 的提示词存储（#50135）；没有输出的回复不再被缓存或重放（#50057）；Gemini 2.5 Pro flex 在 20 万 token 以上补充缓存价格（#50480）；Azure 侧新增 cohere-rerank-v5-pro 与 -fast（#50499）、对齐 chat-latest 的退役元数据（#50509）、补充 gpt-realtime-2.1 等型号的数据区行（#50519）；Gemini 图片编辑无图片时返回 400 而不是 500（#50244）。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">LiteLLM v1.110.0-dev.2 发布说明：</span><a href="https://github.com/BerriAI/litellm/releases/tag/v1.110.0-dev.2" target="_blank" rel="noopener">https://github.com/BerriAI/litellm/releases/tag/v1.110.0-dev.2</a></div>
+<div class="lk"><span class="lt">LiteLLM 版本列表：</span><a href="https://github.com/BerriAI/litellm/releases" target="_blank" rel="noopener">https://github.com/BerriAI/litellm/releases</a></div>
+</div>
+</article>
+<article id="s2-5">
+<div class="a-h"><div class="a-n">6</div><h3>crewAI 1.15.38：默认模型切换为 gpt-6-luna，agent 输入支持表格 URL，eval 新增无头模式</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-07 / 11-08 首次公开</span></div>
+<p class="lede">crewAI 于 2026-11-09 03:39（CST）发布 1.15.38。官方发布说明列出四项新增：把 gpt-6-luna 设为 crewAI 全局默认模型、让 agent 用工具逐行读取输入中的表格 URL、给 eval 用量打上目标与单次评估 id、以及为 <code>crewai eval</code> 增加 <code>--no-open</code> 无头开关。</p>
+<div class="body">
+<p>四项新增之外，本次版本还带来一批 eval 与运行行为修复：eval 运行出错退出时按 run_failed 计数；开启 tracing 时创建的 <code>.env</code> 归项目所有者独占；eval 发起的匿名运行在失败后仍会上传；在首次调用时检查兼容 OpenAI 的各提供商 API key；memoized 的 crew 方法限定在自身实例内；<code>crewai run</code> 的项目脚本失败时以非零码退出。官方还说明 eval 在询问是否共享 trace 时以回车表示同意。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">crewAI 1.15.38 发布说明：</span><a href="https://github.com/crewAIInc/crewAI/releases/tag/1.15.38" target="_blank" rel="noopener">https://github.com/crewAIInc/crewAI/releases/tag/1.15.38</a></div>
+<div class="lk"><span class="lt">crewAI 版本列表：</span><a href="https://github.com/crewAIInc/crewAI/releases" target="_blank" rel="noopener">https://github.com/crewAIInc/crewAI/releases</a></div>
+</div>
+</article>
+</section>
+<section id="s3">
+<div class="sec-h"><span class="no">03</span><h2>模型发布</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s3-1">
+<div class="a-h"><div class="a-n">7</div><h3>Nous Research 发布 Arete-27B：在 Qwen3.8-27B 上做后训练，Apache-2.0 开源，官方称含宣传内容回答从 22% 降至 0.9%</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · 官方博客与 Hugging Face 模型卡原文已取</span><span class="tag">2026-11-07 / 11-08 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">Nous Research 于 2026-11-08（CST）公布 Arete-27B，官方说明该模型是在阿里巴巴 Qwen3.8-27B 上做后训练的结果，用意是强化西方价值观。Hugging Face 模型卡显示其为 Apache-2.0 许可、27B 参数、纯 SFT 后训练、训练上下文 64k；官方称事实得分从 2.32 提升到 2.98（满分 5），含宣传内容的回答从 22% 降至 0.9%。</p>
+<div class="body">
+<p>模型卡给出的训练细节为：后训练方式只有监督微调，没有强化学习、没有偏好优化，也没有改动架构；评测检查点为 step 1,202，教师模型为 Inkling，训练数据为纯文本，训练上下文 64k。数据集为 <code>NousResearch/arete-data-pairs</code>，评测集为 <code>Propaganda_Eval</code>。模型卡列出的七个价值类别是表达自由、国家意识形态、国家与自由市场、教育、数据隐私与监控、民主、环境政策。</p>
+<p>官方给出的结果是：在其评测中事实得分从 2.32 提升到 2.98（满分 5），含宣传内容的回答比例从 22% 降到 0.9%，官方称该提升在七个价值类别上均成立，且在通用能力与 agentic 基准上没有明显回退。官方同时明确这不等于已消除与该立场相关的全部行为。上述数字均为发布方口径，未见独立第三方复测。抓取时该模型在 Hugging Face 的下载量约 1,747、点赞 280，模型卡最近更新时间为 2026-11-06。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Nous Research 官方博客：</span><a href="https://nousresearch.com/arete" target="_blank" rel="noopener">https://nousresearch.com/arete</a></div>
+<div class="lk"><span class="lt">Hugging Face 模型卡：</span><a href="https://huggingface.co/NousResearch/Arete-27B" target="_blank" rel="noopener">https://huggingface.co/NousResearch/Arete-27B</a></div>
+<div class="lk"><span class="lt">评测数据集：</span><a href="https://huggingface.co/datasets/NousResearch/Propaganda_Eval" target="_blank" rel="noopener">https://huggingface.co/datasets/NousResearch/Propaganda_Eval</a></div>
+</div>
+</article>
+<article id="s3-2">
+<div class="a-h"><div class="a-n">8</div><h3>Mistral 开源 Le Chonk 权重，定位为 agentic 编码与网络安全方向的开放模型</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Mistral 官方新闻页原文已取（72 小时补收）</span><span class="tag">2026-11-07 / 11-08 首次公开</span></div>
+<p class="lede">Mistral 官方新闻页于 2026-11-05 发布「Le Chonk: Built for Coders, Trusted by Defenders」，官方说明该版本开放了 Le Chonk 的权重，定位为 agentic 编码与网络安全方向开放模型的前沿推进。该条首次公开日期早于本期 24 小时主窗口，属 72 小时补收条目。</p>
+<div class="body">
+<p>官方条目标题同时点出两个定位方向：面向编码者的构建，以及面向防御者的可信度，官方措辞是开放 Le Chonk 的权重，以推进 agentic 编码与网络安全类开放模型的前沿。本期未从 Mistral 官方页面取得该模型的参数规模、上下文长度、基准数据、许可协议与下载地址等条目，官方页面上也未列出对应数值，因此这些参数本期不予补写，也不做推测。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Mistral 官方新闻页：</span><a href="https://mistral.ai/news/" target="_blank" rel="noopener">https://mistral.ai/news/</a></div>
+<div class="lk"><span class="lt">官方条目「Le Chonk: Built for Coders, Trusted by Defenders」（2026-11-05）：</span><a href="https://mistral.ai/news/" target="_blank" rel="noopener">https://mistral.ai/news/</a></div>
+</div>
+</article>
+</section>
+<section id="s4">
+<div class="sec-h"><span class="no">04</span><h2>产品应用</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s4-1">
+<div class="a-h"><div class="a-n">9</div><h3>OpenAI 状态页：图像生成相关服务错误率升高，11 月 8 日 23:11 CST 起，约 1 小时 49 分后恢复</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · OpenAI 状态页事件接口原始记录已取</span><span class="tag">2026-11-07 / 11-08 首次公开</span></div>
+<p class="lede">OpenAI 状态页记录了一次影响 minor 级别的事件「Elevated errors with image generation」。事件于 2026-11-08 15:11 UTC（23:11 CST）创建，官方在 15:43 UTC 说明已实施缓解措施并进入观察状态，17:00 UTC 确认全部受影响服务恢复正常。从创建到恢复约 1 小时 49 分。</p>
+<div class="body">
+<p>官方状态页给出的处置过程为三步：15:11 UTC 识别出问题并说明用户出现错误升高、正在实施缓解；15:43 UTC 说明已应用缓解措施并正在观察以确认恢复；17:00 UTC 说明全部受影响服务已恢复正常运营并致歉。事件影响等级标注为 minor，状态页给出的时间线覆盖识别、缓解与监控、恢复三个节点。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">OpenAI 状态页事件页：</span><a href="https://status.openai.com/incidents/01M6XVDCKRT3PSB0YP8J30GTD5" target="_blank" rel="noopener">https://status.openai.com/incidents/01M6XVDCKRT3PSB0YP8J30GTD5</a></div>
+<div class="lk"><span class="lt">OpenAI 状态页首页：</span><a href="https://status.openai.com/" target="_blank" rel="noopener">https://status.openai.com/</a></div>
+</div>
+</article>
+<article id="s4-2">
+<div class="a-h"><div class="a-n">10</div><h3>DeepSeek 称开源 agent 应用 Harness 日活达 154 万，日均消耗约 92 万亿 token</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · 彭博经 Techmeme 聚合，TechNode 与官方文档复核</span><span class="tag">2026-11-07 / 11-08 首次公开</span></div>
+<p class="lede">据彭博社 2026-11-08 报道（Techmeme 于 11 月 9 日 04:10 CST 聚合），DeepSeek 称其开源 agent 应用 Harness 在 11 月 4 日的日活跃用户达到 154 万，发布不足三个月；日均消耗约 92 万亿 token，折合每个用户约 6000 万 token。TechNode 此前报道 DeepSeek 正筹备官方插件市场，官方 API 文档也已将 Harness 列为面向 agent 开发者的开发者预览。</p>
+<div class="body">
+<p>彭博社给出的三个数字是：11 月 4 日日活 154 万、上线不足三个月、日均约 92 万亿 token（人均约 6000 万）。日活数字可与 TechNode 2026-11-06 的报道相互印证，该报道同时称 DeepSeek 正计划建立官方插件市场；DeepSeek 官方 API 文档在 DeepSeek Harness 指南中说明 Harness 现已进入面向全球 agent harness 开发者的开发者预览状态。</p>
+<p>同一份官方文档还写明当前可用模型口径：模型名 <code>deepseek-flash</code> 现由 DeepSeek-V4.1-Flash-1017 提供，调用方式不变；旧名 <code>deepseek-v4-flash</code> 与 <code>deepseek-v4-flash-vision-exp</code> 仍被接受，但对应模型已退役，请求由 DeepSeek-V4.1-Flash-1017 按 Flash 价格计费。官方文档同时说明 DeepSeek API 兼容 OpenAI 与 Anthropic 格式，可直接作为 Claude Code、GitHub Copilot、OpenCode 等工具的后端模型。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Techmeme 聚合页（彭博社报道）：</span><a href="https://www.techmeme.com/261108/p12" target="_blank" rel="noopener">https://www.techmeme.com/261108/p12</a></div>
+<div class="lk"><span class="lt">TechNode 报道：</span><a href="https://technode.com/2026/11/06/deepseek-plans-official-plugin-marketplace-as-harness-daily-users-reach-1-54-million/" target="_blank" rel="noopener">https://technode.com/2026/11/06/deepseek-plans-official-plugin-marketplace-as-harness-daily-users-reach-1-54-million/</a></div>
+<div class="lk"><span class="lt">DeepSeek API 官方文档：</span><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing" target="_blank" rel="noopener">https://api-docs.deepseek.com/zh-cn/quick_start/pricing</a></div>
+</div>
+</article>
+</section>
+
+
+
+
+<section id="s9">
+<div class="sec-h"><span class="no">09</span><h2>后续追踪</h2><span class="cnt">连续事件</span></div>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>DeepSeek Harness 的用户规模与插件生态</strong>：此前已确认 Harness 以开源 agent 应用的形态对外提供</h3></div>
+<p class="lede">本期彭博社给出 11 月 4 日日活 154 万、日均约 92 万亿 token，官方文档把 Harness 列为开发者预览</p>
+<div class="body"><p>下一步关注官方插件市场是否上线、日活与 token 量是否继续增长，以及 Harness 与 DeepSeek API 模型线（<code>deepseek-flash</code> 指向 V4.1-Flash-1017、旧名退役后按 Flash 计价）的联动。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>llama.cpp 的 MoE 缓存与精度对齐路线</strong>：此前已确认 b12185 修复 CUDA lightning indexer 共享内存冲突、b12191 支持把 MoE 缓存未命中分给 CPU</h3></div>
+<p class="lede">本期 b12201 不再对 draft 模型套用 MoE 缓存、b12206 让 CPU 部分不等待已缓存专家、b12202 按参考实现把 GLM4/MiMoVL/Qwen3-TTS 相关调用改为 BF16 并保持 DeepSeek V4 与 minimax-M3 indexer 为 F32</p>
+<div class="body"><p>下一步关注 Zamba2 一类 d_state=64 架构是否还有约 28% 的 scan 调用回落 CPU，以及各后端对 BF16 的支持差异带来的兼容性影响。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Anthropic 的算力与电力采购</strong>：此前已确认 Anthropic 已向 SEC 提交 S-1 上市文件</h3></div>
+<p class="lede">本期新增线索为金融时报报道其向 OnePWR 采购 1.7GW 燃气发电机承诺、金额 34 亿美元</p>
+<div class="body"><p>下一步关注该采购是否获得 Anthropic 官方确认，以及 2026 年内 AI 实验室自建电力容量的披露口径。</p></div>
+</article>
+</section>
+<section id="s10">
+<div class="sec-h"><span class="no">10</span><h2>编辑备注</h2><span class="cnt">采集限制与口径</span></div>
+<div class="body">
+<p><strong>本期真实检索时间窗</strong>：2026-11-08 07:00 ~ 2026-11-09 07:00 CST（24 小时）。因窗口内官方博客更新稀少，重要遗漏补检至 72 小时（2026-11-05 07:00 起），本期第 8 条 Mistral Le Chonk 属补收条目，已在正文标注其首次公开日期。</p>
+<p><strong>采集方式</strong>：NotebookLM research 三轮检索用于线索发现（Q1 模型发布与开发生态、Q2 厂商官方更新细节、Q3 安全与合规）；一期源直采覆盖企业官方新闻页与 GitHub Release API、Techmeme 与 TechCrunch RSS、Hugging Face 模型与趋势接口、OpenAI 状态页事件接口；入选条目均逐条打开原始页面或原始接口核实。</p>
+<p><strong>链接可用性</strong>：金融时报原文页与美联社原文页在本环境返回安全校验页，无法读取正文，两条均只保留标题、链接与日期并列入「前瞻与传闻」，未展开细节；Techmeme 聚合页与 TechCrunch 报道页可正常打开。</p>
+<p><strong>来源缺口</strong>：本期未获取 Nvidia 针对董事会调查的官方新闻稿，第 1 条以彭博、Axios、TechCrunch 三方报道口径表述；OpenAI 官方新闻页在本环境返回 JavaScript 质询页，故模型与产品侧无 OpenAI 一级源条目，改由状态页事件接口取得官方口径。</p>
+<p><strong>已排除</strong>：EP013（2026-11-08 期）与 EP012（2026-11-07 期）已收录条目不重复报道，含 llama.cpp b12182–b12192、LiteLLM v1.108.3 (LTS)、Claude Code 密钥泄露研究、Ocient C 轮融资、中期选举与数据中心审批；llama.cpp b12193 之前、LiteLLM v1.110.0-dev.2 之前、vercel/ai 与 codex 的 alpha 构建均在本窗口之外；Mistral Le Chonk 之外的 Mistral 条目、xAI 官方新闻（最新为 11 月 2 日）、Anthropic 官方 newsroom（最新一条为 9 月 22 日）在窗口内无新增；OpenAI Codex CLI <code>rust-v0.169.0-alpha.3</code> 发布说明仍仅含版本号，按价值门槛未单独立条；Hugging Face 模型流中本窗口的新增条目多为个人账号的零下载测试仓库，未纳入。</p>
+<p><strong>官方宣称与独立验证的区分</strong>：第 2 条的 Zamba2 吞吐数字（11 → 15.1 tok/s、约 35% 提升）与第 7 条的事实得分（2.32 → 2.98）、宣传内容比例（22% → 0.9%）均为发布方口径，正文已标注「官方称」，未表述为已独立验证。</p>
+<p><strong>数量说明</strong>：本窗口含周末时段，官方发布量低于工作日，本期共 10 条完整条目与 5 条线索雷达，未为凑数收录低价值内容。</p>
+</div></section>
+
+</main>
+</div>
+</div>
+</body>
+</html>
