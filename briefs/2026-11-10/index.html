@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-11-10 — 全球人工智能情报日报</title>
+<meta name="description" content="2026-11-10 AI 早报：Anthropic 发布 Claude Fable 5.2 与 Mythos 5.2：每百万输入 token 8 美元、输出 40 美元，fast mode 16/80 美元；官方称输出比 5.1 快最多 30%、Fireworks AI 扩大披露 10 月安全事件影响范围：部分客户数据集、不完整模型权重与账单信息被访问，官方称与「LLMJacking」转卖 token 有关、Claude Code v2.1.321：新增 Claude Fable 5.2 为默认 Fable 模型，并修复 MCP OAuth 重定向时向其他主机发送刷新令牌的问题、llama.cpp 在 11 月 9 日一天内发布 b12212 至 b12236 共 11 个构建：OpenAI 兼容端点修复顶层 json_schema 被静默忽略，另新增外部 PLE 文件加载 等 13 条已核实动态与线索雷达。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Global AI Intelligence Daily · 第 015 期</div>
+  <h1>AI 早报<br>2026-11-10</h1>
+  <p class="sub">多源发现 → 线索筛选 → 原始资料核实 → 连续事件关联 → 重要性排序 → 分类报道。本期覆盖全球人工智能生态在主窗口（11-09 07:00 – 11-10 07:00，Asia/Shanghai）内首次公开的事件。</p>
+  <div class="meta">
+    <span class="chip live">检索执行窗口 <b>2026-11-09 07:00 – 2026-11-10 07:00 CST</b></span>
+    <span class="chip">主窗口 <b>2026-11-09 07:00 → 11-10 07:00</b></span>
+    <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
+  </div>
+</header>
+<figure class="episode-video">
+  <figcaption class="episode-video-label">收看本期</figcaption>
+  <video controls preload="metadata" playsinline src="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-11-10/ai-daily-2026-11-10.mp4">
+    <a href="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2026-11-10/ai-daily-2026-11-10.mp4">下载本期视频（mp4）</a>
+  </video>
+  <p class="episode-video-note">本期视频由 AI 生成，内容以图文版为准。</p>
+</figure>
+<style>
+figure.episode-video {
+  color-scheme: dark;
+  margin: 1rem 0 1.25rem;
+  padding: 0.9rem 1rem 0.75rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 48rem;
+  background: #141820;
+  color: #e8ecf6;
+  border: 1px solid rgba(255,255,255,.14);
+}
+figure.episode-video video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  max-height: 70vh;
+  display: block;
+  margin: 0.4rem 0 0.45rem;
+  background: #000;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.episode-video-label { font-size: 0.8rem; letter-spacing: 0.08em; }
+.episode-video-note { margin: 0; font-size: 0.85rem; line-height: 1.5; }
+@media (max-width: 375px) {
+  figure.episode-video { padding: 0.75rem 0.7rem 0.65rem; }
+}
+</style>
+
+
+<div class="stats">
+  <div class="stat c1"><div class="n">13</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
+  <div class="stat c2"><div class="n">8</div><div class="l">新闻栏目 / SECTIONS</div></div>
+  <div class="stat c3"><div class="n">35</div><div class="l">可追溯来源 / SOURCES</div></div>
+  <div class="stat c4"><div class="n">11</div><div class="l">官方已确认 / CONFIRMED</div></div>
+</div>
+
+<div class="grid">
+
+<nav class="toc">
+  <div class="lbl">目录 / Contents</div>
+  <a href="#ov"><span>00</span>今日概览</a>
+  <a href="#s1"><span>01</span>要闻</a><a href="#s2"><span>02</span>开发生态</a><a href="#s3"><span>03</span>模型发布</a><a href="#s4"><span>04</span>产品应用</a><a href="#s5"><span>05</span>技术与洞察</a><a href="#s6"><span>06</span>行业动态</a><a href="#s9"><span>09</span>后续追踪</a><a href="#s10"><span>10</span>编辑备注</a>
+</nav>
+
+<main>
+
+<section id="ov">
+  <div class="sec-h"><span class="no">00</span><h2>今日概览</h2><span class="cnt">15 条 · 按重要性与栏目排列</span></div>
+  <div class="ov">
+    <a class="ovc" href="#ov"><div class="top"><span class="num">1</span><span class="cat">要闻</span></div><h4>Anthropic 发布 Claude Fable 5.2 与 Mythos 5.2：每百万输入 token 8 美元、输出 40 美元，fast mode 16/80 美元；官方称输出比 5.1 快最多 30%</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">2</span><span class="cat">要闻</span></div><h4>Fireworks AI 扩大披露 10 月安全事件影响范围：部分客户数据集、不完整模型权重与账单信息被访问，官方称与「LLMJacking」转卖 token 有关</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">3</span><span class="cat">开发生态</span></div><h4>Claude Code v2.1.321：新增 Claude Fable 5.2 为默认 Fable 模型（1M 上下文），并修复 MCP OAuth 重定向时向其他主机发送刷新令牌的问题</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">4</span><span class="cat">开发生态</span></div><h4>llama.cpp 在 11 月 9 日一天内发布 b12212 至 b12236 共 11 个构建：OpenAI 兼容端点修复顶层 json_schema 被静默忽略，另新增外部 PLE 文件加载</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">5</span><span class="cat">开发生态</span></div><h4>LiteLLM v1.108.4（LTS 线）：Docker 镜像启用 cosign 签名，回合并 8 项修复到 lts/1.108.x</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">6</span><span class="cat">开发生态</span></div><h4>Open WebUI v0.13.3：自动化任务可调用编码 agent，聊天中可切换终端与工作目录，并修复明文 HTTP 下复制按钮失效</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">7</span><span class="cat">开发生态</span></div><h4>openai-python v3.48.0：beta Responses 识别 gpt-6-rosalind，并为 agent 会话增加流选项</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">8</span><span class="cat">模型发布</span></div><h4>Meta 发布 Muse Ember：输入每百万 token 0.10 美元、输出 0.50 美元，1M 上下文，最大输入 1,048,576 token、最大输出 524,288 token</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">9</span><span class="cat">产品应用</span></div><h4>ChatGPT Enterprise 上线 AWS Marketplace；OpenAI 同日发布 Control Room，用于追踪并停止研究基础设施上的模型工作负载</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">10</span><span class="cat">产品应用</span></div><h4>GitHub Copilot 上线 Claude Fable 5.2</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">11</span><span class="cat">产品应用</span></div><h4>Automattic 发布 Spacefast 部署平台，面向 vibe-coding 应用；Medium 发布写作助手应用 TK</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">12</span><span class="cat">技术与洞察</span></div><h4>Anthropic 称 Fable 5.2 用约 1,000 个 agent 在 30 小时内完成费马大定理证明形式化，并称 Mythos 5.2 的 CVE 复现能力高于 Opus 5.5 与 Mythos 5.1</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">13</span><span class="cat">行业动态</span></div><h4>Anthropic 采购价值 34 亿美元的燃气轮机；SpaceX 在德州 Starbase 公示建设燃气电厂与超算设施，首期投资约 240 亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r1</span><span class="cat">前瞻与传闻</span></div><h4>Meituan（美团）发布 1.6 万亿参数新模型（中文科技媒体，单一来源 · 未核实）<a href="https://tech.ifeng.com/c/8xjHpT7wJEN" target="_blank" rel="noopener">https://tech.ifeng.com/c/8xjHpT7wJEN</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r2</span><span class="cat">前瞻与传闻</span></div><h4>Moonshot 的 Kimi K3.1 Pro 进入 Microsoft Foundry，并发布模型权重（中文科技媒体转述 Microsoft 技术社区博客，单一来源 · 未核实）<a href="https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/moonshot-ai%E2%80%99s-kimi-k3-1-pro-comes-to-microsoft-foundry/4570292" target="_blank" rel="noopener">https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/moonshot-ai%E2%80%99s-kimi-k3-1-pro-comes-to-microsoft-foundry/4570292</a></h4></a>
+  </div>
+</section>
+
+<section id="s1">
+<div class="sec-h"><span class="no">01</span><h2>要闻</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s1-1">
+<div class="a-h"><div class="a-n">1</div><h3>Anthropic 发布 Claude Fable 5.2 与 Mythos 5.2：每百万输入 token 8 美元、输出 40 美元，fast mode 16/80 美元；官方称输出比 5.1 快最多 30%</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Anthropic 官方发布页与 Claude Code 发布说明原文已取</span><span class="tag">2026-11-09 / 11-10 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">Anthropic 于 2026 年 11 月 9 日发布 Claude Fable 5.2 与 Claude Mythos 5.2。官方称两者为同一底层模型，Fable 面向全部用户开放，Mythos 需通过网络安全与生命科学验证项目申请。价格方面，输入每百万 token 8 美元、输出每百万 token 40 美元，可选 fast mode 价格为 16 美元与 80 美元。</p>
+<div class="body">
+<p>官方博客给出的差异点集中在三处。一是速度与价格：官方称相较 Claude Fable 5.1 与 Claude Mythos 5.1，新版本输出速度最高提升 30%，且价格更低；fast mode 可将 token 生成速度再提升最多 2.5 倍。二是能力分布：官方列出的基准中，Fable 5.2 在 FrontierCode 2.0（agentic coding，Xhigh 档）得分 49.1%，官方称为其测试过的已发布模型中最高分；在 Humanity's Last Exam（带工具）上为 74.2%；在 RoboDojo Sim 上为 64.9%，官方称超过同一运行条件下 GPT-6 Astra 的 29.8%。三是安全防护：官方称 Fable 5.2 相对 Fable 5.1 在 claude.ai、Claude Code 与 Cowork 上误拦截次数减少约 55%（网络安全方向约 60%，生物方向约 40%）。</p>
+<p>可用性方面，官方称 Claude Fable 5.2 当日在全部平台上线，包含 AWS、Google Cloud 与 Microsoft Azure，开发者可使用模型 ID <code>claude-fable-5-2</code>；fast mode 可用于 Claude Code、Claude Platform、Google Cloud 上的 Claude 模型与 Microsoft Foundry。Claude Code v2.1.321 的发布说明补充了该模型为 1M 上下文、每 Mtok 输入 8 美元与输出 40 美元、缓存读取 0.20 美元/Mtok。官方同时说明，Anthropic 训练阶段对加速器内核优化与大模型架构改进等能力做了限制，使这两款模型在这些方向上的表现与 Opus 5.5 相当。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Anthropic 官方发布页：</span><a href="https://www.anthropic.com/claude-fable-and-mythos-5-2" target="_blank" rel="noopener">https://www.anthropic.com/claude-fable-and-mythos-5-2</a></div>
+<div class="lk"><span class="lt">Claude Code v2.1.321 发布说明（含模型 ID、上下文与价格）：</span><a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.321" target="_blank" rel="noopener">https://github.com/anthropics/claude-code/releases/tag/v2.1.321</a></div>
+<div class="lk"><span class="lt">价格与速度报道（The New Stack，经 Techmeme 聚合）：</span><a href="https://www.techmeme.com/261109/p40" target="_blank" rel="noopener">https://www.techmeme.com/261109/p40</a></div>
+</div>
+</article>
+<article id="s1-2">
+<div class="a-h"><div class="a-n">2</div><h3>Fireworks AI 扩大披露 10 月安全事件影响范围：部分客户数据集、不完整模型权重与账单信息被访问，官方称与「LLMJacking」转卖 token 有关</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Fireworks AI 官方安全公告原文已取</span><span class="tag">2026-11-09 / 11-10 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">Fireworks AI 于 2026 年 11 月 9 日更新其 10 月安全事件公告，称此前只知道被访问的是 Fireworks 自身存储的密钥（如评测作业使用），此后发现部分账号的账单与账户信息、以及部分账号的密钥、数据集和不完整模型权重也受影响。官方称证据指向一个以牟利为目的的网络犯罪团伙，其手法是把非法获取的大语言模型 token 卖给出价方路由网关，即「LLMJacking」。</p>
+<div class="body">
+<p>官方公告称，事件响应中已通知执法部门，并聘请 Palo Alto Networks Unit 42 协助取证。公告称第三方云服务商托管的 Fireworks 研发机器在 10 月 23 日发生安全事件，10 月 24 日该未授权第三方借此到达 Fireworks 开发机器并运行非授权工作负载，造成额外客户数据影响；Fireworks 当日即检测到该活动，截至 10 月 25 日未再发现针对客户所使用平台的成功未授权访问。</p>
+<p>受影响的内部应用可访问的信息类别包括：资源元数据（Fireworks 资源标识、显示名、描述、创建时间等）；账单信息（账单与收货地址、发票与支付记录、账户余额与额度消耗），官方明确说明不存储支付卡号、支付卡号未受影响；以及部分客户的模型权重与数据集，其中被访问的是不完整模型权重与数据集的子集。官方称未检测到 Inference、Training SDK 与 Nexus 受到影响，这三者默认均为零数据保留（ZDR）。处置方面，官方已吊销并更换凭据与服务账号、收紧网络隔离、复核数据存储与分析系统访问控制；调查期间已停用 Batch Inference 与数据集训练使用的自助数据集上传与下载，Training SDK 仍可用且为 ZDR。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Fireworks AI 官方安全公告（2026-11-09 更新）：</span><a href="https://fireworks.ai/security/bulletins/october-2026-security-incident-update" target="_blank" rel="noopener">https://fireworks.ai/security/bulletins/october-2026-security-incident-update</a></div>
+<div class="lk"><span class="lt">Fireworks AI 安全公告列表：</span><a href="https://fireworks.ai/security/bulletins" target="_blank" rel="noopener">https://fireworks.ai/security/bulletins</a></div>
+<div class="lk"><span class="lt">Forbes 报道（Anna Tong，经 Techmeme 聚合）：</span><a href="https://www.forbes.com/sites/annatong/2026/11/09/fireworks-cyberattack-exposes-customer-data-and-ai-models-as-fallout-widens/" target="_blank" rel="noopener">https://www.forbes.com/sites/annatong/2026/11/09/fireworks-cyberattack-exposes-customer-data-and-ai-models-as-fallout-widens/</a></div>
+</div>
+</article>
+</section>
+<section id="s2">
+<div class="sec-h"><span class="no">02</span><h2>开发生态</h2><span class="cnt">5 条 · 按重要性排列</span></div>
+<article id="s2-1">
+<div class="a-h"><div class="a-n">3</div><h3>Claude Code v2.1.321：新增 Claude Fable 5.2 为默认 Fable 模型（1M 上下文），并修复 MCP OAuth 重定向时向其他主机发送刷新令牌的问题</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-09 / 11-10 首次公开</span></div>
+<p class="lede">anthropics/claude-code 于 2026 年 11 月 9 日 19:22 UTC 发布 v2.1.321。发布说明首条即新增 Claude Fable 5.2（<code>claude-fable-5-2</code>）并将其设为默认 Fable 模型，标注 1M 上下文、每 Mtok 输入 8 美元与输出 40 美元、缓存读取 0.20 美元/Mtok；同批修复了 MCP OAuth 请求在服务器重定向时把刷新令牌等机密发送到另一主机的问题。</p>
+<div class="body">
+<p>除模型接入外，本次发布还包含若干行为变更与修复。功能方面，新增 <code>claude remote-control --settings &lt;file&gt;</code>，该设置文件会应用到它启动的每个会话；文件变更后需重启 <code>claude remote-control</code> 才会有新会话启动。安全方面，修复了只读 Bash 命令在沙箱外执行且未弹权限提示的情形，修复了 Bash 权限检查把文件写入判到错误目录而未提示的情形，以及 deny 规则与受保护文件提示未覆盖 <code>cp</code> / <code>mv</code> 写入目标文件的问题。行为方面，修复了 <code>/config</code> 在新会话以 auto 模式启动时把 Manual 显示为默认权限模式的问题，并修复了 <code>/compact</code> 在 Web 与移动端 Remote Control 中显示两次的问题。官方还修复了 <code>NotebookEdit</code> 在未指定单元格时删除或覆盖首个单元格的问题，以及在 UNC 共享、WSL 目录、<code>/net</code> 挂载等网络路径上的 Edit 与 NotebookEdit 行为差异。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Claude Code v2.1.321 发布说明：</span><a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.321" target="_blank" rel="noopener">https://github.com/anthropics/claude-code/releases/tag/v2.1.321</a></div>
+<div class="lk"><span class="lt">Claude Code 仓库：</span><a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener">https://github.com/anthropics/claude-code</a></div>
+</div>
+</article>
+<article id="s2-2">
+<div class="a-h"><div class="a-n">4</div><h3>llama.cpp 在 11 月 9 日一天内发布 b12212 至 b12236 共 11 个构建：OpenAI 兼容端点修复顶层 json_schema 被静默忽略，另新增外部 PLE 文件加载</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-09 / 11-10 首次公开</span></div>
+<p class="lede">llama.cpp 于 2026 年 11 月 9 日一天内连续发布 b12212 至 b12236 共 11 个构建。其中 b12229 修复 OpenAI 兼容 chat completions 端点：<code>response_format</code> 直接以 <code>schema</code> 提供时会被静默忽略，生成过程不受约束；b12233 支持加载外部 PLE 文件。</p>
+<div class="body">
+<p>b12229（#28697）说明，旧实现只在 schema 嵌套于 <code>response_format.json_schema.schema</code> 时才应用；按服务器 README 文档说明直接在 <code>response_format.schema</code> 提供时会被忽略，导致生成不受约束。本次改动按 <code>response_format</code> 是否含 <code>json_schema</code> 键来选择 schema 来源，错误信息中补充 <code>json_schema</code>，并在 README 中说明 OpenAI 包装形式。</p>
+<p>其余构建覆盖后端正确性与新能力。b12220（#30711）把 Metal 的 <code>ggml_tri</code> 从「与 0/1 比较结果相乘」改为 select，原因是相乘会把三角区域外的 ±inf 变成 NaN，而 CPU 内核写入的是普通的 0；改动同时新增 <code>test_tri_special</code> 用例覆盖四种三角类型。b12221（#31662）修复 Metal FA 输出缓冲区的越界写。b12224（#31419）停止上传没有被读取的输入。b12228（#30712）为 TRI 补上反向传播，<code>GGML_OP_TRI</code> 此前在反向 switch 中没有分支，含该算子的可训练图会直接中止。b12233（#31185）支持加载外部 PLE 文件：<code>--ple</code> 成为 <code>--shard</code> 的别名，两者都接受逗号分隔列表且可多次给出，编号分片仍会自动发现并严格校验。b12223（#31449）为 Granite 各架构附加 NVFP4 权重 scale。b12212（#31905）与 b12230（#31824）为 IBM 的 ggml-zdnn 后端修复发布二进制未检测后端库、以及接受非 zdnn 张量并在每次算子后失效计算张量。b12219（#31935）为 OpenCL 引入 climits。b12236（#31964）新增 <code>mtmd_helper_resampler</code>。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">llama.cpp Releases：</span><a href="https://github.com/ggml-org/llama.cpp/releases" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases</a></div>
+<div class="lk"><span class="lt">b12229（response_format json_schema 修复）：</span><a href="https://github.com/ggml-org/llama.cpp/releases/tag/b12229" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases/tag/b12229</a></div>
+<div class="lk"><span class="lt">b12233（外部 PLE 文件加载）：</span><a href="https://github.com/ggml-org/llama.cpp/releases/tag/b12233" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases/tag/b12233</a></div>
+<div class="lk"><span class="lt">b12220（Metal ggml_tri 改用 select）：</span><a href="https://github.com/ggml-org/llama.cpp/releases/tag/b12220" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases/tag/b12220</a></div>
+</div>
+</article>
+<article id="s2-3">
+<div class="a-h"><div class="a-n">5</div><h3>LiteLLM v1.108.4（LTS 线）：Docker 镜像启用 cosign 签名，回合并 8 项修复到 lts/1.108.x</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-09 / 11-10 首次公开</span></div>
+<p class="lede">BerriAI/litellm 于 2026 年 11 月 9 日 23:00 UTC 发布 v1.108.4。发布说明的主线是镜像供应链：所有 LiteLLM Docker 镜像开始用 cosign 签名，本版使用 commit <code>e82a3c6</code> 引入的公钥，官方给出按固定 commit 哈希与按版本标签两种校验方式。</p>
+<div class="body">
+<p>官方给出的校验命令为 <code>cosign verify --key &lt;公钥地址&gt; ghcr.io/berriai/litellm:v1.108.4</code>，并说明 commit 哈希方式最强、标签方式依赖仓库的标签保护规则。变更清单为 8 项往 lts/1.108.x 线的回合：回合并视频相关 PR #48490 与 #44614；回合并 SDK 修复 #45961；回合并 Bedrock 的 <code>guardrailConfig</code> 透传守卫与集成测试修复 #47429；回合并 Anthropic 加密推理往返 #49076；回合并 Vertex AI 上 Anthropic 行格式的 Claude batches #45715；回合并 Bedrock #50073；回合并 <code>/v1/messages</code> Responses 桥接的后台拒绝 #49076 之外的后台拒绝处理；以及把 litellm 版本提升到 1.108.4。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">LiteLLM v1.108.4 发布说明：</span><a href="https://github.com/BerriAI/litellm/releases/tag/v1.108.4" target="_blank" rel="noopener">https://github.com/BerriAI/litellm/releases/tag/v1.108.4</a></div>
+<div class="lk"><span class="lt">LiteLLM 仓库：</span><a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener">https://github.com/BerriAI/litellm</a></div>
+</div>
+</article>
+<article id="s2-4">
+<div class="a-h"><div class="a-n">6</div><h3>Open WebUI v0.13.3：自动化任务可调用编码 agent，聊天中可切换终端与工作目录，并修复明文 HTTP 下复制按钮失效</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-09 / 11-10 首次公开</span></div>
+<p class="lede">open-webui 于 2026 年 11 月 8 日 23:48 UTC 发布 v0.13.3。主要新增是自动化编辑器可以指定终端与工作目录并选择该终端上可用的编码 agent，定时运行会使用保存的终端与目录，并在启动前检查终端与 agent 是否仍可用。</p>
+<div class="body">
+<p>新增功能还包括：聊天中发出消息后可更换终端或工作目录，临时聊天同样适用，回复生成过程中两个控件保持禁用。官方同时记录了一组回退与限制：连接终端不再把其编码 agent 加入 Admin Models、基础模型选择器、Arena 候选、任务模型设置、组默认值、子 agent 设置、频道提及或 Playground，笔记也不再为生成标题选择终端 agent；agent 不能被保存或导入为自定义模型，其聊天菜单也不再提供 Edit。修复部分包含：切换聊天终端后 Files 标签跟随该终端更新（#33954）、在局域网明文 HTTP 地址下复制评论链接、搜索链接、共享聊天链接、webhook URL、聊天 ID、Git 分支名、commit 与表格单元格恢复可用（#33939）、使用剪贴板占位符的提示词在浏览器拦截剪贴板时改为插入并说明无法读取、以及在 Provider 设为 <code>llama.cpp</code> 时 DeepSeek 思考模式不再报缺少推理错误（#33950）。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">open-webui v0.13.3 发布说明：</span><a href="https://github.com/open-webui/open-webui/releases/tag/v0.13.3" target="_blank" rel="noopener">https://github.com/open-webui/open-webui/releases/tag/v0.13.3</a></div>
+<div class="lk"><span class="lt">open-webui 仓库：</span><a href="https://github.com/open-webui/open-webui" target="_blank" rel="noopener">https://github.com/open-webui/open-webui</a></div>
+</div>
+</article>
+<article id="s2-5">
+<div class="a-h"><div class="a-n">7</div><h3>openai-python v3.48.0：beta Responses 识别 gpt-6-rosalind，并为 agent 会话增加流选项</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-09 / 11-10 首次公开</span></div>
+<p class="lede">openai/openai-python 于 2026 年 11 月 9 日 16:12 UTC 发布 v3.48.0。两条功能变更分别是：为 agent 会话增加流选项（#4251），以及在 beta Responses 中识别 <code>gpt-6-rosalind</code>（#4257）。</p>
+<div class="body">
+<p>其余条目属于维护性变更：保留 agent 调度支持的 chore（#4255）、锁定 multidict 由 6.9.1 升至 7.1.0（#4259）、开发依赖组 5 项更新（#4258）、types-requests 由 2.33.0.20261006 升至 2.33.0.20261030（#4260），以及整合 AGENTS.md 文档（#4254）。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">openai-python v3.48.0 发布说明：</span><a href="https://github.com/openai/openai-python/releases/tag/v3.48.0" target="_blank" rel="noopener">https://github.com/openai/openai-python/releases/tag/v3.48.0</a></div>
+<div class="lk"><span class="lt">openai-python 仓库：</span><a href="https://github.com/openai/openai-python" target="_blank" rel="noopener">https://github.com/openai/openai-python</a></div>
+</div>
+</article>
+</section>
+<section id="s3">
+<div class="sec-h"><span class="no">03</span><h2>模型发布</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s3-1">
+<div class="a-h"><div class="a-n">8</div><h3>Meta 发布 Muse Ember：输入每百万 token 0.10 美元、输出 0.50 美元，1M 上下文，最大输入 1,048,576 token、最大输出 524,288 token</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · Meta 官方发布页 / Google Cloud 官方模型文档 / OpenRouter 接口</span><span class="tag">2026-11-09 / 11-10 首次公开</span></div>
+<p class="lede">Meta 超级智能实验室于 2026 年 11 月 9 日发布 Muse Ember，Meta 称其为该实验室至今最轻量、成本效率最高的模型，定位是「复杂推理执行与 agent 全天重复的工作」：工具调用、编码子任务、路由、信息抽取与长文档解析。据 TechCrunch 报道，Ember 的输入价格为每百万 token 0.10 美元；OpenRouter 的模型接口记录为输入每百万 token 0.10 美元、输出每百万 token 0.50 美元，上下文 1,048,576 token。</p>
+<div class="body">
+<p>Meta 在公告中的表述是：该模型为高吞吐量的 agent 场景设计，通常与更大的 Muse Wonder 搭配使用——重模型先确定处理规则，再由轻量模型把规则应用到成千上万条用例上，官方概括为「Muse Wonder plans, Muse Ember handles the volume」。官方还称 Ember 跨文本、图像与音频训练，可直接读截图、图表与扫描文档，或处理语音备忘、会议录音与视频，无需额外模型。按 TechCrunch 报道，Meta 用 Artificial Analysis 的综合基准分数说明 Ember 的单任务成本，并称其在成本与智能程度上优于 Anthropic 的 Haiku 与 OpenAI 的 Luna，且与 DeepSeek V4.1 Flash、GLM 5.3 Flash 等开源竞争者成本相当。</p>
+<p>Google Cloud 官方文档已收录该模型：模型 ID 为 <code>meta/muse-ember-1.0</code>，上线阶段为 Preview，支持文本与图像输入、文本输出，最大输入 token 1,048,576、最大输出 token 524,288，支持函数调用、结构化输出与推理，按量付费可用。OpenRouter 模型接口给出的 <code>meta/muse-ember</code> 定价为输入每百万 token 0.10 美元、输出每百万 token 0.50 美元，上下文 1,048,576 token；同接口下 <code>meta/muse-wonder</code> 为输入 4 美元、输出 20 美元每百万 token。Muse Ember 是 Meta Muse 品牌下的第四款模型，此前依次为 4 月发布的中端 Spark、8 月发布的 Spark 开源孪生模型 Glimmer 与 10 月发布的前沿模型 Wonder。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Meta AI Research 官方发布页： （本次采集环境对该域名的 DNS 解析不可达，未能自动核验，需人工打开确认</span><a href="https://research.meta.ai/blog/muse-ember" target="_blank" rel="noopener">https://research.meta.ai/blog/muse-ember</a></div>
+<div class="lk"><span class="lt">Google Cloud 官方模型文档：</span><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/meta/muse-ember-1-0" target="_blank" rel="noopener">https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/meta/muse-ember-1-0</a></div>
+<div class="lk"><span class="lt">OpenRouter 模型接口（定价与上下文）：</span><a href="https://openrouter.ai/meta/muse-ember" target="_blank" rel="noopener">https://openrouter.ai/meta/muse-ember</a></div>
+<div class="lk"><span class="lt">TechCrunch 报道（Russell Brandom）：</span><a href="https://techcrunch.com/2026/11/09/meta-releases-muse-ember-a-new-lightweight-model-for-agent-execution/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/09/meta-releases-muse-ember-a-new-lightweight-model-for-agent-execution/</a></div>
+</div>
+</article>
+</section>
+<section id="s4">
+<div class="sec-h"><span class="no">04</span><h2>产品应用</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s4-1">
+<div class="a-h"><div class="a-n">9</div><h3>ChatGPT Enterprise 上线 AWS Marketplace；OpenAI 同日发布 Control Room，用于追踪并停止研究基础设施上的模型工作负载</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · OpenAI 官方新闻页原文已取</span><span class="tag">2026-11-09 / 11-10 首次公开</span></div>
+<p class="lede">OpenAI 官方新闻页于 2026 年 11 月 9 日 19:00 UTC 发布 ChatGPT Enterprise 现已在 AWS Marketplace 上线。同日 13:00 UTC，OpenAI 发布 Control Room，官方描述其为一套用于跨研究基础设施追踪并停止模型工作负载的集中系统。</p>
+<div class="body">
+<p>ChatGPT Enterprise 进入 AWS Marketplace 属于企业采购渠道变更：企业客户可在 AWS 侧完成订阅与计费流程。同日的 Control Room 属于研究基础设施侧的能力说明，官方将其定位为「一套追踪并停止模型工作负载的集中系统」，指向对内部研究算力调度的集中管控。</p>
+<p>本期未从官方页面取得 Control Room 的具体功能清单与接入方式，因此这些参数不予补写。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">ChatGPT Enterprise 上线 AWS Marketplace：</span><a href="https://openai.com/index/chatgpt-enterprise-aws-marketplace" target="_blank" rel="noopener">https://openai.com/index/chatgpt-enterprise-aws-marketplace</a></div>
+<div class="lk"><span class="lt">Control Room 官方说明：</span><a href="https://openai.com/index/control-room" target="_blank" rel="noopener">https://openai.com/index/control-room</a></div>
+</div>
+</article>
+<article id="s4-2">
+<div class="a-h"><div class="a-n">10</div><h3>GitHub Copilot 上线 Claude Fable 5.2</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub 官方 Changelog 原文已取</span><span class="tag">2026-11-09 / 11-10 首次公开</span></div>
+<p class="lede">GitHub 官方 Changelog 于 2026 年 11 月 9 日发布 Claude Fable 5.2 in GitHub Copilot。Anthropic 同日发布 Fable 5.2 与 Mythos 5.2，GitHub Copilot 成为该模型的首批接入渠道之一。</p>
+<div class="body">
+<p>Changelog 标题明确为 Claude Fable 5.2 in GitHub Copilot。本期未从该 Changelog 页面取得具体的模型选择路径、可用套餐与限制说明，故这些细节不予补写；模型的上下文长度与价格以 Anthropic 官方发布页与 Claude Code 发布说明为准（见第 1 条）。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">GitHub Changelog 原文：</span><a href="https://github.blog/changelog/2026-11-09-claude-fable-5-5-in-github-copilot" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-09-claude-fable-5-5-in-github-copilot</a></div>
+<div class="lk"><span class="lt">Anthropic 官方发布页：</span><a href="https://www.anthropic.com/claude-fable-and-mythos-5-2" target="_blank" rel="noopener">https://www.anthropic.com/claude-fable-and-mythos-5-2</a></div>
+</div>
+</article>
+<article id="s4-3">
+<div class="a-h"><div class="a-n">11</div><h3>Automattic 发布 Spacefast 部署平台，面向 vibe-coding 应用；Medium 发布写作助手应用 TK</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · TechCrunch 原创报道</span><span class="tag">2026-11-09 / 11-10 首次公开</span></div>
+<p class="lede">Automattic 于 2026 年 11 月 9 日发布 Spacefast，一个用于部署 vibe-coding 应用的平台，TechCrunch 报道称其目标是在这一变化中的互联网环境中与 Lovable 等同类产品竞争。同日 Medium 发布写作助手应用 TK，把 AI 辅助直接放进写作流程。</p>
+<div class="body">
+<p>TechCrunch 对 Automattic 的描述是「在互联网环境变化的背景下推出部署 vibe-coding 应用的平台」，并称 Automattic 的目标竞争对手包括 Lovable。对 Medium 的 TK 应用，报道提到该应用把 AI 辅助直接纳入写作过程，而同期关于 AI 在出版中角色的争议仍在持续。本期未从官方来源取得 Spacefast 的定价、上架渠道与 TK 的功能清单，因此这些细节不予补写。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch：Automattic 发布 Spacefast：</span><a href="https://techcrunch.com/2026/11/09/automattic-debuts-a-platform-to-deploy-vibe-coding-apps-amid-a-changing-internet/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/09/automattic-debuts-a-platform-to-deploy-vibe-coding-apps-amid-a-changing-internet/</a></div>
+<div class="lk"><span class="lt">TechCrunch：Medium 的 TK 应用：</span><a href="https://techcrunch.com/2026/11/09/mediums-new-tk-app-brings-ai-assistance-directly-into-the-writing-process/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/09/mediums-new-tk-app-brings-ai-assistance-directly-into-the-writing-process/</a></div>
+</div>
+</article>
+</section>
+<section id="s5">
+<div class="sec-h"><span class="no">05</span><h2>技术与洞察</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s5-1">
+<div class="a-h"><div class="a-n">12</div><h3>Anthropic 称 Fable 5.2 用约 1,000 个 agent 在 30 小时内完成费马大定理证明形式化，并称 Mythos 5.2 的 CVE 复现能力高于 Opus 5.5 与 Mythos 5.1</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Anthropic 官方发布页原文已取（官方自述，未见独立验证）</span><span class="tag">2026-11-09 / 11-10 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">Anthropic 在官方发布页中给出两项技术声明。其一，官方称由约 1,000 个 Fable 5.2 agent 组成的团队在 30 小时内完成了费马大定理证明的形式化，而首次形式化（由未发布的研究版本 Claude 完成）耗时 11 天。其二，官方称在内部的 CVE Rediscovery 评测中，Claude Mythos 5.2 发现的漏洞比 Opus 5.5 多 10.2%、比 Mythos 5.1 多 14.4%。</p>
+<div class="body">
+<p>形式化方面，官方说明 Fable 5.2 从最少提示出发，自行建立协作方式，未使用数学参考资料，只用一份中间定理陈述清单来衡量进展；官方称其动作 token 用量为首次形式化的三分之一，证明长度短 7 倍。官方同时给出对照：Opus 5.5 在相同的 1,000 agent 配置下，18 小时完成 26%，30 小时后几乎没有更多进展。安全侧，官方称 2026 年 10 月针对 1,829 个 CVE 的测试中，Mythos 5.2 在每个 effort 档位都优于 Mythos 5.1 与 Opus 5.5。</p>
+<p>这些均为发布方自述结果，尚未见独立复现，本期按官方口径表述，不作为已独立验证的结论。相关基准的第三方评测另有报道可对照：CNBC 与 VentureBeat 等媒体同日报道了 Anthropic 的相关发布。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Anthropic 官方发布页（科学与工程、数学形式化、CVE Rediscovery 章节）：</span><a href="https://www.anthropic.com/claude-fable-and-mythos-5-2" target="_blank" rel="noopener">https://www.anthropic.com/claude-fable-and-mythos-5-2</a></div>
+<div class="lk"><span class="lt">TechCrunch 报道：</span><a href="https://techcrunch.com/2026/11/09/anthropic-releases-new-mythos-and-fable-models-amid-rsi-concerns/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/09/anthropic-releases-new-mythos-and-fable-models-amid-rsi-concerns/</a></div>
+</div>
+</article>
+</section>
+<section id="s6">
+<div class="sec-h"><span class="no">06</span><h2>行业动态</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s6-1">
+<div class="a-h"><div class="a-n">13</div><h3>Anthropic 采购价值 34 亿美元的燃气轮机；SpaceX 在德州 Starbase 公示建设燃气电厂与超算设施，首期投资约 240 亿美元</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · TechCrunch 原创报道与彭博社（经 Techmeme 聚合）</span><span class="tag">2026-11-09 / 11-10 首次公开</span></div>
+<p class="lede">Anthropic 被报道已采购价值 34 亿美元的燃气轮机，加入科技公司自建电源的行列。据彭博社报道，SpaceX 计划在德州 Starbase 建设燃气电厂与超算设施，依据一份公示听证文件，首期投资规模约 240 亿美元。</p>
+<div class="body">
+<p>TechCrunch 对 Anthropic 一事的表述是：Anthropic 在一笔可能让其产生购买后悔的交易中买入了价值数十亿美元的燃气轮机。这条线索与本期更早的报道同源——2026-10-28 期早报已记录据《金融时报》报道 Anthropic 向 OnePWR 采购 1.7GW 燃气发电机承诺、金额 34 亿美元（经 Techmeme 聚合），本期为该事件的进展补充：金额与主体由另一家媒体报道。</p>
+<p>SpaceX 一侧，彭博社援引公示听证文件称，SpaceX 计划在其位于得州的公司城 Starbase 建设、持有并运营燃气电厂与超算设施。相关公示文件由得州 Starbase 市发布，文件主题为税收减免听证。本期未从公示文件原文逐项核对装机容量与分期结构，故不补写相关数字。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch：Anthropic 采购 34 亿美元燃气轮机：</span><a href="https://techcrunch.com/2026/11/09/anthropic-joins-ais-natural-gas-frenzy-buys-3-4b-worth-of-turbines/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/09/anthropic-joins-ais-natural-gas-frenzy-buys-3-4b-worth-of-turbines/</a></div>
+<div class="lk"><span class="lt">Techmeme 聚合页（彭博社报道）：</span><a href="https://www.techmeme.com/261109/p41" target="_blank" rel="noopener">https://www.techmeme.com/261109/p41</a></div>
+<div class="lk"><span class="lt">Starbase 市公示听证通知：</span><a href="https://cdn.prod.website-files.com/67fcab04e05680343de9ea4e/6aee00848f7bbe0cdee604da_6aee005cf2854ef8fc7713ed_Public_Hearing_Notice_Tax_Abatement_Dec9_2026.pdf" target="_blank" rel="noopener">https://cdn.prod.website-files.com/67fcab04e05680343de9ea4e/6aee00848f7bbe0cdee604da_6aee005cf2854ef8fc7713ed_Public_Hearing_Notice_Tax_Abatement_Dec9_2026.pdf</a></div>
+</div>
+</article>
+</section>
+
+
+<section id="s9">
+<div class="sec-h"><span class="no">09</span><h2>后续追踪</h2><span class="cnt">连续事件</span></div>
+</section>
+<section id="s10">
+<div class="sec-h"><span class="no">10</span><h2>编辑备注</h2><span class="cnt">采集限制与口径</span></div>
+<div class="body">
+<p>1. <strong>本期真实检索时间窗</strong>：2026-11-09 07:00 至 2026-11-10 07:00（Asia/Shanghai），共 24 小时；个别条目（如第 13 条 Anthropic 燃气轮机）回溯至 72 小时内的早期报道，并已在条目内说明来源关系。</p>
+<p>2. <strong>官方宣称与独立验证的区分</strong>：第 1、8、12 条中的基准分数、成本对比与「30 小时完成形式化」等均为发布方自述，本期按「官方称」表述，未写成已独立验证的事实。第 8 条的 Muse Ember 定价与定位来自 Meta 公告经 TechCrunch 转述，1M 上下文与 token 上限以 Google Cloud 官方模型文档为准。</p>
+<p>3. <strong>未补写的参数</strong>：Muse Ember 的参数量、输出 token 价格、许可协议与权重下载入口，Anthropic 官方发布页与 Google Cloud 文档均未给出，本期不予推测；SpaceX 公示文件的装机容量与分期结构未从原文逐项核对；Spacefast 与 TK 的定价与功能清单未取得官方原文。</p>
+<p>4. <strong>单一来源条目</strong>：概览「前瞻与传闻」小节的两条线索均为单一来源（中文科技媒体与 Microsoft 技术社区博客转述），未取得一手公告，按例程 13.4 只保留标题、来源链接与标注，不展开细节、不写入推断。</p>
+<p>5. <strong>来源级别分布</strong>：本期共 13 条完整条目，其中 8 条含官方一手来源（Anthropic 官方发布页、Fireworks AI 官方安全公告、GitHub 官方 Changelog、OpenAI 官方新闻页、Google Cloud 官方模型文档、GitHub Release 发布说明、Starbase 市公示文件），其余为专业媒体报道经 Techmeme 聚合或直接引用。</p>
+</div></section>
+
+</main>
+</div>
+</div>
+</body>
+</html>
