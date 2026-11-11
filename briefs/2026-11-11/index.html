@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-11-11 — 全球人工智能情报日报</title>
+<meta name="description" content="2026-11-11 AI 早报：Anthropic 更新 IPO 文件：拟发行 8.25 亿股 A 类股，价格区间 70 至 78 美元，区间上限对应全面摊薄估值 1.404 万亿美元，净募资预计 846 亿至 937 亿美元、纽约州 RAISE Act 进入执行期：注册门户已开放，OpenAI 与 Anthropic 等前沿开发商须在 2027 年 1 月 1 日前注册，单次违规罚则最高 100 万美元、Git 修复 CVE-2026-111760：递归克隆恶意仓库可在本机执行攻击者代码，修复版本为 2.56.1 及 2.50.2 至 2.55.1 系列补丁、Claude Code v2.1.322：在 Vertex 的 global、us、eu 区域新增 fast mode，Vertex 拒绝时回落标准速度 等 18 条已核实动态与线索雷达。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Global AI Intelligence Daily · 第 016 期</div>
+  <h1>AI 早报<br>2026-11-11</h1>
+  <p class="sub">多源发现 → 线索筛选 → 原始资料核实 → 连续事件关联 → 重要性排序 → 分类报道。本期覆盖全球人工智能生态在主窗口（11-10 07:00 – 11-11 07:00，Asia/Shanghai）内首次公开的事件。</p>
+  <div class="meta">
+    <span class="chip live">检索执行窗口 <b>2026-11-10 07:00 – 2026-11-11 07:00 CST</b></span>
+    <span class="chip">主窗口 <b>2026-11-10 07:00 → 11-11 07:00</b></span>
+    <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat c1"><div class="n">18</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
+  <div class="stat c2"><div class="n">8</div><div class="l">新闻栏目 / SECTIONS</div></div>
+  <div class="stat c3"><div class="n">26</div><div class="l">可追溯来源 / SOURCES</div></div>
+  <div class="stat c4"><div class="n">18</div><div class="l">官方已确认 / CONFIRMED</div></div>
+</div>
+
+<div class="grid">
+
+<nav class="toc">
+  <div class="lbl">目录 / Contents</div>
+  <a href="#ov"><span>00</span>今日概览</a>
+  <a href="#s1"><span>01</span>要闻</a><a href="#s2"><span>02</span>开发生态</a><a href="#s3"><span>03</span>模型发布</a><a href="#s4"><span>04</span>产品应用</a><a href="#s5"><span>05</span>技术与洞察</a><a href="#s6"><span>06</span>行业动态</a><a href="#s9"><span>09</span>后续追踪</a><a href="#s10"><span>10</span>编辑备注</a>
+</nav>
+
+<main>
+
+<section id="ov">
+  <div class="sec-h"><span class="no">00</span><h2>今日概览</h2><span class="cnt">20 条 · 按重要性与栏目排列</span></div>
+  <div class="ov">
+    <a class="ovc" href="#ov"><div class="top"><span class="num">1</span><span class="cat">要闻</span></div><h4>Anthropic 更新 IPO 文件：拟发行 8.25 亿股 A 类股，价格区间 70 至 78 美元，区间上限对应全面摊薄估值 1.404 万亿美元，净募资预计 846 亿至 937 亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">2</span><span class="cat">要闻</span></div><h4>纽约州 RAISE Act 进入执行期：注册门户已开放，OpenAI 与 Anthropic 等前沿开发商须在 2027 年 1 月 1 日前注册，单次违规罚则最高 100 万美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">3</span><span class="cat">要闻</span></div><h4>Git 修复 CVE-2026-111760：递归克隆恶意仓库可在本机执行攻击者代码，修复版本为 2.56.1 及 2.50.2 至 2.55.1 系列补丁</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">4</span><span class="cat">开发生态</span></div><h4>Claude Code v2.1.322：在 Vertex 的 global、us、eu 区域新增 fast mode，Vertex 拒绝时回落标准速度</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">5</span><span class="cat">开发生态</span></div><h4>openai-python v3.49.0：新增类型化的异步 function tools，修复麦克风录音未编码为合法 PCM WAV</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">6</span><span class="cat">开发生态</span></div><h4>LiteLLM 发布 1.108.5（LTS）与 v1.109.0：分别修复无密钥工作负载身份 401、并行工具调用索引恒为 0 等问题，全部镜像继续用 cosign 签名</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">7</span><span class="cat">开发生态</span></div><h4>LangChain 发布 1.4.10 与 langchain-core 1.7.7：修复 middleware 内部模型调用混入 messages 流、限制 load() 嵌套深度</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">8</span><span class="cat">开发生态</span></div><h4>llama.cpp 在窗口内连续发布 b12252 至 b12261 共 10 个构建：新增 kimi K3.1 视觉支持、修复 JSON Schema allOf 与工具参数控制字符</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">9</span><span class="cat">模型发布</span></div><h4>Google 发布 Gemini 4 Carbon：API 定价与 Gemini 4 Argon 相同（每百万输入 token 2 美元、输出 10 美元），官方称在 CursorBench 4.0、Perplexity WANDR、Zapier AutomationBench 上排名第一</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">10</span><span class="cat">模型发布</span></div><h4>GitHub Copilot 上线 Gemini 4 Carbon：官方称面向复杂编码、agentic 与推理任务，侧重安全代码生成</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">11</span><span class="cat">产品应用</span></div><h4>Anthropic 发布 Claude Meetings、Claude Whiteboards 与 Claude Sheets：Claude 以可见参会者身份进入视频会议</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">12</span><span class="cat">产品应用</span></div><h4>Adobe 在 MAX 大会为 Photoshop、Premiere、Illustrator、InDesign 扩充 AI 功能，并发布供外部聊天机器人调用的 MCP</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">13</span><span class="cat">产品应用</span></div><h4>Google Cloud 发布 Gemini for healthcare：面向临床数据打通与流程自动化</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">14</span><span class="cat">技术与洞察</span></div><h4>NVIDIA 将 OpenShell 捐赠给 CNCF：作为 Sandbox 项目治理，官方称上线不到一年已有数十万次贡献</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">15</span><span class="cat">技术与洞察</span></div><h4>CISA 将 GPUStack、FreeSWITCH、OpenSSH、IBM Aspera Faspex 四个漏洞列入 KEV 目录，均有在野利用证据</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">16</span><span class="cat">行业动态</span></div><h4>CoreWeave 第三季度营收 36.6 亿美元、同比增长 168%，营收积压 1325 亿美元，并上调 2026 年指引</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">17</span><span class="cat">行业动态</span></div><h4>OpenAI 收购旅行创业公司 Odessia，创始人 Francis Davidson 加入</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">18</span><span class="cat">行业动态</span></div><h4>NVIDIA 拟在 Anthropic 上市后投资约 100 亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r1</span><span class="cat">前瞻与传闻</span></div><h4>Anthropic 上市后投资人预期估值可能上调至 1.5 万亿美元或更高（金融时报报道，经 Techmeme 聚合；单一来源 · 未核实）<a href="https://www.techmeme.com/261110/p60" target="_blank" rel="noopener">https://www.techmeme.com/261110/p60</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r2</span><span class="cat">前瞻与传闻</span></div><h4>Anthropic 股价区间上限对应全面摊薄估值 1.404 万亿美元（科技媒体口径 · 未核实）<a href="https://techcrunch.com/2026/11/10/anthropic-sets-ipo-price-range-of-70-to-78-per-share-to-reach-an-implied-valuation-of-1-404-trillion/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/10/anthropic-sets-ipo-price-range-of-70-to-78-per-share-to-reach-an-implied-valuation-of-1-404-trillion/</a></h4></a>
+  </div>
+</section>
+
+<section id="s1">
+<div class="sec-h"><span class="no">01</span><h2>要闻</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s1-1">
+<div class="a-h"><div class="a-n">1</div><h3>Anthropic 更新 IPO 文件：拟发行 8.25 亿股 A 类股，价格区间 70 至 78 美元，区间上限对应全面摊薄估值 1.404 万亿美元</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Anthropic 官方发布页与 Claude Code 发布说明原文已取</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">Anthropic 于 2026 年 11 月 10 日在更新的 IPO 文件中说明，拟发行合计 8.25 亿股 A 类股，价格区间为每股 70 至 78 美元，预计募资 577.5 亿至 643.5 亿美元。若按区间上限上市，全面摊薄口径估值为 1.404 万亿美元。公司同时披露，已与 AMD、Broadcom、Google、Micron、Microsoft、Nvidia、TSMC 达成协议，按 IPO 价格私下配售 260 亿美元无投票权的 N 类股。</p>
+<div class="body">
+<p>文件披露的多项数字可交叉核对。一是规模与价格：8.25 亿股 A 类股、70 至 78 美元区间、募资 577.5 亿至 643.5 亿美元；按区间上限的全面摊薄估值为 1.404 万亿美元，高于 5 月融资时的 9650 亿美元，低于此前报道的 2 万亿美元目标。二是私下配售与净募资：260 亿美元 N 类股由七家机构认购，其中 Google 与 Nvidia 各投 100 亿美元；合计净募资预计 846 亿至 937 亿美元，后者为承销商全额行使超额配售权的情形。三是治理结构：作为公益公司，创始人持有 Class F 股，掌握 50.1% 投票权；Long-Term Benefit Trust 将选举董事会多数席位。四是营收口径：文件称截至 10 月底的年化营收达 810 亿美元，比 9 月底高出约 100 亿美元。五是上市安排：媒体报道其拟于 11 月 19 日前后在纳斯达克开始交易，代码为 ANT，预计最多 20% 的发行份额配售给散户。六是创始团队减持：七位联合创始人每人拟出售近 340 万股，按 74 美元区间中点计每人套现约 2.5 亿美元。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 报道（价格区间、募资规模、私下配售与净募资）：</span><a href="https://techcrunch.com/2026/11/10/anthropic-sets-ipo-price-range-of-70-to-78-per-share-to-reach-an-implied-valuation-of-1-404-trillion/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/10/anthropic-sets-ipo-price-range-of-70-to-78-per-share-to-reach-an-implied-valuation-of-1-404-trillion/</a></div>
+<div class="lk"><span class="lt">NVIDIA 拟投资约 100 亿美元（纽约时报报道，经 Techmeme 聚合）：</span><a href="https://www.techmeme.com/261110/p50" target="_blank" rel="noopener">https://www.techmeme.com/261110/p50</a></div>
+<div class="lk"><span class="lt">CMP-411</span><a href="/CMP/issues/CMP-411" target="_blank" rel="noopener">/CMP/issues/CMP-411</a></div>
+</div>
+</article>
+<article id="s1-2">
+<div class="a-h"><div class="a-n">2</div><h3>纽约州 RAISE Act 进入执行期：前沿开发商须在 2027 年 1 月 1 日前注册，单次违规罚则最高 100 万美元</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Fireworks AI 官方安全公告原文已取</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">纽约州于 2026 年 11 月 10 日开放 RAISE Act 的注册门户，年营收超过 5 亿美元的大型前沿 AI 开发商须在 2027 年 1 月 1 日前完成注册。法案要求发布安全框架、在 72 小时内报告重大安全事件并发布模型透明度报告，违规罚则为单次最高 100 万美元、后续单次最高 300 万美元。</p>
+<div class="body">
+<p>监管执行架构已经就位。法案要求适用对象在官网公布安全框架、在 72 小时内上报重大安全事件、并公开发布模型透明度报告；新设的数字创新、治理、诚信与信任办公室（DIGIT）负责实施 RAISE Act 并监督大型前沿 AI 实验室。州政府另可就未按要求注册的企业提起执法行动。同期，州长 Kathy Hochul 宣布成立纽约人工智能责任与研究中心，落户于纽约州立大学宾厄姆顿分校，该中心将独立评估先进 AI 系统的安全、安保与运行，并与 DIGIT 协同审查企业的安全框架；该中心在 1 月宣布时对应 5500 万美元的捐赠与资本投入。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 报道（注册截止日、义务范围、罚则与 DIGIT）：</span><a href="https://techcrunch.com/2026/11/10/openai-anthropic-face-new-oversight-as-new-yorks-ai-safety-law-takes-effect/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/10/openai-anthropic-face-new-oversight-as-new-yorks-ai-safety-law-takes-effect/</a></div>
+</div>
+</article>
+<article id="s1-3">
+<div class="a-h"><div class="a-n">3</div><h3>Git 修复 CVE-2026-111760：递归克隆恶意仓库可在本机执行攻击者代码，修复版本为 2.56.1</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">Git 项目于本周发布 Git 2.56.1，修复编号为 CVE-2026-111760 的漏洞：攻击者构造的恶意仓库在递归克隆并带子模块时，可在克隆方机器上执行攻击者代码。缺陷成因是 Git 处理索引时的整数截断，极长路径能通过安全检查，之后被以攻击者指定的短名写入磁盘，该短名可设为 <code>.git</code>。</p>
+<div class="body">
+<p>利用链依赖两条路径特性叠加。其一是整数截断：仓库内极长路径可绕过 Git 的安全检查，随后 Git 以更短的名字把它写到磁盘，而这个短名由攻击者指定，可以设为 <code>.git</code>。其二是符号链接与子模块的差异：Git 拒绝用符号链接替换 <code>.git</code> 目录，但全新克隆出的子模块中 <code>.git</code> 是文件，攻击者可用符号链接把它指向存放恶意 hooks 或配置的目录；hooks 是 Git 在特定时点运行的程序，一旦 Git 启用了该目录，攻击者代码即可执行。修复版在路径长度被截短之前即拒绝此类极长路径，2.50 至 2.55 系列的对应补丁版本为 2.50.2、2.51.3、2.52.1、2.53.1、2.54.1 与 2.55.1。GitHub 已把修复应用到 github.com 与 GitHub Enterprise Cloud，GitHub Enterprise Server 对应版本为 3.19.15、3.20.11、3.21.9 与 3.22.4；GitHub Desktop 与 GitHub Copilot 应用的修复版本正在准备中。报道发布时，Git for Windows 尚未发布基于 Git 2.56.1 的版本。GitHub 同时给出临时缓解建议：只克隆可信服务器的仓库、不要递归克隆不可信仓库、不要合并不受信内容或标签、不要处理来自不可信来源的二进制补丁与 fast-import 流。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">The Hacker News 报道（成因、受影响版本、缓解建议）：</span><a href="https://thehackernews.com/2026/11/git-patches-flaw-that-lets-malicious.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/git-patches-flaw-that-lets-malicious.html</a></div>
+</div>
+</article>
+</section>
+<section id="s2">
+<div class="sec-h"><span class="no">02</span><h2>开发生态</h2><span class="cnt">5 条 · 按重要性排列</span></div>
+<article id="s2-1">
+<div class="a-h"><div class="a-n">4</div><h3>Claude Code v2.1.322：在 Vertex 的 global、us、eu 区域新增 fast mode</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">anthropics/claude-code 于 2026 年 11 月 10 日 02:29 UTC 发布 v2.1.322。该版本发布说明只有一条变更：在 Vertex 的 global、us 与 eu 区域加入 fast mode，并在 Vertex 拒绝该选项时回落为标准速度。</p>
+<div class="body">
+<p>fast mode 对应 Claude 平台在模型发布时公布的可选加速档位。本次变更把这一档位接入 Vertex 的三个区域，同时给出降级行为：当 Vertex 侧不接受 fast mode 时自动回落到标准速度，因此不依赖 Vertex 侧是否已开放该能力。其余代码、依赖与文档条目本次发布说明未列出，与 v2.1.321 的差异集中于这一项。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Claude Code v2.1.322 发布说明：</span><a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.322" target="_blank" rel="noopener">https://github.com/anthropics/claude-code/releases/tag/v2.1.322</a></div>
+</div>
+</article>
+<article id="s2-2">
+<div class="a-h"><div class="a-n">5</div><h3>openai-python v3.49.0：新增类型化的异步 function tools，修复麦克风录音编码</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">openai/openai-python 于 2026 年 11 月 10 日发布 v3.49.0。该版本包含一项功能新增与一项缺陷修复：新增类型化的异步 function tools（#4264），并修复麦克风录音未按合法 PCM WAV 编码的问题（#3900）。</p>
+<div class="body">
+<p>功能侧，PR #4264 为函数调用工具引入了类型化的异步形态，使异步调用方可以在本地获得工具定义的类型信息。修复侧，PR #3900 处理的是录音数据落地格式：此前从麦克风获取的录音没有被编码为合法的 PCM WAV 格式，下游播放或上传环节会因此拿到不合规的字节流。该版本相对 v3.48.0 的变更清单到此为止，未列出其他条目。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">openai-python v3.49.0 发布说明：</span><a href="https://github.com/openai/openai-python/releases/tag/v3.49.0" target="_blank" rel="noopener">https://github.com/openai/openai-python/releases/tag/v3.49.0</a></div>
+</div>
+</article>
+<article id="s2-3">
+<div class="a-h"><div class="a-n">6</div><h3>LiteLLM 发布 1.108.5（LTS）与 v1.109.0：修复无密钥工作负载身份 401 与并行工具调用索引恒为 0</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">BerriAI/litellm 在窗口内发布两个版本：11 月 10 日 22:51 UTC 发布的 1.108.5（LTS 线）与 11 月 11 日 00:56 UTC 发布的 v1.109.0。两个版本的发布说明都保留了 LiteLLM Docker 镜像的 cosign 签名校验段落，签名公钥仍取自 commit <code>e82a3c6</code>。</p>
+<div class="body">
+<p>1.108.5（LTS）标注为 5 个 PR、其中 4 项修复。四项变更分别是：OpenAI 侧，无密钥工作负载身份部署在图像编辑、音频、文件、批处理等路由上返回 401（#50962）；<code>ollama_chat/</code> 流式接口给每个并行工具调用返回索引 0，导致客户端只执行第一次调用（#50718）；<code>/v1/messages</code> 对部署 <code>additional_drop_params</code> 中列出的参数返回 400（#50755）；部分 FLAC 文件的转录成本计算错误，可能把密钥推过预算阈值（#50860）。</p>
+<p>v1.109.0 的变更条目包括两项：提示词模板的 <code>initial_prompt_value</code> 与 <code>final_prompt_value</code> 改为按可选处理（#39762）；代理层在设置 <code>call_endpoint</code> 时，纯提示词 token_counter 请求改为计入供应商用量（#468）。签名校验方式与此前一致，提供按固定 commit 哈希与按版本标签两种校验命令。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">LiteLLM 1.108.5（LTS）发布说明：</span><a href="https://github.com/BerriAI/litellm/releases/tag/v1.108.5" target="_blank" rel="noopener">https://github.com/BerriAI/litellm/releases/tag/v1.108.5</a></div>
+<div class="lk"><span class="lt">LiteLLM v1.109.0 发布说明：</span><a href="https://github.com/BerriAI/litellm/releases/tag/v1.109.0" target="_blank" rel="noopener">https://github.com/BerriAI/litellm/releases/tag/v1.109.0</a></div>
+</div>
+</article>
+<article id="s2-4">
+<div class="a-h"><div class="a-n">7</div><h3>LangChain 发布 1.4.10 与 langchain-core 1.7.7：修复 middleware 调用混入 messages 流、限制 load() 嵌套深度</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">langchain-ai/langchain 于 2026 年 11 月 10 日发布两个版本：langchain-core 1.7.7（04:08 UTC）与 langchain 1.4.10（18:37 UTC）。核心包修复了 <code>load()</code> 的嵌套深度无上限问题，主包修复了 middleware 内部的模型调用被混入 <code>messages</code> 流的问题。</p>
+<div class="body">
+<p>langchain-core 1.7.7 相对 1.7.6 的变更包括：发布 1.7.7 版本（#41776）、修复 <code>load()</code> 的嵌套深度（#41742）、以及更新 Python 新版安全锁的依赖解析（#41585）。langchain 1.4.10 相对 1.4.9 的变更包括：发布 1.4.10 版本（#41778）、把 middleware 内部的模型调用从 <code>messages</code> 流中剔除（#41579）、更新依赖（#41585）、以及在 <code>ModelRefusalMiddleware</code> 中不再输出 trace 输入（#41689）。其中 <code>ModelRefusalMiddleware</code> 的变更影响可观测性配置：该中间件此前会把 trace 输入一并带出，调整后仅保留必要的记录。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">langchain 1.4.10 发布说明：</span><a href="https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.4.10" target="_blank" rel="noopener">https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.4.10</a></div>
+<div class="lk"><span class="lt">langchain-core 1.7.7 发布说明：</span><a href="https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.7.7" target="_blank" rel="noopener">https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.7.7</a></div>
+</div>
+</article>
+<article id="s2-5">
+<div class="a-h"><div class="a-n">8</div><h3>llama.cpp 在窗口内连续发布 b12252 至 b12261 共 10 个构建：新增 kimi K3.1 视觉支持、修复 JSON Schema allOf 与工具参数控制字符</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · Meta 官方发布页 / Google Cloud 官方模型文档 / OpenRouter 接口</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">llama.cpp 于 2026 年 11 月 10 日一天内连续发布 b12252 至 b12261 共 10 个构建。其中 b12259 为 mtmd 增加 kimi K3.1 视觉支持，b12254 修复 JSON Schema 中 <code>allOf</code> 与基础类型组合时生成空对象文法的问题，b12253 修复工具参数字符串中的控制字符未被转义。</p>
+<div class="body">
+<p>窗口内各构建的实质改动如下。b12261：mtmd 在多个 subcontext 之间共享计算缓冲区，并为音频生成增加加载期分配（#31945）。b12259：mtmd 支持 kimi K3.1 视觉，修复 k2.5 与 k3.1 的预处理与 projector MLP，并做小幅重命名（#31980）。b12257：CUDA 侧把图状态与并发流状态从 <code>common.cuh</code> 移到 <code>graph.cuh</code>，原因是这两个状态只在 <code>ggml-cuda.cu</code> 中使用，放在公共头文件会让每次改动都重编所有 CUDA 编译单元（#32001）。b12255：plamo2 停止重命名循环缓存张量（#31984）。b12254：<code>common/json-schema</code> 修复 <code>allOf</code> 与普通类型（例如 integer）组合时生成空对象文法的问题（#31834）。b12253：转义工具参数字符串中的控制字符——<code>normalize_quotes_to_json</code> 此前会把原始控制字符原样带入 JSON，使得 <code>python(code='ab')</code> 这类调用返回非法 JSON，回放该历史时会直接失败（#31937）。b12252：CANN 后端在检查 buffer 类型是否受支持时提前失败（#31270）。另有 b12256 与 b12258 的构建号出现在同一时段发布序列中，本次抓取的 release 列表未取到其独立条目正文。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">llama.cpp b12259 发布说明（kimi K3.1 视觉）：</span><a href="https://github.com/ggml-org/llama.cpp/releases/tag/b12259" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases/tag/b12259</a></div>
+<div class="lk"><span class="lt">llama.cpp b12261 发布说明（共享计算缓冲区）：</span><a href="https://github.com/ggml-org/llama.cpp/releases/tag/b12261" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases/tag/b12261</a></div>
+<div class="lk"><span class="lt">CMP-411</span><a href="/CMP/issues/CMP-411" target="_blank" rel="noopener">/CMP/issues/CMP-411</a></div>
+</div>
+</article>
+</section>
+<section id="s3">
+<div class="sec-h"><span class="no">03</span><h2>模型发布</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s3-1">
+<div class="a-h"><div class="a-n">9</div><h3>Google 发布 Gemini 4 Carbon：API 定价与 Gemini 4 Argon 相同，官方称在三项工作流基准上排名第一</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · OpenAI 官方新闻页原文已取</span><span class="tag">2026-11-10 / 11-11 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">Google 于 2026 年 11 月 10 日发布 Gemini 4 Carbon，面向开发者、企业、科学家与消费者开放。官方称 Carbon 在网络安全能力与长程 agentic 工作流方面达到前沿水平，其 API 定价与 Gemini 4 Argon 相同，为每百万输入 token 2 美元、每百万输出 token 10 美元。</p>
+<div class="body">
+<p>官方把 Carbon 定位为在复杂多步编码与调试、开放式科学研究等消耗较多 token 的任务上进一步推高上限的模型，并说明 Argon 仍是多数软件工程与知识工作的推荐选择；官方还提到两周前已通过 Fairwind Program 向一批网络安全防御方发布过 Carbon。基准方面，官方称 Carbon 在 CursorBench 4.0、Perplexity 的 WANDR 与 Zapier 的 AutomationBench 上排名第一，且每任务成本低于次优外部模型 2 倍以上。官方另与 Artificial Analysis 联合推出多模态知识 agent 基准（Multimodal Knowledge Agent，MKA），Carbon 在其上排名第二，平均每任务成本低于榜首模型 6 倍以上。预发布评测中，官方称 Carbon 在 Hebbia 的 E2E Financial Agentic 评测上与受测最佳模型持平，并在 Balyasny Asset Management 的 General Financial Intelligence 基准上于 23 组前沿模型配置中排名第一。可用性方面，官方称 Carbon 通过 API 在 Google AI Studio 与面向企业的 Gemini 中对全部付费开发者与企业开放，价格与 Gemini 4 Argon 的引荐价相同；同时面向全部 Google AI Ultra 订阅者，在 Google Antigravity、Gemini 应用与搜索的 AI Mode 中推出。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Google 官方博客（定价、基准与可用性）：</span><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/" target="_blank" rel="noopener">https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/</a></div>
+</div>
+</article>
+<article id="s3-2">
+<div class="a-h"><div class="a-n">10</div><h3>GitHub Copilot 上线 Gemini 4 Carbon：官方称面向复杂编码、agentic 与推理任务，侧重安全代码生成</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub 官方 Changelog 原文已取</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">GitHub 官方 Changelog 于 2026 年 11 月 10 日发布 Gemini 4 Carbon in GitHub Copilot，官方称该模型已在 GitHub Copilot 中正式可用。官方说明其面向复杂编码、agentic 与推理任务，设计上侧重安全代码生成。</p>
+<div class="body">
+<p>本次条目属于模型进入既有产品通道的上线通告，官方给出的定位是复杂编码、agentic 与推理任务，并把安全代码生成列为设计重点。开发者可在 GitHub Copilot 中直接选用该模型。结合本期另一条，GitHub 同日在 Changelog 发布了多项面向开发工具的变更：Microsoft C++ Language Server 现已内置 MSBuild 编译命令提取器并自动调用，agent 不再需要自行发现和运行该提取器；此外还有 GitHub App 支持企业级 Copilot 席位管理。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">GitHub Changelog（Gemini 4 Carbon in GitHub Copilot）：</span><a href="https://github.blog/changelog/2026-11-10-gemini-4-carbon-in-github-copilot" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-10-gemini-4-carbon-in-github-copilot</a></div>
+<div class="lk"><span class="lt">GitHub Changelog（C++ 语言服务器自动配置 MSBuild）：</span><a href="https://github.blog/changelog/2026-11-10-c-language-server-now-auto-configures-msbuild-builds" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-10-c-language-server-now-auto-configures-msbuild-builds</a></div>
+</div>
+</article>
+</section>
+<section id="s4">
+<div class="sec-h"><span class="no">04</span><h2>产品应用</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s4-1">
+<div class="a-h"><div class="a-n">11</div><h3>Anthropic 发布 Claude Meetings、Claude Whiteboards 与 Claude Sheets：Claude 以可见参会者身份进入视频会议</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · TechCrunch 原创报道</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">Anthropic 于 2026 年 11 月 10 日发布面向工作场景的三个功能：Claude Meetings、Claude Whiteboards 与 Claude Sheets。Claude Meetings 让团队把 Claude 作为可见参会者加入视频会议，在讨论进行中即开始处理任务。</p>
+<div class="body">
+<p>Claude Meetings 的行为细节包括：Claude 以参会者身份自我介绍，并在会议聊天中发布一条告知消息；它在讨论过程中可起草当前讨论的计划、在白板上列出时间线、在会议聊天中回答问题，并访问已连接的工作应用取回信息（例如去年的数字）；会议结束后，会议记录、行动项等材料可在 claude.ai 中查看。权限约束方面，官方说明未获管理员授权时 Claude 不会加入含外部参会者的通话，且外部参会者加入时 Claude 会自动离开。可用性方面，Claude Meetings 以 beta 形式面向 Team 与 Enterprise 方案推出，发布时支持 Google Meet，其他方案的支持后续跟进。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 报道（功能范围、权限约束与可用范围）：</span><a href="https://techcrunch.com/2026/11/10/anthropic-launches-claude-meetings-to-turn-workplace-discussions-into-plans-and-tasks/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/10/anthropic-launches-claude-meetings-to-turn-workplace-discussions-into-plans-and-tasks/</a></div>
+</div>
+</article>
+<article id="s4-2">
+<div class="a-h"><div class="a-n">12</div><h3>Adobe 在 MAX 大会为 Photoshop、Premiere、Illustrator、InDesign 扩充 AI 功能，并发布供外部聊天机器人调用的 MCP</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Anthropic 官方发布页原文已取（官方自述，未见独立验证）</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">Adobe 于 2026 年 11 月 10 日在迈阿密 MAX 大会发布一批产品更新，覆盖 Photoshop、Premiere、Illustrator 与 InDesign，并扩展 Firefly 的 AI 能力。Adobe 同时发布 Model Context Protocol（MCP），让 ChatGPT、Claude、Gemini 等外部聊天机器人调用 Adobe 的功能。</p>
+<div class="body">
+<p>Firefly 侧新增了私有测试阶段的原型设计工具 Builder，用于快速产出展示创意的设计稿，功能定位直接对标 Figma；此外新增品牌图表生成工具，以及只修改图像局部而不影响其他物体的编辑工具；还新增了把片段、图像与音效组装为视频的 AI 视频工具。各应用的分工为：Photoshop 新增重新打光功能与基于提示词的生成式风格滑杆，Premiere 新增面向专业用户的色彩分级系统与视频物体移除，Lightroom 新增眨眼修正与瑕疵去除。Adobe 还说明其 agent 改为主动常驻，以便持续获取工作上下文并随时响应动作。Adobe 既有的第三方模型阵容包含 Google、Runway、ElevenLabs、Black Forest Labs、OpenAI、Kling 与字节跳动等，其近期收购的 Topaz Labs 发布了两款图像模型 Wonder 4，分别用于放大与降噪。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 报道（各产品新增能力与 MCP）：</span><a href="https://techcrunch.com/2026/11/10/adobe-adds-more-ai-to-its-products-and-launches-an-mcp/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/10/adobe-adds-more-ai-to-its-products-and-launches-an-mcp/</a></div>
+</div>
+</article>
+<article id="s4-3">
+<div class="a-h"><div class="a-n">13</div><h3>Google Cloud 发布 Gemini for healthcare：面向临床数据打通与流程自动化</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · TechCrunch 原创报道与彭博社（经 Techmeme 聚合）</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">Google Cloud 于 2026 年 11 月 10 日发布 Gemini for healthcare，定位是打通临床数据并自动化工作流，以减少行政性负担。</p>
+<div class="body">
+<p>官方公告把该产品放在 Google Cloud 的医疗行业线下面向医疗机构与医疗数据团队发布，核心方向是临床数据的统一接入与基于 AI 的流程自动化。就本期抓取到的官方页面内容而言，公告明确给出的产品定位与目标是统一临床数据、自动化工作流与降低行政负担；具体的功能清单、可用区域与合规认证范围需以该官方页面后续条目为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Google 官方博客：</span><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/gemini-for-healthcare/" target="_blank" rel="noopener">https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/gemini-for-healthcare/</a></div>
+</div>
+</article>
+</section>
+<section id="s5">
+<div class="sec-h"><span class="no">05</span><h2>技术与洞察</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s5-1">
+<div class="a-h"><div class="a-n">14</div><h3>NVIDIA 将 OpenShell 捐赠给 CNCF：作为 Sandbox 项目治理，官方称上线不到一年已有数十万次贡献</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-10 / 11-11 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">NVIDIA 于 2026 年 11 月 10 日在 KubeCon + CloudNativeCon 宣布，把用于安全管控自主 agent 的开源运行时 NVIDIA OpenShell 捐赠给云原生计算基金会（CNCF），以 Sandbox 项目形式接受治理。同时 NVIDIA 向 Google 主导的 Agent Substrate 项目贡献代码。</p>
+<div class="body">
+<p>项目定位与治理安排如下。OpenShell 作为 CNCF Sandbox 项目，将由把这些能力做进自己产品的组织共同治理，并借助安全领域专家完善。NVIDIA 同时贡献 Agent Substrate——一个由 Google 主导、用于在 Kubernetes 上规模化运行长时 agent 工作负载的开源框架，该框架已被接纳进入 CNCF Sandbox。此外 NVIDIA 发布了 NVIDIA DSX AI Factory Platform 的新组件：NVIDIA Kubernetes Engine、NVIDIA Kubernetes Recipes 与 NVIDIA Snapshot，用于在 Kubernetes 上部署、管理与扩展 AI 工厂的 GPU 基础设施。OpenShell 的技术要点是对 agent 行为施加确定性控制，在 agent 使用工具、访问推理服务与执行工作负载时强制执行策略；其可扩展架构允许团队接入自有的算力、推理提供方、凭据存储与监控工具。官方称已有数百个组织使用 OpenShell，项目自推出不到一年内获得数万次贡献。Linux 基金会 CEO Jim Zemlin 表示，把 OpenShell 贡献给 CNCF 让开发者有了共同基础，也让 agent 安全形态由社区共同演进。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">NVIDIA 官方博客（捐赠、Sandbox 治理与 DSX 新组件）：</span><a href="https://blogs.nvidia.com/blog/open-source-openshell-infrastructure/" target="_blank" rel="noopener">https://blogs.nvidia.com/blog/open-source-openshell-infrastructure/</a></div>
+</div>
+</article>
+<article id="s5-2">
+<div class="a-h"><div class="a-n">15</div><h3>CISA 将 GPUStack、FreeSWITCH、OpenSSH、IBM Aspera Faspex 四个漏洞列入 KEV 目录</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">美国网络安全与基础设施安全局（CISA）于 2026 年 11 月 9 日（周一）将四个漏洞加入已知被利用漏洞（KEV）目录，理由是存在在野利用证据，四个漏洞分别影响 GPUStack、SignalWire FreeSwitch、OpenBSD OpenSSH 与 IBM Aspera Faspex。</p>
+<div class="body">
+<p>四个漏洞的编号、评分与影响如下。GPUStack 的 CVE-2026-102895（CVSS 9.8）为认证不当问题，可导致未认证的管理访问，包括用户与模型变更、持久化管理员 API 密钥创建、worker 与云服务商凭据泄露，以及通过 <code>POST /v2/inference-backends/from-yaml</code> 实现代码执行，官方标注已于 2026 年 7 月修复。IBM Aspera Faspex 的 CVE-2026-123218（CVSS 9.8）为授权不当漏洞，已认证用户可构造特定消息绕过授权并提权，2026 年 11 月修复。SignalWire FreeSwitch 的 CVE-2026-116779（CVSS 9.8）为代码注入漏洞，可导致配置与凭据泄露、任意通话控制与命令执行，2026 年 10 月修复。OpenBSD OpenSSH 的 CVE-2026-123158（又称 SSHole，CVSS 8.1）为返回状态码异常导致的认证绕过，2026 年 11 月修复。就 SSHole 的在野情况，报道引用多方数据称自 2026 年 11 月 6 日起出现针对该漏洞的利用尝试，累计 22 次尝试来自 14 个独立 IP；GreyNoise 的蜜罐网络在 11 月 7 日 00:46 UTC 首次观察到利用尝试，随后确认有 6 个源 IP 的利用后活动。四个漏洞中有三个与 AI 基础设施直接相关：GPUStack 的推理后端接口、OpenSSH 的服务器侧组件，均出现在 AI 集群常见的部署路径上。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">The Hacker News 报道（四个漏洞编号、评分与修复时间）：</span><a href="https://thehackernews.com/2026/11/cisa-warns-of-active-exploitation-of.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/cisa-warns-of-active-exploitation-of.html</a></div>
+</div>
+</article>
+</section>
+<section id="s6">
+<div class="sec-h"><span class="no">06</span><h2>行业动态</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s6-1">
+<div class="a-h"><div class="a-n">16</div><h3>CoreWeave 第三季度营收 36.6 亿美元、同比增长 168%，营收积压 1325 亿美元，并上调 2026 年指引</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">CoreWeave 于 2026 年 11 月 10 日发布第三季度业绩，营收 36.6 亿美元，同比增长 168%，高于市场预期的 35.5 亿美元。公司披露营收积压 1325 亿美元，并上调 2026 年指引，财报后股价盘后上涨 5% 以上。</p>
+<div class="body">
+<p>本次披露的三组数字为：季度营收 36.6 亿美元（同比增 168%，预期 35.5 亿美元）、营收积压 1325 亿美元、上调后的 2026 年指引。该营收规模与 AI 推理算力供给直接相关，营收积压口径通常指已签约但尚未确认为收入的合同金额。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">CNBC 报道（经 Techmeme 聚合）：</span><a href="https://www.techmeme.com/261110/p53" target="_blank" rel="noopener">https://www.techmeme.com/261110/p53</a></div>
+</div>
+</article>
+<article id="s6-2">
+<div class="a-h"><div class="a-n">17</div><h3>OpenAI 收购旅行创业公司 Odessia，创始人 Francis Davidson 加入</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">OpenAI 于 2026 年 11 月 10 日收购旅行创业公司 Odessia，该公司由 Sonder 创始人 Francis Davidson 创办，Davidson 将加入 OpenAI。OpenAI 尚未说明其在旅行领域的具体计划。</p>
+<div class="body">
+<p>可确认的事实有两条：交易标的是 Odessia；创办人 Francis Davidson 加入 OpenAI。报道指出，OpenAI 方面未就旅行业务的后续规划作出说明，因此收购的用途范围目前没有公开口径。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 报道：</span><a href="https://techcrunch.com/2026/11/10/openai-acquires-odessia-travel-startup-created-by-sonder-founder/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/10/openai-acquires-odessia-travel-startup-created-by-sonder-founder/</a></div>
+</div>
+</article>
+<article id="s6-3">
+<div class="a-h"><div class="a-n">18</div><h3>NVIDIA 拟在 Anthropic 上市后投资约 100 亿美元</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-10 / 11-11 首次公开</span></div>
+<p class="lede">据纽约时报报道并经 Techmeme 聚合，NVIDIA 计划在 Anthropic 首次公开募股时投资约 100 亿美元，约相当于 Anthropic 11 月预计募得新资金总额的 10%。报道将这笔投资描述为多家大型机构对 Anthropic 新增财务承诺中规模最大的一笔。</p>
+<div class="body">
+<p>该笔投资的性质与规模可对应到 Anthropic 更新后的 IPO 文件：文件披露 Anthropic 已与 AMD、Broadcom、Google、Micron、Microsoft、Nvidia、TSMC 达成协议，按 IPO 价格私下配售 260 亿美元无投票权的 N 类股，其中 Google 与 Nvidia 各投 100 亿美元。纽约时报的口径是 NVIDIA 拟在 Anthropic 上市后投资约 100 亿美元，对应总额约 10%。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Techmeme 聚合页（纽约时报报道）：</span><a href="https://www.techmeme.com/261110/p50" target="_blank" rel="noopener">https://www.techmeme.com/261110/p50</a></div>
+<div class="lk"><span class="lt">TechCrunch 报道（N 类股私下配售与各家出资）：</span><a href="https://techcrunch.com/2026/11/10/anthropic-sets-ipo-price-range-of-70-to-78-per-share-to-reach-an-implied-valuation-of-1-404-trillion/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/10/anthropic-sets-ipo-price-range-of-70-to-78-per-share-to-reach-an-implied-valuation-of-1-404-trillion/</a></div>
+</div>
+</article>
+</section>
+
+
+<section id="s9">
+<div class="sec-h"><span class="no">09</span><h2>后续追踪</h2><span class="cnt">连续事件</span></div>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>Anthropic 上市文件与定价：2026-11-10 更新 IPO 文件给出 8.25 亿股、70 至 78 美元区间、净募资 846 亿至 937 亿美元</h3></div>
+<p class="lede">本期新进展为定价区间与私下配售落地</p>
+<div class="body"><p>关注 11 月 19 日前后纳斯达克挂牌（代码 ANT）后的实际成交价与承销商超额配售权行使情况。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>Fireworks AI 10 月安全事件：11 月 9 日官方公告扩大披露范围至账单与账户信息、部分密钥、数据集与不完整模型权重，并指向 LLMJacking 团伙（EV-039）</h3></div>
+<p class="lede">本期无新增官方公告</p>
+<div class="body"><p>关注受影响范围是否再更新、被停用的自助数据集上传下载何时恢复、是否发布补偿或客户迁移公告。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>Git CVE-2026-111760：11 月 10 日由 Git 项目发布 2.56.1 与 2.50.2 至 2.55.1 系列补丁</h3></div>
+<p class="lede">本期新进展为 GitHub Enterprise Server 3.19.15、3.20.11、3.21.9、3.22.4 已含修复，Git for Windows 尚未发布对应版本</p>
+<div class="body"><p>关注 Git for Windows 修复版本发布时间与主流发行版打包进度。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>llama.cpp 版本节奏：11 月 10 日连续发布 b12252 至 b12261 共 10 个构建（EV-037）</h3></div>
+<p class="lede">本期新进展为 mtmd 支持 kimi K3.1 视觉、JSON Schema <code>allOf</code> 基础类型组合修复、工具参数控制字符转义</p>
+<div class="body"><p>关注这些改动进入 0.166.0 之后稳定版的时间，以及 vLLM 与 SGLang 侧是否跟进。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>Gemini 4 Carbon：11 月 10 日由 Google 发布，API 定价与 Gemini 4 Argon 相同</h3></div>
+<p class="lede">本期新进展为同日在 GitHub Copilot 上线、Antigravity 预览 <code>/swarm</code> 多 agent 编排</p>
+<div class="body"><p>关注 Carbon 在主流推理框架与第三方评测中的复现结果，以及 <code>/swarm</code> 的可用范围。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>NVIDIA OpenShell：11 月 10 日捐赠给 CNCF 作为 Sandbox 项目</h3></div>
+<p class="lede">本期新进展为进入 CNCF 治理流程</p>
+<div class="body"><p>关注 Sandbox 项目的首个正式发布版本、上游接受节奏，以及 OpenShell 与 Agent Substrate 的集成进度。</p></div>
+</article>
+</section>
+<section id="s10">
+<div class="sec-h"><span class="no">10</span><h2>编辑备注</h2><span class="cnt">采集限制与口径</span></div>
+<div class="body">
+<p>本期检索窗口为 2026-11-10 07:00 至 2026-11-11 07:00（Asia/Shanghai），共 24 小时，无补跑。一手来源抓取覆盖官方博客与公告、GitHub Release API、Hugging Face Blog、arXiv cs.AI/cs.CL、CISA 相关报道与政府文件，共落盘 2896 条带时间戳条目，窗口内命中 236 条。</p>
+<p>一手来源以 GitHub Release API 返回的发布说明正文为准，本地已核到完整正文；官方博客以官方页面正文为准。媒体口径条目（TechCrunch、Techmeme 聚合、The Hacker News）已在正文标注来源方，不表述为已独立验证的事实。</p>
+<p>链接核验：本期公开条目共 27 条链接，逐条访问，可达 26 条、需人工打开 1 条（<code>openai.com/index/introducing-businesses-chatgpt</code>，本次环境请求返回 403），<strong>失效 0 条</strong>。</p>
+<p>本期未收录 OpenAI「Businesses in ChatGPT」条目：该官方页面在本次环境下不可直接访问（403），仅由官方 RSS 的标题与摘要可确认其存在与发布时间，未取得正文，按例程 13.4 不进入公开完整条目，下期如仍无法取得正文则并入线索雷达。</p>
+<p>Anthropic 上市相关数字（8.25 亿股、70 至 78 美元、577.5 亿至 643.5 亿美元募资、260 亿美元 N 类股、846 亿至 937 亿美元净募资、1.404 万亿美元估值、810 亿美元年化营收、5500 万美元中心投入、100 万与 300 万美元罚则、72 小时报告时限、5 亿美元营收门槛）来自媒体转述的官方文件口径，未经 SEC EDGAR 原文逐项比对。</p>
+<p>本期视频按例程 13.3 第 8 条走配音免检口径：不调用任何外部 STT，不另起转写，取证仅用 NotebookLM 自带产物元数据与当期母版。</p>
+</div></section>
+
+</main>
+</div>
+</div>
+</body>
+</html>
