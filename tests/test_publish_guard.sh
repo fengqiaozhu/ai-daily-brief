@@ -237,7 +237,7 @@ grep -F "built dist/" "$TMP/staged-nopush.out" >/dev/null && fail "staged mp4 st
 git rm --cached -q -- forced-into-index.mp4
 rm -f forced-into-index.mp4
 
-echo "== video marker without a player is refused =="
+echo "== video marker without a player does not block text publish =="
 make_brief 2099-01-09
 mkdir -p video-markers
 printf 'marker\n' > video-markers/2099-01-09
@@ -246,24 +246,22 @@ before=$(git rev-parse HEAD)
 set +e
 sh scripts/publish.sh 2099-01-09 --no-push >"$TMP/marker.out" 2>"$TMP/marker.err"
 marker_code=$?
-sh scripts/publish.sh 2099-01-09 >"$TMP/marker-push.out" 2>"$TMP/marker-push.err"
-marker_push=$?
 set -e
 after=$(git rev-parse HEAD)
 html_after=$(sha256sum briefs/2099-01-09/index.html | awk '{print $1}')
-echo "exit nopush=$marker_code push=$marker_push"
+echo "exit nopush=$marker_code"
 cat "$TMP/marker.err"
-test "$marker_code" -ne 0 || fail "marker without player was accepted"
-test "$marker_push" -ne 0 || fail "marker push was accepted"
-test "$before" = "$after" || fail "HEAD moved for a missing player"
+cat "$TMP/marker.out"
+test "$marker_code" -eq 0 || fail "marker without player blocked text publish"
+test "$before" = "$after" || fail "HEAD moved during --no-push"
 test "$html_before" = "$html_after" || fail "html changed when the player was missing"
-grep -F "error_stage=video_html" "$TMP/marker.err" >/dev/null || fail "video_html stage"
-grep -F "video-2099-01-09/ai-daily-2099-01-09.mp4" "$TMP/marker.err" >/dev/null || fail "missing url"
-grep -F "本期视频由 AI 生成，内容以图文版为准。" "$TMP/marker.err" >/dev/null || fail "missing disclosure"
-grep -F "视频产物标记 video-markers/2099-01-09" "$TMP/marker.err" >/dev/null || fail "marker basis"
-grep -F "built dist/" "$TMP/marker.out" >/dev/null && fail "missing player still built"
+if grep -F "error_stage=video_html" "$TMP/marker.err" >/dev/null; then
+  fail "video_html still blocks a text issue"
+fi
+grep -F "local build only; not pushed" "$TMP/marker.out" >/dev/null || fail "marker preview text"
+grep -F "built dist/" "$TMP/marker.out" >/dev/null || fail "marker did not build"
 
-echo "== another date's player does not satisfy this date =="
+echo "== another date's player does not block this date =="
 make_brief 2099-01-11
 other='<video controls src="https://github.com/fengqiaozhu/ai-daily-brief/releases/download/video-2099-01-01/ai-daily-2099-01-01.mp4"></video><p>本期视频由 AI 生成，内容以图文版为准。</p>'
 printf '%s\n' "$other" >> briefs/2099-01-11/index.html
@@ -274,14 +272,15 @@ other_code=$?
 set -e
 echo "exit=$other_code"
 cat "$TMP/other.err"
-test "$other_code" -ne 0 || fail "other date player was accepted"
-grep -F "video-2099-01-11/ai-daily-2099-01-11.mp4" "$TMP/other.err" >/dev/null || fail "did not name this date"
+cat "$TMP/other.out"
+test "$other_code" -eq 0 || fail "other date player blocked text publish"
 grep -F "video-2099-01-01/ai-daily-2099-01-01.mp4" briefs/2099-01-11/index.html >/dev/null || fail "other player was removed"
-if grep -F "缺少：披露语" "$TMP/other.err" >/dev/null; then
-  fail "disclosure from the other player was reported missing"
+grep -F "local build only; not pushed" "$TMP/other.out" >/dev/null || fail "other date preview text"
+if grep -F "error_stage=video_html" "$TMP/other.err" >/dev/null; then
+  fail "video_html still blocks another date's player"
 fi
 
-echo "== marker plus the matching player is accepted =="
+echo "== marker plus the matching player still publishes =="
 make_brief 2099-01-10
 cat > briefs/2099-01-10/index.html <<'EOF'
 <!DOCTYPE html><html><body>
@@ -304,48 +303,9 @@ test "$player_code" -eq 0 || fail "matching player was refused"
 grep -F "local build only; not pushed" "$TMP/player.out" >/dev/null || fail "player preview text"
 python3 scripts/inject-episode-video.py --check 2099-01-10 --html briefs/2099-01-10/index.html >/dev/null
 
-echo "== release lookup stays off for a non-GitHub origin =="
+echo "== daily publish does not call gh and ignores lookup failures =="
 make_brief 2099-01-13
 mkdir -p "$TMP/fakebin"
-cat > "$TMP/fakebin/gh" <<'EOF'
-#!/bin/sh
-echo called >> "${GH_CALL_LOG:?}"
-echo "gh-called" >&2
-exit 99
-EOF
-chmod +x "$TMP/fakebin/gh"
-: > "$TMP/gh-calls"
-set +e
-env PATH="$TMP/fakebin:$PATH" GH_CALL_LOG="$TMP/gh-calls" \
-  sh scripts/publish.sh 2099-01-13 --no-push >"$TMP/offline.out" 2>"$TMP/offline.err"
-offline_code=$?
-set -e
-echo "exit=$offline_code"
-cat "$TMP/offline.err"
-test "$offline_code" -eq 0 || fail "offline publish called gh or failed"
-test ! -s "$TMP/gh-calls" || fail "gh was called for a local origin"
-
-echo "== a missing release does not require a player =="
-cat > "$TMP/fakebin/gh" <<'EOF'
-#!/bin/sh
-echo called >> "${GH_CALL_LOG:?}"
-echo "release not found" >&2
-exit 1
-EOF
-chmod +x "$TMP/fakebin/gh"
-: > "$TMP/gh-calls"
-make_brief 2099-01-14
-set +e
-env PATH="$TMP/fakebin:$PATH" GH_CALL_LOG="$TMP/gh-calls" AI_DAILY_VIDEO_LOOKUP=1 \
-  sh scripts/publish.sh 2099-01-14 --no-push >"$TMP/absent.out" 2>"$TMP/absent.err"
-absent_code=$?
-set -e
-echo "exit=$absent_code"
-cat "$TMP/absent.err"
-test "$absent_code" -eq 0 || fail "absent release was treated as required"
-test -s "$TMP/gh-calls" || fail "lookup did not run"
-
-echo "== a release lookup error stops publish =="
 cat > "$TMP/fakebin/gh" <<'EOF'
 #!/bin/sh
 echo called >> "${GH_CALL_LOG:?}"
@@ -354,20 +314,26 @@ exit 1
 EOF
 chmod +x "$TMP/fakebin/gh"
 : > "$TMP/gh-calls"
-make_brief 2099-01-15
 before=$(git rev-parse HEAD)
 set +e
 env PATH="$TMP/fakebin:$PATH" GH_CALL_LOG="$TMP/gh-calls" AI_DAILY_VIDEO_LOOKUP=1 \
-  sh scripts/publish.sh 2099-01-15 --no-push >"$TMP/lookup.out" 2>"$TMP/lookup.err"
+  sh scripts/publish.sh 2099-01-13 --no-push >"$TMP/lookup.out" 2>"$TMP/lookup.err"
 lookup_code=$?
 set -e
 after=$(git rev-parse HEAD)
 echo "exit=$lookup_code"
 cat "$TMP/lookup.err"
-test "$lookup_code" -ne 0 || fail "lookup error was ignored"
-test "$before" = "$after" || fail "HEAD moved after lookup error"
-grep -F "error_stage=release_lookup" "$TMP/lookup.err" >/dev/null || fail "lookup stage"
-grep -F "HTTP 401: Bad credentials" "$TMP/lookup.err" >/dev/null || fail "raw lookup error"
-grep -F "built dist/" "$TMP/lookup.out" >/dev/null && fail "lookup error still built"
+cat "$TMP/lookup.out"
+test "$lookup_code" -eq 0 || fail "lookup error blocked a text issue"
+test "$before" = "$after" || fail "HEAD moved during lookup rehearsal"
+test ! -s "$TMP/gh-calls" || fail "daily publish called gh"
+if grep -F "error_stage=release_lookup" "$TMP/lookup.err" >/dev/null; then
+  fail "release_lookup still blocks"
+fi
+if grep -F "error_stage=video_html" "$TMP/lookup.err" >/dev/null; then
+  fail "video_html still blocks a lookup rehearsal"
+fi
+grep -F "built dist/" "$TMP/lookup.out" >/dev/null || fail "lookup rehearsal did not build"
+grep -F "local build only; not pushed" "$TMP/lookup.out" >/dev/null || fail "lookup rehearsal preview text"
 
 echo "ALL_OK origin=$origin_url"

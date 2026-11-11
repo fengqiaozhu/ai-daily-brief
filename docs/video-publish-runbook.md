@@ -1,6 +1,10 @@
 # 视频发布操作说明
 
-把某一期的 mp4 放到 GitHub Release，再把播放器写进该期 `briefs/YYYY-MM-DD/index.html`，最后用原来的站点发布命令提交图文。mp4 不进 git，也不使用 Git LFS。
+**2026-11-11 起视频发布步骤停用（CMP-472）。** 每日发布只用 `scripts/publish.sh`。没有视频、没有 `<video>`、没有披露语也可以发布。这条命令不再查询 `video-YYYY-MM-DD` Release，不再读取 `video-markers/`，也不调用 `scripts/inject-episode-video.py`。
+
+`scripts/publish-video.sh` 和 `scripts/inject-episode-video.py` 保留在仓库里，供查阅停用前的做法。每日例程不要再调用它们。下面第 1–8 节是停用前的操作记录，不是当前步骤。第 9 节演练台账保持原样。历史视频文件和已有 Release 不删除、不改写。
+
+把某一期的 mp4 放到 GitHub Release，再把播放器写进该期 `briefs/YYYY-MM-DD/index.html`，最后用原来的站点发布命令提交图文。mp4 不进 git，也不使用 Git LFS。这段是 2026-11-11 之前的做法。
 
 本说明不发布正式期次。第 002 期及以后的正式补发不在这里执行。
 
@@ -101,6 +105,8 @@ python3 scripts/inject-episode-video.py YYYY-MM-DD --html /path/to/test-index.ht
 同一天再跑一次会打印 `unchanged`，不会插入第二份。文件里如果已经有其他日期的播放器，那段 HTML 保持原样。页面缺少 `.wrap` 或 `header.mast` 时退出非零，并且不改文件。
 
 ## 4. 发布站点与硬校验
+
+自 2026-11-11（CMP-472）起，本节描述的视频硬校验已从 `scripts/publish.sh` 移除。下面是停用前的行为，不是当前发布条件。当前发布不因为缺少播放器或披露语而失败，也不再查询视频 Release。
 
 播放器写进 `index.html` 之后：
 
@@ -250,4 +256,4 @@ error_stage=video_html
 
 权限路径：演练曾把 `GH_TOKEN` 设成无效值再调用 `gh`，退出码仍是 0，登录身份没有变成未授权。没有为了打出 401 再去创建 Release。`stage=permission` 留在脚本里，这次没有实弹触发。
 
-本地、不访问 GitHub 的失败路径由 `tests/test_publish_video_local.sh` 覆盖：参数错误、文件不存在、文件在仓库内、sha256 不符、1.5 GiB 停手，以及 `jq` 对 `draft:false` 的回归。这些路径的标准输出为空，并且没有调用 `gh`。`tests/test_publish_guard.sh` 覆盖 mp4 白名单、暂存区文件名、视频标记缺播放器、其他期次播放器不能冒充本期，以及 Release 查询失败时停止。`tests/test_inject_episode_video.py` 覆盖注入位置、幂等，以及不改其他期次、不改已发布的两期 HTML。上述三项在写入本记录前均已通过。
+本地、不访问 GitHub 的失败路径由 `tests/test_publish_video_local.sh` 覆盖：参数错误、文件不存在、文件在仓库内、sha256 不符、1.5 GiB 停手，以及 `jq` 对 `draft:false` 的回归。这些路径的标准输出为空，并且没有调用 `gh`。`tests/test_inject_episode_video.py` 覆盖注入位置、幂等，以及不改其他期次、不改已发布的两期 HTML。上述脚本级测试在写入本记录前均已通过。2026-11-11 起，`tests/test_publish_guard.sh` 改为证明：mp4 白名单和暂存区拒绝仍然有效，而视频标记、其他期次播放器、Release 查询失败都不再挡住无视频期次的图文发布。
