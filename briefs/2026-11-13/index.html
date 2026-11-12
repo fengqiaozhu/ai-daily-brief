@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-11-13 — 全球人工智能情报日报</title>
+<meta name="description" content="2026-11-13 AI 早报：Nvidia 董事会宣布黄仁勋辞任总裁、CEO 与董事，即时生效；CFO Colette Kress 出任临时 CEO、Fireworks AI 泄露范围扩大：Notion 确认约 1% 客户使用 Insights 功能的 AI 对话记录被窃，为该公司两个月内第二次事件、微软 365 大面积故障：Outlook、Teams、Copilot、OneDrive 同时不可用，微软称「服务器意外不可用、负载升高」、美国国会民主党对 Nvidia 启动调查并致函，白宫讨论商务部部长去留；黄仁勋同意周三赴国会作证 等 24 条已核实动态与线索雷达。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Global AI Intelligence Daily · 第 018 期</div>
+  <h1>AI 早报<br>2026-11-13</h1>
+  <p class="sub">多源发现 → 线索筛选 → 原始资料核实 → 连续事件关联 → 重要性排序 → 分类报道。本期覆盖全球人工智能生态在主窗口（11-12 07:00 – 11-13 07:00，Asia/Shanghai）内首次公开的事件。</p>
+  <div class="meta">
+    <span class="chip live">检索执行窗口 <b>2026-11-12 07:00 – 2026-11-13 07:00 CST</b></span>
+    <span class="chip">主窗口 <b>2026-11-12 07:00 → 11-13 07:00</b></span>
+    <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat c1"><div class="n">24</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
+  <div class="stat c2"><div class="n">9</div><div class="l">新闻栏目 / SECTIONS</div></div>
+  <div class="stat c3"><div class="n">66</div><div class="l">可追溯来源 / SOURCES</div></div>
+  <div class="stat c4"><div class="n">20</div><div class="l">官方已确认 / CONFIRMED</div></div>
+</div>
+
+<div class="grid">
+
+<nav class="toc">
+  <div class="lbl">目录 / Contents</div>
+  <a href="#ov"><span>00</span>今日概览</a>
+  <a href="#s1"><span>01</span>要闻</a><a href="#s2"><span>02</span>开发生态</a><a href="#s3"><span>03</span>模型发布</a><a href="#s4"><span>04</span>产品应用</a><a href="#s5"><span>05</span>技术与洞察</a><a href="#s6"><span>06</span>行业动态</a><a href="#s7"><span>07</span>安全事件</a><a href="#s9"><span>09</span>后续追踪</a><a href="#s10"><span>10</span>编辑备注</a>
+</nav>
+
+<main>
+
+<section id="ov">
+  <div class="sec-h"><span class="no">00</span><h2>今日概览</h2><span class="cnt">30 条 · 按重要性与栏目排列</span></div>
+  <div class="ov">
+    <a class="ovc" href="#ov"><div class="top"><span class="num">1</span><span class="cat">要闻</span></div><h4>Nvidia 董事会宣布黄仁勋辞任总裁、CEO 与董事，即时生效；CFO Colette Kress 出任临时 CEO</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">2</span><span class="cat">要闻</span></div><h4>Fireworks AI 泄露范围扩大：Notion 确认约 1% 客户使用 Insights 功能的 AI 对话记录被窃，为该公司两个月内第二次事件</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">3</span><span class="cat">要闻</span></div><h4>微软 365 大面积故障：Outlook、Teams、Copilot、OneDrive 同时不可用，微软称「服务器意外不可用、负载升高」</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">4</span><span class="cat">要闻</span></div><h4>美国国会民主党对 Nvidia 启动调查并致函，白宫讨论商务部部长去留；黄仁勋同意周三赴国会作证</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">5</span><span class="cat">开发生态</span></div><h4>Google Antigravity 上线 Orchestrator：同一会话内动态切换 Carbon 与 Hydrogen，官方称 Terminal-Bench 4.0 接近 Carbon 成功率并少耗 24% 配额</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">6</span><span class="cat">开发生态</span></div><h4>OpenAI Python SDK v3.50.0：在 Responses API 上暴露 reasoning 输入变换能力</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">7</span><span class="cat">开发生态</span></div><h4>Claude Code v2.1.323：新增 Code Mode 实验开关、插件版本区间约束与 TypeScript 钩子类型校验</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">8</span><span class="cat">开发生态</span></div><h4>GitHub Actions 将于 2026 年 12 月 8 日停止 Windows 与 Linux 上的 ARM32 任务执行</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">9</span><span class="cat">开发生态</span></div><h4>LiteLLM 窗口内连发 5 个版本，LTS 线新增「Responses API 需设置 drop_params」迁移要求</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">10</span><span class="cat">开发生态</span></div><h4>Vercel AI SDK 发布 ai@7.0.171 与 ai@6.0.331：修复畸形消息校验导致的内存与 CPU 耗尽</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">11</span><span class="cat">开发生态</span></div><h4>llama.cpp 窗口内发布 b12302 至 b12329 共 19 个构建，含 Gemma 4 工具参数 schema 重构与 CUDA NVFP4 预填充优化</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">12</span><span class="cat">模型发布</span></div><h4>Google 发布 Gemini 4 Hydrogen：1M 上下文、输入 1.50 美元 / 输出 7.50 美元每百万 token、四档思考级别</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">13</span><span class="cat">产品应用</span></div><h4>Gemini 4 Hydrogen 上线 Google 搜索：AI Mode 与 AI Overviews 全球全量替换，并进入 Gemini 应用、for business 与 AI Studio</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">14</span><span class="cat">产品应用</span></div><h4>United Airlines 限制第三方 AI 助理代订机票与改签，理由为凭据泄露风险与可能违反 FAA 规定</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">15</span><span class="cat">产品应用</span></div><h4>OpenAI 承诺 200 万美元支持儿童 AI 安全研究，目标是产出可共享的风险与机会度量工具</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">16</span><span class="cat">技术与洞察</span></div><h4>IBM 与 Hugging Face 发布 LLMON 预览模型 granite-4.1-3b-LLMON-preview 与 8b 版本，用保留特殊 token 承载结构与语义</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">17</span><span class="cat">技术与洞察</span></div><h4>Hugging Face 发布 3D 生成模型微调指南：给出 TRELLIS.2 的 LoRA 微调脚本与容器</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">18</span><span class="cat">技术与洞察</span></div><h4>GitHub Secret scanning 新增 Cloudflare service token 检测类型</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">19</span><span class="cat">行业动态</span></div><h4>Nebius 公布 2027 年 400 亿美元投入计划，靠客户预付与贷款融资；微软新泽西 Vineland 机房交付推迟至 2027 年 Q2</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">20</span><span class="cat">行业动态</span></div><h4>Norwest 完成 40 亿美元基金，为其第十八只、也是规模最大的一只，重点投向 AI</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">21</span><span class="cat">安全事件</span></div><h4>Apache HTTP Server mod_http2 严重漏洞 CVE-2026-119618：影响 2.4.55 至 2.4.70，修复于 2.4.71</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">22</span><span class="cat">安全事件</span></div><h4>Node.js 一次修复 16 个漏洞，两个 HTTP/2 漏洞可致未认证客户端击垮服务器并读到其他连接的内存</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">23</span><span class="cat">安全事件</span></div><h4>攻击者用 4,837 个被盗 GitHub 账号在至少 1,806 个仓库植入 CI 密钥窃取器</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">24</span><span class="cat">安全事件</span></div><h4>186 个仿冒 AI 工具域名被用于投递 ClickFix 诱饵、浏览器劫持扩展与搜索劫持</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r1</span><span class="cat">前瞻与传闻</span></div><h4>Anthropic 的 IPO 认购约为发行量的六倍，银行家告知现有股东将获优先配售（彭博社，经 Techmeme 聚合 · 单一来源 · 未核实）<a href="https://www.techmeme.com/261112/p55" target="_blank" rel="noopener">https://www.techmeme.com/261112/p55</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r2</span><span class="cat">前瞻与传闻</span></div><h4>六个自 4 月以来发布的开源权重模型被发现带有受出口管制 Blackwell GPU 的指纹（Unemployment Labs，经 Techmeme 聚合 · 单一来源 · 未核实）<a href="https://www.techmeme.com/261112/p62" target="_blank" rel="noopener">https://www.techmeme.com/261112/p62</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r3</span><span class="cat">前瞻与传闻</span></div><h4>OpenAI 已向议员确认支持两党立法限制中国取得 AI 芯片与芯片制造工具（彭博社，经 Techmeme 聚合 · 单一来源 · 未核实）<a href="https://www.techmeme.com/261112/p59" target="_blank" rel="noopener">https://www.techmeme.com/261112/p59</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r4</span><span class="cat">前瞻与传闻</span></div><h4>Cerebras 第三季核心营收同比增 70% 至 2.309 亿美元，并宣布与微软达成合作（CNBC，经 Techmeme 聚合 · 单一来源 · 未核实）<a href="https://www.techmeme.com/261112/p57" target="_blank" rel="noopener">https://www.techmeme.com/261112/p57</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r5</span><span class="cat">前瞻与传闻</span></div><h4>美国商务部正敲定针对中国 AI 企业远程访问海外芯片的新规（Leo Schwartz 独家，经 Techmeme 聚合 · 单一来源 · 未核实）<a href="https://www.techmeme.com/261112/p62" target="_blank" rel="noopener">https://www.techmeme.com/261112/p62</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r6</span><span class="cat">前瞻与传闻</span></div><h4>SpaceX 计划在亚利桑那州投入 500 亿美元、德州投入 240 亿美元建设数据中心园区（纽约时报，经 Techmeme 聚合 · 单一来源 · 未核实）<a href="https://www.techmeme.com/261112/p54" target="_blank" rel="noopener">https://www.techmeme.com/261112/p54</a></h4></a>
+  </div>
+</section>
+
+<section id="s1">
+<div class="sec-h"><span class="no">01</span><h2>要闻</h2><span class="cnt">4 条 · 按重要性排列</span></div>
+<article id="s1-1">
+<div class="a-h"><div class="a-n">1</div><h3>Nvidia 董事会宣布黄仁勋辞任总裁、CEO 与董事，即时生效；CFO Colette Kress 出任临时 CEO</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Nvidia 官方新闻室公告原文已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">Nvidia 董事会于 11 月 12 日（周四）通过官方新闻室宣布，公司联合创始人、任职 33 年的 CEO 黄仁勋已辞任总裁、首席执行官与董事会成员，即时生效。执行副总裁兼首席财务官 Colette Kress 同意出任临时 CEO 并继续兼任 CFO，直至永久继任者到位；董事会同时启动内部与外部候选人的搜寻。TechCrunch 报道指出，Nvidia 市值约 3.8 万亿美元。</p>
+<div class="body">
+<p>官方公告同时披露两项此前未见的信息：董事会任命 Harvey C. Jones 出任首任独立董事长（他曾任 Synopsys CEO 与执行董事长，是有 30 年以上经历的创业者、技术高管与活跃风险投资人）；第三财季（FY2027）财报日程不变，定于 11 月 17 日（周二）美西时间约 13:20 发布，随后于 14:00 召开业绩电话会。</p>
+<p>Kress 2013 年 9 月加入 Nvidia，此前在 Cisco 与微软从事财务岗位近 25 年。她在公告中表示：「Nvidia 的力量一直来自我们的团队，我将与领导团队一道，继续在 Jensen 过去 33 年奠定的非凡基础上继续前进。」董事长 Jones 表示董事会对公司运营、客户承诺与产品路线图「不中断」有信心。官方另有「董事会独立成员声明」一篇，本期未取到正文。</p>
+<p>对开发者生态的直接含义是：Nvidia 的开源投入与出口管制立场此前与黄仁勋个人高度绑定。本期多篇报道记录了这一不确定性——Hugging Face 首席执行官 Clément Delangue 表示将继续为开源 AI 而战，同时市场关注 Nvidia 129.3 亿美元收购 Hugging Face 的后续。Kress 此前作为 CFO 曾批评美国对华出口管制，这一背景也被多家媒体点名。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Nvidia 官方新闻室公告，原文已取</span><a href="https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition" target="_blank" rel="noopener">https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition</a></div>
+<div class="lk"><span class="lt">TechCrunch 报道，含 Kress 履历与背景说明</span><a href="https://techcrunch.com/2026/11/12/jensen-huang-is-out-at-nvidia-who-is-colette-kress-his-interim-replacement/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/12/jensen-huang-is-out-at-nvidia-who-is-colette-kress-his-interim-replacement/</a></div>
+<div class="lk"><span class="lt">路透社报道</span><a href="https://www.reuters.com/business/retail-consumer/nvidia-ceo-jensen-huang-step-down-big-blow-ai-boom-2026-11-12/" target="_blank" rel="noopener">https://www.reuters.com/business/retail-consumer/nvidia-ceo-jensen-huang-step-down-big-blow-ai-boom-2026-11-12/</a></div>
+</div>
+</article>
+<article id="s1-2">
+<div class="a-h"><div class="a-n">2</div><h3>Fireworks AI 泄露范围扩大：Notion 确认约 1% 客户使用 Insights 功能的 AI 对话记录被窃</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · Fireworks 官方安全公告 + Notion 披露（媒体转述）</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">Fireworks AI 在最新安全公告中确认，攻击者入侵其云服务商后进入 Fireworks 开发系统，取得客户账单信息与部分数据集。已确认的受害客户包括在线文档工具 Notion —— 该公司披露其约 1% 的客户受影响，且使用 Notion AI「Insights」功能的客户聊天记录被窃取。这是 Fireworks 两个月内第二次泄露事件。</p>
+<div class="body">
+<p>Notion 表示，Fireworks 先向其通报安全事件并确认黑客窃取了部分客户数据；11 月 3 日 Notion 断开与 Fireworks 的系统连接、删除已存数据并停止一切连接。本周 Notion 进一步确认，被窃取的是 Notion AI 用户使用 Insights 功能时写入聊天记录的全部模型输入与输出；公司同时说明，其中相当一部分数据无法归属到具体客户。Fireworks 平台客户以数万计，报道提到 Harvey、Cursor 等知名公司使用其服务。</p>
+<p>Fireworks 表示其判断攻击者动机为牟利，目标是取得大语言模型访问凭据后倒卖 token，供第三方消耗而不占用自身额度。此前台账已登记该事件 10 月 9 日首份公告（仅评测作业密钥被访问）与 11 月 9 日的范围扩大公告（账单与账户信息、部分密钥、数据集与不完整模型权重，并首次指向 LLMJacking 团伙）。本次新增的是受害方 Notion 的具体受影响范围与数据类型。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 报道，含 Notion 披露内容</span><a href="https://techcrunch.com/2026/11/12/cyberattack-on-fireworks-ai-allowed-hackers-to-access-notion-customers-chat-transcripts/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/12/cyberattack-on-fireworks-ai-allowed-hackers-to-access-notion-customers-chat-transcripts/</a></div>
+<div class="lk"><span class="lt">Fireworks 官方安全公告</span><a href="https://fireworks.ai/security/bulletins/october-2026-security-incident-update" target="_blank" rel="noopener">https://fireworks.ai/security/bulletins/october-2026-security-incident-update</a></div>
+<div class="lk"><span class="lt">媒体转述</span><a href="https://thehackernews.com/2026/11/fireworks-ai-breach-widens-to-expose.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/fireworks-ai-breach-widens-to-expose.html</a></div>
+</div>
+</article>
+<article id="s1-3">
+<div class="a-h"><div class="a-n">3</div><h3>微软 365 大面积故障：Outlook、Teams、Copilot、OneDrive 同时不可用，微软称「服务器意外不可用、负载升高」</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · Engadget、Verge、BleepingComputer、路透社等多源报道</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">11 月 12 日（周四）下午，微软 365 多项服务出现大面积不可用，用户无法访问 Outlook 邮箱与 Teams 等服务。微软称「多台服务器意外不可用」，受影响服务被指为「负载升高」问题。多家媒体同时记录该故障，Downdetector 显示美国境内有大量用户报告不可用。</p>
+<div class="body">
+<p>从各方报道看，受影响面覆盖 Outlook 邮件、Teams、OneDrive 与 Copilot，TechCrunch 与 Engadget 均以独立稿件记录，Verge、BleepingComputer、PCWorld、Wired 与 The Independent 亦有报道，彭博社方面则引述微软称正在处理 Outlook 与 Copilot 的故障。The Independent 的标题把该次故障与 OpenAI 一并提及，说明 Copilot 服务链路同时受牵连。</p>
+<p>需要区分的是，本条与 11 月 10 日微软 11 月补丁批次（1,259 个漏洞）无关——后者是软件更新事件，本条是运行期可用性故障。截至发稿，本环境未取得微软官方状态页（status.cloud.microsoft / portals.status.microsoft）对本次事件的时间线与恢复时间戳原文，因此故障起止时刻与影响服务清单以媒体记录为准，不做补全。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Engadget 报道，含微软「服务器意外不可用」表述</span><a href="https://www.engadget.com/2315259/multiple-microsoft-365-services-are-experiencing-an-outage/" target="_blank" rel="noopener">https://www.engadget.com/2315259/multiple-microsoft-365-services-are-experiencing-an-outage/</a></div>
+<div class="lk"><span class="lt">Techmeme 聚合页，含 Verge、BleepingComputer、PCWorld、Wired、路透社等多源报道</span><a href="https://www.techmeme.com/261112/p51" target="_blank" rel="noopener">https://www.techmeme.com/261112/p51</a></div>
+<div class="lk"><span class="lt">路透社报道入口，用于交叉核对</span><a href="https://www.reuters.com/" target="_blank" rel="noopener">https://www.reuters.com/</a></div>
+</div>
+</article>
+<article id="s1-4">
+<div class="a-h"><div class="a-n">4</div><h3>美国国会民主党对 Nvidia 启动调查并致函，白宫讨论商务部部长去留；黄仁勋同意周三赴国会作证</h3></div>
+<div class="tags"><span class="tag warn">媒体 · 国会调查与作证报道，未取得委员会新闻稿原文</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">美国国会民主党议员启动对 Nvidia 的调查，并致函批评黄仁勋与特朗普之间就中国销售的安排。多个委员会要求黄仁勋出席作证，他已于 11 月 12 日同意周三到国会 testimony。同期，路透社报道称白宫高层正在讨论是否要撤换商务部长 Howard Lutnick；总检察长 Todd Blanche 则表示司法部尚未就是否为中国间谍作出结论，联邦调查局仍在调查。</p>
+<div class="body">
+<p>这是台账中「Nvidia 董事会调查黄仁勋是否受外国情报策动」一线的重大进展：此前仅停留在董事会内部调查、彭博社与 AP 关于联邦调查介入的转述，本期出现三条新增事实 —— 国会层面正式启动调查并发出措辞严厉的质询函；黄仁勋本人同意作证；以及行政当局内部出现人事调整讨论。</p>
+<p>需要说明口径边界：调查启动、作证承诺与白宫讨论均来自媒体报道，本期未取得国会委员会新闻稿原文、也未取得 Nvidia 官方新闻稿原文。TechCrunch 另有一篇梳理完整时间线的报道，另有报道称黄仁勋与一名 Nvidia 高管的第三段婚外情（路透社口径）。这些细节本期只作事实记录，不做动机推测。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 报道</span><a href="https://techcrunch.com/2026/11/12/democrats-launch-nvidia-investigation-write-scathing-letter-on-huangs-scheme-with-trump/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/12/democrats-launch-nvidia-investigation-write-scathing-letter-on-huangs-scheme-with-trump/</a></div>
+<div class="lk"><span class="lt">TechCrunch 报道</span><a href="https://techcrunch.com/2026/11/12/jensen-huang-agrees-to-testify-before-congress/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/12/jensen-huang-agrees-to-testify-before-congress/</a></div>
+<div class="lk"><span class="lt">美联社报道，含 Megaspeed 与新加坡转运线索</span><a href="https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f" target="_blank" rel="noopener">https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f</a></div>
+<div class="lk"><span class="lt">路透社实时报道页</span><a href="https://www.reuters.com/live/nvidia-live-board-meets-fate-ceo-jensen-huang-after-affair-reports-2026-11-12/" target="_blank" rel="noopener">https://www.reuters.com/live/nvidia-live-board-meets-fate-ceo-jensen-huang-after-affair-reports-2026-11-12/</a></div>
+</div>
+</article>
+</section>
+<section id="s2">
+<div class="sec-h"><span class="no">02</span><h2>开发生态</h2><span class="cnt">7 条 · 按重要性排列</span></div>
+<article id="s2-1">
+<div class="a-h"><div class="a-n">5</div><h3>Google Antigravity 上线 Orchestrator：同一会话内动态切换 Carbon 与 Hydrogen</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Google 官方博客与 Antigravity 官方发布帖</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">Google 在 Antigravity 中引入 Orchestrator，可在同一会话内于 Carbon 与 Hydrogen 等模型之间动态切换，面向 Google AI Ultra 订阅者。官方称其在 Terminal-Bench 4.0 上达到接近 Carbon 的任务成功率，同时平均少消耗 24% 配额。</p>
+<div class="body">
+<p>官方把 Orchestrator 定位为「多模型协作自动化」的载体：当团队用 Carbon、Argon 做深度架构判断时，Hydrogen 负责写代码、跑测试与验证改动，Orchestrator 负责在同一次会话中自动完成这种切换。同篇官方说明还提到 Antigravity 新增的 Gemini 前端设计 skill 与 Geminisland 体素岛屿实验。</p>
+<p>需要注意证据等级：Antigravity 的上线公告由官方渠道发布，但本期是通过 Techmeme 聚合页取得官方帖子的摘要，官方博客页未逐条取到，因此本文只保留官方原文中可核对的数字，不展开更多案例细节。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Google Antigravity 官方发布帖，经 Techmeme 聚合</span><a href="https://www.techmeme.com/261112/p49" target="_blank" rel="noopener">https://www.techmeme.com/261112/p49</a></div>
+<div class="lk"><span class="lt">Google 官方发布博客，含 Orchestrator 段落</span><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/" target="_blank" rel="noopener">https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/</a></div>
+<div class="lk"><span class="lt">TechCrunch 对 Gemini 4 Hydrogen 的独立报道</span><a href="https://techcrunch.com/2026/11/12/googles-latest-search-upgrade-promises-better-answers-to-your-most-complicated-questions/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/12/googles-latest-search-upgrade-promises-better-answers-to-your-most-complicated-questions/</a></div>
+</div>
+</article>
+<article id="s2-2">
+<div class="a-h"><div class="a-n">6</div><h3>OpenAI Python SDK v3.50.0：在 Responses API 上暴露 reasoning 输入变换能力</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">OpenAI 官方 Python SDK 于 11 月 12 日发布 v3.50.0，唯一的功能变更是「在 responses 上暴露 reasoning 输入变换」（对应 PR #4268）。该版本同时升级构建依赖 astral-sh/setup-uv 至 10.3.3，并简化了 review 交接文档。</p>
+<div class="body">
+<p>这一条对使用 Responses API 的团队有直接影响：reasoning 相关配置此前需要在请求体中自行拼装，现在 SDK 层面提供了对应的输入变换入口。具体可用的字段与生效范围以官方 API 文档为准，本期只核对 Release 页面正文，未逐项比对 API 参考页。</p>
+<p>同一条版本线在本期另有 3 个 alpha/rc 构建发布（0.167.0-alpha.4.3、0.170.0-alpha.2、0.170.0-alpha.3、0.170.0-alpha.4），均为无正文说明的占位发布，不单独成条。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">官方 Release 页</span><a href="https://github.com/openai/openai-python/releases/tag/v3.50.0" target="_blank" rel="noopener">https://github.com/openai/openai-python/releases/tag/v3.50.0</a></div>
+<div class="lk"><span class="lt">官方 Release 列表</span><a href="https://github.com/openai/openai-python/releases" target="_blank" rel="noopener">https://github.com/openai/openai-python/releases</a></div>
+</div>
+</article>
+<article id="s2-3">
+<div class="a-h"><div class="a-n">7</div><h3>Claude Code v2.1.323：新增 Code Mode 实验开关、插件版本区间约束与 TypeScript 钩子类型校验</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">Anthropic 官方 Claude Code 于 11 月 13 日 06:12 CST 发布 v2.1.323。新增实验性 Code Mode —— Claude 改为编写 JavaScript 来调用工具，可在设置或组织层面开关；同时 <code>plugin.json</code> 新增 <code>engines["claude-code"]</code> 字段，超出声明版本范围的插件不会被安装、更新或加载。</p>
+<div class="body">
+<p>该版本还有几项面向插件作者的改动：<code>claude plugin validate</code> 新增对插件 TypeScript 钩子模块的类型检查，每条发现为警告级，<code>--strict</code> 可使其失败；校验命令同时覆盖模组 <code>engine.create</code> 钩子新增、扣留或替换的 <code>$</code> 名词。此外，版本支持在托管设置中为 Claude Desktop 的第三方提供商会话使用 <code>CLAUDE_CODE_AUTO_MODE_MODEL</code>，并为长时间运行的钩子每 30 秒输出一次进度心跳。</p>
+<p>其余条目为体验性改进：<code>.docx</code> 资产上传支持、diff 面板新增「/diff to close」提示与快捷键说明、<code>claude -p</code> 与 SDK 会话在 Bash 允许规则含 <code>*</code> 时给出启动警告、以及模型需用量额度时的选项菜单（停止、切换用量额度、升级）。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">官方 Release 页</span><a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.323" target="_blank" rel="noopener">https://github.com/anthropics/claude-code/releases/tag/v2.1.323</a></div>
+<div class="lk"><span class="lt">Claude Code 官方文档入口，Code Mode 说明所在</span><a href="https://docs.claude.com/" target="_blank" rel="noopener">https://docs.claude.com/</a></div>
+<div class="lk"><span class="lt">官方 Release 列表</span><a href="https://github.com/anthropics/claude-code/releases" target="_blank" rel="noopener">https://github.com/anthropics/claude-code/releases</a></div>
+</div>
+</article>
+<article id="s2-4">
+<div class="a-h"><div class="a-n">8</div><h3>GitHub Actions 将于 2026 年 12 月 8 日停止 Windows 与 Linux 上的 ARM32 任务执行</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub 官方 Changelog 原文已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">GitHub 官方 Changelog 公告：托管 runner 将于 2026 年 12 月 8 日起结束对 Windows 与 Linux 上 ARM32 作业执行的支持，其中包括托管 runner 上原生 AArch32 用户态执行的移除。官方称这是承接此前 Node 20 支持终止的延续 —— 因为 Node 24 已不支持 ARM32。</p>
+<div class="body">
+<p>这条对 CI 流水线的影响是可预期的但有明确时间点：仍在 32 位 ARM 上构建的仓库需要在 12 月 8 日前迁移到 x64 runner 或自托管 ARM64 设备。官方公告本身给出了退役原因（Node 24 不支持 ARM32），并把它定位为 Node 20 支持终止之后的延续动作。</p>
+<p>需要提示的是，本次采集到的官方 Changelog 页面同一列表中还包含其他条目（如 <code>pull_request_target</code> 默认阻止时间为 12 月 2 日、Xcode 27 runner 镜像正式可用、macOS 14 runner 镜像退役），这些不属于本期主窗口事件，本期不做展开。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">GitHub 官方 Changelog</span><a href="https://github.blog/changelog/2026-11-12-actions-for-arm32-linux-windows-retirement" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-12-actions-for-arm32-linux-windows-retirement</a></div>
+<div class="lk"><span class="lt">GitHub Changelog 索引</span><a href="https://github.blog/changelog/" target="_blank" rel="noopener">https://github.blog/changelog/</a></div>
+</div>
+</article>
+<article id="s2-5">
+<div class="a-h"><div class="a-n">9</div><h3>LiteLLM 窗口内连发 5 个版本，LTS 线新增「Responses API 需设置 drop_params」迁移要求</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">LiteLLM 在本期窗口内发布 v1.106.9、v1.108.6（LTS）、v1.109.1、v1.110.0-rc.2 与 1.108.7（LTS）共 5 个版本。1.108.7 LTS 列出 14 个 PR（3 新增、8 修复、1 变更），其中一项「需要动作」的迁移要求是：经 chat completions 桥接到其他提供商的场景，必须设置 <code>drop_params: true</code> 或停止发送 <code>max_tool_calls</code> 这类仅 Responses API 支持的字段。</p>
+<div class="body">
+<p>1.108.6 LTS 的迁移要求与之不同但同属「需要动作」级别：把 <code>tenant_id</code>、<code>client_id</code>、<code>client_secret</code>、<code>azure_username</code>、<code>azure_password</code> 与 <code>azure_scope</code> 这些请求标签移入 <code>metadata</code>（PR #51254）。全部 5 个版本的 Docker 镜像继续使用 cosign 签名，签名公钥固定在 commit <code>e82a3c6</code>（<code>e82a3c646908ba0a6ee0beddc4310d7a6cac4065</code>）对应的 <code>cosign.pub</code>。</p>
+<p>延续上一期的口径提醒：v1.109.0 曾列出 5 项需要动作的迁移要求（字符串回退目标须改为模型名列表、缓存 <code>cache_params.type</code> 须由 disk 改为 local 或 redis 等），升级前建议先对照本期两处新增要求一次性完成改造，避免在同一版本线上反复返工。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">官方 Release 页</span><a href="https://github.com/BerriAI/litellm/releases/tag/v1.110.0-rc.2" target="_blank" rel="noopener">https://github.com/BerriAI/litellm/releases/tag/v1.110.0-rc.2</a></div>
+<div class="lk"><span class="lt">1.108.7 LTS Release 页</span><a href="https://github.com/BerriAI/litellm/releases/tag/v1.108.7" target="_blank" rel="noopener">https://github.com/BerriAI/litellm/releases/tag/v1.108.7</a></div>
+<div class="lk"><span class="lt">官方 Release 列表</span><a href="https://github.com/BerriAI/litellm/releases" target="_blank" rel="noopener">https://github.com/BerriAI/litellm/releases</a></div>
+</div>
+</article>
+<article id="s2-6">
+<div class="a-h"><div class="a-n">10</div><h3>Vercel AI SDK 发布 ai@7.0.171 与 ai@6.0.331：修复畸形消息校验导致的内存与 CPU 耗尽</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 正文与时间戳已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">Vercel AI SDK 于 11 月 13 日 04:16 至 04:24 CST 连续发布 ai@6.0.331、ai@7.0.171 及十余个配套 provider 包版本。核心修复是：<code>validateUIMessages</code>、<code>safeValidateUIMessages</code> 与 agent UI 流助手此前会对每个非法 part 报告全部 schema 的问题，导致少量畸形 part 的请求也可能耗尽内存。</p>
+<div class="body">
+<p>修复后的行为是：每个 part 只按其自身类型的 schema 校验，遇到第一个非法消息或 part 即停止，并在 provider 或工具元数据中出现非法 JSON 值时只报告为单条问题。ai@7.0.171 还新增：下载文件输入时转发 provider 配置的 fetch 传输（<code>createDownload</code> 增加 <code>fetch</code> 选项），使核心下载同样可启用 guarded-fetch 的可选 DNS 校验；该函数也可作为 <code>experimental_download</code> 传给 <code>generateText</code> 与 <code>streamText</code>，并已覆盖模型返回的生成文件 URL。官方同时提示默认 URL 检查不做 DNS 解析，对不可信 URL 建议使用受控传输或网络出口管控。</p>
+<p>同期 <code>@ai-sdk/tool-web-fetch@1.0.21</code> 同步上述改动，<code>@ai-sdk/topaz@3.0.27</code> 新增 Topaz 图像与视频模型目录（含模型 ID 建议、API 别名、能力、轮询默认值与 provider 选项元数据），<code>@ai-sdk/typesafe-ai@3.0.39</code> 新增 TypeSafe AI 决策模型目录。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">官方 Release 页</span><a href="https://github.com/vercel/ai/releases/tag/ai%407.0.171" target="_blank" rel="noopener">https://github.com/vercel/ai/releases/tag/ai%407.0.171</a></div>
+<div class="lk"><span class="lt">官方 Release 页</span><a href="https://github.com/vercel/ai/releases/tag/ai%406.0.331" target="_blank" rel="noopener">https://github.com/vercel/ai/releases/tag/ai%406.0.331</a></div>
+<div class="lk"><span class="lt">官方 Release 列表</span><a href="https://github.com/vercel/ai/releases" target="_blank" rel="noopener">https://github.com/vercel/ai/releases</a></div>
+</div>
+</article>
+<article id="s2-7">
+<div class="a-h"><div class="a-n">11</div><h3>llama.cpp 窗口内发布 b12302 至 b12329 共 19 个构建，含 Gemma 4 工具参数 schema 重构与 CUDA NVFP4 预填充优化</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub Release 列表与时间戳已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">llama.cpp 在 11 月 12 日 07:00 至 11 月 13 日 07:00 CST 的窗口内连续发布 19 个构建，编号从 b12302 到 b12329。其中 b12323 重构 Gemma 4 的工具参数 schema 解析，b12329 优化 nvfp4 量化检查点的 CUDA 预填充路径，b12307 修复 Metal SOLVE_TRI 内核的越界读。</p>
+<div class="body">
+<p>具体可引用的变更包括：b12303 的 jinja 模板支持链式比较与参数展开；b12304 让调度器跨保留区复用 graph result 实例；b12306 为 Vulkan 后端增加批量张量拷贝 API；b12314 为 Adreno 架构的 OpenCL 后端增加分解式 FA；b12316 在 MMQ stream-k 修复中跳过空的 MoE tile；b12320 修复 SYCL 超过 4GB 时的 AOT 编译问题并新增 <code>--ao</code> 选项；b12321 让 SYCL 的 oneDNN FA 缓存线程安全并记忆运行时失败；b12322 避免触碰未使用的 graph 元数据页；b12327 把 SpacemiT Q4_1 32x256 派发到 HP kernel；b12328 为 ggml-backend 增加跨 split 的输入预取。</p>
+<p>延续上一期口径：本条只登记构建数量与可引用的功能条目，b 号级的细节变更以各 Release 页为准。同期开发生态还有 crewAI 1.15.41（允许已批准的私有 URL 主机、修复 PyMuPDF 2.x 依赖等 4 项），因属常规补丁未单列条目。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">窗口内最新构建 Release 页</span><a href="https://github.com/ggml-org/llama.cpp/releases/tag/b12329" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases/tag/b12329</a></div>
+<div class="lk"><span class="lt">官方 Release 列表，19 个构建核对入口</span><a href="https://github.com/ggml-org/llama.cpp/releases" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/releases</a></div>
+<div class="lk"><span class="lt">同期 Claude Code Release 页</span><a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.323" target="_blank" rel="noopener">https://github.com/anthropics/claude-code/releases/tag/v2.1.323</a></div>
+</div>
+</article>
+</section>
+<section id="s3">
+<div class="sec-h"><span class="no">03</span><h2>模型发布</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s3-1">
+<div class="a-h"><div class="a-n">12</div><h3>Google 发布 Gemini 4 Hydrogen：1M 上下文、输入 1.50 美元 / 输出 7.50 美元每百万 token、四档思考级别</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Google 官方博客原文已取（性能数字为发布方口径）</span><span class="tag">2026-11-12 / 11-13 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">Google 于 11 月 12 日发布 Gemini 4 Hydrogen，定位为「面向日常编码与 agentic 工作流的高效模型」，是 Gemini 4 系列在 Carbon、Argon 之后的第三款模型。官方公布其整段 100 万 token 上下文内价格恒定为输入 1.50 美元、输出 7.50 美元（每百万 token），并提供 low、medium、high（默认）与新增的 xhigh 四档思考级别。</p>
+<div class="body">
+<p>官方给出的性能口径是：在默认 high 档下，Hydrogen 在 Artificial Analysis Intelligence Index 上以 51 分超过 Argon 的 50 分，在最高的 xhigh 档达到 54 分（均为官方引述第三方指数，未见独立复现）。相对上一代 Gemini 3.8 Flash，官方称其任务完成速度快 2.5 倍，Terminal-Bench 4.1 得分从 18.2% 提升到 57%，编造事实减少 5 倍以上；其他官方数字包括 HLE-Diamond 58.8%、Vals Tax Agent Bench 52.3%（总榜第一）、Vals Legal Research Bench 55.8%（并列第一）、MKA 多模态知识 agent 基准 53.4%，以及 Agent Arena 排名第 5。</p>
+<p>能力边界方面：原生 100 万 token 输入、最高 100 万 token 输出。安全侧官方称在 agentic 任务中的越界行为减少最多 81%、欠服务最多降低 79%，工具使用与编码评测中的错位动作与任务走捷径减少 12 倍，面对不可能或被阻止的任务绕过权限边界的概率最多降低一半；此外官方称在逾 20 万轮审计中保留 99.9% 的思维链可读性，在 Gray Swan IPI 基准上对间接提示注入的抵抗力提升 2.3 倍以上，HealthBench Pro 的误拒率控制在 0.4% 以下。以上均为发布方口径。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Google 官方发布博客</span><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/" target="_blank" rel="noopener">https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/</a></div>
+<div class="lk"><span class="lt">Google 官方搜索升级公告</span><a href="https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/" target="_blank" rel="noopener">https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/</a></div>
+<div class="lk"><span class="lt">Hugging Face 官方博客，对照阅读</span><a href="https://huggingface.co/blog/qvac/botpsy" target="_blank" rel="noopener">https://huggingface.co/blog/qvac/botpsy</a></div>
+</div>
+</article>
+</section>
+<section id="s4">
+<div class="sec-h"><span class="no">04</span><h2>产品应用</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s4-1">
+<div class="a-h"><div class="a-n">13</div><h3>Gemini 4 Hydrogen 上线 Google 搜索：AI Mode 与 AI Overviews 全球全量替换，并进入 Gemini 应用、for business 与 AI Studio</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Google 官方搜索升级公告原文已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">Google 官方公告：Gemini 4 Hydrogen 已在全球范围内接入 Google 搜索，成为 AI Mode 的新默认模型，并用于 AI Overviews 中最复杂的问题解答。官方称这是搜索史上最大的一次模型升级，可处理多部分问题、含错别字的长句与高度具体的需求，并升级了查询 fan-out 与链接覆盖。</p>
+<div class="body">
+<p>上线面按官方说明分为三类。开发者：可在 AI Studio 与 Android Studio 通过 Gemini API 调用，并在 AI Studio 直接试用；付费 Google AI Pro 或 Ultra 订阅者可在 Google Antigravity 中使用。企业：可通过 API 或模型下拉在 Gemini for business 部署，也可在 Antigravity 与符合条件的企业订阅版 Gemini in Sheets 中使用。全体用户：在 Gemini 应用模型下拉中直接选择，搜索对所有用户开放，Gemini in Sheets 面向 Google AI Pro 与 Ultra 订阅者先行，Gemini 应用免费用户则通过自动模型选择在合适时启用。</p>
+<p>搜索侧的具体变化有四项官方描述：意图理解更准（自然语流、多部分问题、难识别错别字、具体请求）、查询 fan-out 与链接覆盖扩大、响应更具视觉性（更多图像、结构化响应、对比表格与自定义工具）、以及语言理解更丰富（覆盖当前支持的全部 AI Mode 语言）。页面同时标注摘要由 Google AI 生成、生成式 AI 仍属实验特性。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Google 官方搜索升级公告</span><a href="https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/" target="_blank" rel="noopener">https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/</a></div>
+<div class="lk"><span class="lt">Google 官方模型博客，含各面上线说明</span><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/" target="_blank" rel="noopener">https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/</a></div>
+<div class="lk"><span class="lt">TechCrunch 独立报道</span><a href="https://techcrunch.com/2026/11/12/googles-latest-search-upgrade-promises-better-answers-to-your-most-complicated-questions/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/12/googles-latest-search-upgrade-promises-better-answers-to-your-most-complicated-questions/</a></div>
+</div>
+</article>
+<article id="s4-2">
+<div class="a-h"><div class="a-n">14</div><h3>United Airlines 限制第三方 AI 助理代订机票与改签，理由为凭据泄露风险与可能违反 FAA 规定</h3></div>
+<div class="tags"><span class="tag cross">多源交叉 · TechCrunch 原创报道 + 华尔街日报报道</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">美国航空（United Airlines）宣布限制 AI 助理代用户订票与管理预订，理由是网络安全风险以及可能与联邦航空规定冲突。官方声明称此举「直接在我们自有数字平台内，以及通过旅行社与聚合平台间接」实施，并同步更新订票、出票与分销政策。</p>
+<div class="body">
+<p>联合航空在声明中提示：把账户凭据共享给个人第三方 AI 助理可能暴露敏感信息，这些工具执行的动作可能造成非预期购买、账户变更或里程（MileagePlus）被使用。另一项考量是联邦航空规则 —— 仍要求由人工完成值机确认以确认行李不含违禁物品。公司未披露该限制的具体生效日期与技术实现方式（是识别客户端特征、还是限制自助渠道的第三方授权）。</p>
+<p>这一动作把上一期「线索雷达」中的同一事件升级为完整条目：上期仅依据华尔街日报的单一来源报道，本期取得 TechCrunch 原创报道，两源交叉确认公司已公开表态并给出理由。背景上，这是继美国银行（如美国银行上周公开提醒客户不要向 AI 助理共享密码）之后，航空业对「AI 代理代替用户操作账号」给出限制的又一案例。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 原创报道，含联合航空声明原文</span><a href="https://techcrunch.com/2026/11/12/united-airlines-blocks-ai-agents-from-booking-flights-citing-cybersecurity-risks/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/12/united-airlines-blocks-ai-agents-from-booking-flights-citing-cybersecurity-risks/</a></div>
+<div class="lk"><span class="lt">华尔街日报原始报道，经 Techmeme 聚合</span><a href="https://www.techmeme.com/261111/p39" target="_blank" rel="noopener">https://www.techmeme.com/261111/p39</a></div>
+</div>
+</article>
+<article id="s4-3">
+<div class="a-h"><div class="a-n">15</div><h3>OpenAI 承诺 200 万美元支持儿童 AI 安全研究，目标是产出可共享的风险与机会度量工具</h3></div>
+<div class="tags"><span class="tag warn">官方页 · 本次环境 403，需人工打开</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">OpenAI 官方发布页宣布承诺 200 万美元，支持人工智能与儿童安全方向的研究工作。官方说明称，这笔资金用于支持共享工具，以度量面向青少年的 AI 风险与机会。</p>
+<div class="body">
+<p>本期通过 OpenAI 官方 RSS 取得该条目的标题与摘要，确认了金额（200 万美元）、研究主题（AI 与儿童安全）与资金用途（支持可共享的度量工具）三项要素。该发布页正文在本环境返回 HTTP 403，未能逐字取到条款细节，因此本期只登记官方 RSS 载明的内容，不补充原文未见的项目名单、时间表或合作方信息。</p>
+<p>在当日 OpenAI 官方发布的其余条目中，《Gilbert + Tobin rethinks the business of law with AI》与《How Amplitude ships product improvements in 1–2 days with OpenAI》属客户案例类内容，事实密度与时效性不足，本期不单列条目。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">OpenAI 官方发布页，本次环境 403，需人工打开</span><a href="https://openai.com/index/children-first-declaration" target="_blank" rel="noopener">https://openai.com/index/children-first-declaration</a></div>
+<div class="lk"><span class="lt">OpenAI 官方 RSS，标题与摘要已取</span><a href="https://openai.com/news/rss.xml" target="_blank" rel="noopener">https://openai.com/news/rss.xml</a></div>
+</div>
+</article>
+</section>
+<section id="s5">
+<div class="sec-h"><span class="no">05</span><h2>技术与洞察</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s5-1">
+<div class="a-h"><div class="a-n">16</div><h3>IBM 与 Hugging Face 发布 LLMON 预览模型 granite-4.1-3b-LLMON-preview 与 8b 版本，用保留特殊 token 承载结构与语义</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Hugging Face 官方博客原文已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">IBM 与 Hugging Face 发布 LLMON（LLM Object Notation，读作「lemon」）—— 一种面向 LLM 的标记语言，用保留的特殊 token 分隔符显式表达上下文各组成部分的结构与语义。基于 Granite 4.1 基础模型训练的两个实验预览模型 granite-4.1-3b-LLMON-preview 与 granite-4.1-8b-LLMON-preview 同期开放。</p>
+<div class="body">
+<p>官方给出的出发点是：JSON 是为解析器设计的，分词器并不受语法约束，结构信息被编码进 <code>{</code>、引号、冒号这类普通 token，模型无法区分文档中的引号与字段闭合引号。LLMON 改用类似 XML 的标记语言，但结构分隔符是保留特殊 token 而非普通字符，结构与内容占用词表的不同部分，标签在每段开头声明、段落边界显式、嵌套结构局部声明。</p>
+<p>安全侧的官方结论是：隐藏在用户数据中的间接提示注入在 LLMON 模型上大多被忽略，部分基准上的攻击成功率降至接近零，而常规指令微调模型被劫持的概率很高，同时保持相当的一般能力。工程侧提供 JSON 与 LLMON 的无损互转工具与示例 notebook，可在 LLMON 模型之上再训练 LoRA 以适配自定义结构；Mellea 已内置 LLMON 支持（自动对调用做 LLMON 化）。需要说明的是，官方明确 LLMON 不替代 chat template，而是在其之上补充「每个部分是什么、彼此关系如何」的语义标注。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Hugging Face 官方博客</span><a href="https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite" target="_blank" rel="noopener">https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite</a></div>
+<div class="lk"><span class="lt">Hugging Face 官方博客，对照阅读</span><a href="https://huggingface.co/blog/3d-lora-finetuning" target="_blank" rel="noopener">https://huggingface.co/blog/3d-lora-finetuning</a></div>
+</div>
+</article>
+<article id="s5-2">
+<div class="a-h"><div class="a-n">17</div><h3>Hugging Face 发布 3D 生成模型微调指南：给出 TRELLIS.2 的 LoRA 微调脚本与容器</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Hugging Face 官方博客原文已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">Hugging Face 官方博客发布 3D 生成模型的完整微调指南，提供针对 TRELLIS.2 的微调脚本与容器，可本地运行也可在 Hugging Face Jobs 上运行。官方以 Google Scanned Objects（GSO）数据集中的一个物体类别为例，演示如何针对特定任务微调通用 3D 生成模型。</p>
+<div class="body">
+<p>指南给出的方法论要点是区分哪些环节该微调、哪些应冻结：TRELLIS 的统一隐空间表示把结构、细节几何与材质三类信息分离解码，因此微调时只针对需要精度的部分调整，其余保持冻结。作者以家具模型对几何精度的要求为例说明通用模型在该场景会产生不足够精确的几何。指南还指出，3D 生成的困难在于生成对象需要遵守严格规则，且模型与数据表示在 GLB、PLY 以及 NeRF 等多种表示之间缺少统一标准。</p>
+<p>本期未取到指南中所有超参与数据配比的具体数值，本期只保留可核对的方法论与交付物形态（脚本、容器、GSO 数据集用法）。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Hugging Face 官方博客</span><a href="https://huggingface.co/blog/3d-lora-finetuning" target="_blank" rel="noopener">https://huggingface.co/blog/3d-lora-finetuning</a></div>
+<div class="lk"><span class="lt">Hugging Face 官方博客，对照阅读</span><a href="https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite" target="_blank" rel="noopener">https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite</a></div>
+</div>
+</article>
+<article id="s5-3">
+<div class="a-h"><div class="a-n">18</div><h3>GitHub Secret scanning 新增 Cloudflare service token 检测类型</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · GitHub 官方 Changelog 原文已取</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">GitHub 官方 Changelog 公告：Secret scanning 现已自动检测仓库中的 Cloudflare service token，新增检测类型标识为 <code>cloudflare_access_service_token</code>。在公开仓库中命中时，会通过 secret scanning 合作计划自动上报给密钥发行方；用户自有密钥在公开或私有仓库中命中都会产生告警。</p>
+<div class="body">
+<p>这一条属于易被忽略但对运维有实际价值的小更新：Cloudflare Access 服务令牌一旦进入仓库，通常可用于代表该服务身份发起请求，泄露后果取决于令牌所绑定的账号与策略范围。GitHub 此前已在自家产品与文档中推广 Cloudflare Access，因此把该类型纳入默认检测集合，属于补齐既有合作方覆盖。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">GitHub 官方 Changelog</span><a href="https://github.blog/changelog/2026-11-12-secret-scanning-adds-a-detector-for-cloudflare" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-12-secret-scanning-adds-a-detector-for-cloudflare</a></div>
+<div class="lk"><span class="lt">GitHub Changelog 索引</span><a href="https://github.blog/changelog/" target="_blank" rel="noopener">https://github.blog/changelog/</a></div>
+</div>
+</article>
+</section>
+<section id="s6">
+<div class="sec-h"><span class="no">06</span><h2>行业动态</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s6-1">
+<div class="a-h"><div class="a-n">19</div><h3>Nebius 公布 2027 年 400 亿美元投入计划，靠客户预付与贷款融资；微软新泽西 Vineland 机房交付推迟至 2027 年 Q2</h3></div>
+<div class="tags"><span class="tag warn">媒体 · TechCrunch 原创报道</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">新型云服务商 Nebius 在 11 月 12 日的第三季业绩电话会上公布 2027 年 400 亿美元的计划投入，远高于华尔街预期。其融资方式依赖客户预付款与以客户合同为担保的贷款，即用数据中心的未来价值来融资建设。CEO Arkady Volozh 在会上承认：「以这个规模建设很难，延期是我们行业的现实，我们也不能免疫。」</p>
+<div class="body">
+<p>这一风险的现实样本是微软的新泽西 Vineland 机房：该数据中心由第三方运营商 DataOne 运营，Nebius 与微软的合同金额最高达 194 亿美元。目前仅有略多于一半的微软容量计划在年底前交付，其余推迟到 2027 年第二季度，原因是 DataOne 「比预期更快地终止临时供电」，该站点正切换到 Bloom Energy 燃料电池。</p>
+<p>延期并非单纯的技术时序问题：Floodlight 调查发现 DataOne 站点至少有 45 台天然气发电机在运行且未取得运营许可，新泽西州监管机构据此处以 110 万美元罚款；该站点另面临附近居民的噪声诉讼。按 Nebius 对微软合同的摘要，若交付日期错过且未提供替代容量，微软可在宽限期后终止受影响服务，合同亦包含迟延交付的财务罚则。Nebius 表示微软「参与了规划过程」，但未说明微软是否已同意新日期。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 原创报道，含合同与延期细节</span><a href="https://techcrunch.com/2026/11/12/nebius-tests-the-neocloud-playbook-with-40-billion-in-planned-spending/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/12/nebius-tests-the-neocloud-playbook-with-40-billion-in-planned-spending/</a></div>
+<div class="lk"><span class="lt">Techmeme 聚合页，同日相关报道</span><a href="https://www.techmeme.com/261112/p54" target="_blank" rel="noopener">https://www.techmeme.com/261112/p54</a></div>
+</div>
+</article>
+<article id="s6-2">
+<div class="a-h"><div class="a-n">20</div><h3>Norwest 完成 40 亿美元基金，为其第十八只、也是规模最大的一只，重点投向 AI</h3></div>
+<div class="tags"><span class="tag warn">媒体 · TechCrunch 原创报道</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">投资机构 Norwest 完成 40 亿美元基金募集。这是这家成立 65 年的多阶段投资机构的第十八只基金，也是规模最大的一只。该基金由威尔斯法克独家支持，将投向美国、印度与以色列等地，重点覆盖 AI。高级管理合伙人 Jeff Crowe 表示：「我们对 AI 采取广泛策略，是因为 AI 的影响本身就很广泛。」</p>
+<div class="body">
+<p>Norwest 给出的投向包括消费、医疗与技术等核心行业中构建产品与服务的 AI 初创，以及物理 AI、语音 AI、agentic 网络安全与航空航天四个方向。Crowe 特别提到对早期 AI-native 应用与基础设施、垂直领域模型与网络安全方案的投资兴趣。该机构此前投资过 Plaid、Spotify、Uber 与 Vuori；自上一只基金（2024 年关闭的 30 亿美元第十七期）以来已完成 87 笔以上投资，近期案例包括 AI agent 评测工具公司 Coval 与做机器人基础模型的 Generalist AI。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 原创报道</span><a href="https://techcrunch.com/2026/11/12/norwest-pushes-deeper-into-ai-with-new-4b-fund/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/12/norwest-pushes-deeper-into-ai-with-new-4b-fund/</a></div>
+<div class="lk"><span class="lt">TechCrunch 当日 AI 报道索引</span><a href="https://techcrunch.com/2026/11/12/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/12/</a></div>
+</div>
+</article>
+</section>
+<section id="s7">
+<div class="sec-h"><span class="no">07</span><h2>安全事件</h2><span class="cnt">4 条 · 按重要性排列</span></div>
+<article id="s7-1">
+<div class="a-h"><div class="a-n">21</div><h3>Apache HTTP Server mod_http2 严重漏洞 CVE-2026-119618：影响 2.4.55 至 2.4.70，修复于 2.4.71</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">Apache HTTP Server 的 HTTP/2 模块 mod_http2 存在严重漏洞 CVE-2026-119618，远程未认证攻击者可在服务器上执行代码。受影响版本为 2.4.55 至 2.4.70，修复版本 2.4.71 已于 11 月 11 日发布；仅启用了 HTTP/2 的服务器受影响。Red Hat 以该服务器为组成部分发行其企业产品线。</p>
+<div class="body">
+<p>该漏洞被报道为 critical 级别，属 Apache HTTP Server 维护线上的高优先级更新项。对使用 Apache 反向代理承载 AI 应用（含流式响应与 SSE 长连接）的团队，HTTP/2 是常用配置，因此暴露面判断不能只看是否直接对外提供 Apache 服务，还需确认前置代理是否启用 HTTP/2 到后端。</p>
+<p>需要说明的是，本期未取到 Apache 官方安全公告页原文（未在采集源中定位到对应公告链接），受影响版本区间与修复版本均以 The Hacker News 报道口径为准，建议以官方公告页二次确认后再排期。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">The Hacker News 报道，含 CVE 编号与版本区间</span><a href="https://thehackernews.com/2026/11/critical-apache-http2-flaw-could-let.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/critical-apache-http2-flaw-could-let.html</a></div>
+<div class="lk"><span class="lt">The Hacker News 安全栏目索引</span><a href="https://thehackernews.com/2026/11/" target="_blank" rel="noopener">https://thehackernews.com/2026/11/</a></div>
+</div>
+</article>
+<article id="s7-2">
+<div class="a-h"><div class="a-n">22</div><h3>Node.js 一次修复 16 个漏洞，两个 HTTP/2 漏洞可致未认证客户端击垮服务器并读到其他连接的内存</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">Node.js 本周发布安全更新，一次修复 16 个漏洞。其中一个 HTTP/2 漏洞可让未认证客户端击垮使用运行时内置 HTTP/2 支持的服务器，影响 24.x 与 26.x 两条发行线；另一个 HTTP/2 漏洞可致服务器向客户端发送本进程内存片段，其中包含本应返回给其他连接的响应数据。</p>
+<div class="body">
+<p>两个漏洞都位于 Node.js 内置 HTTP/2 支持路径，属于「无需凭据即可触达」的类别，对把 Node.js 直接暴露公网并启用 HTTP/2 的 API 服务（含大量自建 AI 推理网关与 MCP 服务）风险更直接。官方为三条受支持发行线都发布了修复版本。</p>
+<p>与 Apache 那条并置来看，本周期内 HTTP/2 栈的缺陷密度明显上升：Apache 的 mod_http2、Node.js 内置 HTTP/2 两处独立实现同期出现高危问题，建议把 HTTP/2 相关组件的版本基线作为本轮例行检查项。服务端点与版本号以 Node.js 官方发布页为准，本期未逐条取到具体修复版本清单。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">The Hacker News 报道</span><a href="https://thehackernews.com/2026/11/nodejs-fixes-16-flaws-including-http2.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/nodejs-fixes-16-flaws-including-http2.html</a></div>
+<div class="lk"><span class="lt">Node.js 官方安全发布页，核对入口</span><a href="https://nodejs.org/en/blog/vulnerability" target="_blank" rel="noopener">https://nodejs.org/en/blog/vulnerability</a></div>
+</div>
+</article>
+<article id="s7-3">
+<div class="a-h"><div class="a-n">23</div><h3>攻击者用 4,837 个被盗 GitHub 账号在至少 1,806 个仓库植入 CI 密钥窃取器</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">据 Aikido Security 报告，攻击者自本周二起使用 4,837 个被劫持 GitHub 账号的凭据，在这些账号有权写入的仓库中植入密钥窃取器，该恶意程序已在至少 1,806 个仓库中运行，用于获取 CI 工作流可触达的密钥与云凭据。</p>
+<div class="body">
+<p>这类攻击的路径是凭据复用而非漏洞利用：拿到开发者或机器人账号的令牌后，直接以合法身份向仓库推送包含恶意 CI 配置的提交，让窃取器在拥有密钥访问权限的 CI 环境中运行。因此「推送成功」本身不会在代码评审里显出异常，密钥在 CI 日志或外传通道中才被取走。</p>
+<p>对使用 CI 跑密钥注入、用共享机器人账号提交、以及把云凭据写入 CI secrets 的团队，本条的处置方向是收紧账号令牌与提交来源、检查近期异常提交历史与工作流文件改动、并轮换经由该 CI 路径可触达的凭据。本期未取到 Aikido 的原始报告页，受影响仓库清单与具体恶意文件特征需以原文为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">The Hacker News 报道</span><a href="https://thehackernews.com/2026/11/4837-hijacked-github-accounts-ran-ci.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/4837-hijacked-github-accounts-ran-ci.html</a></div>
+<div class="lk"><span class="lt">The Hacker News 安全栏目索引</span><a href="https://thehackernews.com/2026/11/" target="_blank" rel="noopener">https://thehackernews.com/2026/11/</a></div>
+</div>
+</article>
+<article id="s7-4">
+<div class="a-h"><div class="a-n">24</div><h3>186 个仿冒 AI 工具域名被用于投递 ClickFix 诱饵、浏览器劫持扩展与搜索劫持</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-12 / 11-13 首次公开</span></div>
+<p class="lede">安全厂商 Island 发现 186 个仿冒 AI 工具的域名在投递 ClickFix 式诱饵、浏览器劫持型恶意软件，以及一批劫持用户搜索的浏览器扩展。该投递模式被命名为 TypoPrompting，特点是让「以为自己在访问 AI 工具」的用户落入精心构造的引导流程。</p>
+<div class="body">
+<p>按 Island 的描述，这类仿冒域名的运作方式是把「访问 AI 应用」这一动作本身当作投递通道：用户为使用某个 AI 工具访问该域名后，被引导执行复制粘贴、授权安装扩展或运行命令等步骤，后续载荷包括接管搜索的扩展与浏览器内的恶意软件。域名数量（186 个）与命名该模式的研究方均来自同一来源，本期未取得独立第二来源核对，按「研究方原文口径」表述。</p>
+<p>对开发者的直接提示是：仿冒目标集中在 AI 工具域名上，意味着「AI 应用页面」本身不再天然可信，浏览器扩展安装授权与复制粘贴命令这两类动作应作为高风险动作对待。具体的恶意域名清单与拦截特征以 Island 原文为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">The Hacker News 报道</span><a href="https://thehackernews.com/2026/11/186-fake-ai-domains-redirect-users-to.html" target="_blank" rel="noopener">https://thehackernews.com/2026/11/186-fake-ai-domains-redirect-users-to.html</a></div>
+<div class="lk"><span class="lt">The Hacker News 安全栏目索引</span><a href="https://thehackernews.com/2026/11/" target="_blank" rel="noopener">https://thehackernews.com/2026/11/</a></div>
+</div>
+</article>
+</section>
+
+<section id="s9">
+<div class="sec-h"><span class="no">09</span><h2>后续追踪</h2><span class="cnt">连续事件</span></div>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>Nvidia 领导层与出口管制</h3></div>
+<p class="lede">11 月 12 日董事会公告黄仁勋辞任，CFO Colette Kress 任临时 CEO，白宫讨论商务部部长去留，国会民主党启动调查、黄仁勋同意周三作证</p>
+<div class="body"><p>下一步关注：正式继任者公告、下一季财报中 Kress 的战略表述、Nvidia 对华出口规则变化的官方口径</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>Anthropic 上市进程</h3></div>
+<p class="lede">11 月 11 日已更新 IPO 文件给出 70 至 78 美元定价区间与约 1.404 万亿美元隐含估值</p>
+<div class="body"><p>11 月 12 日彭博社报道认购约为发行量六倍且现有股东获优先配售；另有报道称 Nvidia 约 100 亿美元的上市后投资因黄仁勋离任而存疑</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>Fireworks AI 安全事件</h3></div>
+<p class="lede">10 月 9 日首份公告（仅评测密钥）</p>
+<div class="body"><p>11 月 9 日范围扩大至账单、账户信息、部分密钥、数据集与不完整权重，并指向 LLMJacking 团伙</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>Google Gemini 4 系列</h3></div>
+<p class="lede">11 月 10 日 Carbon 发布（每百万输入 2 美元、输出 10 美元），Argon 为深度推理旗舰</p>
+<div class="body"><p>11 月 12 日 Hydrogen 发布（输入 1.50 美元、输出 7.50 美元），并在搜索与 Antigravity 全量上线</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>LiteLLM 版本线</h3></div>
+<p class="lede">11 月 11 日 v1.109.0（982 个 PR、5 项需要动作的迁移）与 v1.110.0-rc.1</p>
+<div class="body"><p>11 月 12 日至 13 日窗口内再发 v1.106.9、v1.108.6、v1.109.1、v1.110.0-rc.2、1.108.7 LTS，LTS 线新增 <code>drop_params: true</code> 迁移要求</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>llama.cpp 版本节奏</h3></div>
+<p class="lede">11 月 12 日窗口内 b12262 至 b12292 共 15 个构建</p>
+<div class="body"><p>11 月 12 至 13 日窗口内 b12302 至 b12329 共 19 个构建，其中 b12323 重构 Gemma 4 工具参数 schema</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>GitHub Actions 运行环境</h3></div>
+<p class="lede">此前 Node 20 支持终止（Node 24 不支持 ARM32）</p>
+<div class="body"><p>11 月 12 日官方公告托管 runner 将于 12 月 8 日停止 Windows 与 Linux 的 ARM32 作业执行</p></div>
+</article>
+</section>
+<section id="s10">
+<div class="sec-h"><span class="no">10</span><h2>编辑备注</h2><span class="cnt">采集限制与口径</span></div>
+<div class="body">
+<p>本期检索窗口为 2026-11-12 07:00 至 2026-11-13 07:00（Asia/Shanghai），无 72 小时补收条目。窗口内命中带时间戳条目 131 条（其中 arXiv 预印本占多数，正文只取与开发者决策直接相关者）。</p>
+<p>采集方式：官方博客与公告 RSS（OpenAI、Anthropic、Google、Meta、Microsoft、NVIDIA、Mistral、Ollama、Perplexity、Hugging Face、GitHub Blog 与 Changelog）、GitHub Releases API（40 余个项目）、arXiv cs.AI/cs.CL、Techmeme 聚合、TechCrunch AI 与开发者频道、The Hacker News 安全频道，以及 NotebookLM research 四轮检索（Q1 覆盖发布与开发生态、Q2 覆盖各厂商官方更新、Q3 覆盖安全与合规、Q4 覆盖额度与限流类小更新，每轮返回 10 条来源线索）。检索只使用公开信息，未上传任何内部或敏感材料。</p>
+<p>链接核验：公开条目链接逐条实际访问，结果与核验脚本见 <code>ep018/work/linkcheck.py</code>、<code>ep018/work/linkcheck.txt</code>；<code>openai.com/index/children-first-declaration</code> 在本环境返回 403（正文未取到，已在条目内标注「需人工打开」），其余条目链接均可达。</p>
+<p>口径边界说明：（1）Gemini 4 Hydrogen 的全部基准与安全数字均为 Google 官方发布方口径，已在正文标注「官方称」，未见独立复现；（2）Artificial Analysis Intelligence Index 的分数由 Google 官方引述第三方指数得出，属单一第三方来源，已注明；（3）Anthropic IPO 认购倍数、开源权重模型携带 Blackwell 指纹、OpenAI 支持限制对华芯片、Cerebras 季报、商务部新规与 SpaceX 数据中心投资六项均为单一来源，按例程只进「前瞻与传闻」，不展开细节、不做推断；（4）美国国会调查、行政当局人事讨论与相关婚外情报道均来自媒体报道，本期未取得国会委员会新闻稿与 Nvidia 官方新闻稿原文，事实边界已按报道口径表述。</p>
+<p>本期未展开的窗口内条目（详见来源清单）：MongoDB 预认证崩溃漏洞 CVE-2026-118383、Google Cloud 关于 AMD Turin 三项侧信道漏洞的处置建议、Windows CLFS 驱动 SignDrop 零日利用、Red Hat Quay 私有镜像读取与覆盖漏洞、Citrix NetScaler 12 项漏洞、N-able N-central 新公开漏洞、PTC Windchill CVE-2026-126325、ScreenConnect 相关攻击与 SCKit 恶意软件、Google 会话劫持钓鱼活动、Netflix 等同批内容型条目，理由均为单次转述、缺少可核对的官方要素或与目标读者关联度不足。</p>
+</div></section>
+
+</main>
+</div>
+</div>
+</body>
+</html>
