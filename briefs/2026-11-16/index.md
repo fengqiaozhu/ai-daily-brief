@@ -19,16 +19,15 @@
 **开发生态**
 
 7. GitHub Mobile 适配 iPhone Duo：展开自适应布局 + 竖向标签
-8. GitHub Copilot 将于 12 月 14 日弃用一批模型，官方公布替代映射
 
 **产品应用**
 
-9. Google Ask Maps 上线节日出行新功能，可生成含实时信息的行程
+8. Google Ask Maps 上线节日出行新功能，可生成含实时信息的行程
 
 **技术与洞察**
 
-10. 端侧小模型幻觉检测器实测审计：4-bit 量化、4 种检测器、单 GPU 可复现
-11. 多智能体评测复盘：516 组配置下「多 Agent」优势多来自采样数量而非协作
+9. 端侧小模型幻觉检测器实测审计：4-bit 量化、4 种检测器、单 GPU 可复现
+10. 多智能体评测复盘：516 组配置下「多 Agent」优势多来自采样数量而非协作
 
 **前瞻与传闻**
 
@@ -156,27 +155,9 @@ GitHub 于 2026-11-16 14:30 UTC 在官方 Changelog 发布「Improvement」条�
 
 - https://github.blog/changelog/2026-11-16-take-github-mobile-with-you-on-iphone-duo （GitHub 官方 Changelog，2026-11-16，已访问原文）
 
-### 8. GitHub Copilot 将于 12 月 14 日弃用一批模型，官方公布替代映射
-
-**导语**
-
-GitHub 在官方 Changelog 公布：将于 2026 年 12 月 14 日在全部 GitHub Copilot 使用场景（Copilot Chat、行内编辑、ask 与 agent 模式、代码补全）弃用一批模型，并逐一给出建议替代项。弃用清单包含 Claude Fable 5、Claude Haiku 4.5、Claude Haiku 5.5、Gemini 3.8 Flash、Gemini 4 Hydrogen、Gemini 4 Argon、Gemini 4 Carbon、Grok 4.6、Grok 4.7 与 Kimi K3。本条为 72 小时补收条目（首次公开于 2026-11-13 20:40 UTC）。
-
-**详细内容**
-
-官方给出的替代映射为：Claude Fable 5 → Claude Fable 5.2；Claude Haiku 4.5 → Claude Haiku 5.5；Gemini 3.8 Flash、Gemini 4 Hydrogen → Gemini 4 Argon；Gemini 4 Argon → Gemini 4 Carbon；Grok 4.6 → Grok 4.7；Kimi K3 的替代项官方标注为「待公布（To be announced）」。唯一例外是 Claude Haiku 4.5：对采用年付个人订阅的 GitHub Copilot 个人用户，该模型弃用不适用。
-
-官方同时说明，在默认模型启用（default model enablement）状态下，Copilot Enterprise 与 Copilot Business 客户的建议替代模型会自动启用，除非管理员关闭了全局默认或显式禁用了该模型；关闭全局默认的团队可在 Copilot 模型策略中自行启用替代模型。
-
-影响面提示：已在工作流、集成或自建工具中固定使用上述模型的团队，需要在 12 月 14 日前完成切换；同时注意 Gemini 4 Argon 与 Gemini 4 Carbon 在表中互相接力，跨版本依赖链需一并核对。
-
-**相关链接**
-
-- https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december （GitHub 官方 Changelog，2026-11-13，已访问原文）
-
 ## 产品应用
 
-### 9. Google Ask Maps 上线节日出行新功能，可生成含实时信息的行程
+### 8. Google Ask Maps 上线节日出行新功能，可生成含实时信息的行程
 
 **导语**
 
@@ -195,7 +176,7 @@ Google 于 2026-11-16 14:00 UTC 在官方博客发布 Ask Maps 的节日出行�
 
 ## 技术与洞察
 
-### 10. 端侧小模型幻觉检测器实测审计：4-bit 量化、4 种检测器、单 GPU 可复现
+### 9. 端侧小模型幻觉检测器实测审计：4-bit 量化、4 种检测器、单 GPU 可复现
 
 **导语**
 
@@ -211,7 +192,7 @@ arXiv 新论文（2611.17339）指出，现有幻觉检测研究大多基于 7B�
 
 - https://arxiv.org/abs/2611.17339 （arXiv:2611.17339，2026-11-16 新投，已访问）
 
-### 11. 多智能体评测复盘：516 组配置下「多 Agent」优势多来自采样数量而非协作
+### 10. 多智能体评测复盘：516 组配置下「多 Agent」优势多来自采样数量而非协作
 
 **导语**
 
@@ -230,13 +211,12 @@ arXiv 新论文（2611.17610）复核了多智能体语言模型的评测实践�
 ## 后续追踪
 
 - 美国 AI 芯片与数据中心出口管制：本期已定位商务部一手规则文件（RIN 0694-AK50）并确认可访问 → 本期新增：确认存在针对「境外数据中心提供算力」的许可要求 → 下一步关注：正式生效日期、适用芯片参数阈值、许可例外，以及是否发布配套新闻稿。
-- GitHub Copilot 模型弃用：此前已公布 12 月 14 日对一批模型停用 → 本期新增：官方逐一给出建议替代映射，且确认 Kimi K3 的替代项「待公布」、Claude Haiku 4.5 对年付个人订阅用户不适用 → 下一步关注：12 月 14 日当天的实际切换表现与官方补偿说明。
 - OpenAI 医疗线：此前已在 Google Cloud 等医疗产品上布局 → 本期新增：同日两条官方公告，确认 computer-use agents、医疗插件、改进临床问答三项能力方向 → 下一步关注：官方正文页（本期 403）中的可用地区、套餐与上线节奏。
 - Ask Maps 行程能力：此前 Ask Maps 以单点问答为主 → 本期新增：官方博客与媒体报道双源确认可生成逐站带实时信息的行程 → 下一步关注：地区与语言支持、账号要求、实时数据来源。
 
 ## 编辑备注
 
-- **检索窗口**：2026-11-13 23:00 ~ 2026-11-16 23:15（Asia/Shanghai）。本期为补跑期次（例程 07:00 未触发，23:12 起稿），按 §13.2 扩展至 72 小时以覆盖最近一次漏跑时段；其中 2026-11-15 07:00 之后为最近 24 小时区间。第 8 条（GitHub Copilot 模型弃用）为 72 小时补收条目，已在条目内标注。
+- **检索窗口**：2026-11-13 23:00 ~ 2026-11-16 23:15（Asia/Shanghai）。本期为补跑期次（例程 07:00 未触发，23:12 起稿），按 §13.2 扩展至 72 小时以覆盖最近一次漏跑时段；本期收录条目全部落在最近 24 小时区间（2026-11-15 07:00 之后）内。
 - **一手源可用性**：openai.com 的公告正文页在本期环境返回 HTTP 403，涉及的第 2–6 条均只依据 OpenAI 官方 News RSS 的标题、发布时间与官方摘要成稿，链接按 §13.4 标注「需人工打开」；读者点击时应能正常访问。
 - **采集限制**：Anthropic 官方 News RSS 返回 404（沿用 EP020 记录），本期未取得其一手源；DeepMind 与 Hugging Face 官方博客窗口内无更新；Google Innovation 与 arXiv cs.CL 解析失败（沿用 EP020）；未抓取 GitHub 逐仓库 Release 接口（未认证配额受限）、Mistral 官方源与 Reuters 等二级源。
 - **条目筛选**：arXiv cs.AI 当日新投 276 篇，仅收录与目标读者关联度最高的 2 篇（端侧幻觉检测审计、多智能体评测复盘）；融资与产品类线索中仅 TechCrunch 单一来源者一律降级为线索雷达，不展开细节。

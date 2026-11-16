@@ -29,8 +29,6 @@
    https://openai.com/index/our-new-blog-for-science
 12. GitHub 官方 Changelog《Take GitHub Mobile with you on iPhone Duo》· 一手源 · 2026-11-16 14:30 UTC · 已访问原文
    https://github.blog/changelog/2026-11-16-take-github-mobile-with-you-on-iphone-duo
-13. GitHub 官方 Changelog《Upcoming deprecation of selected GitHub Copilot models in December》· 一手源 · 2026-11-13 20:40 UTC（72h 补收）· 已访问原文
-   https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december
 14. Google 官方博客《New Ask Maps features to help with holiday travel and prep》· 一手源 · 2026-11-16 14:00 UTC · 已访问原文
    https://blog.google/products-and-platforms/products/maps/ask-maps-holiday-travel-features-2026/
 15. TechCrunch《Google Maps can now build trip itineraries with real-time details about each stop》· 二级源 · 2026-11-16 14:48 UTC · 已访问
@@ -45,7 +43,7 @@
 | 源 | 抓取结果 | 说明 |
 |---|---|---|
 | OpenAI News RSS | HTTP 200 · 847,814 B | 窗口内 6 条（2026-11-15 22:00Z ~ 11-16 09:00Z） |
-| GitHub Changelog RSS | HTTP 200 · 33,781 B | 窗口内 1 条；另有 72h 补收 1 条（Copilot 模型弃用） |
+| GitHub Changelog RSS | HTTP 200 · 33,781 B | 窗口内 1 条（GitHub Mobile 支持 iPhone Duo）；另有 1 条与 EP019 重复（Copilot 模型弃用），按去重规则未收录 |
 | Google 官方博客 RSS | HTTP 200 · 30,392 B | 窗口内 1 条（Ask Maps） |
 | arXiv cs.AI RSS | HTTP 200 · 605,697 B | 当日新投 276 篇，精选 2 篇 |
 | TechCrunch AI RSS | HTTP 200 · 17,831 B | 窗口内 8 条，其中 3 条单一来源降级为线索雷达 |
