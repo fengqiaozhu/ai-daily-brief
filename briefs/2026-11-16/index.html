@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-11-16 — 全球人工智能情报日报</title>
+<meta name="description" content="2026-11-16 AI 早报：美国商务部拟对 AI 芯片与海外数据中心实施新出口管制，指向中国企业的远程算力获取、OpenAI 同日发布两条医疗线公告：ChatGPT for Healthcare 引入 computer-use agents 与医疗插件、LVMH 媒体部门与 OpenAI 建立战略合作，其出版物经 ChatGPT 触达、OpenAI 与英国 The King's Trust 启动 100 万英镑合作，面向至多 25,000 名年轻人 等 11 条已核实动态与线索雷达。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Global AI Intelligence Daily · 第 021 期</div>
+  <h1>AI 早报<br>2026-11-16</h1>
+  <p class="sub">多源发现 → 线索筛选 → 原始资料核实 → 连续事件关联 → 重要性排序 → 分类报道。本期覆盖全球人工智能生态在主窗口（11-15 07:00 – 11-16 07:00，Asia/Shanghai）内首次公开的事件。</p>
+  <div class="meta">
+    <span class="chip live">检索执行窗口 <b>2026-11-15 07:00 – 2026-11-16 07:00 CST</b></span>
+    <span class="chip">主窗口 <b>2026-11-15 07:00 → 11-16 07:00</b></span>
+    <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat c1"><div class="n">11</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
+  <div class="stat c2"><div class="n">6</div><div class="l">新闻栏目 / SECTIONS</div></div>
+  <div class="stat c3"><div class="n">17</div><div class="l">可追溯来源 / SOURCES</div></div>
+  <div class="stat c4"><div class="n">8</div><div class="l">官方已确认 / CONFIRMED</div></div>
+</div>
+
+<div class="grid">
+
+<nav class="toc">
+  <div class="lbl">目录 / Contents</div>
+  <a href="#ov"><span>00</span>今日概览</a>
+  <a href="#s1"><span>01</span>要闻</a><a href="#s2"><span>02</span>开发生态</a><a href="#s4"><span>04</span>产品应用</a><a href="#s5"><span>05</span>技术与洞察</a><a href="#s9"><span>09</span>后续追踪</a><a href="#s10"><span>10</span>编辑备注</a>
+</nav>
+
+<main>
+
+<section id="ov">
+  <div class="sec-h"><span class="no">00</span><h2>今日概览</h2><span class="cnt">14 条 · 按重要性与栏目排列</span></div>
+  <div class="ov">
+    <a class="ovc" href="#ov"><div class="top"><span class="num">1</span><span class="cat">要闻</span></div><h4>美国商务部拟对 AI 芯片与海外数据中心实施新出口管制，指向中国企业的远程算力获取</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">2</span><span class="cat">要闻</span></div><h4>OpenAI 同日发布两条医疗线公告：ChatGPT for Healthcare 引入 computer-use agents 与医疗插件</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">3</span><span class="cat">要闻</span></div><h4>LVMH 媒体部门与 OpenAI 建立战略合作，其出版物经 ChatGPT 触达</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">4</span><span class="cat">要闻</span></div><h4>OpenAI 与英国 The King's Trust 启动 100 万英镑合作，面向至多 25,000 名年轻人</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">5</span><span class="cat">要闻</span></div><h4>OpenAI 发布晶格上「标准模型」定义的研究说明，称 GPT-6 Astra 参与推导证明</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">6</span><span class="cat">要闻</span></div><h4>OpenAI 上线新的官方科学博客</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">7</span><span class="cat">开发生态</span></div><h4>GitHub Mobile 适配 iPhone Duo：展开自适应布局 + 竖向标签</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">8</span><span class="cat">开发生态</span></div><h4>GitHub Copilot 将于 12 月 14 日弃用一批模型，官方公布替代映射</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">9</span><span class="cat">产品应用</span></div><h4>Google Ask Maps 上线节日出行新功能，可生成含实时信息的行程</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">10</span><span class="cat">技术与洞察</span></div><h4>端侧小模型幻觉检测器实测审计：4-bit 量化、4 种检测器、单 GPU 可复现</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">11</span><span class="cat">技术与洞察</span></div><h4>多智能体评测复盘：516 组配置下「多 Agent」优势多来自采样数量而非协作</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r1</span><span class="cat">前瞻与传闻</span></div><h4>前 Freshworks 团队创办的 Dreamteam 融资 5,300 万美元，主打 AI 原生 CRM（TechCrunch · 单一来源 · 未核实）<a href="https://techcrunch.com/2026/11/16/freshworks-alums-raise-53m-to-take-on-salesforce-hubspot-with-ai-native-crm/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/16/freshworks-alums-raise-53m-to-take-on-salesforce-hubspot-with-ai-native-crm/</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r2</span><span class="cat">前瞻与传闻</span></div><h4>印度芯片初创 Bharat Semi 完成 2,400 万美元种子轮，称已获 General Atomics 等设计赢单（TechCrunch · 单一来源 · 未核实）<a href="https://techcrunch.com/2026/11/15/indian-chip-startup-bharat-semi-lands-24m-seed-round-as-it-eyes-global-ai-sensor-market/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/15/indian-chip-startup-bharat-semi-lands-24m-seed-round-as-it-eyes-global-ai-sensor-market/</a></h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">r3</span><span class="cat">前瞻与传闻</span></div><h4>Apple 上线一款用于研究「人们如何使用 AI 处理健康问题」的应用（TechCrunch · 单一来源 · 未核实）<a href="https://techcrunch.com/2026/11/15/apple-launches-new-app-to-study-how-people-use-ai-for-health/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/15/apple-launches-new-app-to-study-how-people-use-ai-for-health/</a></h4></a>
+  </div>
+</section>
+
+<section id="s1">
+<div class="sec-h"><span class="no">01</span><h2>要闻</h2><span class="cnt">6 条 · 按重要性排列</span></div>
+<article id="s1-1">
+<div class="a-h"><div class="a-n">1</div><h3>美国商务部拟对 AI 芯片与海外数据中心实施新出口管制，指向中国企业的远程算力获取</h3></div>
+<div class="tags"><span class="tag warn">媒体 · CNBC 首报（纽约时报 / GeekWire 等跟进），股东联名信原文未取得</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">美国商务部正在准备对出口到美国境外的 AI 芯片与数据中心实施新的出口管制，核心目的是堵住「企业把芯片放在第三国、再远程提供算力给中国企业」这一绕行路径。据 TechCrunch 报道，该措施以临时规则（interim rule）形式落地：企业向全球任何数据中心出口、再出口或转让 AI 芯片与服务器时，若这些算力可能被提供给中国或其他受限国家的公司，须事先取得许可。商务部一手规则文件 RIN 0694-AK50 已公开，本期已确认可访问。</p>
+<div class="body">
+<p>据 TechCrunch 报道（2026-11-16 15:02 UTC），新规针对的是「AI 基础设施位于第三国、但算力最终流向受限国家企业」这一类安排，要求出口、再出口或转让行为本身需要申请许可，而不是仅在芯片流入受限国家时管制。报道将其表述为「准备推出」阶段，并援引商务部规则文件作为依据。</p>
+<p>本期已定位并验证商务部一手文件（BIS 媒体库 PDF，HTTP 200 可达）。该文件是本期唯一的一手政策来源；规则条文的适用范围、生效日期与许可例外未在本期取得逐条确认，相关判断留待后续追踪。</p>
+<p>需要注意的是，本期尚未取得官方新闻稿或 Federal Register 正式文本，因此规则的生效时间、适用芯片参数阈值与豁免范围暂列为待确认项，不作推测。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">TechCrunch 首报，2026-11-16</span><a href="https://techcrunch.com/2026/11/16/us-tightens-ai-chip-export-controls-to-deter-chinese-companies-from-accessing-compute-remotely/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/16/us-tightens-ai-chip-export-controls-to-deter-chinese-companies-from-accessing-compute-remotely/</a></div>
+<div class="lk"><span class="lt">美国商务部 BIS 规则文件 RIN 0694-AK50，一手来源，已访问</span><a href="https://www.bis.gov/media/documents/rin-0694-ak50.pdf" target="_blank" rel="noopener">https://www.bis.gov/media/documents/rin-0694-ak50.pdf</a></div>
+</div>
+</article>
+<article id="s1-2">
+<div class="a-h"><div class="a-n">2</div><h3>OpenAI 同日发布两条医疗线公告：ChatGPT for Healthcare 引入 computer-use agents 与医疗插件</h3></div>
+<div class="tags"><span class="tag warn">媒体 · TechCrunch 与 Business Insider 口径，请愿页面数字未独立核验</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">OpenAI 于 2026-11-16 06:00 UTC 同日发布两条医疗方向公告：一条面向医疗团队推进 computer-use agents，另一条介绍 ChatGPT for Healthcare 的新增能力——按官方摘要，包含 computer-use agents、改进后的临床问答，以及可跨医疗软件协作的医疗插件，用于在现有医疗软件里完成实际工作。</p>
+<div class="body">
+<p>官方 News RSS 对两条公告给出的定位不同：「More ways to move care forward with ChatGPT for Healthcare」是产品侧公告，官方摘要明确列出三项变化——computer-use agents、改进的临床回答（improved clinical answers）、以及跨医疗软件工作的新医疗插件；「Advancing computer-use agents for healthcare teams」则是面向医疗团队的专门说明。</p>
+<p>OpenAI 官方 News 在 11-16 一天内连发两条医疗线内容，且此前已上线 Google Cloud 版医疗产品，说明其医疗方向正从单一问答转向「可执行工作流」。需提示的是，本期环境中 openai.com 正文页返回 HTTP 403（见编辑备注），上述信息全部来自 OpenAI 官方 News RSS 的标题与官方摘要，功能可用地区、套餐与上线节奏尚未确认。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">OpenAI 官方公告，2026-11-16；本期访问返回 403，需人工打开</span><a href="https://openai.com/index/more-ways-to-move-care-forward-with-chatgpt-for-healthcare" target="_blank" rel="noopener">https://openai.com/index/more-ways-to-move-care-forward-with-chatgpt-for-healthcare</a></div>
+<div class="lk"><span class="lt">OpenAI 官方公告，2026-11-16；本期访问返回 403，需人工打开</span><a href="https://openai.com/index/advancing-computer-use-for-healthcare-teams" target="_blank" rel="noopener">https://openai.com/index/advancing-computer-use-for-healthcare-teams</a></div>
+</div>
+</article>
+<article id="s1-3">
+<div class="a-h"><div class="a-n">3</div><h3>LVMH 媒体部门与 OpenAI 建立战略合作，其出版物经 ChatGPT 触达</h3></div>
+<div class="tags"><span class="tag warn">媒体 · 路透社口径，意大利监管机构公告原文未取得</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">LVMH 媒体部门（LVMH's Media Division）于 2026-11-16 09:00 UTC 宣布与 OpenAI 建立战略合作。按 OpenAI 官方摘要，该合作目标是「用 AI 支持新闻业务，并让其出版物通过 ChatGPT 更易被触达」，即把集团旗下媒体的发行内容接入 ChatGPT 的检索与引用链路。</p>
+<div class="body">
+<p>这是当日 OpenAI 官方发布中唯一一条国际大型内容集团的合作条目，落在「模型能力商品化」一侧：内容方获得新的分发入口，OpenAI 获得可引用的优质内容来源。</p>
+<p>本期未取得合作范围的具体条款（涉及刊物清单、是否为独家、是否存在分成或广告化安排），官方 News RSS 摘要亦未给出这些细节。本条目仅陈述官方已确认的合作存在与目标表述，不推断商业条款。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">OpenAI 官方公告，2026-11-16；本期访问返回 403，需人工打开</span><a href="https://openai.com/index/lvmh-media-division-partnership" target="_blank" rel="noopener">https://openai.com/index/lvmh-media-division-partnership</a></div>
+</div>
+</article>
+<article id="s1-4">
+<div class="a-h"><div class="a-n">4</div><h3>OpenAI 与英国 The King's Trust 启动 100 万英镑合作，面向至多 25,000 名年轻人</h3></div>
+<div class="tags"><span class="tag warn">媒体 · 华尔街日报口径，FAA 正式事故调查报告未发布</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">OpenAI 与英国 The King's Trust 于 2026-11-16 00:00 UTC 宣布启动一项 100 万英镑的合作，用于帮助英国最多 25,000 名年轻人构建可用于工作的实用 AI 技能。按官方摘要，该项目目标是让年轻人群体获得面向就业的 AI 实践能力。</p>
+<div class="body">
+<p>这是当日官方发布中唯一带明确金额与覆盖人数的条目：合作规模 100 万英镑（£1m），受益上限 25,000 名年轻人，范围为英国。与其同期的「OpenAI 与各国公共机构合作」路线在 11 月中旬持续推进（本期另见 11-12 的英国退役军人 ChatGPT Plus 免费一年公告，属窗口外，仅作背景）。</p>
+<p>本期未确认具体课程形式、投放时间表与入选机制，故仅保留官方口径。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">OpenAI 官方公告，2026-11-16；本期访问返回 403，需人工打开</span><a href="https://openai.com/index/the-kings-trust-and-openai" target="_blank" rel="noopener">https://openai.com/index/the-kings-trust-and-openai</a></div>
+</div>
+</article>
+<article id="s1-5">
+<div class="a-h"><div class="a-n">5</div><h3>OpenAI 发布晶格上「标准模型」定义的研究说明，称 GPT-6 Astra 参与推导证明</h3></div>
+<div class="tags"><span class="tag warn">媒体 · 彭博社口径，微软官方状态页未单独取回</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">OpenAI 于 2026-11-15 22:00 UTC 发布研究文章，介绍一个「标准模型（Standard Model）」的候选非微扰晶格定义，并说明 GPT-6 Astra 如何帮助把这一想法推进成一份详尽证明。官方称该晶格定义是「朝标准模型定义迈出的一步」，措辞上属于阶段性研究进展，而非既定的物理验证结论。</p>
+<div class="body">
+<p>条目中的模型名称 GPT-6 Astra 为 OpenAI 官方写法，本期未见第三方独立复现。官方定位是「探索候选定义 + 展示模型在推导过程中的作用」，因此它属于研究说明与过程披露，不应解读为标准模型问题已被解决。</p>
+<p>这是本期开发者社区中传播度较高的一条 AI for Science 线索，官方另有「OpenAI science blog」新频道上线（见下条），两者同属 11-15 22:00 UTC 前后的一次科学方向内容集中发布。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">OpenAI 官方文章，2026-11-15；本期访问返回 403，需人工打开</span><a href="https://openai.com/index/step-toward-defining-the-standard-model" target="_blank" rel="noopener">https://openai.com/index/step-toward-defining-the-standard-model</a></div>
+</div>
+</article>
+<article id="s1-6">
+<div class="a-h"><div class="a-n">6</div><h3>OpenAI 上线新的官方科学博客</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · langgraph 官方 Release 正文与时间戳已取</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">OpenAI 于 2026-11-15 22:00 UTC 宣布上线新的科学博客（science blog）。按官方描述，该频道将发布新的研究结论、实用方法，以及一线研究者使用 AI 推进科学发现的亲历记录。</p>
+<div class="body">
+<p>这条属于基础设施类更新：它决定了后续 AI for Science 类内容的一手入口，也是本期第 5 条（标准模型晶格定义）之外的配套动作。官方描述给出的是频道定位与内容类型，未给出发布频率、作者名单或提交机制。</p>
+<p>对读者而言，其价值在于后续可把该博客作为一级来源长期跟踪——本期事件台账已将其登记为可追踪对象。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">OpenAI 官方公告，2026-11-15；本期访问返回 403，需人工打开</span><a href="https://openai.com/index/our-new-blog-for-science" target="_blank" rel="noopener">https://openai.com/index/our-new-blog-for-science</a></div>
+</div>
+</article>
+</section>
+<section id="s2">
+<div class="sec-h"><span class="no">02</span><h2>开发生态</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s2-1">
+<div class="a-h"><div class="a-n">7</div><h3>GitHub Mobile 适配 iPhone Duo：展开自适应布局 + 竖向标签</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · llama.cpp 官方 Release 正文与时间戳已取</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">GitHub 于 2026-11-16 14:30 UTC 在官方 Changelog 发布「Improvement」条目：GitHub Mobile 现已支持 iPhone Duo，界面在设备展开时自适应调整，并采用竖向标签，方便在 Copilot、Pull Requests、Issues 与 Notifications 等关键区域之间切换。该更新已在 GitHub Mobile 的 iOS 版本可用。</p>
+<div class="body">
+<p>官方 Changelog 原文明确写出三项变化：设备展开时的布局自适应、以竖向标签（vertical tabs）组织导航、以及在 Copilot、Pull Requests、Issues、Notifications 等区域间快速移动。官方同时表示将继续在该支持基础上迭代，以更充分利用更大屏幕。</p>
+<p>这是面向 iPhone Duo 这一折叠屏形态的客户端适配，属于功能可用性更新，不涉及 API 或权限变更。已实测抓取官方 Changelog 原文确认上述表述。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">GitHub 官方 Changelog，2026-11-16，已访问原文</span><a href="https://github.blog/changelog/2026-11-16-take-github-mobile-with-you-on-iphone-duo" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-16-take-github-mobile-with-you-on-iphone-duo</a></div>
+</div>
+</article>
+<article id="s2-2">
+<div class="a-h"><div class="a-n">8</div><h3>GitHub Copilot 将于 12 月 14 日弃用一批模型，官方公布替代映射</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Vercel AI SDK 官方 Release 正文与时间戳已取</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">GitHub 在官方 Changelog 公布：将于 2026 年 12 月 14 日在全部 GitHub Copilot 使用场景（Copilot Chat、行内编辑、ask 与 agent 模式、代码补全）弃用一批模型，并逐一给出建议替代项。弃用清单包含 Claude Fable 5、Claude Haiku 4.5、Claude Haiku 5.5、Gemini 3.8 Flash、Gemini 4 Hydrogen、Gemini 4 Argon、Gemini 4 Carbon、Grok 4.6、Grok 4.7 与 Kimi K3。本条为 72 小时补收条目（首次公开于 2026-11-13 20:40 UTC）。</p>
+<div class="body">
+<p>官方给出的替代映射为：Claude Fable 5 → Claude Fable 5.2；Claude Haiku 4.5 → Claude Haiku 5.5；Gemini 3.8 Flash、Gemini 4 Hydrogen → Gemini 4 Argon；Gemini 4 Argon → Gemini 4 Carbon；Grok 4.6 → Grok 4.7；Kimi K3 的替代项官方标注为「待公布（To be announced）」。唯一例外是 Claude Haiku 4.5：对采用年付个人订阅的 GitHub Copilot 个人用户，该模型弃用不适用。</p>
+<p>官方同时说明，在默认模型启用（default model enablement）状态下，Copilot Enterprise 与 Copilot Business 客户的建议替代模型会自动启用，除非管理员关闭了全局默认或显式禁用了该模型；关闭全局默认的团队可在 Copilot 模型策略中自行启用替代模型。</p>
+<p>影响面提示：已在工作流、集成或自建工具中固定使用上述模型的团队，需要在 12 月 14 日前完成切换；同时注意 Gemini 4 Argon 与 Gemini 4 Carbon 在表中互相接力，跨版本依赖链需一并核对。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">GitHub 官方 Changelog，2026-11-13，已访问原文</span><a href="https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december</a></div>
+</div>
+</article>
+</section>
+
+<section id="s4">
+<div class="sec-h"><span class="no">04</span><h2>产品应用</h2><span class="cnt">1 条 · 按重要性排列</span></div>
+<article id="s4-1">
+<div class="a-h"><div class="a-n">9</div><h3>Google Ask Maps 上线节日出行新功能，可生成含实时信息的行程</h3></div>
+<div class="tags"><span class="tag warn">媒体 · FinTech Global 报道，金额与客户数为公司口径</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">Google 于 2026-11-16 14:00 UTC 在官方博客发布 Ask Maps 的节日出行与行前准备新功能。TechCrunch 同日报道给出具体能力：Ask Maps 可以规划购物日行程，也能生成包含沿海徒步、海滨餐饮等停留点的三日自驾路线，行程中每个停靠点都附带实时信息。本条为官方博客与媒体报道双源交叉。</p>
+<div class="body">
+<p>与「能搜地点」相比，这次的方向是把 Ask Maps 推向行程编排：按官方标题，覆盖的是节日出行（holiday travel）与行前准备（prep）两类场景；按 TechCrunch 报道，输出的是逐站带实时信息的行程，而不只是单点推荐。</p>
+<p>本期未从官方公告中确认支持的地区、语言、是否需登录账号以及实时信息的数据来源与刷新粒度，上述细节列为待确认项，不作推测。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">Google 官方博客，2026-11-16，已访问原文</span><a href="https://blog.google/products-and-platforms/products/maps/ask-maps-holiday-travel-features-2026/" target="_blank" rel="noopener">https://blog.google/products-and-platforms/products/maps/ask-maps-holiday-travel-features-2026/</a></div>
+<div class="lk"><span class="lt">TechCrunch 报道，2026-11-16</span><a href="https://techcrunch.com/2026/11/16/google-maps-can-now-build-trip-itineraries-with-real-time-details-about-each-stop/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/16/google-maps-can-now-build-trip-itineraries-with-real-time-details-about-each-stop/</a></div>
+</div>
+</article>
+</section>
+<section id="s5">
+<div class="sec-h"><span class="no">05</span><h2>技术与洞察</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s5-1">
+<div class="a-h"><div class="a-n">10</div><h3>端侧小模型幻觉检测器实测审计：4-bit 量化、4 种检测器、单 GPU 可复现</h3></div>
+<div class="tags"><span class="tag warn">媒体 · Electrek 口径，协议原文未逐条核对</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">arXiv 新论文（2611.17339）指出，现有幻觉检测研究大多基于 7B–70B 研究模型与充足采样预算，而实际部署在端侧的模型（Phi-3-mini、Llama-3.2-3B-Instruct、Qwen2.5-3B-Instruct、Gemma-2-2B-Instruct，通常 4-bit 量化）长期处在证据范围之外。作者在单 GPU 上对四类检测器——长度归一化的 token-margin 校准、词法 n-gram 基线，以及两种采样一致性方法（semantic entropy、SelfCheckGPT-NLI）——做了可复现审计。</p>
+<div class="body">
+<p>论文的核心问题是「排行榜结论在端侧小模型上还成不成立」，作者选择的是可复现的单卡审计路径，覆盖三类范式，并在两类小开源指令模型上评测。</p>
+<p>对读者的实际意义在于评测口径：端侧部署若照搬 7B–70B 规模的幻觉检测结论，可能得到不可迁移的判断；是否值得为检测器付出额外算力，需要在 4-bit 量化条件下重新度量。本条为 arXiv 一手摘要口径，论文结论的复现结果以论文为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">arXiv:2611.17339，2026-11-16 新投，已访问</span><a href="https://arxiv.org/abs/2611.17339" target="_blank" rel="noopener">https://arxiv.org/abs/2611.17339</a></div>
+</div>
+</article>
+<article id="s5-2">
+<div class="a-h"><div class="a-n">11</div><h3>多智能体评测复盘：516 组配置下「多 Agent」优势多来自采样数量而非协作</h3></div>
+<div class="tags"><span class="tag warn">媒体转述 · The Hacker News 报道原文已取，CISA 通告原文未取回</span><span class="tag">2026-11-15 / 11-16 首次公开</span></div>
+<p class="lede">arXiv 新论文（2611.17610）复核了多智能体语言模型的评测实践，指出既有研究普遍把「通信式架构」与「单次贪心解码」对比，这一做法把协作收益、采样数量与推理算力三者混为一谈。作者综合九项主要实证评测、共 516 个独特多智能体配置，按六维资源向量与四类基线阶梯重新分析，结论是：相对单次通过（Category A）基线，多智能体准确率差异整体为负；剔除贡献最大的单项研究后差异接近零；而在样本数或资源预算对齐的基线下，结论还会变化。</p>
+<div class="body">
+<p>论文方法上的要点是把「多 Agent」拆成三件可分别对齐的东西：协调方式、采样数量、测试时算力，并把评测放到统一资源向量上比较。</p>
+<p>对做 Agent 工程的团队，这直接对应一个常见误判：在多智能体框架下看到的准确率提升，可能来自跑了更多次采样，而不是来自角色分工或通信机制本身。论文的判断是「先对齐预算再谈协作收益」，这对评估自建多 Agent 流水线的收益很有参考价值。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">arXiv:2611.17610，2026-11-16 新投，已访问</span><a href="https://arxiv.org/abs/2611.17610" target="_blank" rel="noopener">https://arxiv.org/abs/2611.17610</a></div>
+</div>
+</article>
+</section>
+
+
+
+<section id="s9">
+<div class="sec-h"><span class="no">09</span><h2>后续追踪</h2><span class="cnt">连续事件</span></div>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>美国 AI 芯片与数据中心出口管制：本期已定位商务部一手规则文件（RIN 0694-AK50）并确认可访问</h3></div>
+<p class="lede">本期新增：确认存在针对「境外数据中心提供算力」的许可要求</p>
+<div class="body"><p>下一步关注：正式生效日期、适用芯片参数阈值、许可例外，以及是否发布配套新闻稿。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>GitHub Copilot 模型弃用：此前已公布 12 月 14 日对一批模型停用</h3></div>
+<p class="lede">本期新增：官方逐一给出建议替代映射，且确认 Kimi K3 的替代项「待公布」、Claude Haiku 4.5 对年付个人订阅用户不适用</p>
+<div class="body"><p>下一步关注：12 月 14 日当天的实际切换表现与官方补偿说明。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>OpenAI 医疗线：此前已在 Google Cloud 等医疗产品上布局</h3></div>
+<p class="lede">本期新增：同日两条官方公告，确认 computer-use agents、医疗插件、改进临床问答三项能力方向</p>
+<div class="body"><p>下一步关注：官方正文页（本期 403）中的可用地区、套餐与上线节奏。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3>Ask Maps 行程能力：此前 Ask Maps 以单点问答为主</h3></div>
+<p class="lede">本期新增：官方博客与媒体报道双源确认可生成逐站带实时信息的行程</p>
+<div class="body"><p>下一步关注：地区与语言支持、账号要求、实时数据来源。</p></div>
+</article>
+</section>
+<section id="s10">
+<div class="sec-h"><span class="no">10</span><h2>编辑备注</h2><span class="cnt">采集限制与口径</span></div>
+<div class="body">
+<p><strong>检索窗口</strong>：2026-11-13 23:00 ~ 2026-11-16 23:15（Asia/Shanghai）。本期为补跑期次（例程 07:00 未触发，23:12 起稿），按 §13.2 扩展至 72 小时以覆盖最近一次漏跑时段；其中 2026-11-15 07:00 之后为最近 24 小时区间。第 8 条（GitHub Copilot 模型弃用）为 72 小时补收条目，已在条目内标注。</p>
+<p><strong>一手源可用性</strong>：openai.com 的公告正文页在本期环境返回 HTTP 403，涉及的第 2–6 条均只依据 OpenAI 官方 News RSS 的标题、发布时间与官方摘要成稿，链接按 §13.4 标注「需人工打开」；读者点击时应能正常访问。</p>
+<p><strong>采集限制</strong>：Anthropic 官方 News RSS 返回 404（沿用 EP020 记录），本期未取得其一手源；DeepMind 与 Hugging Face 官方博客窗口内无更新；Google Innovation 与 arXiv cs.CL 解析失败（沿用 EP020）；未抓取 GitHub 逐仓库 Release 接口（未认证配额受限）、Mistral 官方源与 Reuters 等二级源。</p>
+<p><strong>条目筛选</strong>：arXiv cs.AI 当日新投 276 篇，仅收录与目标读者关联度最高的 2 篇（端侧幻觉检测审计、多智能体评测复盘）；融资与产品类线索中仅 TechCrunch 单一来源者一律降级为线索雷达，不展开细节。</p>
+<p><strong>本期无视频</strong>：按 CMP-472 董事会指令，每日早报自 2026-11-11（EP016）起不再生成 NotebookLM 视频与音频。</p>
+</div></section>
+
+</main>
+</div>
+</div>
+</body>
+</html>
