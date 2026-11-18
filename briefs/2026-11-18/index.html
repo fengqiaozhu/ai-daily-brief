@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 早报 · 2026-11-18 — 全球人工智能情报日报</title>
+<meta name="description" content="2026-11-18 AI 早报：NVIDIA 发布 FY2027 第三财季财报：营收 1158 亿美元、同比增 103%，Q4 指引 1300 亿美元且未计入中国数据中心计算收入、NVIDIA 确认结束对华 H200 出口通道参与，同日董事会新设国家安全与出口管制监督委员会、NVIDIA 董事会表态不打算让黄仁勋回归 CEO，SEC 对公司的调查同步曝光、Anthropic IPO 文件披露：Amazon 持股约 14.7%、Google 13.7%，AMD 等七方合计认购 260 亿美元非投票股 等 23 条已核实动态与线索雷达。">
+<style>
+:root{
+  --bg:#070a12; --bg2:#0b1020; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --tx:#e8ecf6; --tx2:#a8b2c8; --tx3:#6f7b93;
+  --cy:#4de3ff; --vi:#a97bff; --pk:#ff77c8; --gr:#5df2a0; --am:#ffca6b; --rd:#ff7a7a;
+  --grad:linear-gradient(115deg,var(--cy),var(--vi) 48%,var(--pk));
+  --r:16px; --sh:0 18px 50px -24px rgba(0,0,0,.9);
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(1100px 640px at 12% -8%,rgba(77,227,255,.16),transparent 60%),
+    radial-gradient(1000px 620px at 92% 4%,rgba(169,123,255,.15),transparent 62%),
+    radial-gradient(900px 600px at 50% 108%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+  color:var(--tx);font-family:var(--sans);line-height:1.72;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 0%,#000,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 30px;border-bottom:1px solid var(--line2);margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--grad)}
+h1{
+  margin:0 0 14px;font-family:var(--serif);font-weight:800;line-height:1.06;letter-spacing:-.02em;
+  font-size:clamp(38px,6.2vw,80px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{color:var(--tx2);font-size:clamp(15px,1.5vw,18px);max-width:78ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:9px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;backdrop-filter:blur(8px);
+}
+.chip b{color:var(--tx);font-weight:600}
+.chip.live{border-color:rgba(93,242,160,.4);color:var(--gr)}
+.chip.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gr);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 3px rgba(93,242,160,.16)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 40px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;backdrop-filter:blur(10px);box-shadow:var(--sh)}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.stat .l{margin-top:7px;font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+.stat.c1 .n{color:var(--cy)}.stat.c2 .n{color:var(--vi)}.stat.c3 .n{color:var(--pk)}.stat.c4 .n{color:var(--gr)}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;align-items:start}
+nav.toc{position:sticky;top:22px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--tx3);text-transform:uppercase;margin-bottom:12px}
+nav.toc a{display:block;color:var(--tx2);text-decoration:none;padding:6px 0 6px 13px;border-left:1px solid var(--line);transition:.18s}
+nav.toc a:hover{color:var(--cy);border-left-color:var(--cy);padding-left:16px}
+nav.toc a span{font-family:var(--mono);color:var(--tx3);font-size:11px;margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-bottom:56px;scroll-margin-top:20px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-h .no{font-family:var(--mono);font-size:12px;color:var(--cy);letter-spacing:.14em}
+.sec-h h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,31px);letter-spacing:-.01em}
+.sec-h .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+
+/* ---------- article ---------- */
+article{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px 22px;margin-bottom:18px;box-shadow:var(--sh);transition:.22s;position:relative;overflow:hidden;
+}
+article::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);opacity:.75}
+article:hover{border-color:rgba(255,255,255,.19);transform:translateY(-2px)}
+.a-h{display:flex;gap:13px;align-items:flex-start;margin-bottom:4px}
+.a-n{font-family:var(--mono);font-size:26px;font-weight:700;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;line-height:1.15;min-width:34px}
+article h3{margin:0;font-size:clamp(17px,1.9vw,21.5px);line-height:1.44;letter-spacing:-.005em;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:5px;border:1px solid var(--line);color:var(--tx3)}
+.tag.ok{border-color:rgba(93,242,160,.45);color:var(--gr);background:rgba(93,242,160,.08)}
+.tag.cross{border-color:rgba(77,227,255,.45);color:var(--cy);background:rgba(77,227,255,.08)}
+.tag.pend{border-color:rgba(255,202,107,.42);color:var(--am);background:rgba(255,202,107,.07)}
+.lede{
+  margin:16px 0 0;font-family:var(--serif);font-size:16.4px;line-height:1.86;color:#eef2fb;
+  border-left:2px solid rgba(169,123,255,.45);padding-left:17px;
+}
+.lede::first-letter{font-size:1.05em}
+.body{margin-top:16px;color:var(--tx2);font-size:14.6px}
+.body p{margin:0 0 12px}
+.body p:last-child{margin-bottom:0}
+.body strong{color:var(--tx);font-weight:650}
+.body ul{margin:10px 0 14px;padding-left:20px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--cy)}
+.callout{
+  margin:16px 0 4px;padding:15px 17px;border-radius:12px;border:1px solid rgba(77,227,255,.22);
+  background:linear-gradient(135deg,rgba(77,227,255,.08),rgba(169,123,255,.06));
+}
+.callout .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;font-weight:500}
+td{color:var(--tx2)}
+td:first-child{color:var(--tx)}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+.links{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line2);display:flex;flex-direction:column;gap:7px}
+.lk{font-family:var(--mono);font-size:12.3px;line-height:1.5;word-break:break-all}
+.lk .lt{color:var(--tx3);margin-right:8px;letter-spacing:.04em}
+.lk a{color:var(--cy);text-decoration:none;border-bottom:1px solid rgba(77,227,255,.3);transition:.16s}
+.lk a:hover{color:var(--pk);border-bottom-color:var(--pk)}
+
+/* ---------- overview ---------- */
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ovc{
+  background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px;text-decoration:none;display:block;transition:.2s;
+}
+.ovc:hover{border-color:rgba(77,227,255,.42);transform:translateY(-2px);background:rgba(77,227,255,.05)}
+.ovc .top{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--tx3);margin-bottom:8px}
+.ovc .num{color:var(--cy);font-weight:700}
+.ovc .cat{color:var(--vi)}
+.ovc h4{margin:0;font-size:14.6px;line-height:1.5;color:var(--tx);font-weight:600}
+
+/* ---------- tracking ---------- */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ti{margin-bottom:20px;position:relative}
+.ti::before{content:"";position:absolute;left:-23px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(169,123,255,.13)}
+.ti .h{font-weight:700;font-size:15.4px;margin-bottom:5px}
+.ti .p{color:var(--tx2);font-size:14px}
+.ti .p b{color:var(--tx2)}
+.ti .nxt{color:var(--am);font-size:13.4px;margin-top:4px}
+
+/* ---------- notes ---------- */
+.notes{background:rgba(255,122,122,.05);border:1px solid rgba(255,122,122,.22);border-radius:var(--r);padding:24px 26px}
+.notes h2{font-family:var(--serif);font-size:22px;margin:0 0 14px;color:#ffd9d9}
+.notes ol{margin:0;padding-left:20px;color:var(--tx2);font-size:14.3px}
+.notes li{margin-bottom:11px}
+.notes li::marker{color:var(--rd)}
+.notes strong{color:#ffe6e6}
+
+/* ---------- platform chips ---------- */
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.plat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 17px}
+.plat .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--pk);text-transform:uppercase;margin-bottom:8px}
+.plat p{margin:0;font-size:13.6px;color:var(--tx2)}
+
+/* ---------- footer ---------- */
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer p{margin:0;font-size:12.6px;color:var(--tx3);font-family:var(--mono)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--am);border:1px solid rgba(255,202,107,.35);background:rgba(255,202,107,.07);border-radius:999px;padding:6px 14px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;gap:24px}
+  nav.toc{position:static;display:none}
+  .wrap{padding:0 18px 60px}
+  .mast{padding:40px 0 24px}
+  article{padding:20px 18px}
+  table{font-size:12.6px}
+  th,td{padding:8px 8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before{display:none}
+  h1{color:#111;-webkit-text-fill-color:#111}
+  article,.stat,.ovc,.notes{break-inside:avoid;border-color:#ccc;background:#fff;box-shadow:none}
+  .lede,.body,td{color:#222}
+  nav.toc{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Global AI Intelligence Daily · 第 023 期</div>
+  <h1>AI 早报<br>2026-11-18</h1>
+  <p class="sub">多源发现 → 线索筛选 → 原始资料核实 → 连续事件关联 → 重要性排序 → 分类报道。本期覆盖全球人工智能生态在主窗口（11-17 07:00 – 11-18 07:00，Asia/Shanghai）内首次公开的事件。</p>
+  <div class="meta">
+    <span class="chip live">检索执行窗口 <b>2026-11-17 07:00 – 2026-11-18 21:50 CST（补跑）</b></span>
+    <span class="chip">主窗口 <b>2026-11-17 07:00 → 2026-11-18 21:50</b></span>
+    <span class="chip">读者 <b>开发者 / AI 工具用户 / 独立开发者</b></span>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat c1"><div class="n">23</div><div class="l">本期条目 / TOTAL ITEMS</div></div>
+  <div class="stat c2"><div class="n">9</div><div class="l">新闻栏目 / SECTIONS</div></div>
+  <div class="stat c3"><div class="n">40</div><div class="l">可追溯来源 / SOURCES</div></div>
+  <div class="stat c4"><div class="n">1</div><div class="l">官方已确认 / CONFIRMED</div></div>
+</div>
+
+<div class="grid">
+
+<nav class="toc">
+  <div class="lbl">目录 / Contents</div>
+  <a href="#ov"><span>00</span>今日概览</a>
+  <a href="#s1"><span>01</span>要闻</a><a href="#s2"><span>02</span>开发生态</a><a href="#s3"><span>03</span>模型发布</a><a href="#s4"><span>04</span>产品应用</a><a href="#s5"><span>05</span>技术与洞察</a><a href="#s6"><span>06</span>行业动态</a><a href="#s8"><span>08</span>前瞻与传闻</a><a href="#s9"><span>09</span>后续追踪</a><a href="#s10"><span>10</span>编辑备注</a>
+</nav>
+
+<main>
+
+<section id="ov">
+  <div class="sec-h"><span class="no">00</span><h2>今日概览</h2><span class="cnt">26 条 · 按重要性与栏目排列</span></div>
+  <div class="ov">
+    <a class="ovc" href="#ov"><div class="top"><span class="num">1</span><span class="cat">要闻</span></div><h4>NVIDIA 发布 FY2027 第三财季财报：营收 1158 亿美元、同比增 103%，Q4 指引 1300 亿美元且未计入中国数据中心计算收入</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">2</span><span class="cat">要闻</span></div><h4>NVIDIA 确认结束对华 H200 出口通道参与，同日董事会新设国家安全与出口管制监督委员会</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">3</span><span class="cat">要闻</span></div><h4>NVIDIA 董事会表态不打算让黄仁勋回归 CEO，SEC 对公司的调查同步曝光</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">4</span><span class="cat">要闻</span></div><h4>Anthropic IPO 文件披露：Amazon 持股约 14.7%、Google 13.7%，AMD 等七方合计认购 260 亿美元非投票股</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">5</span><span class="cat">要闻</span></div><h4>NVIDIA 确认 129 亿美元收购 Hugging Face 的计划不变，官方称 Nemotron 已是 OpenRouter 上使用最广的美国开源模型</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">6</span><span class="cat">开发生态</span></div><h4>GitHub Copilot app 支持 Azure DevOps 仓库与 GHES 实例，Microsoft Ignite 一批发布同时上线</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">7</span><span class="cat">开发生态</span></div><h4>Copilot code review 新增 Adaptive 审查深度、跨仓库上下文与密钥泄露检测，公开预览</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">8</span><span class="cat">开发生态</span></div><h4>Copilot Fusion 登上 Terminal-Bench 4.1 公开榜单，官方称解决率 71.2%、成本低于 Opus 5.5 与 Fable 5.2</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">9</span><span class="cat">开发生态</span></div><h4>微软 MAI Code 2 与 MAI Code 2 Flash 进入 GitHub Copilot</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">10</span><span class="cat">开发生态</span></div><h4>GitHub 同日上线 Copilot CLI 的 Microsoft Entra 登录预览与 Copilot Evals 公开预览</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">11</span><span class="cat">开发生态</span></div><h4>Amazon SageMaker AI 实时端点新增 KV cache aware routing，按缓存命中情况分流请求</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">12</span><span class="cat">开发生态</span></div><h4>Vercel 新建 Pro 与 Enterprise 团队不再包含 Standard build 额度，Standard 构建改按量计费</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">13</span><span class="cat">模型发布</span></div><h4>OpenAI 发布 GPT-6.2 Astra 与 GPT-6.2 Sol，同日在 GitHub Copilot 上线</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">14</span><span class="cat">模型发布</span></div><h4>Vercel AI Gateway 上架 GPT-6.2 Astra/Sol、Decision-1.1 与 MAI-Image-2.7 系列</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">15</span><span class="cat">产品应用</span></div><h4>Google 开放 Gemini 的 Tasks 任务模式，美国用户可用邮件或短信派单</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">16</span><span class="cat">产品应用</span></div><h4>Google 将 Gemini 对话保留期从 72 小时延长到 2 个月</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">17</span><span class="cat">产品应用</span></div><h4>OpenAI 推出 ChatGPT for Sales 插件与 30 余个合作伙伴插件</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">18</span><span class="cat">技术与洞察</span></div><h4>研究：模型被告知「这是游戏」后，可能把平民识别为军事打击目标</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">19</span><span class="cat">技术与洞察</span></div><h4>AWS 一批 SageMaker 与 AgentCore 更新：数据准备、JSON 工作负载降本、WhatsApp agent</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">20</span><span class="cat">行业动态</span></div><h4>Model ML 完成 2.5 亿美元 B 轮融资，估值 15 亿美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">21</span><span class="cat">行业动态</span></div><h4>融资速览：Unsiloed AI 750 万美元、Humyn Labs 4700 万美元、Pedestal AI 470 万美元</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">22</span><span class="cat">行业动态</span></div><h4>NVIDIA 披露对私营公司股权投资价值 655 亿美元，并扩大与六家制造与封装伙伴的产能承诺</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">23</span><span class="cat">行业动态</span></div><h4>NVIDIA 澄清 neocloud 贷款担保口径：提供担保不等于自己出钱</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">24</span><span class="cat">前瞻与传闻</span></div><h4>DeepSeek 收紧免费对话额度（单一来源 · 未核实）</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">25</span><span class="cat">前瞻与传闻</span></div><h4>Qwen4-Max 据称脱离预览、参数 2.4T 且仍未放出权重（单一来源 · 未核实）</h4></a><a class="ovc" href="#ov"><div class="top"><span class="num">26</span><span class="cat">前瞻与传闻</span></div><h4>Kimi K3.1 Pro 定价与套餐调整（单一来源 · 未核实）</h4></a>
+  </div>
+</section>
+
+<section id="s1">
+<div class="sec-h"><span class="no">01</span><h2>要闻</h2><span class="cnt">5 条 · 按重要性排列</span></div>
+<article id="s1-1">
+<div class="a-h"><div class="a-n">1</div><h3>NVIDIA 发布 FY2027 第三财季财报：营收 1158 亿美元、同比增 103%，Q4 指引 1300 亿美元且未计入中国数据中心计算收入</h3></div>
+<div class="tags"><span class="tag warn">媒体 · CNBC 首报（纽约时报 / GeekWire 等跟进），股东联名信原文未取得</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">NVIDIA 公布截至 2026 年 10 月 25 日的第三财季业绩：营收 1158 亿美元，环比增 20%、同比增 103%；数据中心营收 1076 亿美元，同比增 110%。下一季指引为 1300 亿美元（±3%），且官方明确未假设任何来自中国的数据中心计算收入。</p>
+<div class="body">
+<p>财报口径：GAAP 与非 GAAP 毛利率分别为 74.8% 与 74.9%；GAAP 营业利润 775 亿美元、净利润 653 亿美元，每股摊薄收益 GAAP 2.70 美元、非 GAAP 2.68 美元。同期回购加派息返还股东 281 亿美元，回购授权余额约 2273 亿美元；下一期现金股息为每股 0.25 美元，12 月 23 日派发、12 月 2 日登记。</p>
+<p>公司称 Vera Rubin NVL72 已开始出货，「这是公司历史上最快的一次产品爬坡」，机架已在 CoreWeave、Google Cloud、Microsoft Azure、Oracle Cloud Infrastructure、Nebius 运行，并即将在 SpaceXSI 上线。公告同时确认 Oracle Cloud 的 Vera Rubin NVL72 系统与 Vera CPU 正式可用、Google Cloud 的 Vera Rubin A5X 实例正式可用。官方对全财年税率为 16%—18%。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027" target="_blank" rel="noopener">https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027</a></div>
+</div>
+</article>
+<article id="s1-2">
+<div class="a-h"><div class="a-n">2</div><h3>NVIDIA 确认结束对华 H200 出口通道参与，同日董事会新设国家安全与出口管制监督委员会</h3></div>
+<div class="tags"><span class="tag warn">媒体 · TechCrunch 与 Business Insider 口径，请愿页面数字未独立核验</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">据媒体报道，NVIDIA 代理 CEO Colette Kress 在财报电话会上确认，公司不再参与此前允许 H200 芯片经美国转运、缴 25% 关税后售予中国的出口通道。同日 NVIDIA 宣布董事会新设「国家安全与出口管制监督委员会」，负责出口管制合规与全球贸易风险管理。</p>
+<div class="body">
+<p>该出口安排由黄仁勋与美国总统特朗普促成，芯片须经美国发货以收取 25% 关税。此前一贯主张「在中国竞争更重要」的路线由此终止，媒体报道称这是黄仁勋离任后公司路线的实质调整。</p>
+<p>委员会为常设机构，由董事 Suzanne Nora Johnson 任主席，成员包括 Stephen C. Neal 与 John O. Dabiri，至少每季度开会一次，包括与管理层及独立闭门会议。NVIDIA 国家安全团队与全球贸易合规团队改为直接向委员会及代理 CEO Kress 汇报日常运营。公告称委员会将保留外部独立专家，提供法律、国家安全与贸易合规方面的支持。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://nvidianews.nvidia.com/news/nvidia-board-of-directors-establishes-national-security-and-export-control-oversight-committee" target="_blank" rel="noopener">https://nvidianews.nvidia.com/news/nvidia-board-of-directors-establishes-national-security-and-export-control-oversight-committee</a></div>
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/17/nvidia-is-abandoning-china-after-jensen-huangs-ouster/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/17/nvidia-is-abandoning-china-after-jensen-huangs-ouster/</a></div>
+</div>
+</article>
+<article id="s1-3">
+<div class="a-h"><div class="a-n">3</div><h3>NVIDIA 董事会表态不打算让黄仁勋回归 CEO，SEC 对公司的调查同步曝光</h3></div>
+<div class="tags"><span class="tag warn">媒体 · 路透社口径，意大利监管机构公告原文未取得</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">NVIDIA 董事长 Harvey C. Jones 在财报电话会上表示，董事会一致接受黄仁勋辞去总裁、CEO 与董事职务，「无意让黄仁勋复任 CEO」，公司正同时考虑内部与外部候选人。黄仁勋随后在 X 表示若董事会认定回归符合股东利益，「我会荣幸接受」。</p>
+<div class="body">
+<p>黄仁勋于 11 月 12 日因「披露与公司行为准则、企业文化规范不一致的个人行为」主动辞职，董事会一致接受该辞呈，媒体报道其牵涉多段婚外情以及一名被指为中国情报人员的前高管。目前 NVIDIA 由 CFO 兼任的代理 CEO Colette Kress 主持，公司董事会另启动独立调查，SEC 亦在调查 NVIDIA 的披露是否误导投资者（该调查由《华尔街日报》首先报道，TechCrunch 转述）。</p>
+<p>黄仁勋已定于感恩节前赴国会作证。相关叙事仍处于早期调查阶段，本条目只陈述已公开的辞呈、董事会表态与调查进展，不对责任认定作判断。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/17/nvidia-says-it-doesnt-plan-to-reappoint-jensen-huang-as-ceo/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/17/nvidia-says-it-doesnt-plan-to-reappoint-jensen-huang-as-ceo/</a></div>
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/17/sec-reportedly-investigating-nvidia-amid-huang-exit/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/17/sec-reportedly-investigating-nvidia-amid-huang-exit/</a></div>
+</div>
+</article>
+<article id="s1-4">
+<div class="a-h"><div class="a-n">4</div><h3>Anthropic IPO 文件披露：Amazon 持股约 14.7%、Google 13.7%，AMD 等七方合计认购 260 亿美元非投票股</h3></div>
+<div class="tags"><span class="tag warn">媒体 · 华尔街日报口径，FAA 正式事故调查报告未发布</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">据媒体依据 Anthropic 上市文件披露的信息，Amazon 在 Anthropic IPO 后将持有约 14.7%（全部可转 promissory notes 转股则接近 23.8%），Google 将持约 13.7%。AMD、Broadcom、Google、Micron、Microsoft、Nvidia 与 TSMC Partners 同意认购合计 260 亿美元非投票股，其中 Google 与 Nvidia 各认购 100 亿美元。</p>
+<div class="body">
+<p>Amazon 在 2023 与 2024 年投资 Anthropic 时取得可转股票据，转股价约每股 2.09 美元或 5.05 美元（按投资年份不同）。IPO 中 Amazon 选择把其中一部分转成特殊类别无投票权股份（约 15% 持股），并保留其余票据；这些股份可分红，出售时可转为 A 类普通股。</p>
+<p>另一项被披露的承诺是 Anthropic 未来十年将在 AWS 上消费超过 1000 亿美元的云服务。IPO 时间表、发行定价与承销安排本文未取到原始文件，数字均出自媒体报道对上市文件的转述。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/17/amazon-and-google-will-together-own-nearly-30-of-anthropic-after-its-ipo/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/17/amazon-and-google-will-together-own-nearly-30-of-anthropic-after-its-ipo/</a></div>
+</div>
+</article>
+<article id="s1-5">
+<div class="a-h"><div class="a-n">5</div><h3>NVIDIA 确认 129 亿美元收购 Hugging Face 的计划不变，官方称 Nemotron 已是 OpenRouter 上使用最广的美国开源模型</h3></div>
+<div class="tags"><span class="tag warn">媒体 · 彭博社口径，微软官方状态页未单独取回</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">NVIDIA 代理 CEO Colette Kress 在财报电话会首次公开表态，称 129 亿美元收购 Hugging Face 的交易「仍在按计划推进」，并重申对开放模型生态的承诺。她称 Nemotron 已成为 OpenRouter 上使用最广的美国开放模型，并提到 OpenRouter 周 token 用量同比增 35 倍、过去三个月增 3.5 倍。</p>
+<div class="body">
+<p>Kress 的原话指向「让每个国家、公司与行业都能构建自己的智能」这一开放模型路线。黄仁勋任内曾大力推动 Nemotron 开放权重模型系列，其离任一度让外界担忧 NVIDIA 的开源路线生变；本次电话会是其离任后 Kress 首次面向分析师的公开表态，Q&amp;A 环节未直接讨论 Hugging Face 收购细节。</p>
+<p>公告称 Hugging Face 平台服务超过 1800 万开发者与 20 万家企业，若交易完成将是 NVIDIA 史上第二大收购。上述 35 倍、3.5 倍为官方引用的第三方平台数据，未经本次独立复核。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/17/nvidia-says-its-open-source-ai-strategy-remains-intact-after-jensen-huangs-exit/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/17/nvidia-says-its-open-source-ai-strategy-remains-intact-after-jensen-huangs-exit/</a></div>
+</div>
+</article>
+</section>
+<section id="s2">
+<div class="sec-h"><span class="no">02</span><h2>开发生态</h2><span class="cnt">7 条 · 按重要性排列</span></div>
+<article id="s2-1">
+<div class="a-h"><div class="a-n">6</div><h3>GitHub Copilot app 支持 Azure DevOps 仓库与 GHES 实例，Microsoft Ignite 一批发布同时上线</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · langgraph 官方 Release 正文与时间戳已取</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">GitHub 于 11 月 17 日发布 Copilot app 与 Microsoft Ignite 相关更新：Copilot app 现可操作 Azure DevOps 仓库、GitHub Enterprise Server 实例，并在用户已登录的浏览器中工作，Azure DevOps 集成为公开预览。</p>
+<div class="body">
+<p>在 Copilot app 中可克隆 Azure DevOps 仓库、让 agent 建分支、改代码并开 PR，全程不离开应用；侧边栏可跟踪状态，点击评审意见上的 Fix 让 agent 处理，开启 agent merge 后可由 agent 修复 CI 失败并在检查与策略通过后完成合并。开启方式为 Settings → Experimental → Azure DevOps integration。</p>
+<p>同日 GitHub 还发布了 Copilot Fusion 扩展、code review 能力更新、MAI Code 2 系列模型接入等条目，另有一条 Monitor GitHub Copilot activity through Microsoft Agent 365 的变更，说明 Copilot 的使用可纳入 Microsoft Agent 365 的可观测范围。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://github.blog/changelog/2026-11-17-github-copilot-app-microsoft-ignite-releases" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-17-github-copilot-app-microsoft-ignite-releases</a></div>
+<div class="lk"><span class="lt"></span><a href="https://github.blog/changelog/2026-11-17-monitor-github-copilot-activity-through-microsoft-agent-365" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-17-monitor-github-copilot-activity-through-microsoft-agent-365</a></div>
+</div>
+</article>
+<article id="s2-2">
+<div class="a-h"><div class="a-n">7</div><h3>Copilot code review 新增 Adaptive 审查深度、跨仓库上下文与密钥泄露检测，公开预览</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · llama.cpp 官方 Release 正文与时间戳已取</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">GitHub 为 Copilot code review 加入 Adaptive 能力，按每个 PR 自动匹配审查深度（从 Lite 到 Max），并可引用相关仓库上下文、在进入主分支前标记暴露的密钥，三项均为公开预览。</p>
+<div class="body">
+<p>此前审查深度需人工在设置或发起评审时逐次选择：文档改动可能只需 Lite，认证逻辑改动则需要 Max。Adaptive 免去这一步人工判断，官方描述其目标是「用更少投入更早发现更多问题」。</p>
+<p>跨仓库上下文让评审可以参考相关仓库的信息，密钥检测则在合并前拦截疑似泄露。三项功能对 Copilot Pro、Pro+、Max、Business 与 Enterprise 计划开放，公开预览期间仍可能调整。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://github.blog/changelog/2026-11-17-copilot-code-review-adaptive-effort-secret-detection-and-more" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-17-copilot-code-review-adaptive-effort-secret-detection-and-more</a></div>
+</div>
+</article>
+<article id="s2-3">
+<div class="a-h"><div class="a-n">8</div><h3>Copilot Fusion 登上 Terminal-Bench 4.1 公开榜单，官方称解决率 71.2%、成本低于 Opus 5.5 与 Fable 5.2</h3></div>
+<div class="tags"><span class="tag cross">官方已确认 · Vercel AI SDK 官方 Release 正文与时间戳已取</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">GitHub 公布 Copilot Fusion 在 Terminal-Bench 4.1 公开榜单的成绩，官方称 Copilot Fusion Max 解决率 71.2%，领先 Opus 5.5 与 Fable 5.2 共 5.4 个百分点，同时成本比 Fable 5.2 低 88%、比 Opus 5.5 低 57%。榜单由 Stanford、Harbor 与 Laude Institute 托管。</p>
+<div class="body">
+<p>Terminal-Bench 4.1 衡量 AI agent 在终端中完成高难度真实任务的能力，官方强调独立榜单可在相同任务与相同评测规则下横向比较。同期 Fusion 扩展到更多使用面：可在最新版 github.com、Visual Studio 以及 iOS 与 Android 的 GitHub Mobile beta 应用中选择，正式版移动应用「即将」支持。</p>
+<p>成绩与成本对比均为 GitHub 官方口径，未见第三方复现。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://github.blog/changelog/2026-11-17-github-copilot-fusion-updates-more-availability-benchmarks-and-models" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-17-github-copilot-fusion-updates-more-availability-benchmarks-and-models</a></div>
+</div>
+</article>
+<article id="s2-4">
+<div class="a-h"><div class="a-n">9</div><h3>微软 MAI Code 2 与 MAI Code 2 Flash 进入 GitHub Copilot</h3></div>
+<div class="tags"><span class="tag warn">媒体 · FinTech Global 报道，金额与客户数为公司口径</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">GitHub 宣布微软新一代 MAI 编码模型 MAI Code 2 与 MAI Code 2 Flash 进入 Copilot：前者为通用型 agentic 编码模型，后者为轻量低成本模型，官方称该系列从轻量编码辅助扩展到复杂 agentic 软件工程。</p>
+<div class="body">
+<p>MAI Code 2 面向复杂任务，官方列举的场景包括深度调试、多文件实现、重构与仓库级推理，特点是响应聚焦、代码改动实用、减少来回沟通。MAI Code 2 Flash 面向日常开发流，包括代码解释、针对性修改、例行修复与快速迭代，定位为高性价比。</p>
+<p>两者均面向 agentic 编码场景，与本期第 13 条的 GPT-6.2 系列同属「编码模型向 agent 化演进」的同期动作。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://github.blog/changelog/2026-11-17-mai-code-2-and-mai-code-2-flash-in-github-copilot" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-17-mai-code-2-and-mai-code-2-flash-in-github-copilot</a></div>
+</div>
+</article>
+<article id="s2-5">
+<div class="a-h"><div class="a-n">10</div><h3>GitHub 同日上线 Copilot CLI 的 Microsoft Entra 登录预览与 Copilot Evals 公开预览</h3></div>
+<div class="tags"><span class="tag warn">媒体 · Electrek 口径，协议原文未逐条核对</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">GitHub 于 11 月 17 日为 Copilot CLI 加入 Microsoft Entra 登录（预览），并把 Copilot Evals 转为公开预览；同时 Repository insights 新增跟踪 code review 结果的能力。这批更新面向企业侧的评测与身份管理诉求。</p>
+<div class="body">
+<p>Entra 登录预览让企业用户用既有 Microsoft 身份体系接入命令行编码助手，与第 6 条中 Copilot app 支持 Azure DevOps、GHES 的方向一致：把 Copilot 放进既有的企业身份与仓库治理框架。Copilot Evals 进入公开预览，意味着评测能力从内部试用走向更广可用。</p>
+<p>三条更新的具体可用范围与限制以 GitHub changelog 原文为准，本文未逐项展开。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://github.blog/changelog/2026-11-17-github-copilot-cli-adds-microsoft-entra-sign-in-as-a-preview" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-17-github-copilot-cli-adds-microsoft-entra-sign-in-as-a-preview</a></div>
+<div class="lk"><span class="lt"></span><a href="https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview</a></div>
+<div class="lk"><span class="lt"></span><a href="https://github.blog/changelog/2026-11-17-track-copilot-code-review-outcomes-in-repository-insights" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-17-track-copilot-code-review-outcomes-in-repository-insights</a></div>
+</div>
+</article>
+<article id="s2-6">
+<div class="a-h"><div class="a-n">11</div><h3>Amazon SageMaker AI 实时端点新增 KV cache aware routing，按缓存命中情况分流请求</h3></div>
+<div class="tags"><span class="tag warn">媒体转述 · The Hacker News 报道原文已取，CISA 通告原文未取回</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">Amazon 宣布为 SageMaker AI 实时端点新增 KV cache aware routing：端点会依据模型容器上报的缓存状态，把请求送到已持有长前缀缓存且不繁忙的实例，适用于多轮对话、长共享前缀提示词与高负载场景。</p>
+<div class="body">
+<p>开启需要两处改动：给模型加一个环境变量，让容器上报其缓存内容；在端点配置中把 RoutingStrategy 设为 KV_AWARE。客户端仍使用原有 API 调用，不需要改请求格式。</p>
+<p>官方描述的问题背景是：聊天助手、RAG 与带长系统提示词的 agent 会发出大量以相同文本开头的请求，模型把前缀部分的工作缓存在 GPU 上；若请求落到没有该缓存的实例，就要重算前缀。KV-aware 路由按缓存命中情况选路以降低重复计算。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://aws.amazon.com/blogs/machine-learning/amazon-sagemaker-ai-real-time-endpoints-now-support-kv-cache-aware-routing/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/machine-learning/amazon-sagemaker-ai-real-time-endpoints-now-support-kv-cache-aware-routing/</a></div>
+</div>
+</article>
+<article id="s2-7">
+<div class="a-h"><div class="a-n">12</div><h3>Vercel 新建 Pro 与 Enterprise 团队不再包含 Standard build 额度，Standard 构建改按量计费</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">Vercel 宣布自即日起，新建 Pro 与 Enterprise 团队不再附带 Standard build 额度，Standard 构建转入按用量计费；这是 Vercel 构建计费口径的一次调整，已有团队的适用方式以官方说明为准。</p>
+<div class="body">
+<p>公告由 Mehul Kar 与 Pranav Kanchi 署名，发布于 11 月 17 日。Standard 构建对应按 CPU 时间计费的传统构建模式，与 Fluid Compute 等按量付费形态并存；本次调整把新团队统一到用量计费口径，减少套餐内固定额度的差异。</p>
+<p>同一批 Vercel 更新还包括 Vercel Blob 支持 TTL 自动删除、preview 构建新增仅拉取请求的预设、Speed Insights 开始统计软导航等条目。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://vercel.com/changelog/standard-build-billing-new-teams" target="_blank" rel="noopener">https://vercel.com/changelog/standard-build-billing-new-teams</a></div>
+<div class="lk"><span class="lt"></span><a href="https://vercel.com/changelog/vercel-blob-now-supports-ttls-for-automatic-deletion" target="_blank" rel="noopener">https://vercel.com/changelog/vercel-blob-now-supports-ttls-for-automatic-deletion</a></div>
+</div>
+</article>
+</section>
+<section id="s3">
+<div class="sec-h"><span class="no">03</span><h2>模型发布</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s3-1">
+<div class="a-h"><div class="a-n">13</div><h3>OpenAI 发布 GPT-6.2 Astra 与 GPT-6.2 Sol，同日在 GitHub Copilot 上线</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">OpenAI 发布 GPT-6.2 Astra 与 GPT-6.2 Sol，官方称两者在专业产出、编码、计算机操作与效率上有改进、成本更低，覆盖 ChatGPT Work、Codex 与 API；两款模型同日于 GitHub Copilot 正式可用（GA）。</p>
+<div class="body">
+<p>GitHub 官方 changelog 给出 Copilot 侧的模型说明：两款模型面向 agentic coding 与代码审查，判断力强于更早的 GPT-6 系列。官方称在早期测试中 Astra 比 GPT-6 Astra 发现更多真实代码问题、且完成 agentic 编码任务所用 token 更少；Sol 面向复杂 agentic 编码与深度代码审查，官方称其发现的真实问题数接近 GPT-6.1 Sol 的两倍，同时保持结论准确性。</p>
+<p>两模型在 Copilot 中按用量计费并适用供应商目录价，可用范围为 Copilot Pro+、Max、Business 与 Enterprise，可在 VS Code、Visual Studio 等编辑器中选择。openai.com 对应公告页在本次抓取中返回 403，正文以官方 RSS 摘要与 GitHub changelog 为依据，API 价格与上下文窗口等参数本期未取到官方原文。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">官方页需人工打开</span><a href="https://openai.com/index/introducing-gpt-6-2-astra-sol" target="_blank" rel="noopener">https://openai.com/index/introducing-gpt-6-2-astra-sol</a></div>
+<div class="lk"><span class="lt"></span><a href="https://github.blog/changelog/2026-11-17-openais-gpt-6-2-astra-and-gpt-6-2-sol-now-available" target="_blank" rel="noopener">https://github.blog/changelog/2026-11-17-openais-gpt-6-2-astra-and-gpt-6-2-sol-now-available</a></div>
+</div>
+</article>
+<article id="s3-2">
+<div class="a-h"><div class="a-n">14</div><h3>Vercel AI Gateway 上架 GPT-6.2 Astra/Sol、Decision-1.1 与 MAI-Image-2.7 系列</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">Vercel AI Gateway 同期上架 OpenAI 的 GPT-6.2 Astra 与 GPT-6.2 Sol、Decision-1.1，以及 MAI-Image-2.7 与 MAI-Image-2.7-Flash，使这些模型可通过统一网关接入。</p>
+<div class="body">
+<p>AI Gateway 作为 Vercel 的多供应商聚合入口，本期新增的模型 ID 让开发者在既有鉴权与可观测体系下切换模型，无需自行对接各家接口。此前该网关已上架腾讯 Hy4 Flash（本期见第 21 条之后的跟踪项）与 Qwen4-Max 等模型。</p>
+<p>本条只陈述「已上架」这一事实，模型规格、价格与上下文窗口以各厂商官方文档为准；Vercel 公告页未给出可比的定价明细。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://vercel.com/changelog/gpt-6-2-astra-and-sol-now-available-on-ai-gateway" target="_blank" rel="noopener">https://vercel.com/changelog/gpt-6-2-astra-and-sol-now-available-on-ai-gateway</a></div>
+<div class="lk"><span class="lt"></span><a href="https://vercel.com/changelog/decision-1-1-now-available-on-ai-gateway" target="_blank" rel="noopener">https://vercel.com/changelog/decision-1-1-now-available-on-ai-gateway</a></div>
+<div class="lk"><span class="lt"></span><a href="https://vercel.com/changelog/mai-image-2-7-and-mai-image-2-7-flash-now-available-on-ai-gateway" target="_blank" rel="noopener">https://vercel.com/changelog/mai-image-2-7-and-mai-image-2-7-flash-now-available-on-ai-gateway</a></div>
+</div>
+</article>
+</section>
+<section id="s4">
+<div class="sec-h"><span class="no">04</span><h2>产品应用</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s4-1">
+<div class="a-h"><div class="a-n">15</div><h3>Google 开放 Gemini 的 Tasks 任务模式，美国用户可用邮件或短信派单</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">Google 在 Gemini App 首页加入 Task 模式开关（从 Chat 切到 Task），用户可让 Gemini 代为完成整件事；官方称美国用户还可把邮件转发到 gemini@google.com，或通过短信向 Gemini 下达任务。</p>
+<div class="body">
+<p>配置路径：Android 或 iOS 打开 Gemini，进入 Settings → Channels → Text with Gemini 下的 Set up 并验证手机号。</p>
+<p>官方说明中也承认任务模式仍会出错，可能出现任务未完成或未达标的情况，遇到时请点「thumbs down」反馈。Google 表示将与主要网站和安全服务商合作推进开放、可验证的标准，让个人助理类代理能在真实站点上完成操作；同时提到在部分站点上 Gemini 可能推进到一半把最后一步交回用户点击。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/" target="_blank" rel="noopener">https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/</a></div>
+</div>
+</article>
+<article id="s4-2">
+<div class="a-h"><div class="a-n">16</div><h3>Google 将 Gemini 对话保留期从 72 小时延长到 2 个月</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">据媒体报道，Google 宣布在 Gemini App 中把对话保留期从 72 小时延长到 2 个月，变更将在未来数周内全球推出。官方给出的理由是为回应用户、处理反馈与保护服务与用户，临时对话仍不用于训练模型。</p>
+<div class="body">
+<p>此前 Gemini Apps 隐私中心记载的临时对话保留期为 72 小时，Google 在 11 月 12 日的存档版本中仍是该口径。Google 同期更新隐私中心，新增「系统故障」作为保留对话的理由之一，并把「聊天历史」与「AI 训练」拆成两个独立设置项。</p>
+<p>对照来看，OpenAI 称 ChatGPT 临时对话最长保留 30 天，Anthropic 的 Claude 无痕对话默认保留 30 天；各厂商仍可能因法律或安全原因保留更久，或用于调查违规。Google 未说明本次调整的触发原因，也未说明是否影响对话的访问与审查方式。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/</a></div>
+</div>
+</article>
+<article id="s4-3">
+<div class="a-h"><div class="a-n">17</div><h3>OpenAI 推出 ChatGPT for Sales 插件与 30 余个合作伙伴插件</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">OpenAI 发布 ChatGPT for Sales 插件，并新增与扩充 30 余个合作伙伴插件，覆盖线索调研、提案准备、CRM 更新等销售流程场景。官方公告页在本次抓取中返回 403，内容依据官方 RSS 摘要。</p>
+<div class="body">
+<p>按官方 RSS 摘要，ChatGPT for Sales 插件面向销售团队的端到端动作：研究潜在客户、准备 pitch、更新 CRM 并推进交易；同期扩充的合作伙伴插件同样围绕 CRM 与销售工具链路。</p>
+<p>插件的具体清单、可用套餐、地区与数据处理条款未取到原文，本期不对细节作展开。该产品线与第 14 条的模型上架、第 19 条的 AWS 插件生态属于同期「把 agent 接进既有业务系统」的方向。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt">官方页需人工打开</span><a href="https://openai.com/index/introducing-chatgpt-for-sales" target="_blank" rel="noopener">https://openai.com/index/introducing-chatgpt-for-sales</a></div>
+</div>
+</article>
+</section>
+<section id="s5">
+<div class="sec-h"><span class="no">05</span><h2>技术与洞察</h2><span class="cnt">2 条 · 按重要性排列</span></div>
+<article id="s5-1">
+<div class="a-h"><div class="a-n">18</div><h3>研究：模型被告知「这是游戏」后，可能把平民识别为军事打击目标</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">据媒体报道，一项研究显示 Anthropic、OpenAI 等实验室的部分模型在「战场情景」模拟中，只要被告知这是游戏就可能被绕过，把平民或学校等地点识别为可打击目标；研究人员称没有任何一次请求被安全分类器拦截，拒答也不常见。</p>
+<div class="body">
+<p>报道称 Anthropic 的模型在这些模拟中表现最差，但所有模型表现都不理想：即便拒答，也常常在被告知「这是游戏」后转为配合。研究发布之际，Anthropic 与美国国防部正就是否可将 Anthropic 技术用于大规模监控或自主作战发生争议，Anthropic CEO Dario Amodei 坚持认为当前系统不足以在无人监督下做生死决策。</p>
+<p>报道指向的原始研究论文与评测方法本次未取到，相关结论属媒体转述的单一来源摘要，仅作为安全线索保留。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/17/ai-models-can-be-tricked-into-identifying-civilians-as-military-targets-by-telling-them-its-a-game/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/17/ai-models-can-be-tricked-into-identifying-civilians-as-military-targets-by-telling-them-its-a-game/</a></div>
+</div>
+</article>
+<article id="s5-2">
+<div class="a-h"><div class="a-n">19</div><h3>AWS 一批 SageMaker 与 AgentCore 更新：数据准备、JSON 工作负载降本、WhatsApp agent</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">AWS 在 11 月 16—17 日连续发布多篇官方博客：SageMaker AI 新增面向模型开发的数据准备能力，Amazon Bedrock AgentCore 给出 JSON 工作负载降低 token 成本与延迟的实践方案，并给出在 AgentCore 上构建 WhatsApp AI agent 的方法。</p>
+<div class="body">
+<p>同批条目还包括：Bedrock AgentCore 上的 OpenTSLM 时序推理（JumpStart 提供）、AWS Agent Registry 支持通用元数据的治理与发现、AgentCore 接入 Snowflake Cortex AI 的安全 OAuth 模式，以及面向 agentic AI 的分阶段负责任 AI 路线图。多家客户案例（LoanPro、ArisGlobal、Duco、MoEngage、Novo Nordisk）同期发布。</p>
+<p>这些以官方博客形式发布的产品说明与技术实践，属于开发者在 re:Invent 前后评估上云路径时的参考材料；具体能力与限制以各自文档为准。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://aws.amazon.com/blogs/machine-learning/announcing-ai-data-preparation-capabilities-in-amazon-sagemaker-build-high-quality-datasets-for-model-development-workflows/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/machine-learning/announcing-ai-data-preparation-capabilities-in-amazon-sagemaker-build-high-quality-datasets-for-model-development-workflows/</a></div>
+<div class="lk"><span class="lt"></span><a href="https://aws.amazon.com/blogs/machine-learning/reducing-token-costs-and-latency-in-amazon-bedrock-agentcore-json-workloads/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/machine-learning/reducing-token-costs-and-latency-in-amazon-bedrock-agentcore-json-workloads/</a></div>
+<div class="lk"><span class="lt"></span><a href="https://aws.amazon.com/blogs/machine-learning/build-whatsapp-ai-agents-with-amazon-bedrock-agentcore/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/machine-learning/build-whatsapp-ai-agents-with-amazon-bedrock-agentcore/</a></div>
+</div>
+</article>
+</section>
+<section id="s6">
+<div class="sec-h"><span class="no">06</span><h2>行业动态</h2><span class="cnt">4 条 · 按重要性排列</span></div>
+<article id="s6-1">
+<div class="a-h"><div class="a-n">20</div><h3>Model ML 完成 2.5 亿美元 B 轮融资，估值 15 亿美元</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span><span class="tag">官方口径 · 未独立验证</span></div>
+<p class="lede">据媒体报道，Model ML 完成 2.5 亿美元 B 轮融资，估值 15 亿美元，由 General Atlantic 与早期投资方 QED Investors 联合领投；该公司为投行与咨询顾问自动化 Excel、PowerPoint 等系统内的分析工作。</p>
+<div class="body">
+<p>该公司由兄弟 Chaz 与 Arnie Englander 创立，两人此前还创办过点对点租赁平台 Fat Llama（2022 年以 4150 万美元被瑞典对手 Hygglo 收购）。Model ML 的产品是与客户系统、数据和工具（含 Excel 与 PowerPoint）集成的 AI agent，官方称其理解交易上下文，并能在新情况影响分析时自动更新财务模型与演示文稿。</p>
+<p>新一轮融资距其 7500 万美元 A 轮约一年。估值与轮次金额均为报道口径。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/17/model-ml-raises-250m-to-automate-investment-banking-grunt-work/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/17/model-ml-raises-250m-to-automate-investment-banking-grunt-work/</a></div>
+</div>
+</article>
+<article id="s6-2">
+<div class="a-h"><div class="a-n">21</div><h3>融资速览：Unsiloed AI 750 万美元、Humyn Labs 4700 万美元、Pedestal AI 470 万美元</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">据 11 月 17—18 日的报道，三笔 AI 领域融资：Felicis 领投 Unsiloed AI 750 万美元，做企业文档到 agent 可用的转换；Accel 领投印度 Humyn Labs 4700 万美元，为美国机器人公司供给训练数据；Pedestal AI 融资 470 万美元，方向是用 agent 改造供应链。</p>
+<div class="body">
+<p>Unsiloed AI 的定位是让企业既有文档可被 AI agent 使用；Humyn Labs 为美国机器人开发商提供其所需的数据供给，属数据供给侧投资；Pedestal AI 的融资规模明显小于前两者，方向为供应链 agent 化。</p>
+<p>三笔融资金额与领投方均来自媒体报道，本期未取到投资方公告原文，按二级来源口径处理。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/18/felicis-leads-7-5m-bet-on-unsiloed-ai-to-make-enterprise-documents-usable-by-ai-agents/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/18/felicis-leads-7-5m-bet-on-unsiloed-ai-to-make-enterprise-documents-usable-by-ai-agents/</a></div>
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/18/accel-backs-indias-humyn-labs-to-supply-training-data-needed-by-u-s-robotics-ai-developers/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/18/accel-backs-indias-humyn-labs-to-supply-training-data-needed-by-u-s-robotics-ai-developers/</a></div>
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/17/pedestal-ai-raises-4-7-million-to-agentify-the-supply-chain/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/17/pedestal-ai-raises-4-7-million-to-agentify-the-supply-chain/</a></div>
+</div>
+</article>
+<article id="s6-3">
+<div class="a-h"><div class="a-n">22</div><h3>NVIDIA 披露对私营公司股权投资价值 655 亿美元，并扩大与六家制造与封装伙伴的产能承诺</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">NVIDIA 在财报披露其持有的私营公司股权价值已达 655 亿美元（媒体口径 655 亿）；同期公司宣布与 Amkor、Foxconn、Kinsus、Samsung Electro-Mechanics、SPIL 与 TSMC 扩大合作，在基板、先进封装、晶圆与代工产能上扩张。</p>
+<div class="body">
+<p>供应链公告由运营执行副总裁 Debora Shoquist 表述为「供应链是我们的战略优势」，目标是让产能与加速计算及 AI 基础设施平台的需求对齐，其中对 Kinsus 与 Samsung Electro-Mechanics 的基板供应承诺扩容、并提升现有工厂产能。</p>
+<p>媒体同时指出，黄仁勋离任后这部分投资的未来交易前景存在不确定性——这些股权合作多由其主导推谈，属观察项而非已确认的变化。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://nvidianews.nvidia.com/news/nvidia-expands-commitments-with-supply-chain-partners-to-support-ai-infrastructure-buildout" target="_blank" rel="noopener">https://nvidianews.nvidia.com/news/nvidia-expands-commitments-with-supply-chain-partners-to-support-ai-infrastructure-buildout</a></div>
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/17/nvidias-startup-stakes-ballooned-to-65b-but-huangs-exit-puts-future-deals-in-doubt/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/17/nvidias-startup-stakes-ballooned-to-65b-but-huangs-exit-puts-future-deals-in-doubt/</a></div>
+</div>
+</article>
+<article id="s6-4">
+<div class="a-h"><div class="a-n">23</div><h3>NVIDIA 澄清 neocloud 贷款担保口径：提供担保不等于自己出钱</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">NVIDIA 在季度 CFO 评论中澄清：为客户新建数据中心的贷款提供担保，并不等于 NVIDIA 自己在提供融资——担保只有在客户已拿到建厂与安装设备的融资后才生效。据媒体报道，OpenAI 的 PORTS-Pike 园区担保规模为 1050 亿美元。</p>
+<div class="body">
+<p>该口径由代理 CEO 兼 CFO Colette Kress 在财报电话会说明：客户需自行通过股权或债务完成融资、建设并安装算力，NVIDIA 的担保才启动；若项目未满足这些条件，担保「并不存在」。</p>
+<p>媒体报道称，最大一笔是为 OpenAI 在俄亥俄的 PORTS-Pike 数据中心园区提供的 1050 亿美元担保（8 月宣布），OpenAI 承诺该园区独家使用 NVIDIA 设备；另有报道称 Kress 曾把该项目担保从 2500 亿美元下调到 1050 亿美元。担保规模与调整过程为媒体转述，官方新闻稿未逐笔列示。</p>
+</div>
+<div class="links">
+<div class="lk"><span class="lt"></span><a href="https://techcrunch.com/2026/11/18/nvidia-clarifies-when-it-will-and-wont-keep-financing-neoclouds/" target="_blank" rel="noopener">https://techcrunch.com/2026/11/18/nvidia-clarifies-when-it-will-and-wont-keep-financing-neoclouds/</a></div>
+</div>
+</article>
+</section>
+
+<section id="s8">
+<div class="sec-h"><span class="no">08</span><h2>前瞻与传闻</h2><span class="cnt">3 条 · 按重要性排列</span></div>
+<article id="s8-1">
+<div class="a-h"><div class="a-n">24</div><h3>DeepSeek 因算力紧张收紧免费对话额度</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">：<a href="https://emergent.sh/news/deepseek-caps-free-chat-quotas-amid-china" target="_blank" rel="noopener">https://emergent.sh/news/deepseek-caps-free-chat-quotas-amid-china</a> （2026-11-18 · 单一来源 · 未核实）</p>
+</article>
+<article id="s8-2">
+<div class="a-h"><div class="a-n">25</div><h3>Qwen4-Max 据称脱离预览、参数 2.4T 且仍未放出权重</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">：<a href="https://modelfit.io/blog/qwen4-max-general-availability-no-weights/" target="_blank" rel="noopener">https://modelfit.io/blog/qwen4-max-general-availability-no-weights/</a> （2026-11-18 · 单一来源 · 未核实）</p>
+</article>
+<article id="s8-3">
+<div class="a-h"><div class="a-n">26</div><h3>Kimi K3.1 Pro 定价与套餐调整说明</h3></div>
+<div class="tags"><span class="tag warn">单一来源 · 未核实</span><span class="tag">2026-11-17 / 11-18 首次公开</span></div>
+<p class="lede">：<a href="https://deepinfra.com/blog/kimi-k3-1-pro-pricing-guide" target="_blank" rel="noopener">https://deepinfra.com/blog/kimi-k3-1-pro-pricing-guide</a> （2026-11-18 · 单一来源 · 未核实）</p>
+</article>
+</section>
+<section id="s9">
+<div class="sec-h"><span class="no">09</span><h2>后续追踪</h2><span class="cnt">连续事件</span></div>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>NVIDIA 继任 CEO</strong>：董事会表态无意让黄仁勋复任、公司同时考虑内部与外部候选人</h3></div>
+<p class="lede">财报电话会首次由代理 CEO Kress 主持</p>
+<div class="body"><p>下一步关注永久 CEO 人选公布与战略口径是否延续。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>NVIDIA 中国业务</strong>：H200 出口通道参与终止、Q4 指引未计入中国数据中心计算收入</h3></div>
+<p class="lede">出口管制监督委员会成立</p>
+<div class="body"><p>下一步关注中国相关收入口径、委员会首次会议内容与后续出口政策变化。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>NVIDIA 与 Hugging Face 收购</strong>：129 亿美元交易原计划推进</h3></div>
+<p class="lede">财报电话会确认仍在按计划推进</p>
+<div class="body"><p>下一步关注交割时间与开放模型路线是否随人事变化调整。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Anthropic IPO</strong>：Amazon 约 14.7%、Google 13.7%，260 亿美元非投票股认购</h3></div>
+<p class="lede">发行定价与上市时间未取到</p>
+<div class="body"><p>下一步关注定价文件、路演与 AWS 千亿美元云消费承诺的落地节奏。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>黄仁勋相关调查与作证</strong>：董事会独立调查与 SEC 调查同步进行</h3></div>
+<p class="lede">已定于感恩节前赴国会作证</p>
+<div class="body"><p>下一步关注作证内容与后续披露。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>GPT-6.2 系列</strong>：Astra 与 Sol 已在 Copilot GA、亦上架 Vercel AI Gateway</h3></div>
+<p class="lede">API 价格、上下文窗口与开放范围本期未取到官方原文</p>
+<div class="body"><p>下一步关注官方文档中的定价与限额口径。</p></div>
+</article>
+<article class="track">
+<div class="a-h"><div class="a-n">→</div><h3><strong>Google Gemini 数据保留</strong>：临时对话保留期由 72 小时延长至 2 个月</h3></div>
+<p class="lede">全球逐步推出，聊天历史与训练设置拆分</p>
+<div class="body"><p>下一步关注是否扩展到其他地区与产品线。</p></div>
+</article>
+</section>
+<section id="s10">
+<div class="sec-h"><span class="no">10</span><h2>编辑备注</h2><span class="cnt">采集限制与口径</span></div>
+<div class="body">
+<p>1. <strong>本期为补跑触发</strong>：本次运行在 2026-11-18 21:48（Asia/Shanghai）触发，非 07:00 例程时点。按例程 13.2 的 <code>skip_missed</code> 口径，检索按 72 小时范围扫描，再按「事件首次公开时间」与 EP022（2026-11-17）已覆盖内容去重，本期条目以 2026-11-17 07:00 之后首次公开者为主，只补一期、不堆积历史期次。</p>
+<p>2. <strong>来源限制</strong>：openai.com 的公告页在本次抓取中全部返回 HTTP 403，第 13、17 条以官方 RSS 摘要与 GitHub changelog 为依据，页面已标注「需人工打开」；Anthropic IPO（第 4 条）、NVIDIA 人事与调查（第 3 条）、对华出口（第 2 条）、担保口径（第 23 条）均来自 TechCrunch 对官方文件或财报电话会的转述，属二级来源，未取到原始文件。</p>
+<p>3. <strong>官方宣称未独立验证</strong>：Terminal-Bench 成绩与成本对比（第 8 条）、GPT-6.2 代码审查效果（第 13 条）、OpenRouter token 用量与 Nemotron 排名（第 5 条）均为发布方口径，正文已标注「官方称」。</p>
+<p>4. <strong>未展开项</strong>：AWS 一批客户案例与 AgentCore 教程（第 19 条）、arXiv 论文与 Hugging Face/ModelScope 论文均未纳入本期完整条目，避免以研究产出稀释开发者可操作信息。</p>
+</div></section>
+
+</main>
+</div>
+</div>
+</body>
+</html>
